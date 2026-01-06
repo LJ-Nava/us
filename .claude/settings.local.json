@@ -31,7 +31,9 @@
       "WebFetch(domain:www.cta.gallery)",
       "WebFetch(domain:www.digitalsilk.com)",
       "WebFetch(domain:webflow.com)",
-      "WebFetch(domain:lj-nava.github.io)"
+      "WebFetch(domain:lj-nava.github.io)",
+      "Bash(git push:*)",
+      "Bash(npm run deploy:*)"
     ]
   }
 }
