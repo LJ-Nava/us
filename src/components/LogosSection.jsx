@@ -66,6 +66,7 @@ const icons = {
 const LogosSection = () => {
   const sectionRef = useRef(null);
   const mockupRef = useRef(null);
+  const aiFaceRef = useRef(null);
 
   const technologies = [
     { name: 'React', icon: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/><path d="M12 21.35c-1.2 0-2.3-.28-3.2-.75-.9.25-1.9.4-2.9.4-1.5 0-2.7-.35-3.5-1-.8-.7-1.2-1.6-1.2-2.7 0-.8.25-1.7.7-2.5-.45-.8-.7-1.65-.7-2.5 0-1.1.4-2 1.2-2.7.8-.65 2-1 3.5-1 1 0 2 .15 2.9.4.9-.47 2-.75 3.2-.75s2.3.28 3.2.75c.9-.25 1.9-.4 2.9-.4 1.5 0 2.7.35 3.5 1 .8.7 1.2 1.6 1.2 2.7 0 .85-.25 1.7-.7 2.5.45.8.7 1.65.7 2.5 0 1.1-.4 2-1.2 2.7-.8.65-2 1-3.5 1-1 0-2-.15-2.9-.4-.9.47-2 .75-3.2.75Z"/></svg> },
@@ -84,6 +85,43 @@ const LogosSection = () => {
         opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
       });
+
+      // Animación de entrada para el núcleo IA
+      gsap.fromTo(aiFaceRef.current, { opacity: 0, scale: 0.5 }, {
+        opacity: 1, scale: 1, duration: 2, ease: 'power3.out', delay: 0.3,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
+      // Animación de los anillos concéntricos
+      gsap.fromTo('.logos-section__ai-ring', { opacity: 0, scale: 0 }, {
+        opacity: 1, scale: 1, duration: 1.5, stagger: 0.2, ease: 'power3.out', delay: 0.5,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
+      // Animación de los circuitos
+      gsap.fromTo('.logos-section__ai-circuit', { strokeDashoffset: 300 }, {
+        strokeDashoffset: 0, duration: 2, stagger: 0.1, ease: 'power2.inOut', delay: 0.8,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
+      // Animación de los nodos
+      gsap.fromTo('.logos-section__ai-node', { opacity: 0, scale: 0 }, {
+        opacity: 1, scale: 1, duration: 0.5, stagger: 0.08, ease: 'back.out(2)', delay: 1.5,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
+      // Animación de las partículas
+      gsap.fromTo('.logos-section__ai-particle', { opacity: 0, scale: 0 }, {
+        opacity: 1, scale: 1, duration: 1, stagger: 0.05, ease: 'back.out(1.7)', delay: 1.8,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
+      // Animación de las barras del espectro
+      gsap.fromTo('.logos-section__ai-bar', { scaleY: 0 }, {
+        scaleY: 1, duration: 0.8, stagger: 0.05, ease: 'power2.out', delay: 2,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      });
+
       gsap.fromTo('.logos-section__headline', { opacity: 0, y: 30 }, {
         opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
         scrollTrigger: { trigger: '.logos-section__headline', start: 'top 85%', once: true }
@@ -93,7 +131,136 @@ const LogosSection = () => {
         scrollTrigger: { trigger: '.logos-section__tech-grid', start: 'top 85%', once: true }
       });
     }, sectionRef);
-    return () => ctx.revert();
+
+    // Mouse tracking - El ojo central sigue el cursor como un ojo de IA
+    const handleMouseMove = (e) => {
+      if (!aiFaceRef.current) return;
+
+      const core = aiFaceRef.current;
+      const rect = core.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+      // El iris central sigue el mouse - efecto de "ojo" que mira
+      const iris = document.querySelector('.logos-section__ai-iris');
+      const pupil = document.querySelector('.logos-section__ai-pupil');
+
+      const maxIrisMove = 25; // Movimiento amplio para que sea visible
+      const irisX = Math.max(-maxIrisMove, Math.min(maxIrisMove, (deltaX / 300) * maxIrisMove));
+      const irisY = Math.max(-maxIrisMove, Math.min(maxIrisMove, (deltaY / 300) * maxIrisMove));
+
+      if (iris) {
+        gsap.to(iris, {
+          x: irisX,
+          y: irisY,
+          duration: 0.2,
+          ease: 'power2.out'
+        });
+      }
+
+      if (pupil) {
+        gsap.to(pupil, {
+          x: irisX * 0.3,
+          y: irisY * 0.3,
+          scale: 1 + (distance / 1000),
+          duration: 0.15,
+          ease: 'power2.out'
+        });
+      }
+
+      // Los anillos reaccionan con parallax diferente cada uno
+      const rings = document.querySelectorAll('.logos-section__ai-ring');
+      rings.forEach((ring, i) => {
+        const speed = (i + 1) * 0.15;
+        const rotation = (deltaX / window.innerWidth) * 10 * (i + 1);
+        gsap.to(ring, {
+          x: (deltaX / window.innerWidth) * 8 * speed,
+          y: (deltaY / window.innerHeight) * 8 * speed,
+          rotation: rotation,
+          duration: 0.4 + (i * 0.1),
+          ease: 'power2.out'
+        });
+      });
+
+      // Los circuitos se iluminan con el movimiento
+      const circuits = document.querySelectorAll('.logos-section__ai-circuit');
+      circuits.forEach((circuit, i) => {
+        const delay = i * 0.02;
+        gsap.to(circuit, {
+          strokeOpacity: 0.5 + (Math.abs(deltaX) / window.innerWidth) * 0.5,
+          duration: 0.3,
+          delay: delay
+        });
+      });
+
+      // Nodos parpadean
+      const nodes = document.querySelectorAll('.logos-section__ai-node');
+      nodes.forEach((node, i) => {
+        const intensity = Math.random() * 0.5 + 0.5;
+        gsap.to(node, {
+          opacity: intensity,
+          scale: 1 + (Math.random() * 0.3),
+          duration: 0.2,
+          ease: 'power1.out'
+        });
+      });
+
+      // Partículas con parallax amplio
+      const particles = document.querySelectorAll('.logos-section__ai-particle');
+      particles.forEach((particle, i) => {
+        const speed = (i % 4 + 1) * 0.8;
+        gsap.to(particle, {
+          x: (deltaX / window.innerWidth) * 50 * speed,
+          y: (deltaY / window.innerHeight) * 50 * speed,
+          duration: 0.3 + (i * 0.02),
+          ease: 'power1.out'
+        });
+      });
+
+      // Las barras del espectro reaccionan al movimiento
+      const bars = document.querySelectorAll('.logos-section__ai-bar');
+      bars.forEach((bar, i) => {
+        const heightMultiplier = 1 + Math.abs(deltaX / window.innerWidth) + Math.abs(deltaY / window.innerHeight);
+        gsap.to(bar, {
+          scaleY: heightMultiplier * (0.5 + Math.random() * 0.5),
+          duration: 0.1,
+          ease: 'power1.out'
+        });
+      });
+
+      // Aura se intensifica con la proximidad
+      const aura = document.querySelector('.logos-section__ai-aura');
+      if (aura) {
+        const intensity = Math.max(0, 1 - (distance / 500));
+        gsap.to(aura, {
+          opacity: 0.4 + (intensity * 0.6),
+          scale: 1 + (intensity * 0.15),
+          duration: 0.5
+        });
+      }
+
+      // Scanner rota basado en posición del mouse
+      const scanner = document.querySelector('.logos-section__ai-scanner');
+      if (scanner) {
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+        gsap.to(scanner, {
+          rotation: angle,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   return (
@@ -312,6 +479,117 @@ const LogosSection = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Claude AI - Núcleo de Inteligencia */}
+        <div className="logos-section__ai-container">
+          {/* Aura de fondo */}
+          <div className="logos-section__ai-aura"></div>
+
+          <div ref={aiFaceRef} className="logos-section__ai-core">
+            {/* Líneas de circuito/datos - izquierda */}
+            <svg className="logos-section__ai-circuits logos-section__ai-circuits--left" viewBox="0 0 150 200">
+              <path className="logos-section__ai-circuit" d="M150 100 L100 100 L100 60 L60 60 L60 40 L20 40" />
+              <path className="logos-section__ai-circuit" d="M150 100 L110 100 L110 140 L70 140 L70 160 L30 160" />
+              <path className="logos-section__ai-circuit" d="M150 90 L90 90 L90 30 L40 30" />
+              <path className="logos-section__ai-circuit" d="M150 110 L95 110 L95 170 L50 170" />
+              <circle className="logos-section__ai-node" cx="20" cy="40" r="4" />
+              <circle className="logos-section__ai-node" cx="30" cy="160" r="3" />
+              <circle className="logos-section__ai-node" cx="40" cy="30" r="3" />
+              <circle className="logos-section__ai-node" cx="50" cy="170" r="4" />
+              <circle className="logos-section__ai-node" cx="60" cy="60" r="2" />
+              <circle className="logos-section__ai-node" cx="70" cy="140" r="2" />
+            </svg>
+
+            {/* Líneas de circuito/datos - derecha */}
+            <svg className="logos-section__ai-circuits logos-section__ai-circuits--right" viewBox="0 0 150 200">
+              <path className="logos-section__ai-circuit" d="M0 100 L50 100 L50 50 L90 50 L90 35 L130 35" />
+              <path className="logos-section__ai-circuit" d="M0 100 L40 100 L40 150 L80 150 L80 165 L120 165" />
+              <path className="logos-section__ai-circuit" d="M0 85 L60 85 L60 25 L110 25" />
+              <path className="logos-section__ai-circuit" d="M0 115 L55 115 L55 175 L100 175" />
+              <circle className="logos-section__ai-node" cx="130" cy="35" r="4" />
+              <circle className="logos-section__ai-node" cx="120" cy="165" r="3" />
+              <circle className="logos-section__ai-node" cx="110" cy="25" r="3" />
+              <circle className="logos-section__ai-node" cx="100" cy="175" r="4" />
+              <circle className="logos-section__ai-node" cx="90" cy="50" r="2" />
+              <circle className="logos-section__ai-node" cx="80" cy="150" r="2" />
+            </svg>
+
+            {/* Anillos concéntricos del ojo/núcleo */}
+            <div className="logos-section__ai-eye">
+              <div className="logos-section__ai-ring logos-section__ai-ring--1"></div>
+              <div className="logos-section__ai-ring logos-section__ai-ring--2"></div>
+              <div className="logos-section__ai-ring logos-section__ai-ring--3"></div>
+              <div className="logos-section__ai-ring logos-section__ai-ring--4"></div>
+
+              {/* Iris/pupila central que sigue el mouse */}
+              <div className="logos-section__ai-iris">
+                <div className="logos-section__ai-pupil"></div>
+              </div>
+
+              {/* Líneas de escaneo rotativas */}
+              <div className="logos-section__ai-scanner"></div>
+            </div>
+
+            {/* Espectro de audio */}
+            <div className="logos-section__ai-spectrum">
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+              <div className="logos-section__ai-bar"></div>
+            </div>
+
+            {/* Partículas de datos */}
+            <div className="logos-section__ai-particles">
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+              <div className="logos-section__ai-particle"></div>
+            </div>
+
+            {/* Nombre y branding */}
+            <div className="logos-section__ai-brand">
+              <span className="logos-section__ai-name">Claude</span>
+              <span className="logos-section__ai-tagline">AI Assistant</span>
+            </div>
+
+            {/* Indicador de estado */}
+            <div className="logos-section__ai-status">
+              <span className="logos-section__ai-status-dot"></span>
+              <span className="logos-section__ai-status-text">Listening</span>
+            </div>
+
+            {/* Preguntas/mensajes que van apareciendo */}
+            <div className="logos-section__ai-questions">
+              <div className="logos-section__ai-question logos-section__ai-question--1">¿Qué proyecto tienes en mente?</div>
+              <div className="logos-section__ai-question logos-section__ai-question--2">¿Necesitas ayuda con código?</div>
+              <div className="logos-section__ai-question logos-section__ai-question--3">¿Diseñamos algo juntos?</div>
+              <div className="logos-section__ai-question logos-section__ai-question--4">¿En qué puedo ayudarte hoy?</div>
+              <div className="logos-section__ai-question logos-section__ai-question--5">¿Listo para crear algo increíble?</div>
+            </div>
+
+            {/* Datos técnicos flotantes */}
+            <div className="logos-section__ai-data">
+              <span className="logos-section__ai-data-item logos-section__ai-data-item--1">analyzing_</span>
+              <span className="logos-section__ai-data-item logos-section__ai-data-item--2">processing_</span>
+              <span className="logos-section__ai-data-item logos-section__ai-data-item--3">ready_</span>
+            </div>
+          </div>
         </div>
 
         {/* Glows */}
