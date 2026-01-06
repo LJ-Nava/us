@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Portfolio3DBackground from '../components/Portfolio3DBackground';
 
 // Importar imágenes de Romelima
 import romelima1 from '../assets/Romelima/1.png';
@@ -136,7 +137,60 @@ const projects = [
   }
 ];
 
-// Componente de carrusel de imágenes
+// Animated Counter Component
+const AnimatedCounter = ({ target, suffix = '', duration = 2 }) => {
+  const counterRef = useRef(null);
+  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const element = counterRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated.current) {
+            hasAnimated.current = true;
+
+            const startTime = performance.now();
+            const startValue = 0;
+            const endValue = parseInt(target);
+
+            const animate = (currentTime) => {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / (duration * 1000), 1);
+
+              // Easing function
+              const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+              const currentValue = Math.floor(startValue + (endValue - startValue) * easeOutQuart);
+
+              setCount(currentValue);
+
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
+
+            requestAnimationFrame(animate);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return (
+    <span ref={counterRef} className="portfolio-page__stat-value">
+      {count}{suffix}
+    </span>
+  );
+};
+
+// Image Carousel Component
 const ImageCarousel = ({ images, title, isHovered }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef(null);
@@ -189,9 +243,43 @@ const ImageCarousel = ({ images, title, isHovered }) => {
   );
 };
 
-// Componente de tarjeta de proyecto
+// Project Card with 3D Tilt Effect
 const ProjectCard = ({ project }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
+  const glowRef = useRef(null);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!cardRef.current) return;
+
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+    // Update glow position
+    if (glowRef.current) {
+      glowRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, ${project.color}30, transparent 40%)`;
+    }
+  }, [project.color]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    setIsHovered(false);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
 
   return (
     <a
@@ -199,10 +287,15 @@ const ProjectCard = ({ project }) => {
       target="_blank"
       rel="noopener noreferrer"
       className="portfolio-page__card"
+      ref={cardRef}
       style={{ '--card-color': project.color }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
+      <div className="portfolio-page__card-glow" ref={glowRef}></div>
+      <div className="portfolio-page__card-border"></div>
+
       <div className="portfolio-page__browser">
         <div className="portfolio-page__browser-header">
           <div className="portfolio-page__browser-dots">
@@ -226,6 +319,19 @@ const ProjectCard = ({ project }) => {
             isHovered={isHovered}
           />
           <div className="portfolio-page__overlay"></div>
+
+          {/* Hover particles */}
+          {isHovered && (
+            <div className="portfolio-page__particles">
+              {[...Array(6)].map((_, i) => (
+                <span key={i} className="portfolio-page__particle" style={{
+                  '--delay': `${i * 0.1}s`,
+                  '--x': `${Math.random() * 100}%`,
+                  '--color': project.color
+                }}></span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -251,43 +357,81 @@ const ProjectCard = ({ project }) => {
         </div>
       </div>
 
-      <div className="portfolio-page__card-glow"></div>
+      {/* Shine effect */}
+      <div className="portfolio-page__card-shine"></div>
     </a>
   );
 };
 
 const PortfolioPage = () => {
   const heroRef = useRef(null);
-  const gridRef = useRef(null);
+  const titleRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const ctx = gsap.context(() => {
-      // Animación del hero
+      // Hero content animation
+      const tl = gsap.timeline({ delay: 0.3 });
+
+      tl.fromTo(
+        '.portfolio-page__back',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      )
+        .fromTo(
+          '.portfolio-page__eyebrow',
+          { opacity: 0, y: 30, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.7)' },
+          '-=0.3'
+        )
+        .fromTo(
+          '.portfolio-page__title',
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+          '-=0.3'
+        )
+        .fromTo(
+          '.portfolio-page__subtitle',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+          '-=0.4'
+        )
+        .fromTo(
+          '.portfolio-page__stats',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+          '-=0.3'
+        );
+
+      // Cards stagger animation
       gsap.fromTo(
-        '.portfolio-page__hero-content > *',
-        { opacity: 0, y: 40 },
+        '.portfolio-page__card',
+        { opacity: 0, y: 80, rotateX: -15 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          stagger: 0.15,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.1,
           ease: 'power3.out',
-          delay: 0.3
+          delay: 1.2
         }
       );
 
-      // Animación de todas las tarjetas a la vez
+      // CTA animation
       gsap.fromTo(
-        '.portfolio-page__card',
+        '.portfolio-page__cta',
         { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
           ease: 'power3.out',
-          delay: 0.5
+          scrollTrigger: {
+            trigger: '.portfolio-page__cta',
+            start: 'top 85%'
+          }
         }
       );
     }, heroRef);
@@ -296,11 +440,13 @@ const PortfolioPage = () => {
   }, []);
 
   return (
-    <div className="portfolio-page">
-      <section className="portfolio-page__hero" ref={heroRef}>
+    <div className="portfolio-page" ref={heroRef}>
+      {/* 3D Background */}
+      <Portfolio3DBackground />
+
+      <section className="portfolio-page__hero">
         <div className="portfolio-page__hero-bg">
-          <div className="portfolio-page__hero-orb portfolio-page__hero-orb--1"></div>
-          <div className="portfolio-page__hero-orb portfolio-page__hero-orb--2"></div>
+          <div className="portfolio-page__hero-gradient"></div>
           <div className="portfolio-page__hero-grid"></div>
         </div>
 
@@ -316,15 +462,17 @@ const PortfolioPage = () => {
           <span className="portfolio-page__eyebrow">
             <span className="portfolio-page__eyebrow-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
               </svg>
             </span>
             Nuestro Portfolio
           </span>
 
-          <h1 className="portfolio-page__title">
-            Proyectos que <span className="portfolio-page__title-highlight">transforman</span> negocios
+          <h1 className="portfolio-page__title" ref={titleRef}>
+            Proyectos que{' '}
+            <span className="portfolio-page__title-highlight">transforman</span>{' '}
+            negocios
           </h1>
 
           <p className="portfolio-page__subtitle">
@@ -333,17 +481,17 @@ const PortfolioPage = () => {
 
           <div className="portfolio-page__stats">
             <div className="portfolio-page__stat">
-              <span className="portfolio-page__stat-value">7+</span>
+              <AnimatedCounter target="7" suffix="+" duration={2} />
               <span className="portfolio-page__stat-label">Proyectos</span>
             </div>
             <div className="portfolio-page__stat-divider"></div>
             <div className="portfolio-page__stat">
-              <span className="portfolio-page__stat-value">100%</span>
+              <AnimatedCounter target="100" suffix="%" duration={2.5} />
               <span className="portfolio-page__stat-label">Satisfacción</span>
             </div>
             <div className="portfolio-page__stat-divider"></div>
             <div className="portfolio-page__stat">
-              <span className="portfolio-page__stat-value">5+</span>
+              <AnimatedCounter target="5" suffix="+" duration={1.8} />
               <span className="portfolio-page__stat-label">Industrias</span>
             </div>
           </div>
@@ -353,13 +501,19 @@ const PortfolioPage = () => {
       <section className="portfolio-page__projects">
         <div className="portfolio-page__container">
           <div className="portfolio-page__grid">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
 
           <div className="portfolio-page__cta">
             <div className="portfolio-page__cta-content">
+              <div className="portfolio-page__cta-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span>Tu proyecto puede ser el próximo</span>
+              </div>
               <h2 className="portfolio-page__cta-title">
                 ¿Listo para crear algo increíble?
               </h2>
@@ -374,6 +528,7 @@ const PortfolioPage = () => {
                 </svg>
               </Link>
             </div>
+            <div className="portfolio-page__cta-glow"></div>
           </div>
         </div>
       </section>
