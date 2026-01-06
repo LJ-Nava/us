@@ -1,0 +1,151 @@
+// ==============================================
+// FEATURES SECTION - Por qué elegirnos
+// Cards con beneficios estilo premium
+// ==============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.features-section {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: linear-gradient(
+    180deg,
+    $color-white 0%,
+    #f8fafc 50%,
+    #f1f5f9 100%
+  );
+
+  &__container {
+    @include container;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto $spacing-3xl;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    margin-bottom: $spacing-md;
+    background: rgba($color-accent, 0.1);
+    border-radius: $radius-full;
+    font-size: 0.7rem;
+    font-weight: $font-weight-semibold;
+    color: $color-accent;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: $font-weight-bold;
+    color: $color-charcoal;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: $spacing-md;
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    color: $color-gray-500;
+    line-height: 1.7;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 1.125rem;
+    }
+  }
+
+  // Grid de cards
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-lg;
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  // Cards individuales
+  &__card {
+    position: relative;
+    padding: $spacing-xl;
+    background: $color-white;
+    border: 1px solid rgba($color-gray-200, 0.6);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Efecto de borde con color
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--feature-color, $color-accent);
+      border-radius: 16px 16px 0 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 40px rgba($color-black, 0.08),
+        0 4px 12px rgba($color-black, 0.04);
+      border-color: transparent;
+
+      &::before {
+        opacity: 1;
+      }
+
+      .features-section__card-icon {
+        background: rgba(var(--feature-color-rgb, 99, 102, 241), 0.15);
+        color: var(--feature-color, $color-accent);
+      }
+    }
+  }
+
+  &__card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-gray-100;
+    border-radius: 12px;
+    margin-bottom: $spacing-md;
+    color: $color-gray-500;
+    transition: all 0.3s ease;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__card-title {
+    font-size: 1.125rem;
+    font-weight: $font-weight-semibold;
+    color: $color-charcoal;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__card-description {
+    font-size: 0.9rem;
+    color: $color-gray-500;
+    line-height: 1.6;
+  }
+}

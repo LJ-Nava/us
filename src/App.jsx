@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
+import LogosSection from './components/LogosSection';
+import FeaturesSection from './components/FeaturesSection';
 import WhatsAppWidget from './components/WhatsAppWidget';
 
 // Registrar plugins de GSAP
@@ -35,8 +37,14 @@ function App() {
         {/* Hero Section con 3D */}
         <HeroSection />
 
-        {/* Services Section - Estilo Stripe */}
+        {/* Services Section - Nuestro Proceso */}
         <ServicesSection />
+
+        {/* Logos Section - Social Proof */}
+        <LogosSection />
+
+        {/* Features Section - Por qué elegirnos */}
+        <FeaturesSection />
       </main>
 
       {/* Footer */}

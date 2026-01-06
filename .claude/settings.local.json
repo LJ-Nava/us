@@ -16,7 +16,13 @@
       "WebFetch(domain:devnahian.com)",
       "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
-      "Bash(timeout 15 npm run dev)"
+      "Bash(timeout 15 npm run dev)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:www.linear.app)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:raycast.com)",
+      "Bash(git add:*)"
     ]
   }
 }

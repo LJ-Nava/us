@@ -138,7 +138,14 @@
 .services-section {
   position: relative;
   padding: $spacing-4xl 0;
-  background: linear-gradient(180deg, $color-white 0%, $color-gray-100 100%);
+  // Transición suave desde el hero (lavanda) hacia blanco
+  background: linear-gradient(
+    180deg,
+    #dfe6ff 0%,      // Mismo color que termina el hero
+    #eef2ff 15%,     // Transición suave
+    #f8f9ff 35%,     // Casi blanco con tinte azul
+    $color-white 60% // Blanco puro
+  );
   overflow: hidden;
 
   &__container {
