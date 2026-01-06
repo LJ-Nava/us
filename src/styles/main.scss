@@ -23,5 +23,9 @@
 @use 'components/logos-section';
 @use 'components/features-section';
 @use 'components/packages-section';
+@use 'components/contact-section';
 @use 'components/footer';
 @use 'components/whatsapp-widget';
+
+// PAGES
+@use 'pages/portfolio-page';

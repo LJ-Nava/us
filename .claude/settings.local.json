@@ -26,7 +26,12 @@
       "Bash(git commit:*)",
       "WebFetch(domain:dazzet.co)",
       "WebFetch(domain:aukera.es)",
-      "Bash(timeout 12 npm run dev:*)"
+      "Bash(timeout 12 npm run dev:*)",
+      "WebFetch(domain:inkbotdesign.com)",
+      "WebFetch(domain:www.cta.gallery)",
+      "WebFetch(domain:www.digitalsilk.com)",
+      "WebFetch(domain:webflow.com)",
+      "WebFetch(domain:lj-nava.github.io)"
     ]
   }
 }

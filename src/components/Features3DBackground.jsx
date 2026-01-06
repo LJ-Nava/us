@@ -70,87 +70,72 @@ const GlowOrb = ({ position, color, size = 0.3 }) => {
  */
 const Scene = () => {
   const shapes = useMemo(() => [
-    // Left side shapes
+    // Upper left corner - Main shape (prominent)
     {
-      position: [-6, 2, -5],
+      position: [-7, 3.5, -4],
       rotation: [0.5, 0.3, 0],
-      scale: 1.2,
+      scale: 1.4,
       geometry: <octahedronGeometry args={[1, 0]} />,
       color: '#06b6d4',
+      speed: 0.6,
+    },
+    // Left side - secondary shapes
+    {
+      position: [-5.5, 1.5, -5],
+      rotation: [0, 0.5, 0.2],
+      scale: 0.9,
+      geometry: <icosahedronGeometry args={[1, 0]} />,
+      color: '#8b5cf6',
       speed: 0.8,
     },
     {
-      position: [-5, -1, -3],
-      rotation: [0, 0.5, 0.2],
-      scale: 0.8,
-      geometry: <boxGeometry args={[1, 1, 1]} />,
-      color: '#8b5cf6',
-      speed: 1.2,
-    },
-    {
-      position: [-7, 0, -6],
+      position: [-8, 1, -6],
       rotation: [0.3, 0, 0.5],
-      scale: 1,
-      geometry: <tetrahedronGeometry args={[1, 0]} />,
-      color: '#f59e0b',
-      speed: 0.6,
-    },
-    // Right side shapes
-    {
-      position: [6, 1.5, -4],
-      rotation: [0.2, 0.4, 0],
-      scale: 1,
-      geometry: <icosahedronGeometry args={[1, 0]} />,
-      color: '#10b981',
-      speed: 0.9,
-    },
-    {
-      position: [5, -0.5, -5],
-      rotation: [0, 0.3, 0.4],
-      scale: 0.9,
-      geometry: <dodecahedronGeometry args={[1, 0]} />,
-      color: '#06b6d4',
-      speed: 1.1,
-    },
-    {
-      position: [7, 0.5, -6],
-      rotation: [0.4, 0.2, 0],
       scale: 0.7,
-      geometry: <octahedronGeometry args={[1, 0]} />,
-      color: '#8b5cf6',
-      speed: 0.7,
-    },
-    // Center back shapes (very subtle)
-    {
-      position: [0, 3, -8],
-      rotation: [0.5, 0.5, 0],
-      scale: 1.5,
-      geometry: <torusGeometry args={[1, 0.3, 8, 16]} />,
-      color: '#06b6d4',
-      speed: 0.4,
-    },
-    {
-      position: [-2, -2, -7],
-      rotation: [0.3, 0.2, 0.5],
-      scale: 0.6,
-      geometry: <boxGeometry args={[1, 1, 1]} />,
+      geometry: <tetrahedronGeometry args={[1, 0]} />,
       color: '#f59e0b',
       speed: 0.5,
     },
     {
-      position: [3, -1.5, -6],
-      rotation: [0.2, 0.5, 0.3],
-      scale: 0.8,
-      geometry: <tetrahedronGeometry args={[1, 0]} />,
+      position: [-6, -0.5, -4],
+      rotation: [0.4, 0.2, 0],
+      scale: 0.6,
+      geometry: <boxGeometry args={[1, 1, 1]} />,
       color: '#10b981',
-      speed: 0.8,
+      speed: 0.7,
+    },
+    // Left bottom
+    {
+      position: [-7.5, -1.5, -5],
+      rotation: [0.2, 0.4, 0],
+      scale: 0.5,
+      geometry: <dodecahedronGeometry args={[1, 0]} />,
+      color: '#06b6d4',
+      speed: 0.9,
+    },
+    // Right side - subtle accents
+    {
+      position: [7, 2, -7],
+      rotation: [0.5, 0.5, 0],
+      scale: 0.8,
+      geometry: <torusGeometry args={[1, 0.3, 8, 16]} />,
+      color: '#8b5cf6',
+      speed: 0.4,
+    },
+    {
+      position: [6, -1, -6],
+      rotation: [0.3, 0.2, 0.5],
+      scale: 0.5,
+      geometry: <octahedronGeometry args={[1, 0]} />,
+      color: '#f59e0b',
+      speed: 0.6,
     },
   ], []);
 
   const orbs = useMemo(() => [
-    { position: [-4, 1, -4], color: '#06b6d4', size: 0.4 },
-    { position: [4, 2, -5], color: '#8b5cf6', size: 0.3 },
-    { position: [0, -1, -6], color: '#f59e0b', size: 0.35 },
+    { position: [-6, 2.5, -3], color: '#06b6d4', size: 0.35 },
+    { position: [-4, 0, -5], color: '#8b5cf6', size: 0.25 },
+    { position: [5, 1, -6], color: '#f59e0b', size: 0.2 },
   ], []);
 
   return (

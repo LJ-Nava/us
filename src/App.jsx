@@ -1,18 +1,48 @@
 import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Componentes
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ServicesSection from './components/ServicesSection';
-import LogosSection from './components/LogosSection';
-import FeaturesSection from './components/FeaturesSection';
-import PackagesSection from './components/PackagesSection';
+import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
+
+// Pages
+import HomePage from './pages/HomePage';
+import PortfolioPage from './pages/PortfolioPage';
 
 // Registrar plugins de GSAP
 gsap.registerPlugin(ScrollTrigger);
+
+// Componente para scroll al cambiar de ruta
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    ScrollTrigger.refresh();
+  }, [pathname]);
+
+  return null;
+};
+
+// Layout principal
+const Layout = ({ children }) => {
+  return (
+    <div className="app">
+      <Header />
+      <main className="main">
+        {children}
+      </main>
+      <Footer />
+      <WhatsAppWidget
+        phoneNumber="573147083182"
+        message="Hola! Me gustaría saber más sobre sus servicios de diseño web."
+      />
+    </div>
+  );
+};
 
 function App() {
   // Inicialización de efectos globales
@@ -29,43 +59,27 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      {/* Header Premium */}
-      <Header />
-
-      {/* Main Content */}
-      <main className="main">
-        {/* Hero Section con 3D */}
-        <HeroSection />
-
-        {/* Services Section - Nuestro Proceso */}
-        <ServicesSection />
-
-        {/* Logos Section - Social Proof */}
-        <LogosSection />
-
-        {/* Features Section - Por qué elegirnos */}
-        <FeaturesSection />
-
-        {/* Packages Section - Nuestros Paquetes */}
-        <PackagesSection />
-      </main>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer__container">
-          <p className="footer__text">
-            © 2025 J-Visual. Todos los derechos reservados.
-          </p>
-        </div>
-      </footer>
-
-      {/* WhatsApp Widget */}
-      <WhatsAppWidget
-        phoneNumber="1234567890"
-        message="Hola! Me gustaría saber más sobre sus servicios de diseño web."
-      />
-    </div>
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <HomePage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/portfolio"
+          element={
+            <Layout>
+              <PortfolioPage />
+            </Layout>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

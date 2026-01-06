@@ -1,38 +1,39 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import useCurrency from '../hooks/useCurrency';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
  * PackagesSection - Nuestros Paquetes
  * Diseño premium con 4 planes diferenciados
+ * Precios en moneda local según ubicación
  */
 const PackagesSection = () => {
   const sectionRef = useRef(null);
   const [hoveredPackage, setHoveredPackage] = useState(null);
+  const { formatPrice, currencyName, loading } = useCurrency();
 
   const packages = [
     {
       id: 1,
       name: 'Starter',
-      tagline: 'Perfecto para comenzar',
-      description: 'Ideal para emprendedores y pequeños negocios que necesitan presencia digital profesional.',
-      price: '2,500',
-      priceNote: 'USD / proyecto',
+      tagline: 'Ideal para comenzar',
+      description: 'Landing page profesional para emprendedores que buscan presencia digital.',
+      price: '250',
       color: 'slate',
       popular: false,
       features: [
-        { text: 'Landing page optimizada', included: true },
+        { text: 'Landing page (1 página)', included: true },
         { text: 'Diseño responsive', included: true },
         { text: 'Hasta 5 secciones', included: true },
         { text: 'Formulario de contacto', included: true },
-        { text: 'SEO básico', included: true },
-        { text: 'Entrega en 2 semanas', included: true },
-        { text: '1 revisión incluida', included: true },
-        { text: 'Hosting primer año', included: false },
+        { text: 'Integración WhatsApp', included: true },
+        { text: 'Entrega en 5-7 días', included: true },
+        { text: '2 revisiones incluidas', included: true },
       ],
-      cta: 'Comenzar proyecto',
+      cta: 'Comenzar',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -43,25 +44,24 @@ const PackagesSection = () => {
     },
     {
       id: 2,
-      name: 'Growth',
+      name: 'Profesional',
       tagline: 'El más elegido',
-      description: 'Para negocios en crecimiento que necesitan una web completa y funcional.',
-      price: '5,500',
-      priceNote: 'USD / proyecto',
+      description: 'Sitio web completo para negocios que quieren destacar y convertir.',
+      price: '500',
       color: 'cyan',
       popular: true,
       features: [
-        { text: 'Sitio web hasta 10 páginas', included: true },
+        { text: 'Sitio web hasta 5 páginas', included: true },
         { text: 'Diseño UI/UX personalizado', included: true },
-        { text: 'CMS integrado (editable)', included: true },
-        { text: 'Blog optimizado para SEO', included: true },
-        { text: 'Integración redes sociales', included: true },
-        { text: 'Analytics avanzado', included: true },
-        { text: 'Entrega en 4 semanas', included: true },
+        { text: 'Panel administrable (CMS)', included: true },
+        { text: 'Optimización SEO', included: true },
+        { text: 'Google Analytics', included: true },
+        { text: 'Redes sociales integradas', included: true },
+        { text: 'Entrega en 10-14 días', included: true },
         { text: '3 revisiones incluidas', included: true },
-        { text: 'Soporte 3 meses', included: true },
+        { text: 'Soporte 1 mes', included: true },
       ],
-      cta: 'Elegir Growth',
+      cta: 'Elegir plan',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -71,58 +71,52 @@ const PackagesSection = () => {
     {
       id: 3,
       name: 'Business',
-      tagline: 'Solución completa',
-      description: 'E-commerce y aplicaciones web con funcionalidades avanzadas para escalar.',
-      price: '12,000',
-      priceNote: 'USD / proyecto',
+      tagline: 'Con marketing incluido',
+      description: 'Web profesional + posicionamiento en Google para atraer más clientes.',
+      price: '750',
       color: 'violet',
       popular: false,
       features: [
-        { text: 'E-commerce completo', included: true },
-        { text: 'Hasta 500 productos', included: true },
-        { text: 'Pasarela de pagos', included: true },
-        { text: 'Panel de administración', included: true },
-        { text: 'Inventario automatizado', included: true },
-        { text: 'Email marketing integrado', included: true },
-        { text: 'SEO avanzado + SEM setup', included: true },
-        { text: 'Entrega en 8 semanas', included: true },
+        { text: 'Todo del plan Profesional', included: true },
+        { text: 'Hasta 8 páginas', included: true },
+        { text: 'Blog integrado', included: true },
+        { text: 'SEO avanzado (posicionamiento)', included: true },
+        { text: 'Google My Business', included: true },
+        { text: 'Estrategia de palabras clave', included: true },
+        { text: 'Entrega en 15-20 días', included: true },
         { text: 'Revisiones ilimitadas', included: true },
-        { text: 'Soporte 6 meses', included: true },
+        { text: 'Soporte 3 meses', included: true },
       ],
-      cta: 'Solicitar Business',
+      cta: 'Solicitar',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-          <path d="M8 21h8M12 17v4"/>
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
     },
     {
       id: 4,
-      name: 'Enterprise',
-      tagline: 'A tu medida',
-      description: 'Soluciones personalizadas para grandes empresas con necesidades específicas.',
-      price: 'Custom',
-      priceNote: 'Cotización personalizada',
+      name: 'E-commerce',
+      tagline: 'Tu tienda online',
+      description: 'Tienda online lista para vender con carrito y pagos integrados.',
+      price: '950',
       color: 'amber',
       popular: false,
       features: [
-        { text: 'Desarrollo a medida', included: true },
-        { text: 'Arquitectura escalable', included: true },
-        { text: 'APIs e integraciones', included: true },
-        { text: 'App móvil opcional', included: true },
-        { text: 'Equipo dedicado', included: true },
-        { text: 'Infraestructura cloud', included: true },
-        { text: 'Seguridad enterprise', included: true },
-        { text: 'SLA garantizado', included: true },
-        { text: 'Soporte prioritario 24/7', included: true },
-        { text: 'Account manager dedicado', included: true },
+        { text: 'Tienda online completa', included: true },
+        { text: 'Hasta 50 productos', included: true },
+        { text: 'Carrito de compras', included: true },
+        { text: 'Pasarela de pagos', included: true },
+        { text: 'Panel de inventario', included: true },
+        { text: 'WhatsApp Business', included: true },
+        { text: 'Entrega en 20-25 días', included: true },
+        { text: 'Capacitación incluida', included: true },
+        { text: 'Soporte 3 meses', included: true },
       ],
-      cta: 'Contactar ventas',
+      cta: 'Cotizar',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M12 8v4M12 16h.01" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
     },
@@ -225,15 +219,10 @@ const PackagesSection = () => {
 
                 {/* Price */}
                 <div className="packages-section__card-price">
-                  {pkg.price === 'Custom' ? (
-                    <span className="packages-section__card-price-custom">Custom</span>
-                  ) : (
-                    <>
-                      <span className="packages-section__card-price-currency">$</span>
-                      <span className="packages-section__card-price-value">{pkg.price}</span>
-                    </>
-                  )}
-                  <span className="packages-section__card-price-note">{pkg.priceNote}</span>
+                  <span className={`packages-section__card-price-value ${loading ? 'is-loading' : ''}`}>
+                    {formatPrice(pkg.price)}
+                  </span>
+                  <span className="packages-section__card-price-note">{currencyName}</span>
                 </div>
 
                 {/* CTA Button */}
