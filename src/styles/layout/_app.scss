@@ -1,0 +1,17 @@
+// ==============================================
+// APP - Layout principal (BEM)
+// ==============================================
+
+@use '../abstracts/variables' as *;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $color-dark;
+  position: relative;
+}
+
+.main {
+  flex: 1;
+}

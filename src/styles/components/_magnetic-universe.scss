@@ -1,0 +1,26 @@
+// ==============================================
+// MAGNETIC UNIVERSE - Sistema de partículas interactivo
+// ==============================================
+
+@use '../abstracts/variables' as *;
+
+.magnetic-universe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  // Canvas principal
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    z-index: 1;
+  }
+}

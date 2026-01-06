@@ -1,0 +1,579 @@
+// ==============================================
+// HEADER PREMIUM - Nivel Awwwards 2025
+// Inspirado en IgnemTech + Igloo Inc
+// ==============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/animations' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-fixed;
+  padding: $spacing-md 0;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Fondo glassmorphism premium
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($color-snow, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba($color-accent, 0.08);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  // Línea de brillo superior (aurora effect)
+  &__glow-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-accent, 0.3) 20%,
+      rgba($color-secondary, 0.5) 50%,
+      rgba($color-accent, 0.3) 80%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmerElegant 8s linear infinite;
+  }
+
+  // Estado: Scrolled
+  &--scrolled {
+    padding: $spacing-sm 0;
+
+    &::before {
+      background: rgba($color-snow, 0.95);
+      box-shadow: 0 4px 30px rgba($color-black, 0.08);
+    }
+
+    .header__container {
+      height: 50px;
+    }
+
+    .header__logo-mark {
+      transform: scale(0.9);
+    }
+
+    .header__glow-line {
+      opacity: 0.5;
+    }
+  }
+
+  // CONTENEDOR
+  &__container {
+    @include container;
+    @include flex-between;
+    position: relative;
+    height: 56px;
+    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @include responsive(lg) {
+      height: 64px;
+    }
+  }
+
+  // ==================== LOGO ====================
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    position: relative;
+    z-index: 10;
+
+    &:hover {
+      .header__logo-mark {
+        border-color: rgba($color-accent, 0.4);
+        box-shadow: 0 0 30px rgba($color-accent, 0.2);
+      }
+
+      .header__logo-glow {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+
+      .header__logo-letter--accent {
+        text-shadow: 0 0 20px rgba($color-accent, 0.5);
+      }
+    }
+  }
+
+  &__logo-mark {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($color-white, 0.8);
+    border: 1px solid rgba($color-black, 0.08);
+    border-radius: $radius-md;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+
+  &__logo-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba($color-accent, 0.15) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+
+  &__logo-letter {
+    font-size: 1.5rem;
+    font-weight: $font-weight-black;
+    color: $color-charcoal;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: all 0.3s ease;
+
+    &--accent {
+      background: $gradient-text;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &__logo-info {
+    display: none;
+
+    @include responsive(md) {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  &__logo-text {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-charcoal;
+    line-height: 1.1;
+  }
+
+  &__logo-tagline {
+    font-size: 0.6rem;
+    font-weight: $font-weight-medium;
+    color: $color-gray-500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  // ==================== NAVEGACIÓN ====================
+  &__nav {
+    display: none;
+
+    @include responsive(lg) {
+      display: block;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__nav-item {
+    position: relative;
+
+    &--has-dropdown {
+      &:hover {
+        .header__dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        .header__nav-arrow {
+          transform: rotate(180deg);
+          color: $color-accent;
+        }
+      }
+    }
+  }
+
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-gray-600;
+    text-decoration: none;
+    border-radius: $radius-md;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      color: $color-charcoal;
+
+      .header__nav-line {
+        transform: scaleX(1);
+      }
+    }
+
+    &--active {
+      color: $color-charcoal;
+
+      .header__nav-line {
+        transform: scaleX(1);
+        background: $gradient-accent;
+      }
+    }
+  }
+
+  &__nav-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Línea animada bajo el texto
+  &__nav-line {
+    position: absolute;
+    bottom: 6px;
+    left: $spacing-md;
+    right: $spacing-md;
+    height: 2px;
+    background: $gradient-accent;
+    border-radius: $radius-full;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &__nav-arrow {
+    width: 12px;
+    height: 12px;
+    color: $color-gray-400;
+    transition: all 0.3s ease;
+  }
+
+  &__nav-badge {
+    padding: 2px 8px;
+    font-size: 0.65rem;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    background: $gradient-accent;
+    border-radius: $radius-full;
+    line-height: 1.2;
+  }
+
+  // ==================== DROPDOWN MEGA ====================
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: 480px;
+    padding-top: $spacing-md;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  &__dropdown-content {
+    position: relative;
+    background: rgba($color-white, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba($color-accent, 0.1);
+    border-radius: $radius-xl;
+    padding: $spacing-lg;
+    box-shadow:
+      0 20px 50px rgba($color-black, 0.1),
+      0 0 0 1px rgba($color-white, 0.5) inset;
+    overflow: hidden;
+  }
+
+  &__dropdown-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    text-decoration: none;
+    border-radius: $radius-lg;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      background: rgba($color-accent, 0.05);
+      transform: translateX(4px);
+
+      .header__dropdown-icon {
+        border-color: rgba($color-accent, 0.3);
+        background: rgba($color-accent, 0.1);
+
+        svg {
+          color: $color-accent;
+        }
+      }
+
+      .header__dropdown-arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__dropdown-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    @include flex-center;
+    background: rgba($color-gray-100, 0.5);
+    border: 1px solid rgba($color-black, 0.06);
+    border-radius: $radius-md;
+    transition: all 0.3s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: $color-gray-500;
+      transition: color 0.3s ease;
+    }
+  }
+
+  &__dropdown-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__dropdown-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-charcoal;
+  }
+
+  &__dropdown-desc {
+    font-size: $font-size-xs;
+    color: $color-gray-500;
+  }
+
+  &__dropdown-arrow {
+    width: 16px;
+    height: 16px;
+    color: $color-accent;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+
+  // Decoración del dropdown
+  &__dropdown-decoration {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+  }
+
+  &__dropdown-blob {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      rgba($color-accent, 0.1) 0%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    animation: breathe 8s ease-in-out infinite;
+  }
+
+  // ==================== ACCIONES ====================
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    @include responsive(lg) {
+      gap: $spacing-lg;
+    }
+  }
+
+  &__status {
+    display: none;
+
+    @include responsive(xl) {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-xs $spacing-md;
+      background: rgba($color-white, 0.6);
+      border: 1px solid rgba($color-black, 0.06);
+      border-radius: $radius-full;
+    }
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulseSubtle 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(#10b981, 0.5);
+  }
+
+  &__status-text {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-gray-600;
+  }
+
+  // ==================== CTA PREMIUM ====================
+  &__cta {
+    display: none;
+
+    @include responsive(md) {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-white;
+      background: $gradient-accent;
+      border: none;
+      border-radius: $radius-full;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba($color-accent, 0.3);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 25px rgba($color-accent, 0.4),
+          0 0 0 1px rgba($color-white, 0.2) inset;
+
+        .header__cta-icon {
+          transform: translateX(4px);
+        }
+
+        .header__cta-shimmer {
+          transform: translateX(100%);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__cta-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__cta-icon {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  // Efecto shimmer en CTA
+  &__cta-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-white, 0.3) 50%,
+      transparent 100%
+    );
+    transition: transform 0.6s ease;
+  }
+
+  // ==================== MENÚ MÓVIL ====================
+  &__menu-toggle {
+    @include flex-center;
+    flex-direction: column;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    background: rgba($color-white, 0.8);
+    border: 1px solid rgba($color-black, 0.08);
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    @include responsive(lg) {
+      display: none;
+    }
+
+    &:hover {
+      border-color: rgba($color-accent, 0.3);
+      background: rgba($color-accent, 0.05);
+
+      .header__menu-line {
+        background: $color-accent;
+
+        &:first-child {
+          transform: translateX(-2px);
+        }
+
+        &:last-child {
+          transform: translateX(2px);
+        }
+      }
+    }
+  }
+
+  &__menu-line {
+    width: 18px;
+    height: 2px;
+    background: $color-charcoal;
+    border-radius: $radius-full;
+    transition: all 0.3s ease;
+
+    &:first-child {
+      width: 14px;
+      align-self: flex-end;
+    }
+  }
+}

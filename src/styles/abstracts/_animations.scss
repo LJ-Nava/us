@@ -1,0 +1,224 @@
+// ==============================================
+// ANIMATIONS - Animaciones elegantes y refinadas
+// ==============================================
+
+// ==================== KEYFRAMES BASE ====================
+
+// Fade in desde abajo - suave y elegante
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade in desde la izquierda
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Fade in desde la derecha
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Fade in simple
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Escala suave
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Reveal desde máscara
+@keyframes revealUp {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+// Línea que se expande
+@keyframes lineExpand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// Flotación muy sutil
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+// Pulso muy sutil
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Rotación lenta y elegante
+@keyframes rotateSlowly {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Shimmer elegante
+@keyframes shimmerElegant {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Blink del cursor typewriter
+@keyframes cursorBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+// Gradiente sutil
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Breathing muy sutil
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.5;
+  }
+}
+
+// Partículas derivando suavemente
+@keyframes drift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5px, -5px);
+  }
+  50% {
+    transform: translate(0, -10px);
+  }
+  75% {
+    transform: translate(-5px, -5px);
+  }
+}
+
+// ==================== MIXINS DE ANIMACIÓN ====================
+
+@mixin animate-fade-in-up($delay: 0s, $duration: 0.8s) {
+  opacity: 0;
+  animation: fadeInUp $duration cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-fade-in-left($delay: 0s, $duration: 0.8s) {
+  opacity: 0;
+  animation: fadeInLeft $duration cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-fade-in-right($delay: 0s, $duration: 0.8s) {
+  opacity: 0;
+  animation: fadeInRight $duration cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-fade-in($delay: 0s, $duration: 0.6s) {
+  opacity: 0;
+  animation: fadeIn $duration ease-out forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-scale-in($delay: 0s, $duration: 0.6s) {
+  opacity: 0;
+  animation: scaleIn $duration cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-reveal-up($delay: 0s, $duration: 0.8s) {
+  animation: revealUp $duration cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin animate-float-subtle($duration: 6s) {
+  animation: floatSubtle $duration ease-in-out infinite;
+}
+
+@mixin animate-breathe($duration: 8s) {
+  animation: breathe $duration ease-in-out infinite;
+}
+
+@mixin animate-gradient($duration: 8s) {
+  background-size: 200% 200%;
+  animation: gradientShift $duration ease infinite;
+}

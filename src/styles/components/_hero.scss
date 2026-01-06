@@ -1,0 +1,631 @@
+// ==============================================
+// HERO SECTION - Nivel Awwwards 2025
+// 3D + Animaciones + Premium Design
+// ==============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/animations' as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: $gradient-hero;
+
+  // ==================== ESCENA 3D ====================
+  &__3d-container {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    bottom: 0;
+    width: 60%;
+    z-index: 1;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    // Fade y ajuste en móvil/tablet
+    @media (max-width: $breakpoint-lg) {
+      opacity: 0.35;
+      right: -10%;
+      width: 70%;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      opacity: 0.25;
+    }
+  }
+
+  // ==================== GRADIENTES DECORATIVOS ====================
+  &__gradients {
+    @include absolute-fill;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  &__gradient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.4;
+
+    &--1 {
+      top: -25%;
+      right: 5%;
+      width: 45vw;
+      height: 45vw;
+      max-width: 550px;
+      max-height: 550px;
+      background: radial-gradient(
+        circle,
+        rgba($color-accent, 0.08) 0%,
+        rgba($color-accent-light, 0.04) 50%,
+        transparent 70%
+      );
+      animation: breathe 25s ease-in-out infinite;
+    }
+
+    &--2 {
+      bottom: -15%;
+      left: -5%;
+      width: 35vw;
+      height: 35vw;
+      max-width: 400px;
+      max-height: 400px;
+      background: radial-gradient(
+        circle,
+        rgba($color-secondary, 0.05) 0%,
+        transparent 60%
+      );
+      animation: breathe 30s ease-in-out infinite;
+      animation-delay: -10s;
+    }
+
+    &--3 {
+      display: none;
+    }
+  }
+
+  // ==================== GRID PATTERN ====================
+  &__grid-pattern {
+    display: none; // Oculto para diseño más limpio
+  }
+
+  // ==================== NOISE TEXTURE ====================
+  &__noise {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+  }
+
+  // ==================== FLOATING ACCENTS ====================
+  &__accents {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &__accent {
+    position: absolute;
+    opacity: 0;
+    animation: accentFloat 20s ease-in-out infinite;
+
+    // Dots
+    &--dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba($color-accent, 0.4);
+    }
+
+    // Cross
+    &--cross {
+      width: 12px;
+      height: 12px;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: rgba($color-gray-400, 0.5);
+      }
+
+      &::before {
+        width: 12px;
+        height: 1px;
+        transform: translate(-50%, -50%);
+      }
+
+      &::after {
+        width: 1px;
+        height: 12px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    // Line
+    &--line {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba($color-accent, 0.3), transparent);
+    }
+
+    // Ring
+    &--ring {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba($color-accent, 0.2);
+      border-radius: 50%;
+    }
+
+    // Posiciones individuales
+    &--1 {
+      top: 20%;
+      right: 25%;
+      animation-delay: 0s;
+    }
+
+    &--2 {
+      top: 60%;
+      right: 15%;
+      animation-delay: -3s;
+      width: 4px;
+      height: 4px;
+    }
+
+    &--3 {
+      top: 75%;
+      right: 40%;
+      animation-delay: -7s;
+      width: 5px;
+      height: 5px;
+    }
+
+    &--4 {
+      top: 30%;
+      right: 45%;
+      animation-delay: -2s;
+    }
+
+    &--5 {
+      top: 80%;
+      right: 55%;
+      animation-delay: -10s;
+    }
+
+    &--6 {
+      top: 25%;
+      right: 60%;
+      animation-delay: -5s;
+      transform: rotate(-30deg);
+    }
+
+    &--7 {
+      top: 55%;
+      right: 35%;
+      animation-delay: -12s;
+      transform: rotate(45deg);
+    }
+
+    &--8 {
+      top: 45%;
+      right: 50%;
+      animation-delay: -8s;
+    }
+  }
+
+  // ==================== CONTENEDOR ====================
+  &__container {
+    @include container;
+    position: relative;
+    z-index: 10;
+    padding-top: 140px;
+    padding-bottom: $spacing-3xl;
+
+    @include responsive(lg) {
+      padding-top: 120px;
+      padding-bottom: $spacing-2xl;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // ==================== CONTENIDO ====================
+  &__content {
+    max-width: 680px;
+
+    @include responsive(lg) {
+      max-width: 600px;
+    }
+  }
+
+  // ==================== BADGE ====================
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px 5px 7px;
+    margin-bottom: $spacing-lg;
+    background: rgba($color-white, 0.95);
+    border: 1px solid rgba($color-gray-200, 0.6);
+    border-radius: $radius-full;
+    box-shadow: 0 1px 3px rgba($color-black, 0.02);
+
+    &-dot {
+      width: 6px;
+      height: 6px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulseSubtle 2.5s ease-in-out infinite;
+    }
+
+    &-text {
+      font-size: 0.65rem;
+      font-weight: $font-weight-medium;
+      color: $color-gray-500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  // ==================== TÍTULO ====================
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: $font-weight-semibold;
+    color: $color-charcoal;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: $spacing-lg;
+
+    @include responsive(lg) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__title-line {
+    display: block;
+  }
+
+  &__title-dynamic {
+    display: block;
+    min-height: 1.15em;
+    color: $color-accent;
+    font-weight: $font-weight-semibold;
+  }
+
+  // ==================== SUBTÍTULO ====================
+  &__subtitle {
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    color: $color-gray-500;
+    line-height: 1.7;
+    margin-bottom: $spacing-xl;
+    max-width: 420px;
+
+    @include responsive(lg) {
+      font-size: $font-size-lg;
+      max-width: 460px;
+    }
+  }
+
+  // ==================== BOTONES ====================
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-2xl;
+  }
+
+  // CTA Principal
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    background: $color-charcoal;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    box-shadow: 0 1px 3px rgba($color-black, 0.1);
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba($color-black, 0.15);
+      background: $color-black;
+
+      .hero__cta-icon {
+        transform: translateX(2px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    &-icon {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.25s ease;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &-glow {
+      display: none;
+    }
+  }
+
+  // CTA Secundario
+  &__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    font-size: 0.8rem;
+    font-weight: $font-weight-medium;
+    color: $color-gray-600;
+    background: transparent;
+    border: 1px solid rgba($color-gray-300, 0.7);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+
+    svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.25s ease;
+    }
+
+    &:hover {
+      color: $color-charcoal;
+      border-color: $color-gray-400;
+      background: rgba($color-white, 0.6);
+
+      svg {
+        transform: translate(2px, -2px);
+      }
+    }
+  }
+
+  // ==================== STATS ====================
+  &__stats {
+    display: flex;
+    gap: $spacing-xl;
+    padding-top: $spacing-xl;
+
+    @include responsive(md) {
+      gap: $spacing-2xl;
+    }
+  }
+
+  &__stat {
+    position: relative;
+    text-align: left;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: calc(-1 * $spacing-lg * 0.5);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 32px;
+      background: rgba($color-gray-300, 0.6);
+
+      @include responsive(md) {
+        right: calc(-1 * $spacing-lg);
+        height: 36px;
+      }
+    }
+
+    &-number {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: $font-weight-bold;
+      color: $color-charcoal;
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+
+      span {
+        font-size: 0.65em;
+        font-weight: $font-weight-semibold;
+        color: $color-accent;
+        margin-left: 1px;
+      }
+    }
+
+    &-label {
+      font-size: 0.7rem;
+      font-weight: $font-weight-medium;
+      color: $color-gray-500;
+      letter-spacing: 0.01em;
+
+      @include responsive(md) {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+
+  // ==================== SCROLL INDICATOR ====================
+  &__scroll {
+    position: absolute;
+    bottom: $spacing-xl;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    z-index: 10;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &-text {
+      font-size: 0.6rem;
+      font-weight: $font-weight-medium;
+      color: $color-gray-400;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    &-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(
+        to bottom,
+        rgba($color-gray-400, 0.4) 0%,
+        transparent 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    &-dot {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 3px;
+      background: $color-charcoal;
+      border-radius: 50%;
+      animation: scrollIndicator 2.5s ease-in-out infinite;
+    }
+  }
+
+  // ==================== LÍNEA INFERIOR ====================
+  &__bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-gray-300, 0.3) 20%,
+      rgba($color-gray-300, 0.5) 50%,
+      rgba($color-gray-300, 0.3) 80%,
+      transparent 100%
+    );
+  }
+}
+
+// ==================== HERO 3D SCENE ====================
+.hero-3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba($color-white, 0.3) 0%,
+      transparent 50%,
+      rgba($color-white, 0.1) 100%
+    );
+    pointer-events: none;
+  }
+}
+
+// ==================== ANIMACIONES ====================
+@keyframes scrollIndicator {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes accentFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(-10px);
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

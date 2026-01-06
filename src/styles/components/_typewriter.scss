@@ -1,0 +1,43 @@
+// ==============================================
+// TYPEWRITER - Efecto de máquina de escribir (BEM)
+// ==============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.typewriter {
+  display: inline-flex;
+  align-items: baseline;
+
+  // ELEMENTO: Texto que se escribe
+  &__text {
+    display: inline;
+  }
+
+  // ELEMENTO: Cursor elegante
+  &__cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.85em;
+    margin-left: 4px;
+    background: $color-accent;
+    border-radius: 1px;
+    animation: cursorBlink 1s ease-in-out infinite;
+    vertical-align: baseline;
+    position: relative;
+    top: 0.08em;
+  }
+}
+
+// Keyframe para el cursor
+@keyframes cursorBlink {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

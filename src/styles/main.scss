@@ -1,0 +1,24 @@
+// ==============================================
+// MAIN - Archivo principal de estilos premium
+// ==============================================
+
+// ABSTRACTS - Variables, mixins y animaciones
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+@use 'abstracts/animations';
+
+// BASE - Reset y estilos fundamentales
+@use 'base/reset';
+@use 'base/typography';
+
+// LAYOUT - Estructura general
+@use 'layout/app';
+
+// COMPONENTS - Bloques BEM
+@use 'components/header';
+@use 'components/hero';
+@use 'components/typewriter';
+@use 'components/magnetic-universe';
+@use 'components/services-grid';
+@use 'components/footer';
+@use 'components/whatsapp-widget';

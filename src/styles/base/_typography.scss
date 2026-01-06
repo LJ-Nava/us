@@ -1,0 +1,40 @@
+// ==============================================
+// TYPOGRAPHY - Estilos tipográficos premium
+// ==============================================
+
+@use '../abstracts/variables' as *;
+
+// Google Fonts - Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  color: $color-gray-300;
+  background-color: $color-dark;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  color: $color-white;
+}
+
+h1 { font-size: $font-size-h1; }
+h2 { font-size: $font-size-h2; }
+h3 { font-size: $font-size-h3; }
+
+p {
+  line-height: 1.7;
+}
+
+strong {
+  font-weight: $font-weight-semibold;
+}
