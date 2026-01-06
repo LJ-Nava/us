@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(dir:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "WebSearch",
+      "WebFetch(domain:ignemtech.com)",
+      "WebFetch(domain:ariesideas.com)",
+      "WebFetch(domain:www.hostinger.com)",
+      "WebFetch(domain:agencypartner.com)",
+      "WebFetch(domain:www.saritasa.com)",
+      "WebFetch(domain:www.microsourcing.com)",
+      "WebFetch(domain:freefrontend.com)",
+      "WebFetch(domain:devnahian.com)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(timeout 15 npm run dev)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:www.linear.app)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:raycast.com)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:dazzet.co)",
+      "WebFetch(domain:aukera.es)",
+      "Bash(timeout 12 npm run dev:*)",
+      "WebFetch(domain:inkbotdesign.com)",
+      "WebFetch(domain:www.cta.gallery)",
+      "WebFetch(domain:www.digitalsilk.com)",
+      "WebFetch(domain:webflow.com)",
+      "WebFetch(domain:lj-nava.github.io)"
+    ]
+  }
+}
