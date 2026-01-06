@@ -1,106 +1,127 @@
 // ==============================================
-// FEATURES SECTION - Por qué elegirnos
-// Diseño premium estilo Linear
+// FEATURES SECTION - Premium Design
+// Hover efectos cautivadores con elegancia
 // ==============================================
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+// Color palette for each card
+$card-colors: (
+  'cyan': (
+    primary: #06b6d4,
+    secondary: #22d3ee,
+    glow: rgba(6, 182, 212, 0.25),
+    bg: rgba(6, 182, 212, 0.08),
+  ),
+  'amber': (
+    primary: #f59e0b,
+    secondary: #fbbf24,
+    glow: rgba(245, 158, 11, 0.25),
+    bg: rgba(245, 158, 11, 0.08),
+  ),
+  'emerald': (
+    primary: #10b981,
+    secondary: #34d399,
+    glow: rgba(16, 185, 129, 0.25),
+    bg: rgba(16, 185, 129, 0.08),
+  ),
+  'violet': (
+    primary: #8b5cf6,
+    secondary: #a78bfa,
+    glow: rgba(139, 92, 246, 0.25),
+    bg: rgba(139, 92, 246, 0.08),
+  ),
+);
+
 .features-section {
   position: relative;
-  padding: $spacing-2xl 0 $spacing-5xl;
-  // Fondo oscuro que transiciona suavemente a blanco
+  padding: $spacing-4xl 0 $spacing-5xl;
   background: linear-gradient(
     180deg,
     #0a0a0c 0%,
-    #0a0a0c 20%,
-    #0c0c0e 30%,
-    #0e0e10 40%,
-    #101012 50%,
-    #141416 55%,
-    #1a1a1c 60%,
-    #222224 65%,
-    #2e2e30 68%,
-    #3a3a3c 71%,
-    #4a4a4c 74%,
-    #5c5c5e 77%,
-    #707072 80%,
-    #888888 83%,
-    #a0a0a0 86%,
-    #b8b8b8 89%,
-    #d0d0d0 92%,
-    #e4e4e4 95%,
-    #f4f4f4 98%,
+    #0c0c0e 10%,
+    #111115 20%,
+    #18181c 30%,
+    #222225 40%,
+    #333336 50%,
+    #505053 58%,
+    #707073 65%,
+    #909093 72%,
+    #b0b0b3 78%,
+    #d0d0d3 84%,
+    #e8e8eb 90%,
+    #f5f5f8 95%,
     #ffffff 100%
   );
   overflow: hidden;
 
   // =============================================
-  // BACKGROUND EFFECTS
+  // 3D BACKGROUND
   // =============================================
-  &__bg {
+  .features-3d-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+
+  // =============================================
+  // AMBIENT BACKGROUND
+  // =============================================
+  &__ambient {
     position: absolute;
     inset: 0;
     pointer-events: none;
     overflow: hidden;
   }
 
-  &__gradient {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse 80% 50% at 50% 0%,
-      rgba(139, 92, 246, 0.08) 0%,
-      transparent 50%
-    );
-  }
-
-  &__noise {
-    position: absolute;
-    inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  }
-
   &__orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(120px);
+    opacity: 0.3;
 
     &--1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(251, 191, 36, 0.06);
-      top: 10%;
-      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+      top: -200px;
+      left: -200px;
+      animation: orbFloat1 25s ease-in-out infinite;
     }
 
     &--2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(139, 92, 246, 0.06);
-      top: 30%;
-      right: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+      bottom: 100px;
+      right: -150px;
+      animation: orbFloat2 30s ease-in-out infinite;
     }
   }
 
-  &__grid-lines {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: linear-gradient(180deg, black 0%, transparent 60%);
+  @keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(80px, 40px) scale(1.1); }
   }
 
-  // =============================================
-  // CONTAINER
-  // =============================================
+  @keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-60px, -30px) scale(1.05); }
+  }
+
   &__container {
     @include container;
+    max-width: 1200px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 
   // =============================================
@@ -108,79 +129,50 @@
   // =============================================
   &__header {
     text-align: center;
-    max-width: 680px;
-    margin: 0 auto $spacing-4xl;
+    margin-bottom: $spacing-4xl;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  &__label {
+  &__eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    margin-bottom: $spacing-lg;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 100px;
+    gap: 12px;
     font-size: 0.8rem;
     font-weight: $font-weight-medium;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: $spacing-lg;
   }
 
-  &__label-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #a78bfa;
-    box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
-    animation: dotPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes dotPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.2); }
+  &__eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.6));
   }
 
   &__title {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: $font-weight-bold;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: $font-weight-semibold;
     color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: $spacing-lg;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: $spacing-md;
   }
 
-  &__title-gradient {
-    background: linear-gradient(
-      135deg,
-      #fbbf24 0%,
-      #f59e0b 25%,
-      #a78bfa 50%,
-      #8b5cf6 75%,
-      #fbbf24 100%
-    );
-    background-size: 200% 200%;
+  &__title-highlight {
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 8s ease-in-out infinite;
-  }
-
-  @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
   }
 
   &__subtitle {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.5);
     line-height: 1.7;
-    max-width: 520px;
-    margin: 0 auto;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 1.2rem;
-    }
   }
 
   // =============================================
@@ -188,43 +180,38 @@
   // =============================================
   &__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xl;
 
-    @media (max-width: $breakpoint-lg) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: $breakpoint-md) {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: $spacing-lg;
     }
   }
 
   // =============================================
-  // PREMIUM CARDS
+  // CARD - Base Styles
   // =============================================
   &__card {
     position: relative;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 24px;
+    cursor: default;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
       transform: translateY(-8px);
 
-      .features-section__card-glow {
+      .features-section__card-shine {
+        animation: cardShine 0.8s ease-out forwards;
+      }
+
+      .features-section__card-border {
         opacity: 1;
       }
 
-      .features-section__card-inner {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.12);
-      }
-
-      .features-section__card-icon {
-        transform: scale(1.1);
-        box-shadow: 0 0 40px var(--card-color);
+      .features-section__card-icon-glow {
+        opacity: 1;
+        transform: scale(1.2);
       }
 
       .features-section__card-arrow {
@@ -232,185 +219,320 @@
         transform: translate(0, 0);
       }
 
-      .features-section__card-border {
-        opacity: 1;
+      .features-section__card-title {
+        color: #ffffff;
       }
     }
   }
 
-  &__card-glow {
-    position: absolute;
-    inset: -1px;
-    border-radius: 20px;
-    background: radial-gradient(
-      circle at 50% 0%,
-      var(--card-color) 0%,
-      transparent 60%
-    );
-    opacity: 0;
-    filter: blur(30px);
-    transition: opacity 0.4s ease;
-    z-index: -1;
+  // Shine effect animation
+  @keyframes cardShine {
+    0% {
+      left: -100%;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
   }
 
-  &__card-inner {
-    position: relative;
-    padding: 28px 24px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
+  &__card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 10;
   }
 
   &__card-border {
     position: absolute;
     inset: 0;
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 1px;
-    background: linear-gradient(
-      135deg,
-      var(--card-color) 0%,
-      transparent 50%,
-      var(--card-color) 100%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
     pointer-events: none;
   }
 
+  &__card-inner {
+    position: relative;
+    background: rgba(18, 18, 22, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: $spacing-2xl $spacing-xl;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-xl;
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-lg;
+  }
+
   &__card-icon {
+    position: relative;
     width: 52px;
     height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--card-color), color-mix(in srgb, var(--card-color) 70%, #000));
+    background: rgba(255, 255, 255, 0.04);
     border-radius: 14px;
-    margin-bottom: 20px;
-    color: #0a0a0c;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--card-color) 30%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
 
     svg {
       width: 24px;
       height: 24px;
-      stroke-width: 2;
+      position: relative;
+      z-index: 2;
+      transition: all 0.4s ease;
     }
+  }
+
+  &__card-icon-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+    filter: blur(15px);
+  }
+
+  &__card-number {
+    font-size: 0.85rem;
+    font-weight: $font-weight-medium;
+    color: rgba(255, 255, 255, 0.15);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    transition: color 0.4s ease;
   }
 
   &__card-title {
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     font-weight: $font-weight-semibold;
-    color: #ffffff;
-    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: $spacing-sm;
     letter-spacing: -0.01em;
+    transition: color 0.4s ease;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1.2rem;
+    }
   }
 
   &__card-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.45);
-    line-height: 1.6;
-    flex-grow: 1;
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 0.9rem;
+    }
   }
 
-  &__card-metric {
+  &__card-footer {
     display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
   }
 
-  &__card-metric-value {
-    font-size: 1.5rem;
-    font-weight: $font-weight-bold;
-    color: var(--card-color);
-    letter-spacing: -0.02em;
+  &__card-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: $font-weight-medium;
+    transition: all 0.4s ease;
   }
 
-  &__card-metric-label {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  &__card-arrow {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 32px;
-    height: 32px;
+  &__card-highlight-icon {
+    width: 16px;
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.6);
-    opacity: 0;
-    transform: translate(-8px, 8px);
-    transition: all 0.3s ease;
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__card-arrow {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translate(-10px, 10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
 
   // =============================================
-  // BOTTOM STATS
+  // CARD COLOR VARIANTS
   // =============================================
-  &__bottom {
-    margin-top: $spacing-4xl;
+  @each $name, $colors in $card-colors {
+    &__card--#{$name} {
+      .features-section__card-border {
+        background: linear-gradient(
+          135deg,
+          #{map-get($colors, primary)},
+          transparent 50%,
+          #{map-get($colors, secondary)}
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+
+      .features-section__card-icon {
+        color: #{map-get($colors, primary)};
+      }
+
+      .features-section__card-icon-glow {
+        background: #{map-get($colors, glow)};
+      }
+
+      .features-section__card-highlight {
+        background: #{map-get($colors, bg)};
+        border: 1px solid rgba(map-get($colors, primary), 0.2);
+        color: #{map-get($colors, primary)};
+      }
+
+      .features-section__card-arrow {
+        background: #{map-get($colors, bg)};
+        color: #{map-get($colors, primary)};
+      }
+
+      &:hover {
+        .features-section__card-inner {
+          border-color: rgba(map-get($colors, primary), 0.15);
+          background: rgba(map-get($colors, primary), 0.02);
+        }
+
+        .features-section__card-icon {
+          background: #{map-get($colors, bg)};
+          border-color: rgba(map-get($colors, primary), 0.3);
+        }
+
+        .features-section__card-number {
+          color: rgba(map-get($colors, primary), 0.5);
+        }
+
+        .features-section__card-highlight {
+          background: rgba(map-get($colors, primary), 0.12);
+          border-color: rgba(map-get($colors, primary), 0.3);
+        }
+      }
+    }
+  }
+
+  // =============================================
+  // FOOTER STATS
+  // =============================================
+  &__footer {
+    margin-top: $spacing-5xl;
     padding-top: $spacing-3xl;
   }
 
-  &__stats {
+  &__stats-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: $spacing-2xl;
-    flex-wrap: wrap;
+    gap: $spacing-3xl;
 
     @media (max-width: $breakpoint-md) {
       gap: $spacing-xl;
     }
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
   }
 
-  &__stat {
-    text-align: center;
-  }
-
-  &__stat-number {
-    display: block;
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: $font-weight-bold;
-    color: rgba(0, 0, 0, 0.8);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  &__stat-label {
-    font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.5);
-    font-weight: $font-weight-medium;
+  &__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
   }
 
   &__stat-divider {
     width: 1px;
     height: 50px;
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.15), transparent);
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(0, 0, 0, 0.15),
+      transparent
+    );
 
     @media (max-width: $breakpoint-sm) {
-      display: none;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 0, 0, 0.15),
+        transparent
+      );
     }
+  }
+
+  &__stat-value {
+    font-size: 2.5rem;
+    font-weight: $font-weight-bold;
+    color: $color-charcoal;
+    letter-spacing: -0.03em;
+    line-height: 1;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 2rem;
+    }
+  }
+
+  &__stat-label {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: $font-weight-medium;
   }
 }

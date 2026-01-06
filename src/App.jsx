@@ -8,6 +8,7 @@ import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
 import LogosSection from './components/LogosSection';
 import FeaturesSection from './components/FeaturesSection';
+import PackagesSection from './components/PackagesSection';
 import WhatsAppWidget from './components/WhatsAppWidget';
 
 // Registrar plugins de GSAP
@@ -45,6 +46,9 @@ function App() {
 
         {/* Features Section - Por qué elegirnos */}
         <FeaturesSection />
+
+        {/* Packages Section - Nuestros Paquetes */}
+        <PackagesSection />
       </main>
 
       {/* Footer */}
