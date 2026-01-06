@@ -8,7 +8,7 @@
 
 .portfolio-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #0d0d12 50%, #0a0a0f 100%);
+  background: #ffffff;
   position: relative;
   overflow-x: hidden;
 
@@ -23,6 +23,8 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    opacity: 0.4;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
 
     canvas {
       width: 100% !important;
@@ -31,7 +33,7 @@
   }
 
   // =============================================
-  // HERO SECTION
+  // HERO SECTION - LIGHT THEME
   // =============================================
   &__hero {
     position: relative;
@@ -42,6 +44,7 @@
     padding: 140px $container-padding 100px;
     overflow: hidden;
     z-index: 1;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 60%, #e8edf5 100%);
   }
 
   &__hero-bg {
@@ -55,17 +58,17 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba($color-accent, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba($color-secondary, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 30% at 20% 60%, rgba($color-accent, 0.08) 0%, transparent 50%);
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba($color-accent, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba($color-secondary, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 20% 60%, rgba($color-accent, 0.05) 0%, transparent 50%);
   }
 
   &__hero-grid {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba($color-accent, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-accent, 0.04) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 20%, transparent 70%);
     animation: gridPulse 8s ease-in-out infinite;
@@ -88,10 +91,10 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba($color-accent, 0.06);
+    border: 1px solid rgba($color-accent, 0.12);
     border-radius: 50px;
-    color: rgba(255, 255, 255, 0.7);
+    color: $color-accent;
     font-size: 0.875rem;
     font-weight: $font-weight-medium;
     text-decoration: none;
@@ -100,11 +103,11 @@
     backdrop-filter: blur(10px);
 
     &:hover {
-      background: rgba($color-accent, 0.1);
-      border-color: rgba($color-accent, 0.3);
-      color: $color-white;
+      background: rgba($color-accent, 0.12);
+      border-color: rgba($color-accent, 0.25);
+      color: darken($color-accent, 10%);
       transform: translateX(-8px);
-      box-shadow: 0 0 30px rgba($color-accent, 0.2);
+      box-shadow: 0 0 30px rgba($color-accent, 0.15);
     }
 
     svg {
@@ -121,10 +124,10 @@
     align-items: center;
     gap: 12px;
     padding: 12px 24px;
-    background: linear-gradient(135deg, rgba($color-accent, 0.15) 0%, rgba($color-secondary, 0.1) 100%);
-    border: 1px solid rgba($color-accent, 0.25);
+    background: linear-gradient(135deg, rgba($color-accent, 0.1) 0%, rgba($color-secondary, 0.08) 100%);
+    border: 1px solid rgba($color-accent, 0.2);
     border-radius: 50px;
-    color: $color-accent-light;
+    color: $color-accent;
     font-size: 0.85rem;
     font-weight: $font-weight-semibold;
     text-transform: uppercase;
@@ -137,7 +140,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
       transform: translateX(-100%);
       animation: shimmer 3s infinite;
     }
@@ -162,11 +165,10 @@
   &__title {
     font-size: clamp(2.8rem, 7vw, 5rem);
     font-weight: $font-weight-bold;
-    color: $color-white;
+    color: #1a1a2e;
     line-height: 1.05;
     letter-spacing: -0.04em;
     margin-bottom: $spacing-lg;
-    text-shadow: 0 0 80px rgba($color-accent, 0.3);
   }
 
   &__title-highlight {
@@ -203,7 +205,7 @@
 
   &__subtitle {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: #64748b;
     line-height: 1.7;
     margin-bottom: $spacing-3xl;
     max-width: 650px;
@@ -217,10 +219,11 @@
     justify-content: center;
     gap: $spacing-2xl;
     padding: $spacing-xl $spacing-2xl;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba($color-accent, 0.1);
     border-radius: 20px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 
     @media (max-width: $breakpoint-sm) {
       gap: $spacing-lg;
@@ -251,7 +254,7 @@
 
   &__stat-label {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-top: 4px;
@@ -260,7 +263,7 @@
   &__stat-divider {
     width: 1px;
     height: 50px;
-    background: linear-gradient(180deg, transparent, rgba($color-accent, 0.4), transparent);
+    background: linear-gradient(180deg, transparent, rgba($color-accent, 0.3), transparent);
 
     @media (max-width: $breakpoint-sm) {
       display: none;
@@ -268,17 +271,41 @@
   }
 
   // =============================================
-  // PROJECTS SECTION
+  // TRANSITION GRADIENT - Light to Dark
+  // =============================================
+  &__transition {
+    height: 200px;
+    background: linear-gradient(180deg, #e8edf5 0%, #1a1a2e 100%);
+    position: relative;
+    z-index: 1;
+  }
+
+  // =============================================
+  // PROJECTS SECTION - DARK THEME
   // =============================================
   &__projects {
     position: relative;
-    padding: $spacing-3xl 0 $spacing-5xl;
+    padding: $spacing-4xl 0 $spacing-5xl;
     z-index: 1;
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 30%, #0a0a12 100%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(180deg, #e8edf5 0%, #1a1a2e 100%);
+      pointer-events: none;
+    }
   }
 
   &__container {
     @include container;
     max-width: 1400px;
+    position: relative;
+    padding-top: 120px;
   }
 
   &__grid {
