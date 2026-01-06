@@ -813,21 +813,21 @@
   }
 
   // =============================================
-  // CLAUDE AI - Núcleo de Inteligencia Artificial
+  // CLAUDE AI - Núcleo de Inteligencia Premium
   // =============================================
   &__ai-container {
     position: absolute;
-    right: 3%;
+    right: 2%;
     top: 50%;
     transform: translateY(-50%);
-    width: 520px;
-    height: 520px;
+    width: 580px;
+    height: 580px;
     z-index: 5;
 
     @media (max-width: $breakpoint-lg) {
-      width: 420px;
-      height: 420px;
-      right: 2%;
+      width: 460px;
+      height: 460px;
+      right: 1%;
     }
 
     @media (max-width: $breakpoint-md) {
@@ -842,6 +842,86 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+
+    &:hover {
+      .logos-section__ai-iris {
+        box-shadow:
+          0 0 60px rgba(254, 243, 199, 1),
+          0 0 100px rgba(251, 191, 36, 0.8),
+          0 0 150px rgba(217, 119, 6, 0.5),
+          inset 0 0 30px rgba(255, 255, 255, 0.5);
+      }
+
+      .logos-section__ai-pupil-core {
+        box-shadow: 0 0 25px #fff, 0 0 50px rgba(254, 243, 199, 1), 0 0 80px rgba(251, 191, 36, 1);
+      }
+
+      .logos-section__ai-ring {
+        border-color: rgba(254, 243, 199, 0.7);
+      }
+
+      .logos-section__ai-scanner {
+        background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(254, 243, 199, 0.1) 15%,
+          rgba(254, 243, 199, 1) 50%,
+          rgba(254, 243, 199, 0.1) 85%,
+          transparent 100%
+        );
+      }
+
+      .logos-section__ai-name {
+        text-shadow: 0 0 50px rgba(254, 243, 199, 1), 0 0 100px rgba(251, 191, 36, 0.8);
+      }
+    }
+  }
+
+  // ============ ONDAS DE PULSO ============
+  &__ai-pulse {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+
+    &--1 {
+      width: 250px;
+      height: 250px;
+      transform: translate(-50%, -50%);
+      animation: pulseWave 3s ease-out infinite;
+    }
+
+    &--2 {
+      width: 250px;
+      height: 250px;
+      transform: translate(-50%, -50%);
+      animation: pulseWave 3s ease-out infinite 1s;
+    }
+
+    &--3 {
+      width: 250px;
+      height: 250px;
+      transform: translate(-50%, -50%);
+      animation: pulseWave 3s ease-out infinite 2s;
+    }
+  }
+
+  @keyframes pulseWave {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.8;
+      border-color: rgba(251, 191, 36, 0.6);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+      border-color: rgba(251, 191, 36, 0);
+    }
   }
 
   // ============ CIRCUITOS / LÍNEAS DE DATOS ============
@@ -908,29 +988,45 @@
     50% { opacity: 1; transform: scale(1.5); }
   }
 
-  // ============ OJO CENTRAL / NÚCLEO ============
+  // ============ OJO CENTRAL / NÚCLEO PREMIUM ============
   &__ai-eye {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
 
     @media (max-width: $breakpoint-lg) {
-      width: 160px;
-      height: 160px;
+      width: 190px;
+      height: 190px;
     }
   }
 
-  // Anillos concéntricos
+  // Anillos concéntricos premium
   &__ai-ring {
     position: absolute;
     border-radius: 50%;
     border: 2px solid rgba(251, 191, 36, 0.3);
     top: 50%;
     left: 50%;
+    transition: all 0.3s ease-out;
+
+    &--outer {
+      width: 240px;
+      height: 240px;
+      transform: translate(-50%, -50%);
+      border: 3px solid rgba(251, 191, 36, 0.2);
+      border-top-color: rgba(251, 191, 36, 0.6);
+      border-right-color: rgba(251, 191, 36, 0.4);
+      animation: ringRotateSlow 30s linear infinite;
+
+      @media (max-width: $breakpoint-lg) {
+        width: 190px;
+        height: 190px;
+      }
+    }
 
     &--1 {
       width: 200px;
@@ -973,18 +1069,36 @@
     }
 
     &--4 {
-      width: 80px;
-      height: 80px;
+      width: 85px;
+      height: 85px;
       transform: translate(-50%, -50%);
       border-color: rgba(251, 191, 36, 0.8);
       border-width: 3px;
       animation: ringPulse2 3s ease-in-out infinite;
 
       @media (max-width: $breakpoint-lg) {
-        width: 65px;
-        height: 65px;
+        width: 70px;
+        height: 70px;
       }
     }
+
+    &--inner {
+      width: 60px;
+      height: 60px;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(254, 243, 199, 0.8);
+      animation: ringPulse3 2s ease-in-out infinite;
+
+      @media (max-width: $breakpoint-lg) {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  @keyframes ringRotateSlow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
   @keyframes ringPulse1 {
@@ -994,7 +1108,12 @@
 
   @keyframes ringPulse2 {
     0%, 100% { transform: translate(-50%, -50%) scale(1); border-color: rgba(251, 191, 36, 0.8); }
-    50% { transform: translate(-50%, -50%) scale(1.1); border-color: rgba(254, 243, 199, 1); }
+    50% { transform: translate(-50%, -50%) scale(1.08); border-color: rgba(254, 243, 199, 1); }
+  }
+
+  @keyframes ringPulse3 {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
   }
 
   @keyframes ringRotate {
@@ -1002,80 +1121,206 @@
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  // Iris central que sigue el mouse
+  // Hexágono decorativo
+  &__ai-hexagon {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    z-index: 11;
+    animation: hexRotate 40s linear infinite reverse;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  &__ai-hex-shape {
+    fill: none;
+    stroke: rgba(251, 191, 36, 0.3);
+    stroke-width: 1;
+    animation: hexPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes hexRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes hexPulse {
+    0%, 100% { stroke: rgba(251, 191, 36, 0.3); stroke-width: 1; }
+    50% { stroke: rgba(254, 243, 199, 0.6); stroke-width: 1.5; }
+  }
+
+  // Arcos decorativos
+  &__ai-arcs {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    z-index: 9;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
+  &__ai-arc {
+    fill: none;
+    stroke: rgba(251, 191, 36, 0.4);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 50 100;
+    animation: arcRotate 8s linear infinite;
+
+    &--1 { animation-delay: 0s; }
+    &--2 { animation-delay: 2s; }
+    &--3 { animation-delay: 4s; }
+    &--4 { animation-delay: 6s; }
+  }
+
+  @keyframes arcRotate {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 150; }
+  }
+
+  // Iris central premium que sigue el mouse
   &__ai-iris {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%,
-      rgba(254, 243, 199, 0.9) 0%,
-      rgba(251, 191, 36, 0.8) 40%,
-      rgba(217, 119, 6, 0.6) 100%
+      rgba(254, 243, 199, 1) 0%,
+      rgba(251, 191, 36, 0.9) 35%,
+      rgba(217, 119, 6, 0.7) 100%
     );
     box-shadow:
-      0 0 30px rgba(251, 191, 36, 0.8),
-      0 0 60px rgba(245, 158, 11, 0.5),
-      0 0 100px rgba(217, 119, 6, 0.3),
-      inset 0 0 20px rgba(255, 255, 255, 0.3);
+      0 0 40px rgba(251, 191, 36, 0.9),
+      0 0 80px rgba(245, 158, 11, 0.6),
+      0 0 120px rgba(217, 119, 6, 0.4),
+      inset 0 0 25px rgba(255, 255, 255, 0.4);
     z-index: 15;
     transition: transform 0.1s ease-out;
 
     @media (max-width: $breakpoint-lg) {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
     }
+  }
+
+  // Glow del iris
+  &__ai-iris-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
+    transform: scale(1.5);
+    animation: irisGlowPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes irisGlowPulse {
+    0%, 100% { transform: scale(1.5); opacity: 0.5; }
+    50% { transform: scale(2); opacity: 0.8; }
   }
 
   // Pupila brillante
   &__ai-pupil {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background: radial-gradient(circle,
       rgba(255, 255, 255, 1) 0%,
-      rgba(254, 243, 199, 0.9) 50%,
-      rgba(251, 191, 36, 0.7) 100%
+      rgba(254, 243, 199, 0.95) 40%,
+      rgba(251, 191, 36, 0.8) 100%
     );
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
     animation: pupilGlow 2s ease-in-out infinite;
 
     @media (max-width: $breakpoint-lg) {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Núcleo interno de la pupila
+  &__ai-pupil-core {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 15px #fff, 0 0 30px rgba(251, 191, 36, 1);
+    animation: coreFlicker 0.5s ease-in-out infinite;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 8px;
+      height: 8px;
     }
   }
 
   @keyframes pupilGlow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-    50% { box-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 60px rgba(251, 191, 36, 0.8); }
+    0%, 100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.9); }
+    50% { box-shadow: 0 0 50px rgba(255, 255, 255, 1), 0 0 80px rgba(251, 191, 36, 0.9); }
   }
 
-  // Scanner rotativo
+  @keyframes coreFlicker {
+    0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  // Scanner rotativo dual con efecto glitch
   &__ai-scanner {
     position: absolute;
-    width: 200px;
+    width: 220px;
     height: 2px;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(251, 191, 36, 0.1) 20%,
+      rgba(251, 191, 36, 0.05) 15%,
       rgba(251, 191, 36, 0.8) 50%,
-      rgba(251, 191, 36, 0.1) 80%,
+      rgba(251, 191, 36, 0.05) 85%,
       transparent 100%
     );
     top: 50%;
     left: 50%;
     transform-origin: center;
     transform: translate(-50%, -50%);
-    animation: scannerRotate 6s linear infinite;
+    animation: scannerRotate 5s linear infinite, scannerGlitch 8s ease-in-out infinite;
     z-index: 12;
 
+    &::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(254, 243, 199, 1);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 1), 0 0 30px rgba(251, 191, 36, 0.5);
+      animation: scannerDot 2s ease-in-out infinite;
+    }
+
+    &--2 {
+      animation: scannerRotate 5s linear infinite, scannerGlitch 8s ease-in-out infinite 4s;
+      animation-delay: 2.5s;
+      opacity: 0.5;
+      height: 1px;
+
+      &::before { display: none; }
+    }
+
     @media (max-width: $breakpoint-lg) {
-      width: 160px;
+      width: 175px;
     }
   }
 
@@ -1084,51 +1329,119 @@
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  // ============ ESPECTRO DE AUDIO ============
+  @keyframes scannerGlitch {
+    0%, 95%, 100% { opacity: 1; filter: none; }
+    96% { opacity: 0.5; filter: hue-rotate(90deg); }
+    97% { opacity: 0.8; filter: hue-rotate(-90deg); transform: translate(-50%, -50%) rotate(0deg) skewX(5deg); }
+    98% { opacity: 0.3; filter: none; }
+    99% { opacity: 1; filter: hue-rotate(45deg); transform: translate(-50%, -50%) rotate(0deg) skewX(-3deg); }
+  }
+
+  @keyframes scannerDot {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+  }
+
+  // ============ LÍNEAS DE ENERGÍA ============
+  &__ai-energy-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__ai-energy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg,
+      rgba(251, 191, 36, 0.8) 0%,
+      rgba(251, 191, 36, 0.3) 30%,
+      transparent 100%
+    );
+    transform-origin: left center;
+    opacity: 0.3;
+
+    &--1 { transform: translateY(-50%) rotate(0deg); }
+    &--2 { transform: translateY(-50%) rotate(90deg); }
+    &--3 { transform: translateY(-50%) rotate(180deg); }
+    &--4 { transform: translateY(-50%) rotate(270deg); }
+
+    @media (max-width: $breakpoint-lg) {
+      width: 240px;
+    }
+  }
+
+  // ============ ESPECTRO DE AUDIO PREMIUM ============
   &__ai-spectrum {
     position: absolute;
-    bottom: 100px;
+    bottom: 95px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: flex-end;
-    gap: 4px;
-    height: 40px;
+    gap: 3px;
+    height: 50px;
     z-index: 15;
 
     @media (max-width: $breakpoint-lg) {
-      bottom: 80px;
-      height: 32px;
-      gap: 3px;
+      bottom: 75px;
+      height: 40px;
+      gap: 2px;
     }
   }
 
   &__ai-bar {
-    width: 4px;
+    width: 3px;
     background: linear-gradient(180deg,
-      rgba(254, 243, 199, 1) 0%,
-      rgba(251, 191, 36, 0.8) 50%,
-      rgba(217, 119, 6, 0.5) 100%
+      rgba(255, 255, 255, 1) 0%,
+      rgba(254, 243, 199, 0.95) 20%,
+      rgba(251, 191, 36, 0.85) 60%,
+      rgba(217, 119, 6, 0.6) 100%
     );
-    border-radius: 2px;
+    border-radius: 3px;
     transform-origin: bottom;
-    box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+    box-shadow:
+      0 0 10px rgba(251, 191, 36, 0.7),
+      0 0 20px rgba(251, 191, 36, 0.3);
+    transition: all 0.1s ease-out;
 
-    @for $i from 1 through 13 {
+    @for $i from 1 through 17 {
       &:nth-child(#{$i}) {
-        height: #{12 + random(20)}px;
-        animation: barPulse #{0.3 + random(5) * 0.1}s ease-in-out infinite #{$i * 0.05}s;
+        $center: 9;
+        $distFromCenter: abs($i - $center);
+        $baseHeight: 35 - ($distFromCenter * 3);
+        height: #{max(15, $baseHeight)}px;
+        animation: barPulse#{($i % 5) + 1} #{0.25 + ($i % 4) * 0.1}s ease-in-out infinite #{$i * 0.03}s;
       }
     }
 
     @media (max-width: $breakpoint-lg) {
-      width: 3px;
+      width: 2px;
     }
   }
 
-  @keyframes barPulse {
-    0%, 100% { transform: scaleY(0.4); }
-    50% { transform: scaleY(1); }
+  @keyframes barPulse1 {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.6; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+  @keyframes barPulse2 {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.7; }
+    50% { transform: scaleY(0.9); opacity: 1; }
+  }
+  @keyframes barPulse3 {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.6; }
+    50% { transform: scaleY(1.1); opacity: 1; }
+  }
+  @keyframes barPulse4 {
+    0%, 100% { transform: scaleY(0.35); opacity: 0.65; }
+    50% { transform: scaleY(0.95); opacity: 1; }
+  }
+  @keyframes barPulse5 {
+    0%, 100% { transform: scaleY(0.45); opacity: 0.7; }
+    50% { transform: scaleY(1.05); opacity: 1; }
   }
 
   // ============ PARTÍCULAS ============
@@ -1145,34 +1458,83 @@
     border-radius: 50%;
     background: rgba(251, 191, 36, 1);
     box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+    transition: all 0.2s ease-out;
 
-    &:nth-child(1) { width: 4px; height: 4px; top: 5%; left: 25%; animation: particleDrift 8s ease-in-out infinite; }
-    &:nth-child(2) { width: 3px; height: 3px; top: 10%; right: 20%; animation: particleDrift 9s ease-in-out infinite 1s; }
-    &:nth-child(3) { width: 5px; height: 5px; top: 25%; left: 10%; animation: particleDrift 7s ease-in-out infinite 2s; }
-    &:nth-child(4) { width: 3px; height: 3px; top: 35%; right: 15%; animation: particleDrift 10s ease-in-out infinite 0.5s; }
-    &:nth-child(5) { width: 4px; height: 4px; bottom: 30%; left: 15%; animation: particleDrift 8.5s ease-in-out infinite 1.5s; }
-    &:nth-child(6) { width: 3px; height: 3px; bottom: 25%; right: 25%; animation: particleDrift 9.5s ease-in-out infinite 2.5s; }
-    &:nth-child(7) { width: 5px; height: 5px; top: 60%; left: 5%; animation: particleDrift 7.5s ease-in-out infinite 0.8s; }
-    &:nth-child(8) { width: 4px; height: 4px; top: 70%; right: 10%; animation: particleDrift 8s ease-in-out infinite 1.2s; }
-    &:nth-child(9) { width: 3px; height: 3px; bottom: 15%; left: 30%; animation: particleDrift 9s ease-in-out infinite 0.3s; }
-    &:nth-child(10) { width: 4px; height: 4px; bottom: 10%; right: 30%; animation: particleDrift 10s ease-in-out infinite 1.8s; }
+    &:nth-child(1) { width: 4px; height: 4px; top: 5%; left: 25%; animation: particleDrift1 8s ease-in-out infinite; }
+    &:nth-child(2) { width: 3px; height: 3px; top: 10%; right: 20%; animation: particleDrift2 9s ease-in-out infinite 1s; }
+    &:nth-child(3) { width: 5px; height: 5px; top: 25%; left: 10%; animation: particleDrift3 7s ease-in-out infinite 2s; }
+    &:nth-child(4) { width: 3px; height: 3px; top: 35%; right: 15%; animation: particleDrift1 10s ease-in-out infinite 0.5s; }
+    &:nth-child(5) { width: 4px; height: 4px; bottom: 30%; left: 15%; animation: particleDrift2 8.5s ease-in-out infinite 1.5s; }
+    &:nth-child(6) { width: 3px; height: 3px; bottom: 25%; right: 25%; animation: particleDrift3 9.5s ease-in-out infinite 2.5s; }
+    &:nth-child(7) { width: 5px; height: 5px; top: 60%; left: 5%; animation: particleDrift1 7.5s ease-in-out infinite 0.8s; }
+    &:nth-child(8) { width: 4px; height: 4px; top: 70%; right: 10%; animation: particleDrift2 8s ease-in-out infinite 1.2s; }
+    &:nth-child(9) { width: 3px; height: 3px; bottom: 15%; left: 30%; animation: particleDrift3 9s ease-in-out infinite 0.3s; }
+    &:nth-child(10) { width: 4px; height: 4px; bottom: 10%; right: 30%; animation: particleDrift1 10s ease-in-out infinite 1.8s; }
+    &:nth-child(11) { width: 6px; height: 6px; top: 15%; left: 5%; animation: particleOrbit 12s linear infinite; box-shadow: 0 0 15px rgba(251, 191, 36, 1); }
+    &:nth-child(12) { width: 5px; height: 5px; top: 45%; right: 5%; animation: particleOrbit 14s linear infinite reverse 2s; }
+    &:nth-child(13) { width: 4px; height: 4px; bottom: 20%; left: 8%; animation: particleDrift2 6s ease-in-out infinite 0.7s; }
+    &:nth-child(14) { width: 3px; height: 3px; top: 50%; left: 3%; animation: particleDrift3 11s ease-in-out infinite 1.3s; }
+    &:nth-child(15) { width: 5px; height: 5px; bottom: 5%; right: 8%; animation: particleOrbit 10s linear infinite 3s; box-shadow: 0 0 12px rgba(254, 243, 199, 0.9); }
   }
 
-  @keyframes particleDrift {
+  @keyframes particleDrift1 {
     0%, 100% {
       transform: translate(0, 0) scale(1);
       opacity: 0.4;
     }
     25% {
-      transform: translate(10px, -15px) scale(1.2);
-      opacity: 0.8;
+      transform: translate(15px, -20px) scale(1.3);
+      opacity: 0.9;
     }
     50% {
-      transform: translate(-5px, -25px) scale(1);
+      transform: translate(-8px, -30px) scale(1);
       opacity: 1;
     }
     75% {
-      transform: translate(-10px, -10px) scale(1.3);
+      transform: translate(-15px, -12px) scale(1.4);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes particleDrift2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    33% {
+      transform: translate(20px, 10px) scale(1.5) rotate(120deg);
+      opacity: 1;
+    }
+    66% {
+      transform: translate(-10px, -20px) scale(0.8) rotate(240deg);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes particleDrift3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+    50% {
+      transform: translate(-20px, -15px) scale(1.6);
+      opacity: 1;
+      box-shadow: 0 0 25px rgba(254, 243, 199, 1);
+    }
+  }
+
+  @keyframes particleOrbit {
+    0% {
+      transform: rotate(0deg) translateX(50px) rotate(0deg) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: rotate(180deg) translateX(50px) rotate(-180deg) scale(1.3);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) translateX(50px) rotate(-360deg) scale(1);
       opacity: 0.6;
     }
   }
@@ -1321,34 +1683,6 @@
     20%, 100% { opacity: 0; transform: translateX(-20px); }
   }
 
-  // ============ DATOS TÉCNICOS ============
-  &__ai-data {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 20;
-  }
-
-  &__ai-data-item {
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 9px;
-    color: rgba(251, 191, 36, 0.5);
-    letter-spacing: 1px;
-    opacity: 0;
-
-    &--1 { animation: dataFlicker 6s ease-in-out infinite; }
-    &--2 { animation: dataFlicker 6s ease-in-out infinite 2s; }
-    &--3 { animation: dataFlicker 6s ease-in-out infinite 4s; }
-  }
-
-  @keyframes dataFlicker {
-    0%, 100% { opacity: 0; }
-    10%, 30% { opacity: 0.8; }
-    35%, 100% { opacity: 0; }
-  }
 
   // ============ AURA DE FONDO ============
   &__ai-aura {
@@ -1370,14 +1704,101 @@
     pointer-events: none;
     z-index: -1;
 
+    &--secondary {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center,
+        rgba(254, 243, 199, 0.08) 0%,
+        rgba(251, 191, 36, 0.04) 40%,
+        transparent 70%
+      );
+      filter: blur(80px);
+      animation: auraBreathe 7s ease-in-out infinite 1s;
+    }
+
     @media (max-width: $breakpoint-lg) {
       width: 480px;
       height: 480px;
+
+      &--secondary {
+        width: 560px;
+        height: 560px;
+      }
     }
   }
 
   @keyframes auraBreathe {
     0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
     50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  // ============ DATOS TÉCNICOS - POSICIONES ============
+  &__ai-data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 20;
+
+    &--left {
+      top: 15px;
+      left: 10px;
+      align-items: flex-start;
+    }
+
+    &--right {
+      top: 15px;
+      right: 10px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      &--left { left: 5px; }
+      &--right { right: 5px; }
+    }
+  }
+
+  &__ai-data-item {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 9px;
+    color: rgba(251, 191, 36, 0.5);
+    letter-spacing: 1px;
+    opacity: 0;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    transition: all 0.3s ease-out;
+
+    &--1 { animation: dataFlicker 6s ease-in-out infinite; }
+    &--2 { animation: dataFlicker 6s ease-in-out infinite 2s; }
+    &--3 { animation: dataFlicker 6s ease-in-out infinite 4s; }
+
+    .logos-section__ai-data--left & {
+      &:nth-child(1) { animation: dataSlideLeft 6s ease-in-out infinite; }
+      &:nth-child(2) { animation: dataSlideLeft 6s ease-in-out infinite 2s; }
+      &:nth-child(3) { animation: dataSlideLeft 6s ease-in-out infinite 4s; }
+    }
+
+    .logos-section__ai-data--right & {
+      &:nth-child(1) { animation: dataSlideRight 6s ease-in-out infinite 1s; }
+      &:nth-child(2) { animation: dataSlideRight 6s ease-in-out infinite 3s; }
+      &:nth-child(3) { animation: dataSlideRight 6s ease-in-out infinite 5s; }
+    }
+  }
+
+  @keyframes dataFlicker {
+    0%, 100% { opacity: 0; }
+    10%, 30% { opacity: 0.8; }
+    35%, 100% { opacity: 0; }
+  }
+
+  @keyframes dataSlideLeft {
+    0%, 100% { opacity: 0; transform: translateX(-10px); }
+    10%, 30% { opacity: 0.9; transform: translateX(0); }
+    35%, 100% { opacity: 0; transform: translateX(10px); }
+  }
+
+  @keyframes dataSlideRight {
+    0%, 100% { opacity: 0; transform: translateX(10px); }
+    10%, 30% { opacity: 0.9; transform: translateX(0); }
+    35%, 100% { opacity: 0; transform: translateX(-10px); }
   }
 }
