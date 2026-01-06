@@ -25,7 +25,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "WebFetch(domain:dazzet.co)",
-      "WebFetch(domain:aukera.es)"
+      "WebFetch(domain:aukera.es)",
+      "Bash(timeout 12 npm run dev:*)"
     ]
   }
 }

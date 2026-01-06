@@ -12,7 +12,7 @@ const HeroSection = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const statsRef = useRef(null);
-  const [counters, setCounters] = useState({ projects: 0, clients: 0, years: 0 });
+  const [counters, setCounters] = useState({ projects: 0, clients: 0, years: 0, team: 0 });
 
   const heroWords = [
     'cobra vida.',
@@ -108,9 +108,10 @@ const HeroSection = () => {
 
     // Iniciar después del delay de animación
     const timeout = setTimeout(() => {
-      animateCounter('projects', 50, 2000);
+      animateCounter('projects', 300, 2000);
       animateCounter('clients', 30, 2000);
       animateCounter('years', 5, 1500);
+      animateCounter('team', 12, 1500);
     }, 1500);
 
     return () => clearTimeout(timeout);
@@ -202,8 +203,8 @@ const HeroSection = () => {
               <div className="hero__stat-label">Proyectos entregados</div>
             </div>
             <div className="hero__stat">
-              <div className="hero__stat-number">{counters.clients}<span>+</span></div>
-              <div className="hero__stat-label">Clientes felices</div>
+              <div className="hero__stat-number">{counters.team}</div>
+              <div className="hero__stat-label">Personas en el equipo</div>
             </div>
             <div className="hero__stat">
               <div className="hero__stat-number">{counters.years}</div>
