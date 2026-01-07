@@ -3,6 +3,7 @@
 // 3D effects, particles, and immersive experience
 // ==============================================
 
+@use 'sass:math';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -883,9 +884,9 @@
 
     @for $i from 0 through 19 {
       &:nth-child(#{$i + 1}) {
-        left: #{random(100)}%;
-        top: #{random(100)}%;
-        animation-duration: #{15 + random(10)}s;
+        left: #{math.random(100)}%;
+        top: #{math.random(100)}%;
+        animation-duration: #{15 + math.random(10)}s;
       }
     }
   }
