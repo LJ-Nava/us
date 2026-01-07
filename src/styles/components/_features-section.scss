@@ -3,6 +3,7 @@
 // Hover efectos cautivadores con elegancia
 // ==============================================
 
+@use 'sass:map';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -413,9 +414,9 @@ $card-colors: (
       .features-section__card-border {
         background: linear-gradient(
           135deg,
-          #{map-get($colors, primary)},
+          #{map.get($colors, primary)},
           transparent 50%,
-          #{map-get($colors, secondary)}
+          #{map.get($colors, secondary)}
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -424,42 +425,42 @@ $card-colors: (
       }
 
       .features-section__card-icon {
-        color: #{map-get($colors, primary)};
+        color: #{map.get($colors, primary)};
       }
 
       .features-section__card-icon-glow {
-        background: #{map-get($colors, glow)};
+        background: #{map.get($colors, glow)};
       }
 
       .features-section__card-highlight {
-        background: #{map-get($colors, bg)};
-        border: 1px solid rgba(map-get($colors, primary), 0.2);
-        color: #{map-get($colors, primary)};
+        background: #{map.get($colors, bg)};
+        border: 1px solid rgba(map.get($colors, primary), 0.2);
+        color: #{map.get($colors, primary)};
       }
 
       .features-section__card-arrow {
-        background: #{map-get($colors, bg)};
-        color: #{map-get($colors, primary)};
+        background: #{map.get($colors, bg)};
+        color: #{map.get($colors, primary)};
       }
 
       &:hover {
         .features-section__card-inner {
-          border-color: rgba(map-get($colors, primary), 0.15);
-          background: rgba(map-get($colors, primary), 0.02);
+          border-color: rgba(map.get($colors, primary), 0.15);
+          background: rgba(map.get($colors, primary), 0.02);
         }
 
         .features-section__card-icon {
-          background: #{map-get($colors, bg)};
-          border-color: rgba(map-get($colors, primary), 0.3);
+          background: #{map.get($colors, bg)};
+          border-color: rgba(map.get($colors, primary), 0.3);
         }
 
         .features-section__card-number {
-          color: rgba(map-get($colors, primary), 0.5);
+          color: rgba(map.get($colors, primary), 0.5);
         }
 
         .features-section__card-highlight {
-          background: rgba(map-get($colors, primary), 0.12);
-          border-color: rgba(map-get($colors, primary), 0.3);
+          background: rgba(map.get($colors, primary), 0.12);
+          border-color: rgba(map.get($colors, primary), 0.3);
         }
       }
     }

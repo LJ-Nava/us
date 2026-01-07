@@ -409,63 +409,159 @@ const Header = () => {
         </div>
       </div>
 
-      {/* NEW Mobile Menu - Full screen overlay */}
+      {/* Premium Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="mob-overlay" onClick={() => setIsMobileMenuOpen(false)}>
-          <nav className="mob-menu" onClick={(e) => e.stopPropagation()}>
-            <Link
-              to="/"
-              className={`mob-menu__item ${location.pathname === '/' ? 'mob-menu__item--active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {t('nav.inicio')}
-            </Link>
+          <div className="mob-panel" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="mob-panel__header">
+              <div className="mob-panel__brand">
+                <div className="mob-panel__logo">
+                  <svg viewBox="0 0 40 40" fill="none">
+                    <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#mobLogoGrad)" fillOpacity="0.15"/>
+                    <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#mobLogoGrad)" strokeWidth="1.5"/>
+                    <text x="8" y="28" fill="#0f172a" fontSize="18" fontWeight="800" fontFamily="inherit">U</text>
+                    <text x="20" y="28" fill="url(#mobLogoGrad)" fontSize="18" fontWeight="800" fontFamily="inherit">S</text>
+                    <defs>
+                      <linearGradient id="mobLogoGrad" x1="0" y1="0" x2="40" y2="40">
+                        <stop offset="0%" stopColor="#8b5cf6"/>
+                        <stop offset="100%" stopColor="#06b6d4"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <span className="mob-panel__title">Menu</span>
+              </div>
+              <button className="mob-panel__close" onClick={() => setIsMobileMenuOpen(false)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
 
-            <Link
-              to="/servicios"
-              className={`mob-menu__item ${location.pathname === '/servicios' ? 'mob-menu__item--active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {t('nav.servicios')}
-            </Link>
+            {/* Navigation */}
+            <nav className="mob-panel__nav">
+              <Link
+                to="/"
+                className={`mob-panel__link ${location.pathname === '/' ? 'mob-panel__link--active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9,22 9,12 15,12 15,22"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.inicio')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
 
-            <Link
-              to="/portfolio"
-              className={`mob-menu__item ${location.pathname === '/portfolio' ? 'mob-menu__item--active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {t('nav.portfolio')}
-            </Link>
+              <Link
+                to="/servicios"
+                className={`mob-panel__link ${location.pathname === '/servicios' ? 'mob-panel__link--active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.servicios')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
 
-            <a
-              href="#paquetes"
-              className="mob-menu__item"
-              onClick={(e) => {
-                setIsMobileMenuOpen(false);
-                navigateToSection('paquetes')(e);
-              }}
-            >
-              {t('nav.paquetes')}
-            </a>
+              <Link
+                to="/portfolio"
+                className={`mob-panel__link ${location.pathname === '/portfolio' ? 'mob-panel__link--active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                    <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.portfolio')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
 
-            <Link
-              to="/nosotros"
-              className={`mob-menu__item ${location.pathname === '/nosotros' ? 'mob-menu__item--active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {t('nav.nosotros')}
-            </Link>
+              <a
+                href="#paquetes"
+                className="mob-panel__link"
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  navigateToSection('paquetes')(e);
+                }}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.paquetes')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </a>
 
-            <button
-              className="mob-menu__cta"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                setIsContactModalOpen(true);
-              }}
-            >
-              {t('nav.contactanos')}
-            </button>
-          </nav>
+              <Link
+                to="/nosotros"
+                className={`mob-panel__link ${location.pathname === '/nosotros' ? 'mob-panel__link--active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.nosotros')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
+            </nav>
+
+            {/* CTA */}
+            <div className="mob-panel__footer">
+              <button
+                className="mob-panel__cta"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsContactModalOpen(true);
+                }}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+                <span>{t('nav.contactanos')}</span>
+                <svg className="mob-panel__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

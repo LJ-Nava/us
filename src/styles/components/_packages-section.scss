@@ -3,6 +3,7 @@
 // Diseño elegante que concuerda con el resto del sitio
 // ==============================================
 
+@use 'sass:map';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -410,19 +411,19 @@ $package-colors: (
   @each $name, $colors in $package-colors {
     &__card--#{$name} {
       .packages-section__card-icon {
-        color: #{map-get($colors, primary)};
-        background: #{map-get($colors, bg)};
+        color: #{map.get($colors, primary)};
+        background: #{map.get($colors, bg)};
       }
 
       .packages-section__card-feature-icon {
-        color: #{map-get($colors, primary)};
+        color: #{map.get($colors, primary)};
       }
 
       .packages-section__card-cta {
         &:hover {
-          background: #{map-get($colors, bg)};
+          background: #{map.get($colors, bg)};
           border-color: rgba(15, 23, 42, 0.1);
-          color: #{map-get($colors, primary)};
+          color: #{map.get($colors, primary)};
         }
       }
     }
