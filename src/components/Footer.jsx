@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ const Footer = () => {
   const footerRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, language } = useI18n();
 
   const contactInfo = {
     email: 'DeveloperLuis17@gmail.com',
@@ -22,19 +24,19 @@ const Footer = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const quickLinks = [
-    { label: 'Inicio', href: '/', isRoute: true },
-    { label: 'Servicios', href: '/servicios', isRoute: true },
-    { label: 'Portfolio', href: '/portfolio', isRoute: true },
-    { label: 'Nosotros', href: '/nosotros', isRoute: true },
-  ];
+  const quickLinks = useMemo(() => [
+    { label: t('footer.home'), href: '/', isRoute: true },
+    { label: t('footer.servicesLink'), href: '/servicios', isRoute: true },
+    { label: t('footer.portfolio'), href: '/portfolio', isRoute: true },
+    { label: t('footer.aboutUs'), href: '/nosotros', isRoute: true },
+  ], [t, language]);
 
-  const services = [
-    { name: 'Diseño Web', serviceId: 'web-design' },
-    { name: 'Desarrollo Frontend', serviceId: 'desarrollo' },
-    { name: 'E-commerce', serviceId: 'ecommerce' },
-    { name: 'Landing Pages', serviceId: 'landing' },
-  ];
+  const services = useMemo(() => [
+    { name: t('footer.webDesign'), serviceId: 'web-design' },
+    { name: t('footer.frontendDev'), serviceId: 'desarrollo' },
+    { name: t('footer.ecommerce'), serviceId: 'ecommerce' },
+    { name: t('footer.landingPages'), serviceId: 'landing' },
+  ], [t, language]);
 
   // Navigate to a specific service on the services page
   const navigateToService = (serviceId) => (e) => {
@@ -78,7 +80,7 @@ const Footer = () => {
   }, []);
 
   const handleWhatsApp = () => {
-    const message = encodeURIComponent('Hola, me interesa desarrollar mi proyecto web.');
+    const message = encodeURIComponent(t('whatsapp.defaultMessage'));
     window.open(`https://wa.me/${contactInfo.whatsapp}?text=${message}`, '_blank');
   };
 
@@ -97,11 +99,11 @@ const Footer = () => {
           <div className="footer__cta">
             <div className="footer__cta-content">
               <h3 className="footer__cta-title">
-                ¿Listo para comenzar tu
-                <span className="footer__cta-gradient"> proyecto?</span>
+                {t('footer.ctaTitle')}
+                <span className="footer__cta-gradient"> {t('footer.ctaTitleHighlight')}</span>
               </h3>
               <p className="footer__cta-text">
-                Hablemos sobre cómo podemos ayudarte a alcanzar tus objetivos digitales.
+                {t('footer.ctaText')}
               </p>
             </div>
             <button className="footer__cta-btn" onClick={handleWhatsApp}>
@@ -109,7 +111,7 @@ const Footer = () => {
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
-              <span>Iniciar conversación</span>
+              <span>{t('footer.ctaButton')}</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="footer__cta-btn-arrow">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -125,7 +127,7 @@ const Footer = () => {
                 <span className="footer__logo-dot" />
               </Link>
               <p className="footer__tagline">
-                Creamos experiencias digitales que impulsan el crecimiento de tu negocio.
+                {t('footer.tagline')}
               </p>
               <div className="footer__social">
                 <a
@@ -153,7 +155,7 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div className="footer__column">
-              <h4 className="footer__column-title">Navegación</h4>
+              <h4 className="footer__column-title">{t('footer.navigation')}</h4>
               <ul className="footer__list">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
@@ -168,7 +170,7 @@ const Footer = () => {
 
             {/* Services */}
             <div className="footer__column">
-              <h4 className="footer__column-title">Servicios</h4>
+              <h4 className="footer__column-title">{t('footer.servicesTitle')}</h4>
               <ul className="footer__list">
                 {services.map((service, index) => (
                   <li key={index}>
@@ -187,7 +189,7 @@ const Footer = () => {
 
             {/* Contact */}
             <div className="footer__column">
-              <h4 className="footer__column-title">Contacto</h4>
+              <h4 className="footer__column-title">{t('footer.contactTitle')}</h4>
               <div className="footer__contact-cards">
                 <a href={`mailto:${contactInfo.email}`} className="footer__contact-card">
                   <div className="footer__contact-card-icon">
@@ -219,12 +221,12 @@ const Footer = () => {
           <div className="footer__bottom">
             <div className="footer__bottom-left">
               <p className="footer__copyright">
-                © {currentYear} US Web Agency. Todos los derechos reservados.
+                © {currentYear} US Web Agency. {t('footer.rights')}
               </p>
             </div>
             <div className="footer__bottom-right">
-              <a href="#" className="footer__legal-link">Privacidad</a>
-              <a href="#" className="footer__legal-link">Términos</a>
+              <a href="#" className="footer__legal-link">{t('footer.privacy')}</a>
+              <a href="#" className="footer__legal-link">{t('footer.terms')}</a>
             </div>
           </div>
         </div>

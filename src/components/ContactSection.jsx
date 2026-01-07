@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 const ContactSection = () => {
   const sectionRef = useRef(null);
+  const { t } = useI18n();
 
   const contactInfo = {
     email: 'DeveloperLuis17@gmail.com',
@@ -46,7 +48,7 @@ const ContactSection = () => {
   }, []);
 
   const handleWhatsApp = () => {
-    const message = encodeURIComponent('Hola, me interesa desarrollar mi proyecto web. ¿Podemos agendar una llamada?');
+    const message = encodeURIComponent(t('contact.whatsappMessage'));
     window.open(`https://wa.me/${contactInfo.whatsapp}?text=${message}`, '_blank');
   };
 
@@ -66,14 +68,13 @@ const ContactSection = () => {
       <div className="contact-section__container">
         {/* Header */}
         <div className="contact-section__header">
-          <span className="contact-section__label">Contacto</span>
+          <span className="contact-section__label">{t('contact.label')}</span>
           <h2 className="contact-section__title">
-            Hablemos de tu
-            <span className="contact-section__title-gradient"> próximo proyecto</span>
+            {t('contact.title')}
+            <span className="contact-section__title-gradient"> {t('contact.titleHighlight')}</span>
           </h2>
           <p className="contact-section__subtitle">
-            Estamos listos para convertir tu visión en realidad.
-            Elige el canal que prefieras.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -90,7 +91,7 @@ const ContactSection = () => {
               <h3 className="contact-section__card-title">WhatsApp</h3>
               <p className="contact-section__card-text">{contactInfo.whatsappDisplay}</p>
               <span className="contact-section__card-action">
-                Enviar mensaje
+                {t('contact.sendMessage')}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -109,7 +110,7 @@ const ContactSection = () => {
               <h3 className="contact-section__card-title">Email</h3>
               <p className="contact-section__card-text">{contactInfo.email}</p>
               <span className="contact-section__card-action">
-                Enviar email
+                {t('contact.sendEmail')}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -128,7 +129,7 @@ const ContactSection = () => {
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
               <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
             </svg>
-            Copiar email
+            {t('contact.copyEmail')}
           </button>
           <button
             className="contact-section__quick-btn"
@@ -138,7 +139,7 @@ const ContactSection = () => {
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
               <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
             </svg>
-            Copiar teléfono
+            {t('contact.copyPhone')}
           </button>
         </div>
 
@@ -151,8 +152,8 @@ const ContactSection = () => {
               </svg>
             </div>
             <div className="contact-section__cta-text">
-              <strong>Respuesta en menos de 24 horas</strong>
-              <span>Propuesta personalizada en 48h</span>
+              <strong>{t('contact.responseTime')}</strong>
+              <span>{t('contact.proposalTime')}</span>
             </div>
           </div>
         </div>

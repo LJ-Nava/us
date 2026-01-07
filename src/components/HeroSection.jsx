@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import Hero3DScene from './Hero3DScene';
 import Typewriter from './Typewriter';
 import ContactModal from './ContactModal';
+import { useI18n } from '../contexts/I18nContext';
 
 /**
  * Hero Section Premium - Nivel Awwwards
  * Combina escena 3D con contenido animado
+ * Traducido automáticamente según el país del usuario
  */
 const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -16,14 +18,14 @@ const HeroSection = () => {
   const statsRef = useRef(null);
   const [counters, setCounters] = useState({ projects: 0, clients: 0, years: 0, team: 0 });
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const { t, language } = useI18n();
 
-  const heroWords = [
-    'cobra vida.',
-    'se hace realidad.',
-    'toma forma.',
-    'empieza aquí.',
-    'evoluciona.'
-  ];
+  // Get heroWords from translations based on current language
+  const heroWords = useMemo(() => {
+    const words = t('hero.heroWords');
+    // If translation returns array, use it; otherwise fallback
+    return Array.isArray(words) ? words : ['cobra vida.', 'se hace realidad.', 'toma forma.', 'empieza aquí.', 'evoluciona.'];
+  }, [t, language]);
 
   // Animaciones de entrada con GSAP
   useEffect(() => {
@@ -158,12 +160,12 @@ const HeroSection = () => {
           {/* Badge */}
           <div className="hero__badge">
             <span className="hero__badge-dot" />
-            <span className="hero__badge-text">Bienvenido a J-Visual</span>
+            <span className="hero__badge-text">{t('hero.welcomeBadge')}</span>
           </div>
 
           {/* Título */}
           <h1 ref={titleRef} className="hero__title">
-            <span className="hero__title-line">Donde tu visión</span>
+            <span className="hero__title-line">{t('hero.titleLine')}</span>
             <span className="hero__title-dynamic">
               <Typewriter
                 words={heroWords}
@@ -176,8 +178,7 @@ const HeroSection = () => {
 
           {/* Subtítulo */}
           <p ref={subtitleRef} className="hero__subtitle">
-            Creamos experiencias digitales que conectan con tu audiencia<br />
-            y transforman visitantes en clientes.
+            {t('hero.subtitle')}
           </p>
 
           {/* Botones */}
@@ -188,7 +189,7 @@ const HeroSection = () => {
               data-cursor
               data-cursor-text="Go"
             >
-              <span className="hero__cta-text">Iniciar proyecto</span>
+              <span className="hero__cta-text">{t('hero.startProject')}</span>
               <span className="hero__cta-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -197,7 +198,7 @@ const HeroSection = () => {
               <span className="hero__cta-glow" />
             </button>
             <Link to="/portfolio" className="hero__cta-secondary" data-cursor>
-              <span>Ver proyectos</span>
+              <span>{t('hero.viewProjects')}</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>
@@ -208,15 +209,15 @@ const HeroSection = () => {
           <div ref={statsRef} className="hero__stats">
             <div className="hero__stat">
               <div className="hero__stat-number">{counters.projects}<span>+</span></div>
-              <div className="hero__stat-label">Proyectos entregados</div>
+              <div className="hero__stat-label">{t('hero.stats.projectsDelivered')}</div>
             </div>
             <div className="hero__stat">
               <div className="hero__stat-number">{counters.team}</div>
-              <div className="hero__stat-label">Personas en el equipo</div>
+              <div className="hero__stat-label">{t('hero.stats.teamMembers')}</div>
             </div>
             <div className="hero__stat">
               <div className="hero__stat-number">{counters.years}</div>
-              <div className="hero__stat-label">Años de experiencia</div>
+              <div className="hero__stat-label">{t('hero.stats.yearsExperience')}</div>
             </div>
           </div>
         </div>
@@ -224,7 +225,7 @@ const HeroSection = () => {
 
       {/* Scroll indicator */}
       <div className="hero__scroll">
-        <span className="hero__scroll-text">Scroll</span>
+        <span className="hero__scroll-text">{t('hero.scroll')}</span>
         <div className="hero__scroll-line">
           <span className="hero__scroll-dot" />
         </div>

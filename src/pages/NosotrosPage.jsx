@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Globe3D from '../components/Globe3D';
 import AboutSection from '../components/AboutSection';
 import ProcessSection from '../components/ProcessSection';
-import BlogSection from '../components/BlogSection';
 import ContactSection from '../components/ContactSection';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +39,7 @@ const NosotrosPage = () => {
   const pageRef = useRef(null);
   const heroRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { t, language } = useI18n();
 
   // Counters - load immediately
   const [count1, ref1] = useCounter(8, 1.5);
@@ -129,12 +130,12 @@ const NosotrosPage = () => {
     return () => ctx.revert();
   }, []);
 
-  const metrics = [
-    { value: count1, label: 'Expertos creativos', suffix: '', ref: ref1 },
-    { value: count2, label: 'Proyectos entregados', suffix: '+', ref: ref2 },
-    { value: count3, label: 'Clientes satisfechos', suffix: '%', ref: ref3 },
-    { value: count4, label: 'Años de experiencia', suffix: '+', ref: ref4 },
-  ];
+  const metrics = useMemo(() => [
+    { value: count1, label: t('nosotrosPage.metric1Label'), suffix: '', ref: ref1 },
+    { value: count2, label: t('nosotrosPage.metric2Label'), suffix: '+', ref: ref2 },
+    { value: count3, label: t('nosotrosPage.metric3Label'), suffix: '%', ref: ref3 },
+    { value: count4, label: t('nosotrosPage.metric4Label'), suffix: '+', ref: ref4 },
+  ], [count1, count2, count3, count4, t, language]);
 
   return (
     <div ref={pageRef} className="nosotros-page">
@@ -152,25 +153,23 @@ const NosotrosPage = () => {
           <div className="nosotros-hero__content">
             <span className="nosotros-hero__label">
               <span className="nosotros-hero__label-line" />
-              Sobre nosotros
+              {t('nosotrosPage.label')}
             </span>
 
             <h1 className="nosotros-hero__title">
               <span className="nosotros-hero__title-line">
-                <span className="nosotros-hero__title-word">Construimos</span>
+                <span className="nosotros-hero__title-word">{t('nosotrosPage.titleWord1')}</span>
               </span>
               <span className="nosotros-hero__title-line">
-                <span className="nosotros-hero__title-word">productos digitales</span>
+                <span className="nosotros-hero__title-word">{t('nosotrosPage.titleWord2')}</span>
               </span>
               <span className="nosotros-hero__title-line">
-                <span className="nosotros-hero__title-word nosotros-hero__title-word--accent">excepcionales</span>
+                <span className="nosotros-hero__title-word nosotros-hero__title-word--accent">{t('nosotrosPage.titleWord3')}</span>
               </span>
             </h1>
 
             <p className="nosotros-hero__subtitle">
-              Somos un equipo multidisciplinario de diseñadores, desarrolladores
-              y estrategas digitales con presencia en USA, Colombia y Chile.
-              Creamos soluciones que impulsan el crecimiento de negocios ambiciosos.
+              {t('nosotrosPage.subtitle')}
             </p>
 
             {/* Metrics with animated counters */}
@@ -198,14 +197,14 @@ const NosotrosPage = () => {
                   <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
                 </svg>
               </span>
-              Presencia Global
+              {t('nosotrosPage.globalPresence')}
             </div>
           </div>
         </div>
 
         {/* Animated scroll indicator */}
         <div className="nosotros-hero__scroll">
-          <span className="nosotros-hero__scroll-text">Scroll</span>
+          <span className="nosotros-hero__scroll-text">{t('nosotrosPage.scroll')}</span>
           <div className="nosotros-hero__scroll-track">
             <div className="nosotros-hero__scroll-thumb" />
           </div>
@@ -214,7 +213,6 @@ const NosotrosPage = () => {
 
       <AboutSection />
       <ProcessSection />
-      <BlogSection />
       <ContactSection />
     </div>
   );

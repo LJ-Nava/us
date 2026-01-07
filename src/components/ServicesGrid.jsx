@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import gsap from 'gsap';
+import { useI18n } from '../contexts/I18nContext';
 
 /**
  * ServicesGrid - Componente estilo Stripe con layout orgánico
@@ -7,6 +8,7 @@ import gsap from 'gsap';
  */
 const ServicesGrid = () => {
   const containerRef = useRef(null);
+  const { t, language } = useI18n();
 
   // Iconos SVG
   const icons = {
@@ -95,8 +97,8 @@ const ServicesGrid = () => {
     ),
   };
 
-  // Tarjetas con posiciones absolutas (estilo orgánico)
-  const cards = [
+  // Tarjetas con posiciones absolutas (estilo orgánico) - translated labels
+  const cards = useMemo(() => [
     // Fila 1 - dispersa
     { id: 1, icon: 'inactive1', x: 18, y: 5, active: false },
     { id: 2, icon: 'inactive2', x: 45, y: 2, active: false },
@@ -104,32 +106,32 @@ const ServicesGrid = () => {
 
     // Fila 2
     { id: 4, icon: 'inactive4', x: 5, y: 20, active: false },
-    { id: 5, icon: 'estrategia', x: 28, y: 18, active: true, label: 'Estrategia', color: '#f59e0b' },
+    { id: 5, icon: 'estrategia', x: 28, y: 18, active: true, label: t('services.strategy'), color: '#f59e0b' },
     { id: 6, icon: 'inactive5', x: 55, y: 22, active: false },
     { id: 7, icon: 'inactive6', x: 82, y: 18, active: false },
 
     // Fila 3
     { id: 8, icon: 'inactive7', x: 12, y: 38, active: false },
-    { id: 9, icon: 'diseno', x: 38, y: 35, active: true, label: 'Diseño', color: '#8b5cf6' },
+    { id: 9, icon: 'diseno', x: 38, y: 35, active: true, label: t('services.design'), color: '#8b5cf6' },
     { id: 10, icon: 'inactive8', x: 62, y: 40, active: false },
     { id: 11, icon: 'inactive9', x: 88, y: 35, active: false },
 
     // Fila 4
     { id: 12, icon: 'inactive10', x: 2, y: 55, active: false },
-    { id: 13, icon: 'desarrollo', x: 25, y: 55, active: true, label: 'Desarrollo', color: '#06b6d4' },
+    { id: 13, icon: 'desarrollo', x: 25, y: 55, active: true, label: t('services.development'), color: '#06b6d4' },
     { id: 14, icon: 'inactive1', x: 52, y: 58, active: false },
     { id: 15, icon: 'inactive2', x: 78, y: 52, active: false },
 
     // Fila 5
     { id: 16, icon: 'inactive3', x: 15, y: 75, active: false },
-    { id: 17, icon: 'lanzamiento', x: 42, y: 72, active: true, label: 'Lanzamiento', color: '#10b981' },
+    { id: 17, icon: 'lanzamiento', x: 42, y: 72, active: true, label: t('services.launch'), color: '#10b981' },
     { id: 18, icon: 'inactive4', x: 68, y: 78, active: false },
     { id: 19, icon: 'inactive5', x: 90, y: 72, active: false },
 
     // Fila 6
     { id: 20, icon: 'inactive6', x: 8, y: 90, active: false },
     { id: 21, icon: 'inactive7', x: 55, y: 92, active: false },
-  ];
+  ], [t, language]);
 
   // Conexiones entre servicios activos
   const connections = [

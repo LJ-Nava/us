@@ -1,25 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Features3DBackground from './Features3DBackground';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
  * FeaturesSection - Por qué elegirnos
  * Diseño elegante con elementos visuales cautivadores
+ * Traducido automáticamente según el país del usuario
  */
 const FeaturesSection = () => {
   const sectionRef = useRef(null);
   const [activeFeature, setActiveFeature] = useState(null);
+  const { t, language } = useI18n();
 
-  const features = [
+  // Get translated features
+  const features = useMemo(() => [
     {
       id: 1,
       number: '01',
-      title: 'Inteligencia Artificial',
-      description: 'Nuestro motor LUMEN optimiza cada línea de código, acelerando el desarrollo sin comprometer la calidad.',
-      highlight: 'Desarrollo 3x más rápido',
+      title: t('features.feature1Title'),
+      description: t('features.feature1Desc'),
+      highlight: t('features.feature1Highlight'),
       color: 'cyan',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -30,9 +34,9 @@ const FeaturesSection = () => {
     {
       id: 2,
       number: '02',
-      title: 'Metodología Ágil',
-      description: 'Sprints semanales, entregas incrementales y comunicación constante. Tu proyecto avanza cada día.',
-      highlight: 'Entregas semanales',
+      title: t('features.feature2Title'),
+      description: t('features.feature2Desc'),
+      highlight: t('features.feature2Highlight'),
       color: 'amber',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -43,9 +47,9 @@ const FeaturesSection = () => {
     {
       id: 3,
       number: '03',
-      title: 'Diseño Estratégico',
-      description: 'Cada decisión de diseño está respaldada por datos. Interfaces que convierten visitantes en clientes.',
-      highlight: '+40% conversión promedio',
+      title: t('features.feature3Title'),
+      description: t('features.feature3Desc'),
+      highlight: t('features.feature3Highlight'),
       color: 'emerald',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -58,9 +62,9 @@ const FeaturesSection = () => {
     {
       id: 4,
       number: '04',
-      title: 'Código de Calidad',
-      description: 'Arquitectura escalable, tests automatizados y documentación completa. Tu inversión está protegida.',
-      highlight: '100% mantenible',
+      title: t('features.feature4Title'),
+      description: t('features.feature4Desc'),
+      highlight: t('features.feature4Highlight'),
       color: 'violet',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -69,7 +73,7 @@ const FeaturesSection = () => {
         </svg>
       ),
     },
-  ];
+  ], [t, language]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -90,16 +94,6 @@ const FeaturesSection = () => {
         {
           opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: 'power3.out',
           scrollTrigger: { trigger: '.features-section__grid', start: 'top 80%', once: true },
-        }
-      );
-
-      // Stats animation
-      gsap.fromTo(
-        '.features-section__stat-item',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
-          scrollTrigger: { trigger: '.features-section__footer', start: 'top 90%', once: true },
         }
       );
     }, sectionRef);
@@ -123,14 +117,14 @@ const FeaturesSection = () => {
         <div className="features-section__header">
           <span className="features-section__eyebrow">
             <span className="features-section__eyebrow-line" />
-            Por qué elegirnos
+            {t('features.eyebrow')}
           </span>
           <h2 className="features-section__title">
-            Construimos productos digitales
-            <span className="features-section__title-highlight"> que generan resultados</span>
+            {t('features.title')}
+            <span className="features-section__title-highlight"> {t('features.titleHighlight')}</span>
           </h2>
           <p className="features-section__subtitle">
-            Combinamos tecnología de vanguardia con estrategia de negocio para crear soluciones que impulsan tu crecimiento.
+            {t('features.subtitle')}
           </p>
         </div>
 
@@ -182,25 +176,6 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {/* Footer Stats */}
-        <div className="features-section__footer">
-          <div className="features-section__stats-row">
-            <div className="features-section__stat-item">
-              <span className="features-section__stat-value">300+</span>
-              <span className="features-section__stat-label">Proyectos entregados</span>
-            </div>
-            <div className="features-section__stat-divider" />
-            <div className="features-section__stat-item">
-              <span className="features-section__stat-value">98%</span>
-              <span className="features-section__stat-label">Clientes satisfechos</span>
-            </div>
-            <div className="features-section__stat-divider" />
-            <div className="features-section__stat-item">
-              <span className="features-section__stat-value">5+</span>
-              <span className="features-section__stat-label">Años de experiencia</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

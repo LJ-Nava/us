@@ -3,7 +3,6 @@ import ServicesSection from '../components/ServicesSection';
 import LogosSection from '../components/LogosSection';
 import FeaturesSection from '../components/FeaturesSection';
 import PackagesSection from '../components/PackagesSection';
-import CTASection from '../components/CTASection';
 
 const HomePage = () => {
   return (
@@ -22,9 +21,6 @@ const HomePage = () => {
 
       {/* Packages Section - Nuestros Paquetes */}
       <PackagesSection />
-
-      {/* CTA Section - Contacto */}
-      <CTASection />
     </>
   );
 };

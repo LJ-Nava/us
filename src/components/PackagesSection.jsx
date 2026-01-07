@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useCurrency from '../hooks/useCurrency';
+import { useI18n } from '../contexts/I18nContext';
 import PackageModal from './PackageModal';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,34 +11,38 @@ gsap.registerPlugin(ScrollTrigger);
  * PackagesSection - Nuestros Paquetes
  * Diseño premium con 4 planes diferenciados
  * Precios en moneda local según ubicación
+ * Traducido automáticamente según el país del usuario
  */
 const PackagesSection = () => {
   const sectionRef = useRef(null);
   const [hoveredPackage, setHoveredPackage] = useState(null);
-  const { formatPrice, currencyName, loading } = useCurrency();
+  const { t, language, country } = useI18n();
+  // Use the country detected by IP for currency, NOT the language-mapped country
+  const { formatPrice, currencyName, loading } = useCurrency(country);
 
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const packages = [
+  // Packages with translated content
+  const packages = useMemo(() => [
     {
       id: 1,
-      name: 'Básico',
-      tagline: 'Sitio simple',
-      description: 'Página web sencilla, ideal para mostrar tu negocio de forma profesional.',
+      name: t('packages.basic'),
+      tagline: t('packages.basicTagline'),
+      description: t('packages.basicDesc'),
       price: '250',
-      complexity: 'Baja complejidad',
+      complexity: t('packages.lowComplexity'),
       color: 'slate',
       popular: false,
       features: [
-        { text: '1-3 páginas', included: true },
-        { text: 'Diseño responsive', included: true },
-        { text: 'Formulario de contacto', included: true },
-        { text: 'Integración WhatsApp', included: true },
-        { text: 'Entrega en 5-7 días', included: true },
-        { text: '2 revisiones incluidas', included: true },
+        { text: t('packages.pages13'), included: true },
+        { text: t('packages.responsiveDesign'), included: true },
+        { text: t('packages.contactForm'), included: true },
+        { text: t('packages.whatsappIntegration'), included: true },
+        { text: t('packages.delivery57'), included: true },
+        { text: t('packages.revisions2'), included: true },
       ],
-      cta: 'Solicitar',
+      cta: t('packages.cta'),
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -48,23 +53,23 @@ const PackagesSection = () => {
     },
     {
       id: 2,
-      name: 'Profesional',
-      tagline: 'El más elegido',
-      description: 'Sitio web completo con más funcionalidades para negocios en crecimiento.',
+      name: t('packages.professional'),
+      tagline: t('packages.professionalTagline'),
+      description: t('packages.professionalDesc'),
       price: '500',
-      complexity: 'Complejidad media',
+      complexity: t('packages.mediumComplexity'),
       color: 'cyan',
       popular: true,
       features: [
-        { text: '4-6 páginas', included: true },
-        { text: 'Diseño UI/UX personalizado', included: true },
-        { text: 'Optimización SEO básico', included: true },
+        { text: t('packages.pages46'), included: true },
+        { text: t('packages.customUiUx'), included: true },
+        { text: t('packages.gsapAnimations'), included: true },
+        { text: t('packages.technicalSeo'), included: true },
         { text: 'Google Analytics', included: true },
-        { text: 'Redes sociales integradas', included: true },
-        { text: 'Entrega en 10-14 días', included: true },
-        { text: '3 revisiones incluidas', included: true },
+        { text: t('packages.delivery1014'), included: true },
+        { text: t('packages.revisions3'), included: true },
       ],
-      cta: 'Elegir plan',
+      cta: t('packages.ctaPopular'),
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -73,23 +78,24 @@ const PackagesSection = () => {
     },
     {
       id: 3,
-      name: 'Avanzado',
-      tagline: 'Sitio complejo',
-      description: 'Web robusta con múltiples secciones, animaciones y funcionalidades avanzadas.',
+      name: t('packages.advanced'),
+      tagline: t('packages.advancedTagline'),
+      description: t('packages.advancedDesc'),
       price: '800',
-      complexity: 'Alta complejidad',
+      complexity: t('packages.highComplexity'),
       color: 'violet',
       popular: false,
       features: [
-        { text: '7-10 páginas', included: true },
-        { text: 'Diseño premium personalizado', included: true },
-        { text: 'Animaciones avanzadas', included: true },
-        { text: 'SEO avanzado', included: true },
-        { text: 'Blog integrado', included: true },
-        { text: 'Entrega en 15-20 días', included: true },
-        { text: 'Revisiones ilimitadas', included: true },
+        { text: t('packages.pages710'), included: true },
+        { text: t('packages.premiumDesign'), included: true },
+        { text: t('packages.advancedAnimations'), included: true },
+        { text: t('packages.advancedSeo'), included: true },
+        { text: t('packages.integratedBlog'), included: true },
+        { text: t('packages.database'), included: true },
+        { text: t('packages.delivery1520'), included: true },
+        { text: t('packages.unlimitedRevisions'), included: true },
       ],
-      cta: 'Solicitar',
+      cta: t('packages.cta'),
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -98,30 +104,30 @@ const PackagesSection = () => {
     },
     {
       id: 4,
-      name: 'E-commerce',
-      tagline: 'Tu tienda online',
-      description: 'Tienda online lista para vender con carrito y pasarela de pagos.',
+      name: t('packages.ecommerce'),
+      tagline: t('packages.ecommerceTagline'),
+      description: t('packages.ecommerceDesc'),
       price: '1000',
-      complexity: 'Tienda completa',
+      complexity: t('packages.completeStore'),
       color: 'amber',
       popular: false,
       features: [
-        { text: 'Tienda online completa', included: true },
-        { text: 'Hasta 50 productos iniciales', included: true },
-        { text: 'Carrito de compras', included: true },
-        { text: 'Pasarela de pagos', included: true },
-        { text: 'WhatsApp Business', included: true },
-        { text: 'Entrega en 20-25 días', included: true },
-        { text: 'Capacitación incluida', included: true },
+        { text: t('packages.completeOnlineStore'), included: true },
+        { text: t('packages.initialProducts50'), included: true },
+        { text: t('packages.shoppingCart'), included: true },
+        { text: t('packages.paymentGateway'), included: true },
+        { text: t('packages.adminPanel'), included: true },
+        { text: t('packages.delivery2025'), included: true },
+        { text: t('packages.trainingIncluded'), included: true },
       ],
-      cta: 'Cotizar',
+      cta: t('packages.ctaQuote'),
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
     },
-  ];
+  ], [t, language]);
 
   const handlePackageClick = (pkg) => {
     setSelectedPackage(pkg);
@@ -173,15 +179,14 @@ const PackagesSection = () => {
                 <path d="M2 12l10 5 10-5"/>
               </svg>
             </span>
-            Nuestros Paquetes
+            {t('packages.eyebrow')}
           </span>
           <h2 className="packages-section__title">
-            Elige el plan perfecto
-            <span className="packages-section__title-highlight"> para tu proyecto</span>
+            {t('packages.title')}
+            <span className="packages-section__title-highlight"> {t('packages.titleHighlight')}</span>
           </h2>
           <p className="packages-section__subtitle">
-            Soluciones transparentes y sin sorpresas. Cada paquete incluye diseño, desarrollo
-            y optimización con nuestra tecnología LUMEN AI.
+            {t('packages.subtitle')}
           </p>
         </div>
 
@@ -197,7 +202,7 @@ const PackagesSection = () => {
               {/* Popular badge */}
               {pkg.popular && (
                 <div className="packages-section__card-badge">
-                  <span>Más popular</span>
+                  <span>{t('packages.mostPopular')}</span>
                 </div>
               )}
 
@@ -225,7 +230,7 @@ const PackagesSection = () => {
 
                 {/* Price */}
                 <div className="packages-section__card-price">
-                  <span className="packages-section__card-price-from">Desde</span>
+                  <span className="packages-section__card-price-from">{t('packages.from')}</span>
                   <span className={`packages-section__card-price-value ${loading ? 'is-loading' : ''}`}>
                     {formatPrice(pkg.price)}
                   </span>
@@ -248,7 +253,7 @@ const PackagesSection = () => {
 
                 {/* Features */}
                 <div className="packages-section__card-features">
-                  <span className="packages-section__card-features-title">Incluye:</span>
+                  <span className="packages-section__card-features-title">{t('packages.includes')}</span>
                   <ul className="packages-section__card-features-list">
                     {pkg.features.map((feature, index) => (
                       <li key={index} className={`packages-section__card-feature ${!feature.included ? 'is-disabled' : ''}`}>
@@ -281,7 +286,7 @@ const PackagesSection = () => {
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               <path d="M9 12l2 2 4-4"/>
             </svg>
-            Todos los paquetes incluyen garantía de satisfacción y código fuente completo
+            {t('packages.footer')}
           </p>
         </div>
       </div>

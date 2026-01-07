@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Portfolio3DBackground from '../components/Portfolio3DBackground';
 import PortfolioHeroBackground from '../components/PortfolioHeroBackground';
+import { useI18n } from '../contexts/I18nContext';
 
 // Importar imágenes de Romelima
 import romelima1 from '../assets/Romelima/1.png';
@@ -57,66 +57,67 @@ import physica5 from '../assets/Physuca/5.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
+// Project images config (without translations)
+const projectsConfig = [
   {
     id: 1,
     title: 'Romelima',
-    category: 'Restaurante',
-    description: 'Gastronomía peruana auténtica con un diseño elegante que captura la esencia culinaria de Lima.',
+    categoryKey: 'restaurant',
+    descKey: 'romelimaDesc',
     url: 'https://lj-nava.github.io/Romelima/',
     images: [romelima1, romelima2, romelima3, romelima4, romelima5],
     color: '#9b2335',
-    tags: ['UI/UX', 'Menú Digital', 'Reservaciones']
+    tagKeys: ['tagUIUX', 'tagDigitalMenu', 'tagReservations']
   },
   {
     id: 2,
     title: 'El Cracker RYD',
-    category: 'Lavadero Premium',
-    description: 'Lavado de autos premium con sistema de reservas y precios dinámicos por tipo de vehículo.',
+    categoryKey: 'carWash',
+    descKey: 'crackerDesc',
     url: 'https://lj-nava.github.io/lavadero/',
     images: [lavadero1, lavadero2, lavadero3, lavadero4, lavadero5, lavadero6],
     color: '#ef4444',
-    tags: ['Sistema de Precios', 'Reservas', 'Promociones']
+    tagKeys: ['tagPricingSystem', 'tagReservations', 'tagPromotions']
   },
   {
     id: 3,
     title: 'Construcciones El Cracker',
-    category: 'Constructora',
-    description: 'Empresa de construcción premium con galería de proyectos y sistema de cotización integral.',
+    categoryKey: 'construction',
+    descKey: 'construccionesDesc',
     url: 'https://lj-nava.github.io/cracker-web/',
     images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
     color: '#d4a855',
-    tags: ['Corporativo', 'Galería', 'Cotizador']
+    tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
   },
   {
     id: 4,
     title: 'Motive Homecare',
-    category: 'Healthcare',
-    description: 'Plataforma de staffing médico conectando agencias de salud con profesionales de terapia.',
+    categoryKey: 'healthcare',
+    descKey: 'motiveDesc',
     url: 'https://lj-nava.github.io/motive/',
     images: [motive1, motive2, motive3, motive4, motive5, motive6, motive7],
     color: '#f97316',
-    tags: ['Staffing', 'Healthcare', 'B2B']
+    tagKeys: ['tagStaffing', 'tagHealthcare', 'tagB2B']
   },
   {
     id: 5,
     title: 'NeuroFys Y',
-    category: 'SaaS / EMR',
-    description: 'Sistema EMR con IA para clínicas de terapia. Notas clínicas automatizadas y gestión integral.',
+    categoryKey: 'saas',
+    descKey: 'neuroDesc',
     url: 'https://lj-nava.github.io/Health/',
     images: [neuro1, neuro2, neuro3, neuro4, neuro5, neuro6, neuro7],
     color: '#3b82f6',
-    tags: ['AI', 'EMR', 'HIPAA Compliant']
+    tagKeys: ['tagAI', 'tagEMR', 'tagHIPAA']
   },
   {
     id: 6,
     title: 'Physica Inc',
-    category: 'Clínica',
-    description: 'Centro de fisioterapia con sistema de citas, servicios especializados y testimonios de pacientes.',
+    categoryKey: 'clinic',
+    descKey: 'physicaDesc',
     url: 'https://lj-nava.github.io/PhysicaInc/',
     images: [physica1, physica2, physica3, physica4, physica5],
     color: '#6b7b5c',
-    tags: ['Citas Online', 'Servicios', 'Testimonios']
+    tagKeys: ['tagOnlineAppointments', 'tagServices', 'tagTestimonials']
   }
 ];
 
@@ -227,10 +228,14 @@ const ImageCarousel = ({ images, title, isHovered }) => {
 };
 
 // Project Card with 3D Tilt Effect
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, t }) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const glowRef = useRef(null);
+
+  // Get translated category and description
+  const category = t(`portfolioPage.${project.categoryKey}`);
+  const description = t(`portfolioPage.${project.descKey}`);
 
   const handleMouseMove = useCallback((e) => {
     if (!cardRef.current) return;
@@ -320,7 +325,7 @@ const ProjectCard = ({ project }) => {
 
       <div className="portfolio-page__card-content">
         <div className="portfolio-page__card-header">
-          <span className="portfolio-page__card-category">{project.category}</span>
+          <span className="portfolio-page__card-category">{category}</span>
           <div className="portfolio-page__card-link-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
@@ -331,11 +336,11 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <h3 className="portfolio-page__card-title">{project.title}</h3>
-        <p className="portfolio-page__card-description">{project.description}</p>
+        <p className="portfolio-page__card-description">{description}</p>
 
         <div className="portfolio-page__card-tags">
-          {project.tags.map((tag, i) => (
-            <span key={i} className="portfolio-page__card-tag">{tag}</span>
+          {project.tagKeys.map((tagKey, i) => (
+            <span key={i} className="portfolio-page__card-tag">{t(`portfolioPage.${tagKey}`)}</span>
           ))}
         </div>
       </div>
@@ -346,9 +351,108 @@ const ProjectCard = ({ project }) => {
   );
 };
 
+// 3D Testimonials Carousel - Ultra Premium Infinite Rotation
+const Testimonials3DCarousel = ({ t }) => {
+  const testimonials = t('portfolioPage.testimonials');
+  const totalSlides = testimonials.length;
+
+  return (
+    <div className="testimonial-carousel">
+      {/* Premium background layers */}
+      <div className="testimonial-carousel__bg">
+        <div className="testimonial-carousel__gradient-top" />
+        <div className="testimonial-carousel__gradient-bottom" />
+        <div className="testimonial-carousel__particles">
+          {[...Array(20)].map((_, i) => (
+            <span key={i} className="testimonial-carousel__particle" style={{ '--i': i }} />
+          ))}
+        </div>
+      </div>
+
+      {/* Elegant Header */}
+      <div className="testimonial-carousel__header">
+        <div className="testimonial-carousel__header-line" />
+        <span className="testimonial-carousel__eyebrow">{t('portfolioPage.trustedBy')}</span>
+        <h2 className="testimonial-carousel__title">
+          {t('portfolioPage.testimonialsTitle')}{' '}
+          <span className="testimonial-carousel__title-gold">
+            {t('portfolioPage.testimonialsTitleHighlight')}
+          </span>
+        </h2>
+        <p className="testimonial-carousel__subtitle">
+          {t('portfolioPage.testimonialsSubtitle')}
+        </p>
+      </div>
+
+      {/* 3D Scene */}
+      <div className="testimonial-carousel__scene">
+        {/* Rotating Ring */}
+        <div className="testimonial-carousel__ring">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="testimonial-carousel__card"
+              style={{ '--index': index, '--total': totalSlides }}
+            >
+              <div className="testimonial-carousel__card-inner">
+                {/* Card shine effect */}
+                <div className="testimonial-carousel__card-shine" />
+
+                {/* Quote decoration */}
+                <div className="testimonial-carousel__quote-mark">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+
+                {/* 5 Stars */}
+                <div className="testimonial-carousel__stars">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Testimonial text */}
+                <blockquote className="testimonial-carousel__text">
+                  {testimonial.comment}
+                </blockquote>
+
+                {/* Author info */}
+                <div className="testimonial-carousel__author">
+                  <div className="testimonial-carousel__avatar">
+                    <span>{testimonial.name.charAt(0)}</span>
+                  </div>
+                  <div className="testimonial-carousel__author-details">
+                    <cite className="testimonial-carousel__name">{testimonial.name}</cite>
+                    <span className="testimonial-carousel__role">{t('portfolioPage.verifiedClient')}</span>
+                  </div>
+                </div>
+
+                {/* Decorative corner */}
+                <div className="testimonial-carousel__corner" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Center glow */}
+        <div className="testimonial-carousel__center-glow" />
+      </div>
+
+      {/* Bottom decoration */}
+      <div className="testimonial-carousel__footer">
+        <div className="testimonial-carousel__footer-line" />
+      </div>
+    </div>
+  );
+};
+
 const PortfolioPage = () => {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
+  const { t, language } = useI18n();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -402,6 +506,39 @@ const PortfolioPage = () => {
         }
       );
 
+      // Testimonials animation
+      gsap.fromTo(
+        '.portfolio-page__testimonials-title',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.portfolio-page__testimonials',
+            start: 'top 80%'
+          }
+        }
+      );
+
+      gsap.fromTo(
+        '.portfolio-page__testimonial',
+        { opacity: 0, y: 40, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.06,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.portfolio-page__testimonials-grid',
+            start: 'top 85%'
+          }
+        }
+      );
+
       // CTA animation
       gsap.fromTo(
         '.portfolio-page__cta',
@@ -440,72 +577,32 @@ const PortfolioPage = () => {
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             </span>
-            Trabajos Destacados
+            {t('portfolioPage.eyebrow')}
           </span>
 
           <h1 className="portfolio-page__title" ref={titleRef}>
-            Lo que podemos{' '}
-            <span className="portfolio-page__title-highlight">crear</span>{' '}
-            para ti
+            {t('portfolioPage.title')}{' '}
+            <span className="portfolio-page__title-highlight">{t('portfolioPage.titleHighlight')}</span>{' '}
+            {t('portfolioPage.titleEnd')}
           </h1>
 
           <p className="portfolio-page__subtitle">
-            Una selección de nuestros proyectos más solicitados por nuestros clientes.
-            Cada uno representa nuestra capacidad de transformar ideas en experiencias digitales excepcionales.
+            {t('portfolioPage.subtitle')}
           </p>
-
-          <div className="portfolio-page__stats">
-            <div className="portfolio-page__stat">
-              <AnimatedCounter target="50" suffix="+" duration={2} />
-              <span className="portfolio-page__stat-label">Proyectos totales</span>
-            </div>
-            <div className="portfolio-page__stat-divider"></div>
-            <div className="portfolio-page__stat">
-              <AnimatedCounter target="100" suffix="%" duration={2.5} />
-              <span className="portfolio-page__stat-label">Satisfacción</span>
-            </div>
-            <div className="portfolio-page__stat-divider"></div>
-            <div className="portfolio-page__stat">
-              <AnimatedCounter target="5" suffix="+" duration={1.8} />
-              <span className="portfolio-page__stat-label">Años creando</span>
-            </div>
-          </div>
         </div>
       </section>
 
       <section className="portfolio-page__projects">
         <div className="portfolio-page__container">
           <div className="portfolio-page__grid">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {projectsConfig.map((project) => (
+              <ProjectCard key={project.id} project={project} t={t} />
             ))}
           </div>
-
-          <div className="portfolio-page__cta">
-            <div className="portfolio-page__cta-content">
-              <div className="portfolio-page__cta-badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-                <span>Tu proyecto puede ser el próximo</span>
-              </div>
-              <h2 className="portfolio-page__cta-title">
-                ¿Listo para crear algo increíble?
-              </h2>
-              <p className="portfolio-page__cta-text">
-                Tu proyecto podría ser el próximo en esta galería. Hablemos sobre cómo podemos transformar tu visión en realidad.
-              </p>
-              <Link to="/#contacto" className="portfolio-page__cta-button">
-                <span>Iniciar mi proyecto</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </Link>
-            </div>
-            <div className="portfolio-page__cta-glow"></div>
-          </div>
         </div>
+
+        {/* Testimonials Section - 3D Carousel (outside container for full width) */}
+        <Testimonials3DCarousel t={t} />
       </section>
     </div>
   );

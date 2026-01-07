@@ -3,6 +3,9 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Contexts
+import { I18nProvider } from './contexts/I18nContext';
+
 // Componentes
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -96,43 +99,45 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <HomePage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/portfolio"
-          element={
-            <Layout>
-              <PortfolioPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/nosotros"
-          element={
-            <Layout>
-              <NosotrosPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/servicios"
-          element={
-            <Layout>
-              <ServiciosPage />
-            </Layout>
-          }
-        />
-      </Routes>
-    </Router>
+    <I18nProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <HomePage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/portfolio"
+            element={
+              <Layout>
+                <PortfolioPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/nosotros"
+            element={
+              <Layout>
+                <NosotrosPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/servicios"
+            element={
+              <Layout>
+                <ServiciosPage />
+              </Layout>
+            }
+          />
+        </Routes>
+      </Router>
+    </I18nProvider>
   );
 }
 

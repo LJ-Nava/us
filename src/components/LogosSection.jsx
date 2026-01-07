@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,22 +79,36 @@ const LogosSection = () => {
   const sectionRef = useRef(null);
   const mockupRef = useRef(null);
   const aiFaceRef = useRef(null);
-  const [colorIndex, setColorIndex] = useState(0);
+  // Random beautiful color on each page load
+  const [colorIndex, setColorIndex] = useState(() => Math.floor(Math.random() * waveColors.length));
   const [isWaving, setIsWaving] = useState(false);
+  const colorIndexRef = useRef(colorIndex);
+  const { t } = useI18n();
 
-  // Handle click on AI core - trigger Venom-like color transformation
+  // Keep ref in sync with state
+  useEffect(() => {
+    colorIndexRef.current = colorIndex;
+  }, [colorIndex]);
+
+  // Handle click on AI core - smooth, elegant color transformation
   const handleAIClick = () => {
     if (isWaving) return;
 
     setIsWaving(true);
-    const nextIndex = (colorIndex + 1) % waveColors.length;
+
+    // Get random color different from current
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * waveColors.length);
+    } while (nextIndex === colorIndex && waveColors.length > 1);
+
     const newColor = waveColors[nextIndex];
 
-    // Create gradual "Venom taking over" color transformation
+    // Create gradual, smooth color transformation
     const container = document.querySelector('.logos-section__ai-container');
     if (!container) return;
 
-    // Timeline for cascading color transformation
+    // Premium timeline with elegant easing
     const tl = gsap.timeline({
       onComplete: () => {
         setColorIndex(nextIndex);
@@ -101,7 +116,20 @@ const LogosSection = () => {
       }
     });
 
-    // 1. Start with the iris/pupil (center) - immediate transformation
+    // Elegant entrance - subtle scale breathing effect
+    tl.to(container, {
+      scale: 1.02,
+      duration: 0.4,
+      ease: 'power1.out'
+    }, 0);
+
+    tl.to(container, {
+      scale: 1,
+      duration: 0.6,
+      ease: 'power2.inOut'
+    }, 0.4);
+
+    // 1. Start with the iris/pupil (center) - elegant transformation
     const iris = document.querySelector('.logos-section__ai-iris');
     const pupil = document.querySelector('.logos-section__ai-pupil');
     const pupilCore = document.querySelector('.logos-section__ai-pupil-core');
@@ -109,140 +137,149 @@ const LogosSection = () => {
     tl.to(iris, {
       background: `radial-gradient(circle at 30% 30%, ${newColor.secondary} 0%, ${newColor.primary} 35%, ${newColor.primary}99 100%)`,
       boxShadow: `0 0 40px ${newColor.glow}, 0 0 80px ${newColor.glow}`,
-      duration: 0.3,
-      ease: 'power2.out'
-    }, 0);
+      duration: 1.2,
+      ease: 'power2.inOut'
+    }, 0.1);
 
     tl.to(pupil, {
       background: `radial-gradient(circle, #fff 0%, ${newColor.secondary} 40%, ${newColor.primary} 100%)`,
-      duration: 0.25,
-      ease: 'power2.out'
-    }, 0.05);
+      duration: 1.0,
+      ease: 'power2.inOut'
+    }, 0.15);
 
     tl.to(pupilCore, {
       boxShadow: `0 0 15px #fff, 0 0 30px ${newColor.primary}`,
-      duration: 0.2,
-      ease: 'power2.out'
-    }, 0.1);
+      duration: 0.9,
+      ease: 'power2.inOut'
+    }, 0.2);
 
-    // 1.5 Iris glow
+    // 1.5 Iris glow - gentle bloom
     const irisGlow = document.querySelector('.logos-section__ai-iris-glow');
     if (irisGlow) {
       tl.to(irisGlow, {
         background: `radial-gradient(circle, ${newColor.glow} 0%, transparent 70%)`,
-        duration: 0.3,
-        ease: 'power2.out'
+        opacity: 1.2,
+        duration: 0.6,
+        ease: 'power1.out'
       }, 0.1);
+
+      tl.to(irisGlow, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power1.inOut'
+      }, 0.7);
     }
 
-    // 2. Inner rings spread outward (Venom spreading effect)
+    // 2. Inner rings - flowing wave transition from center outward
     const rings = document.querySelectorAll('.logos-section__ai-ring');
     rings.forEach((ring, i) => {
-      const delay = 0.15 + (i * 0.08); // Cascading delay
+      const delay = 0.15 + (i * 0.08); // Gentle cascading delay
       tl.to(ring, {
         borderColor: `${newColor.primary}99`,
         boxShadow: `0 0 ${8 + i * 3}px ${newColor.glow}`,
-        duration: 0.4,
-        ease: 'power2.inOut'
+        duration: 1.1,
+        ease: 'sine.inOut'
       }, delay);
     });
 
-    // 3. Hexagon shape
+    // 3. Hexagon shape - elegant rotation
     const hexShape = document.querySelector('.logos-section__ai-hex-shape');
     if (hexShape) {
       tl.to(hexShape, {
         stroke: `${newColor.primary}66`,
-        duration: 0.5,
-        ease: 'power2.inOut'
-      }, 0.3);
+        rotation: '+=30',
+        transformOrigin: 'center center',
+        duration: 1.2,
+        ease: 'power1.inOut'
+      }, 0.2);
     }
 
-    // 4. Arcs
+    // 4. Arcs - smooth transition
     const arcs = document.querySelectorAll('.logos-section__ai-arc');
     arcs.forEach((arc, i) => {
       tl.to(arc, {
         stroke: `${newColor.primary}99`,
-        duration: 0.4,
-        ease: 'power2.inOut'
-      }, 0.35 + (i * 0.05));
+        duration: 1.0,
+        ease: 'sine.inOut'
+      }, 0.4 + (i * 0.08));
     });
 
-    // 5. Scanner lines
+    // 5. Scanner lines - gentle fade
     const scanners = document.querySelectorAll('.logos-section__ai-scanner');
     scanners.forEach((scanner, i) => {
       tl.to(scanner, {
         background: `linear-gradient(90deg, transparent 0%, ${newColor.primary}15 15%, ${newColor.primary} 50%, ${newColor.primary}15 85%, transparent 100%)`,
-        duration: 0.4,
-        ease: 'power2.inOut'
-      }, 0.4 + (i * 0.1));
+        duration: 0.9,
+        ease: 'sine.inOut'
+      }, 0.5 + (i * 0.12));
     });
 
-    // 6. Circuit lines - spreading from center outward
+    // 6. Circuit lines - smooth spreading
     const circuits = document.querySelectorAll('.logos-section__ai-circuit');
     circuits.forEach((circuit, i) => {
       tl.to(circuit, {
         stroke: `${newColor.primary}99`,
         filter: `drop-shadow(0 0 4px ${newColor.glow})`,
-        duration: 0.5,
-        ease: 'power2.inOut'
-      }, 0.5 + (i * 0.04));
+        duration: 1,
+        ease: 'sine.inOut'
+      }, 0.6 + (i * 0.06));
     });
 
-    // 7. Nodes - cascading effect
+    // 7. Nodes - gentle cascading effect
     const nodes = document.querySelectorAll('.logos-section__ai-node');
     nodes.forEach((node, i) => {
       tl.to(node, {
         fill: newColor.primary,
         filter: `drop-shadow(0 0 6px ${newColor.glow})`,
-        duration: 0.3,
-        ease: 'power2.out'
-      }, 0.6 + (i * 0.03));
+        duration: 0.8,
+        ease: 'sine.inOut'
+      }, 0.7 + (i * 0.05));
     });
 
-    // 8. Pulses
+    // 8. Pulses - smooth transition
     const pulses = document.querySelectorAll('.logos-section__ai-pulse');
     pulses.forEach((pulse, i) => {
       tl.to(pulse, {
         borderColor: `${newColor.primary}66`,
-        duration: 0.4,
-        ease: 'power2.inOut'
-      }, 0.55 + (i * 0.08));
+        duration: 0.9,
+        ease: 'sine.inOut'
+      }, 0.6 + (i * 0.1));
     });
 
-    // 9. Spectrum bars - spreading from center
+    // 9. Spectrum bars - smooth spreading from center
     const bars = document.querySelectorAll('.logos-section__ai-bar');
     const centerIndex = Math.floor(bars.length / 2);
     bars.forEach((bar, i) => {
       const distanceFromCenter = Math.abs(i - centerIndex);
-      const delay = 0.65 + (distanceFromCenter * 0.03);
+      const delay = 0.7 + (distanceFromCenter * 0.05);
       tl.to(bar, {
         background: `linear-gradient(180deg, #fff 0%, ${newColor.secondary} 20%, ${newColor.primary} 60%, ${newColor.primary}99 100%)`,
         boxShadow: `0 0 10px ${newColor.glow}, 0 0 20px ${newColor.glow}66`,
-        duration: 0.3,
-        ease: 'power2.out'
+        duration: 0.8,
+        ease: 'sine.inOut'
       }, delay);
     });
 
-    // 10. Particles - random spreading
+    // 10. Particles - gentle spreading
     const particles = document.querySelectorAll('.logos-section__ai-particle');
     particles.forEach((particle, i) => {
       tl.to(particle, {
         background: newColor.primary,
         boxShadow: `0 0 10px ${newColor.glow}`,
-        duration: 0.4,
-        ease: 'power2.out'
-      }, 0.7 + (Math.random() * 0.3));
+        duration: 0.9,
+        ease: 'sine.inOut'
+      }, 0.8 + (i * 0.05));
     });
 
-    // 11. Extended lines and nodes (far reaching Venom tentacles)
+    // 11. Extended lines and nodes - smooth spreading
     const extendedLines = document.querySelectorAll('.logos-section__extended-line');
     extendedLines.forEach((line, i) => {
       tl.to(line, {
         stroke: `${newColor.primary}66`,
         filter: `drop-shadow(0 0 3px ${newColor.glow})`,
-        duration: 0.6,
-        ease: 'power2.inOut'
-      }, 0.8 + (i * 0.05));
+        duration: 1,
+        ease: 'sine.inOut'
+      }, 0.9 + (i * 0.08));
     });
 
     const extendedNodes = document.querySelectorAll('.logos-section__extended-node');
@@ -885,6 +922,9 @@ const LogosSection = () => {
 
       // Solo si se hace clic cerca del núcleo
       if (distance < 300) {
+        // Get current color from the theme
+        const currentColor = waveColors[colorIndexRef.current];
+
         // Pulso de expansión del iris
         const iris = document.querySelector('.logos-section__ai-iris');
         const pulses = document.querySelectorAll('.logos-section__ai-pulse');
@@ -892,25 +932,25 @@ const LogosSection = () => {
         const particles = document.querySelectorAll('.logos-section__ai-particle');
         const bars = document.querySelectorAll('.logos-section__ai-bar');
 
-        // Flash del iris
+        // Flash del iris - use current theme colors
         if (iris) {
           gsap.timeline()
-            .to(iris, { scale: 1.8, boxShadow: '0 0 100px rgba(254, 243, 199, 1), 0 0 200px rgba(251, 191, 36, 0.8)', duration: 0.15, ease: 'power2.out' })
-            .to(iris, { scale: 1, boxShadow: '0 0 40px rgba(251, 191, 36, 0.9), 0 0 80px rgba(245, 158, 11, 0.6)', duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+            .to(iris, { scale: 1.8, boxShadow: `0 0 100px ${currentColor.secondary}, 0 0 200px ${currentColor.glow}`, duration: 0.15, ease: 'power2.out' })
+            .to(iris, { scale: 1, boxShadow: `0 0 40px ${currentColor.glow}, 0 0 80px ${currentColor.glow}`, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
         }
 
-        // Ondas de pulso sincronizadas
+        // Ondas de pulso sincronizadas - use current theme colors
         pulses.forEach((pulse, i) => {
           gsap.timeline()
-            .to(pulse, { scale: 2.5, opacity: 0.8, borderColor: 'rgba(254, 243, 199, 0.9)', duration: 0.3, delay: i * 0.1, ease: 'power2.out' })
-            .to(pulse, { scale: 1, opacity: 0.3, borderColor: 'rgba(251, 191, 36, 0.3)', duration: 0.6, ease: 'power2.inOut' });
+            .to(pulse, { scale: 2.5, opacity: 0.8, borderColor: `${currentColor.secondary}e6`, duration: 0.3, delay: i * 0.1, ease: 'power2.out' })
+            .to(pulse, { scale: 1, opacity: 0.3, borderColor: `${currentColor.primary}4d`, duration: 0.6, ease: 'power2.inOut' });
         });
 
-        // Anillos - expansión rápida
+        // Anillos - expansión rápida - use current theme colors
         rings.forEach((ring, i) => {
           gsap.timeline()
-            .to(ring, { scale: 1.3 - (i * 0.03), opacity: 1, borderColor: 'rgba(254, 243, 199, 0.9)', duration: 0.2, delay: i * 0.03 })
-            .to(ring, { scale: 1, opacity: 0.8, borderColor: 'rgba(251, 191, 36, 0.5)', duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+            .to(ring, { scale: 1.3 - (i * 0.03), opacity: 1, borderColor: `${currentColor.secondary}e6`, duration: 0.2, delay: i * 0.03 })
+            .to(ring, { scale: 1, opacity: 0.8, borderColor: `${currentColor.primary}80`, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
         });
 
         // Partículas - disparo radial
@@ -965,21 +1005,20 @@ const LogosSection = () => {
       <div className="logos-section__headline">
         <span className="logos-section__headline-badge">
           <span className="logos-section__headline-badge-dot"></span>
-          Potenciado por IA
+          {t('logos.badge')}
         </span>
         <h2 className="logos-section__headline-title">
-          Diseño inteligente.<br/>
-          <span className="logos-section__headline-accent">Resultados extraordinarios.</span>
+          {t('logos.title1')}<br/>
+          <span className="logos-section__headline-accent">{t('logos.title2')}</span>
         </h2>
         <p className="logos-section__headline-subtitle">
-          Combinamos las mejores tecnologías con IA avanzada para crear
-          experiencias digitales que superan expectativas.
+          {t('logos.subtitle')}
         </p>
       </div>
 
       {/* Tech grid - Stack tecnológico con carrusel infinito */}
       <div className="logos-section__container">
-        <p className="logos-section__tech-label">Nuestro stack tecnológico</p>
+        <p className="logos-section__tech-label">{t('logos.techLabel')}</p>
         <div className="logos-section__carousel">
           <div className="logos-section__carousel-track">
             {/* Duplicamos los items para crear el efecto infinito */}
@@ -991,7 +1030,7 @@ const LogosSection = () => {
             ))}
           </div>
         </div>
-        <p className="logos-section__tech-plus">+ Inteligencia Artificial integrada en cada proyecto</p>
+        <p className="logos-section__tech-plus">{t('logos.aiIntegrated')}</p>
       </div>
 
       {/* Paneles flotantes 3D estilo Linear */}
@@ -1010,48 +1049,48 @@ const LogosSection = () => {
             <div className="logos-section__nav">
               <div className="logos-section__nav-item logos-section__nav-item--active">
                 {icons.inbox}
-                <span>Inbox</span>
+                <span>{t('logos.inbox')}</span>
                 <span className="logos-section__nav-badge">3</span>
               </div>
               <div className="logos-section__nav-item">
                 {icons.projects}
-                <span>Proyectos</span>
+                <span>{t('logos.projects')}</span>
               </div>
               <div className="logos-section__nav-item">
                 {icons.team}
-                <span>Equipo</span>
+                <span>{t('logos.team')}</span>
               </div>
               <div className="logos-section__nav-item">
                 {icons.settings}
-                <span>Configuración</span>
+                <span>{t('logos.settings')}</span>
               </div>
             </div>
 
             <div className="logos-section__nav-section">
-              <span className="logos-section__nav-label">Favoritos</span>
+              <span className="logos-section__nav-label">{t('logos.favorites')}</span>
               <div className="logos-section__nav-item">
                 <span className="logos-section__dot logos-section__dot--purple"></span>
-                <span>E-commerce App</span>
+                <span>{t('logos.ecommerceApp')}</span>
               </div>
               <div className="logos-section__nav-item">
                 <span className="logos-section__dot logos-section__dot--blue"></span>
-                <span>Landing Page</span>
+                <span>{t('logos.landingPage')}</span>
               </div>
               <div className="logos-section__nav-item">
                 <span className="logos-section__dot logos-section__dot--green"></span>
-                <span>Dashboard UI</span>
+                <span>{t('logos.dashboardUI')}</span>
               </div>
             </div>
 
             <div className="logos-section__nav-section">
-              <span className="logos-section__nav-label">Recientes</span>
+              <span className="logos-section__nav-label">{t('logos.recent')}</span>
               <div className="logos-section__nav-item">
                 <span className="logos-section__dot logos-section__dot--blue"></span>
-                <span>App Móvil</span>
+                <span>{t('logos.mobileApp')}</span>
               </div>
               <div className="logos-section__nav-item">
                 <span className="logos-section__dot logos-section__dot--purple"></span>
-                <span>API Backend</span>
+                <span>{t('logos.apiBackend')}</span>
               </div>
             </div>
           </div>
@@ -1059,18 +1098,18 @@ const LogosSection = () => {
           {/* Panel 2: Lista de proyectos/inbox */}
           <div className="logos-section__panel logos-section__panel--list">
             <div className="logos-section__list-header">
-              <span className="logos-section__list-title">Inbox</span>
-              <span className="logos-section__list-count">12 tareas</span>
+              <span className="logos-section__list-title">{t('logos.inbox')}</span>
+              <span className="logos-section__list-count">12 {t('logos.tasks')}</span>
             </div>
 
             <div className="logos-section__task logos-section__task--active">
               <div className="logos-section__task-priority logos-section__task-priority--high"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-142</span>
-                <span className="logos-section__task-title">Diseñar landing page</span>
+                <span className="logos-section__task-title">{t('logos.designLanding')}</span>
                 <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--design">Diseño</span>
-                  <span className="logos-section__task-date">{icons.clock} Hoy</span>
+                  <span className="logos-section__task-tag logos-section__task-tag--design">{t('logos.design')}</span>
+                  <span className="logos-section__task-date">{icons.clock} {t('logos.today')}</span>
                 </div>
               </div>
             </div>
@@ -1079,10 +1118,10 @@ const LogosSection = () => {
               <div className="logos-section__task-priority logos-section__task-priority--medium"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-141</span>
-                <span className="logos-section__task-title">Implementar checkout</span>
+                <span className="logos-section__task-title">{t('logos.implementCheckout')}</span>
                 <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--dev">Desarrollo</span>
-                  <span className="logos-section__task-date">{icons.clock} Mañana</span>
+                  <span className="logos-section__task-tag logos-section__task-tag--dev">{t('logos.development')}</span>
+                  <span className="logos-section__task-date">{icons.clock} {t('logos.tomorrow')}</span>
                 </div>
               </div>
             </div>
@@ -1091,10 +1130,10 @@ const LogosSection = () => {
               <div className="logos-section__task-priority logos-section__task-priority--low"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-140</span>
-                <span className="logos-section__task-title">Optimizar imágenes</span>
+                <span className="logos-section__task-title">{t('logos.optimizeImages')}</span>
                 <div className="logos-section__task-meta">
                   <span className="logos-section__task-tag logos-section__task-tag--ops">Ops</span>
-                  <span className="logos-section__task-date">{icons.clock} Esta semana</span>
+                  <span className="logos-section__task-date">{icons.clock} {t('logos.thisWeek')}</span>
                 </div>
               </div>
             </div>
@@ -1103,9 +1142,9 @@ const LogosSection = () => {
               <div className="logos-section__task-priority logos-section__task-priority--medium"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-139</span>
-                <span className="logos-section__task-title">Crear componentes UI</span>
+                <span className="logos-section__task-title">{t('logos.createComponents')}</span>
                 <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--design">Diseño</span>
+                  <span className="logos-section__task-tag logos-section__task-tag--design">{t('logos.design')}</span>
                 </div>
               </div>
             </div>
@@ -1114,10 +1153,10 @@ const LogosSection = () => {
               <div className="logos-section__task-priority logos-section__task-priority--high"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-138</span>
-                <span className="logos-section__task-title">Integrar API de pagos</span>
+                <span className="logos-section__task-title">{t('logos.integratePayments')}</span>
                 <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--dev">Backend</span>
-                  <span className="logos-section__task-date">{icons.clock} Próxima semana</span>
+                  <span className="logos-section__task-tag logos-section__task-tag--dev">{t('logos.backend')}</span>
+                  <span className="logos-section__task-date">{icons.clock} {t('logos.nextWeek')}</span>
                 </div>
               </div>
             </div>
@@ -1126,9 +1165,9 @@ const LogosSection = () => {
               <div className="logos-section__task-priority logos-section__task-priority--low"></div>
               <div className="logos-section__task-content">
                 <span className="logos-section__task-id">PRJ-137</span>
-                <span className="logos-section__task-title">Documentar componentes</span>
+                <span className="logos-section__task-title">{t('logos.documentComponents')}</span>
                 <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--ops">Docs</span>
+                  <span className="logos-section__task-tag logos-section__task-tag--ops">{t('logos.docs')}</span>
                 </div>
               </div>
             </div>
@@ -1138,31 +1177,31 @@ const LogosSection = () => {
           <div className="logos-section__panel logos-section__panel--detail">
             <div className="logos-section__detail-header">
               <div className="logos-section__detail-breadcrumb">
-                <span>E-commerce App</span>
+                <span>{t('logos.ecommerceApp')}</span>
                 <span className="logos-section__detail-sep">›</span>
                 <span>PRJ-142</span>
               </div>
             </div>
 
-            <h2 className="logos-section__detail-title">Diseñar landing page</h2>
+            <h2 className="logos-section__detail-title">{t('logos.designLanding')}</h2>
 
             <div className="logos-section__detail-props">
               <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">Estado</span>
+                <span className="logos-section__detail-label">{t('logos.status')}</span>
                 <span className="logos-section__detail-status">
                   <span className="logos-section__status-dot logos-section__status-dot--progress"></span>
-                  En progreso
+                  {t('logos.inProgress')}
                 </span>
               </div>
               <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">Prioridad</span>
+                <span className="logos-section__detail-label">{t('logos.priority')}</span>
                 <span className="logos-section__detail-priority">
                   {icons.star}
-                  Alta
+                  {t('logos.high')}
                 </span>
               </div>
               <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">Asignado</span>
+                <span className="logos-section__detail-label">{t('logos.assigned')}</span>
                 <div className="logos-section__avatars">
                   <div className="logos-section__avatar">JC</div>
                   <div className="logos-section__avatar">MR</div>
@@ -1171,11 +1210,11 @@ const LogosSection = () => {
             </div>
 
             <div className="logos-section__detail-desc">
-              <p>Crear un diseño moderno y atractivo para la página principal del e-commerce. Incluir hero section, productos destacados, y testimonios.</p>
+              <p>{t('logos.taskDescription')}</p>
             </div>
 
             <div className="logos-section__detail-attachments">
-              <span className="logos-section__detail-label">Archivos</span>
+              <span className="logos-section__detail-label">{t('logos.files')}</span>
               <div className="logos-section__files">
                 <div className="logos-section__file">
                   {icons.figma}
@@ -1189,21 +1228,21 @@ const LogosSection = () => {
             </div>
 
             <div className="logos-section__detail-activity">
-              <span className="logos-section__detail-label">Actividad</span>
+              <span className="logos-section__detail-label">{t('logos.activity')}</span>
               <div className="logos-section__activity-item">
                 <div className="logos-section__avatar logos-section__avatar--sm">JC</div>
-                <span>Juan actualizó el estado a <strong>En progreso</strong></span>
-                <span className="logos-section__activity-time">hace 2h</span>
+                <span>Juan {t('logos.updatedStatus')} <strong>{t('logos.inProgress')}</strong></span>
+                <span className="logos-section__activity-time">{t('logos.hoursAgo')} 2h</span>
               </div>
               <div className="logos-section__activity-item">
                 <div className="logos-section__avatar logos-section__avatar--sm">MR</div>
-                <span>María añadió archivo <strong>landing-v2.fig</strong></span>
-                <span className="logos-section__activity-time">hace 5h</span>
+                <span>María {t('logos.addedFile')} <strong>landing-v2.fig</strong></span>
+                <span className="logos-section__activity-time">{t('logos.hoursAgo')} 5h</span>
               </div>
               <div className="logos-section__activity-item">
                 <div className="logos-section__avatar logos-section__avatar--sm">JC</div>
-                <span>Juan creó la tarea</span>
-                <span className="logos-section__activity-time">ayer</span>
+                <span>Juan {t('logos.createdTask')}</span>
+                <span className="logos-section__activity-time">{t('logos.yesterday')}</span>
               </div>
             </div>
           </div>
@@ -1380,22 +1419,22 @@ const LogosSection = () => {
             {/* Nombre y branding */}
             <div className="logos-section__ai-brand">
               <span className="logos-section__ai-name">LUMEN</span>
-              <span className="logos-section__ai-tagline">AI Core Engine</span>
+              <span className="logos-section__ai-tagline">{t('logos.lumenTagline')}</span>
             </div>
 
             {/* Indicador de estado */}
             <div className="logos-section__ai-status">
               <span className="logos-section__ai-status-dot"></span>
-              <span className="logos-section__ai-status-text">Online</span>
+              <span className="logos-section__ai-status-text">{t('logos.lumenStatus')}</span>
             </div>
 
             {/* Preguntas/mensajes que van apareciendo */}
             <div className="logos-section__ai-questions">
-              <div className="logos-section__ai-question logos-section__ai-question--1">Optimizando rendimiento...</div>
-              <div className="logos-section__ai-question logos-section__ai-question--2">Analizando código...</div>
-              <div className="logos-section__ai-question logos-section__ai-question--3">Generando diseño...</div>
-              <div className="logos-section__ai-question logos-section__ai-question--4">Procesando datos...</div>
-              <div className="logos-section__ai-question logos-section__ai-question--5">Creando experiencia...</div>
+              <div className="logos-section__ai-question logos-section__ai-question--1">{t('logos.lumenMsg1')}</div>
+              <div className="logos-section__ai-question logos-section__ai-question--2">{t('logos.lumenMsg2')}</div>
+              <div className="logos-section__ai-question logos-section__ai-question--3">{t('logos.lumenMsg3')}</div>
+              <div className="logos-section__ai-question logos-section__ai-question--4">{t('logos.lumenMsg4')}</div>
+              <div className="logos-section__ai-question logos-section__ai-question--5">{t('logos.lumenMsg5')}</div>
             </div>
 
             {/* Datos técnicos flotantes */}

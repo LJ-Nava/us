@@ -10,7 +10,6 @@
   min-height: 100vh;
   background: #ffffff;
   position: relative;
-  overflow-x: hidden;
 
   // =============================================
   // 3D BACKGROUND
@@ -241,6 +240,7 @@
     position: relative;
     padding: 0 0 $spacing-5xl;
     z-index: 1;
+    overflow: visible;
     background: linear-gradient(
       180deg,
       #eef1f6 0%,
@@ -781,5 +781,511 @@
     svg {
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+  }
+
+}
+
+// =============================================
+// TESTIMONIAL CAROUSEL - Ultra Premium 3D
+// Infinite rotation with CSS animations
+// =============================================
+.testimonial-carousel {
+  --gold: #d4a853;
+  --gold-light: #f0d890;
+  --gold-dark: #a07d2e;
+  --card-width: 280px;
+  --card-height: 340px;
+  --radius: 420px;
+  --rotation-duration: 140s;
+
+  position: relative;
+  padding: 100px 0 120px;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  // Performance optimizations
+  contain: layout style;
+  isolation: isolate;
+
+  @media (max-width: 1400px) {
+    --radius: 380px;
+  }
+
+  @media (max-width: 1200px) {
+    --radius: 340px;
+    --card-width: 260px;
+    --card-height: 320px;
+  }
+
+  @media (max-width: 900px) {
+    --radius: 300px;
+    --card-width: 240px;
+    --card-height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    --card-width: 220px;
+    --card-height: 280px;
+    --radius: 250px;
+    padding: 70px 0 90px;
+  }
+
+  @media (max-width: 480px) {
+    --radius: 200px;
+    --card-width: 200px;
+    --card-height: 260px;
+  }
+
+  // ==================== BACKGROUND ====================
+  &__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  &__gradient-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 60%;
+    background: radial-gradient(ellipse 50% 80% at 50% 0%, rgba(201, 162, 39, 0.06), transparent 60%);
+  }
+
+  &__gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 50%;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201, 162, 39, 0.03), transparent 50%);
+  }
+
+  // Floating particles
+  &__particles {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 20s infinite;
+    animation-delay: calc(var(--i) * 1s);
+
+    @for $i from 0 through 19 {
+      &:nth-child(#{$i + 1}) {
+        left: #{random(100)}%;
+        top: #{random(100)}%;
+        animation-duration: #{15 + random(10)}s;
+      }
+    }
+  }
+
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0); }
+    10% { opacity: 0.6; transform: translateY(-20px) scale(1); }
+    90% { opacity: 0.3; transform: translateY(-100px) scale(0.5); }
+  }
+
+  // ==================== HEADER ====================
+  &__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 80px;
+    padding: 0 $container-padding;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__header-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 28px;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 200;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  &__title-gold {
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  // ==================== 3D SCENE ====================
+  &__scene {
+    position: relative;
+    height: 460px;
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+    overflow: visible;
+    // Edge fade masks for smooth clipping
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+
+    @media (max-width: 768px) {
+      height: 400px;
+      perspective: 1400px;
+      mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
+      );
+    }
+
+    @media (max-width: 480px) {
+      height: 360px;
+      perspective: 1200px;
+    }
+  }
+
+  // ==================== ROTATING RING ====================
+  &__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    animation: carouselRotate var(--rotation-duration) linear infinite;
+    // GPU acceleration
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  @keyframes carouselRotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(-360deg); }
+  }
+
+  // ==================== CARDS ====================
+  &__card {
+    position: absolute;
+    width: var(--card-width);
+    height: var(--card-height);
+    margin-left: calc(var(--card-width) / -2);
+    margin-top: calc(var(--card-height) / -2);
+    transform-style: preserve-3d;
+    // Calculate position in circle
+    transform: rotateY(calc(var(--index) * (360deg / var(--total)))) translateZ(var(--radius));
+    // GPU acceleration for smooth rendering
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    // Smoother rendering
+    transform-origin: center center;
+  }
+
+  &__card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 28px 24px;
+    background: linear-gradient(
+      160deg,
+      rgba(22, 22, 32, 0.97) 0%,
+      rgba(16, 16, 24, 0.99) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 20px 40px -10px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    // Smooth rendering
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    @media (max-width: 768px) {
+      padding: 22px 18px;
+      border-radius: 14px;
+    }
+  }
+
+  // Card shine sweep - subtle
+  &__card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.015),
+      transparent
+    );
+    transform: skewX(-15deg);
+    animation: cardShine 12s ease-in-out infinite;
+    animation-delay: calc(var(--index) * 1s);
+    pointer-events: none;
+  }
+
+  @keyframes cardShine {
+    0%, 100% { left: -100%; }
+    50% { left: 150%; }
+  }
+
+  // Quote mark - refined
+  &__quote-mark {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(212, 168, 83, 0.15), rgba(212, 168, 83, 0.05));
+    border-radius: 8px;
+    transform: rotate(180deg);
+
+    svg {
+      width: 13px;
+      height: 13px;
+      color: var(--gold);
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      width: 26px;
+      height: 26px;
+      top: 14px;
+      right: 16px;
+
+      svg {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+
+  // Stars - elegant small
+  &__stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 16px;
+
+    svg {
+      width: 11px;
+      height: 11px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 2px rgba(212, 168, 83, 0.3));
+    }
+
+    @media (max-width: 768px) {
+      gap: 2px;
+      margin-bottom: 12px;
+
+      svg {
+        width: 9px;
+        height: 9px;
+      }
+    }
+  }
+
+  // Text - clean typography
+  &__text {
+    flex: 1;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 300;
+    font-style: italic;
+    margin: 0 0 16px 0;
+    letter-spacing: 0.01em;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+  }
+
+  // Author - compact
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: auto;
+
+    @media (max-width: 768px) {
+      gap: 8px;
+      padding-top: 12px;
+    }
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, var(--gold-light), var(--gold-dark));
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(212, 168, 83, 0.25);
+    flex-shrink: 0;
+
+    span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    @media (max-width: 768px) {
+      width: 30px;
+      height: 30px;
+
+      span {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  &__author-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #ffffff;
+    font-style: normal;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 768px) {
+      font-size: 0.72rem;
+    }
+  }
+
+  &__role {
+    font-size: 0.58rem;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 0.52rem;
+    }
+  }
+
+  // Decorative corner - subtle
+  &__corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, transparent 50%, rgba(212, 168, 83, 0.03) 50%);
+    border-radius: 0 0 18px 0;
+    pointer-events: none;
+  }
+
+  // Center glow
+  &__center-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(201, 162, 39, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+    animation: centerPulse 5s ease-in-out infinite;
+  }
+
+  @keyframes centerPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
+  }
+
+  // ==================== FOOTER ====================
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__footer-line {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.25), transparent);
   }
 }

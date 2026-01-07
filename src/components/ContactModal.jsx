@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
+import { useI18n } from '../contexts/I18nContext';
 
 /**
  * ContactModal - Premium Contact Form Modal
@@ -8,6 +9,7 @@ import gsap from 'gsap';
  * Uses Portal to render outside of parent stacking context
  */
 const ContactModal = ({ isOpen, onClose }) => {
+  const { t } = useI18n();
   const modalRef = useRef(null);
   const contentRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -134,7 +136,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
-        <button className="contact-modal__close" onClick={handleClose} aria-label="Cerrar">
+        <button className="contact-modal__close" onClick={handleClose} aria-label={t('common.close')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
@@ -144,13 +146,13 @@ const ContactModal = ({ isOpen, onClose }) => {
         <div className="contact-modal__header">
           <div className="contact-modal__badge">
             <span className="contact-modal__badge-dot" />
-            Disponible para proyectos
+            {t('contactModal.badge')}
           </div>
           <h2 className="contact-modal__title">
-            Cuéntanos sobre tu <span>proyecto</span>
+            {t('contactModal.title')} <span>{t('contactModal.titleHighlight')}</span>
           </h2>
           <p className="contact-modal__subtitle">
-            Completa el formulario y te contactaremos en menos de 24 horas
+            {t('contactModal.subtitle')}
           </p>
         </div>
 
@@ -162,8 +164,8 @@ const ContactModal = ({ isOpen, onClose }) => {
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
             <div>
-              <strong>¡Mensaje enviado!</strong>
-              <span>Te contactaremos pronto. Revisa tu email.</span>
+              <strong>{t('contactModal.successTitle')}</strong>
+              <span>{t('contactModal.successText')}</span>
             </div>
           </div>
         )}
@@ -176,8 +178,8 @@ const ContactModal = ({ isOpen, onClose }) => {
               <line x1="9" y1="9" x2="15" y2="15"/>
             </svg>
             <div>
-              <strong>Error al enviar</strong>
-              <span>Intenta de nuevo o contáctanos por WhatsApp.</span>
+              <strong>{t('contactModal.errorTitle')}</strong>
+              <span>{t('contactModal.errorText')}</span>
             </div>
           </div>
         )}
@@ -186,7 +188,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         <form className="contact-modal__form" onSubmit={handleSubmit}>
           <div className="contact-modal__row">
             <div className="contact-modal__field">
-              <label htmlFor="name">Nombre completo <span>*</span></label>
+              <label htmlFor="name">{t('contactModal.nameLabel')} <span>{t('contactModal.required')}</span></label>
               <input
                 type="text"
                 id="name"
@@ -194,11 +196,11 @@ const ContactModal = ({ isOpen, onClose }) => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Tu nombre"
+                placeholder={t('contactModal.namePlaceholder')}
               />
             </div>
             <div className="contact-modal__field">
-              <label htmlFor="email">Email <span>*</span></label>
+              <label htmlFor="email">{t('contactModal.emailLabel')} <span>{t('contactModal.required')}</span></label>
               <input
                 type="email"
                 id="email"
@@ -206,77 +208,77 @@ const ContactModal = ({ isOpen, onClose }) => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="tu@email.com"
+                placeholder={t('contactModal.emailPlaceholder')}
               />
             </div>
           </div>
 
           <div className="contact-modal__row">
             <div className="contact-modal__field">
-              <label htmlFor="phone">Teléfono</label>
+              <label htmlFor="phone">{t('contactModal.phoneLabel')}</label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+57 300 123 4567"
+                placeholder={t('contactModal.phonePlaceholder')}
               />
             </div>
             <div className="contact-modal__field">
-              <label htmlFor="company">Empresa</label>
+              <label htmlFor="company">{t('contactModal.companyLabel')}</label>
               <input
                 type="text"
                 id="company"
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Nombre de tu empresa"
+                placeholder={t('contactModal.companyPlaceholder')}
               />
             </div>
           </div>
 
           <div className="contact-modal__row">
             <div className="contact-modal__field">
-              <label htmlFor="service">Servicio de interés</label>
+              <label htmlFor="service">{t('contactModal.serviceLabel')}</label>
               <select
                 id="service"
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
               >
-                <option value="">Selecciona una opción</option>
-                <option value="Sitio Web Corporativo">Sitio Web Corporativo</option>
-                <option value="E-Commerce">E-Commerce / Tienda Online</option>
-                <option value="Landing Page">Landing Page</option>
-                <option value="Aplicación Web">Aplicación Web</option>
-                <option value="Rediseño Web">Rediseño Web</option>
-                <option value="Branding">Branding / Identidad Visual</option>
-                <option value="SEO">SEO / Posicionamiento</option>
-                <option value="Otro">Otro</option>
+                <option value="">{t('contactModal.servicePlaceholder')}</option>
+                <option value="corporate">{t('contactModal.serviceOptions.corporate')}</option>
+                <option value="ecommerce">{t('contactModal.serviceOptions.ecommerce')}</option>
+                <option value="landing">{t('contactModal.serviceOptions.landing')}</option>
+                <option value="webapp">{t('contactModal.serviceOptions.webapp')}</option>
+                <option value="redesign">{t('contactModal.serviceOptions.redesign')}</option>
+                <option value="branding">{t('contactModal.serviceOptions.branding')}</option>
+                <option value="seo">{t('contactModal.serviceOptions.seo')}</option>
+                <option value="other">{t('contactModal.serviceOptions.other')}</option>
               </select>
             </div>
             <div className="contact-modal__field">
-              <label htmlFor="budget">Presupuesto estimado</label>
+              <label htmlFor="budget">{t('contactModal.budgetLabel')}</label>
               <select
                 id="budget"
                 name="budget"
                 value={formData.budget}
                 onChange={handleChange}
               >
-                <option value="">Selecciona un rango</option>
-                <option value="$500 - $1,500 USD">$500 - $1,500 USD</option>
-                <option value="$1,500 - $3,000 USD">$1,500 - $3,000 USD</option>
-                <option value="$3,000 - $5,000 USD">$3,000 - $5,000 USD</option>
-                <option value="$5,000 - $10,000 USD">$5,000 - $10,000 USD</option>
-                <option value="$10,000+ USD">$10,000+ USD</option>
-                <option value="Por definir">Por definir</option>
+                <option value="">{t('contactModal.budgetPlaceholder')}</option>
+                <option value="range1">{t('contactModal.budgetOptions.range1')}</option>
+                <option value="range2">{t('contactModal.budgetOptions.range2')}</option>
+                <option value="range3">{t('contactModal.budgetOptions.range3')}</option>
+                <option value="range4">{t('contactModal.budgetOptions.range4')}</option>
+                <option value="range5">{t('contactModal.budgetOptions.range5')}</option>
+                <option value="tbd">{t('contactModal.budgetOptions.tbd')}</option>
               </select>
             </div>
           </div>
 
           <div className="contact-modal__field contact-modal__field--full">
-            <label htmlFor="message">Cuéntanos más sobre tu proyecto <span>*</span></label>
+            <label htmlFor="message">{t('contactModal.messageLabel')} <span>{t('contactModal.required')}</span></label>
             <textarea
               id="message"
               name="message"
@@ -284,7 +286,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               onChange={handleChange}
               required
               rows="4"
-              placeholder="Describe tu idea, objetivos, plazos y cualquier detalle importante..."
+              placeholder={t('contactModal.messagePlaceholder')}
             />
           </div>
 
@@ -306,10 +308,10 @@ const ContactModal = ({ isOpen, onClose }) => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
               </svg>
-              Adjuntar archivos
+              {t('contactModal.attachFiles')}
             </button>
             <span className="contact-modal__upload-hint">
-              PDF, DOC, PNG, JPG, ZIP (máx. 10MB por archivo, hasta 5 archivos)
+              {t('contactModal.attachHint')}
             </span>
           </div>
 
@@ -350,18 +352,18 @@ const ContactModal = ({ isOpen, onClose }) => {
             {isSubmitting ? (
               <>
                 <span className="contact-modal__spinner" />
-                Enviando...
+                {t('contactModal.submitting')}
               </>
             ) : submitStatus === 'success' ? (
               <>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                ¡Enviado!
+                {t('contactModal.submitted')}
               </>
             ) : (
               <>
-                Enviar mensaje
+                {t('contactModal.submit')}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
@@ -376,20 +378,20 @@ const ContactModal = ({ isOpen, onClose }) => {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
-            <span>100% Confidencial</span>
+            <span>{t('contactModal.trustConfidential')}</span>
           </div>
           <div className="contact-modal__trust-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 6v6l4 2" />
             </svg>
-            <span>Respuesta en 24h</span>
+            <span>{t('contactModal.trustResponse')}</span>
           </div>
           <div className="contact-modal__trust-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M20 6L9 17l-5-5" />
             </svg>
-            <span>Sin compromiso</span>
+            <span>{t('contactModal.trustNoCommit')}</span>
           </div>
         </div>
       </div>

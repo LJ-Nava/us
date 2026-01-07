@@ -1,6 +1,7 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ const AboutSection = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
   const techItemsRef = useRef([]);
+  const { t, language } = useI18n();
 
   // Magnetic hover effect for tech items
   const handleMagneticMove = useCallback((e, element) => {
@@ -234,23 +236,23 @@ const AboutSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const expertise = [
+  const expertise = useMemo(() => [
     {
-      title: 'Desarrollo Frontend',
-      description: 'Interfaces de usuario modernas, responsivas y de alto rendimiento.',
+      title: t('about.frontendTitle'),
+      description: t('about.frontendDesc'),
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
     },
     {
-      title: 'Desarrollo Backend',
-      description: 'APIs robustas, arquitecturas escalables y bases de datos optimizadas.',
+      title: t('about.backendTitle'),
+      description: t('about.backendDesc'),
       skills: ['Node.js', 'Python', 'PostgreSQL', 'AWS'],
     },
     {
-      title: 'Diseno UI/UX',
-      description: 'Experiencias de usuario intuitivas basadas en investigacion y datos.',
+      title: t('about.designTitle'),
+      description: t('about.designDesc'),
       skills: ['Figma', 'Prototyping', 'Design Systems', 'User Research'],
     },
-  ];
+  ], [t, language]);
 
   const techStack = [
     { name: 'React', color: '#61DAFB',
@@ -296,9 +298,9 @@ const AboutSection = () => {
       <div className="about-section__container">
         {/* Header */}
         <div className="about-section__header">
-          <span className="about-section__label">Capacidades</span>
+          <span className="about-section__label">{t('about.label')}</span>
           <h2 className="about-section__title">
-            Expertise que impulsa <span>resultados</span>
+            {t('about.title')} <span>{t('about.titleHighlight')}</span>
           </h2>
         </div>
 
@@ -328,9 +330,9 @@ const AboutSection = () => {
         {/* Tech Stack */}
         <div className="tech-section">
           <div className="tech-section__header">
-            <span className="about-section__label">Stack tecnologico</span>
+            <span className="about-section__label">{t('about.techLabel')}</span>
             <p className="tech-section__subtitle">
-              Herramientas de nivel empresarial para soluciones de clase mundial
+              {t('about.techSubtitle')}
             </p>
           </div>
 
@@ -361,12 +363,11 @@ const AboutSection = () => {
           <div className="philosophy__content">
             <span className="philosophy__quote">"</span>
             <blockquote>
-              No creemos en jerarquías rígidas. Cada miembro de nuestro equipo
-              aporta perspectivas únicas que enriquecen cada proyecto.
+              {t('about.philosophyQuote')}
             </blockquote>
             <div className="philosophy__author">
-              <span className="philosophy__author-title">Filosofía del equipo</span>
-              <span className="philosophy__author-subtitle">8 expertos creativos, una visión compartida</span>
+              <span className="philosophy__author-title">{t('about.philosophyTitle')}</span>
+              <span className="philosophy__author-subtitle">{t('about.philosophySubtitle')}</span>
             </div>
           </div>
         </div>

@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
+import { useI18n } from '../contexts/I18nContext';
 
 /**
  * PackageModal - Modal para solicitar un paquete
  * Muestra info del plan, formulario de contacto y extras
  */
 const PackageModal = ({ isOpen, onClose, selectedPackage, formatPrice }) => {
+  const { t } = useI18n();
   const modalRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -144,10 +146,10 @@ CONTACTO:
           <div className={`package-modal__plan-badge package-modal__plan-badge--${selectedPackage.color}`}>
             {selectedPackage.name}
           </div>
-          <h2 className="package-modal__title">Solicitar {selectedPackage.name}</h2>
+          <h2 className="package-modal__title">{t('packageModal.request')} {selectedPackage.name}</h2>
           <p className="package-modal__subtitle">
             <span className="package-modal__price">
-              Desde {formatPrice ? formatPrice(selectedPackage.price) : `$${selectedPackage.price}`}
+              {t('packages.from')} {formatPrice ? formatPrice(selectedPackage.price) : `$${selectedPackage.price}`}
             </span>
             <span className="package-modal__complexity">{selectedPackage.complexity}</span>
           </p>
@@ -155,7 +157,7 @@ CONTACTO:
 
         {/* Features reminder */}
         <div className="package-modal__features">
-          <span className="package-modal__features-title">Este plan incluye:</span>
+          <span className="package-modal__features-title">{t('packageModal.planIncludes')}</span>
           <ul className="package-modal__features-list">
             {selectedPackage.features.slice(0, 4).map((feature, i) => (
               <li key={i}>
@@ -173,52 +175,52 @@ CONTACTO:
           {/* Contact info */}
           <div className="package-modal__form-row">
             <div className="package-modal__form-group">
-              <label htmlFor="pm-name">Nombre</label>
+              <label htmlFor="pm-name">{t('packageModal.name')}</label>
               <input
                 type="text"
                 id="pm-name"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Tu nombre"
+                placeholder={t('packageModal.namePlaceholder')}
                 required
               />
             </div>
             <div className="package-modal__form-group">
-              <label htmlFor="pm-phone">Teléfono</label>
+              <label htmlFor="pm-phone">{t('packageModal.phone')}</label>
               <input
                 type="tel"
                 id="pm-phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="+57 300 000 0000"
+                placeholder={t('packageModal.phonePlaceholder')}
                 required
               />
             </div>
           </div>
 
           <div className="package-modal__form-group">
-            <label htmlFor="pm-email">Email</label>
+            <label htmlFor="pm-email">{t('packageModal.email')}</label>
             <input
               type="email"
               id="pm-email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="tu@email.com"
+              placeholder={t('packageModal.emailPlaceholder')}
               required
             />
           </div>
 
           <div className="package-modal__form-group">
-            <label htmlFor="pm-description">Cuéntanos sobre tu proyecto</label>
+            <label htmlFor="pm-description">{t('packageModal.projectDescription')}</label>
             <textarea
               id="pm-description"
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              placeholder="Describe brevemente qué tipo de página necesitas, tu negocio, y cualquier detalle importante..."
+              placeholder={t('packageModal.projectPlaceholder')}
               rows={4}
               required
             />
@@ -226,7 +228,8 @@ CONTACTO:
 
           {/* Extras */}
           <div className="package-modal__extras">
-            <span className="package-modal__extras-title">Servicios adicionales (opcional)</span>
+            <span className="package-modal__extras-title">{t('packageModal.extrasTitle')}</span>
+            <span className="package-modal__extras-subtitle">{t('packageModal.extrasSubtitle')}</span>
 
             <label className="package-modal__extra">
               <input
@@ -241,10 +244,34 @@ CONTACTO:
                 </svg>
               </span>
               <span className="package-modal__extra-content">
-                <span className="package-modal__extra-name">Google My Business</span>
-                <span className="package-modal__extra-desc">
-                  Aparece en Google Maps y búsquedas locales con tu ubicación, reseñas y horarios.
+                <span className="package-modal__extra-header">
+                  <span className="package-modal__extra-name">{t('packageModal.gmbName')}</span>
+                  <span className="package-modal__extra-price">{formatPrice('50')}</span>
                 </span>
+                <span className="package-modal__extra-desc">
+                  {t('packageModal.gmbDesc')}
+                </span>
+                <span className="package-modal__extra-details">
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.gmbDetail1')}
+                  </span>
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.gmbDetail2')}
+                  </span>
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.gmbDetail3')}
+                  </span>
+                </span>
+                <span className="package-modal__extra-note">{t('packageModal.gmbNote')}</span>
               </span>
             </label>
 
@@ -261,10 +288,40 @@ CONTACTO:
                 </svg>
               </span>
               <span className="package-modal__extra-content">
-                <span className="package-modal__extra-name">Mantenimiento mensual</span>
-                <span className="package-modal__extra-desc">
-                  Incluye cambios menores después del primer mes. Cambios mayores se cotizan aparte.
+                <span className="package-modal__extra-header">
+                  <span className="package-modal__extra-name">{t('packageModal.maintenanceName')}</span>
+                  <span className="package-modal__extra-price">{formatPrice('30')}<span className="package-modal__extra-period">/{t('packageModal.perMonth')}</span></span>
                 </span>
+                <span className="package-modal__extra-desc">
+                  {t('packageModal.maintenanceDesc')}
+                </span>
+                <span className="package-modal__extra-details">
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.maintenanceDetail1')}
+                  </span>
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.maintenanceDetail2')}
+                  </span>
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.maintenanceDetail3')}
+                  </span>
+                  <span className="package-modal__extra-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t('packageModal.maintenanceDetail4')}
+                  </span>
+                </span>
+                <span className="package-modal__extra-note">{t('packageModal.maintenanceNote')}</span>
               </span>
             </label>
           </div>
@@ -284,13 +341,13 @@ CONTACTO:
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                Solicitud enviada
+                {t('packageModal.requestSent')}
               </>
             ) : submitStatus === 'error' ? (
-              'Error, intenta de nuevo'
+              t('packageModal.errorTryAgain')
             ) : (
               <>
-                Enviar solicitud
+                {t('packageModal.sendRequest')}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                 </svg>

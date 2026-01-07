@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ContactModal from '../components/ContactModal';
+import { useI18n } from '../contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,19 +12,19 @@ gsap.registerPlugin(ScrollTrigger);
  */
 const ServiciosPage = () => {
   const pageRef = useRef(null);
-  const heroRef = useRef(null);
   const cardsRef = useRef([]);
   const [activeService, setActiveService] = useState(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const { t, language } = useI18n();
 
-  const services = [
+  const services = useMemo(() => [
     {
       id: 'web-design',
       number: '01',
-      title: 'Diseño Web',
-      subtitle: 'UI/UX Premium',
-      description: 'Creamos experiencias digitales que cautivan. Cada pixel está pensado para convertir visitantes en clientes.',
-      features: ['Investigación UX', 'Wireframes', 'Diseño Visual', 'Prototipos', 'Design System'],
+      title: t('serviciosPage.webDesignTitle'),
+      subtitle: t('serviciosPage.webDesignSubtitle'),
+      description: t('serviciosPage.webDesignDesc'),
+      features: t('serviciosPage.webDesignFeatures'),
       color: '#8b5cf6',
       colorLight: 'rgba(139, 92, 246, 0.1)',
       gradient: 'linear-gradient(135deg, #8b5cf6, #a78bfa)',
@@ -32,10 +33,10 @@ const ServiciosPage = () => {
     {
       id: 'desarrollo',
       number: '02',
-      title: 'Desarrollo',
-      subtitle: 'Code Excellence',
-      description: 'Código limpio, rendimiento excepcional. Sitios web rápidos, seguros y escalables con las últimas tecnologías.',
-      features: ['React/Next.js', 'Animaciones GSAP', 'SEO Técnico', '90+ Performance', 'APIs REST'],
+      title: t('serviciosPage.developmentTitle'),
+      subtitle: t('serviciosPage.developmentSubtitle'),
+      description: t('serviciosPage.developmentDesc'),
+      features: t('serviciosPage.developmentFeatures'),
       color: '#06b6d4',
       colorLight: 'rgba(6, 182, 212, 0.1)',
       gradient: 'linear-gradient(135deg, #06b6d4, #22d3ee)',
@@ -44,10 +45,10 @@ const ServiciosPage = () => {
     {
       id: 'ecommerce',
       number: '03',
-      title: 'E-Commerce',
-      subtitle: 'Tiendas que Venden',
-      description: 'Plataformas de comercio diseñadas para maximizar conversiones y simplificar operaciones.',
-      features: ['Shopify/Custom', 'Pasarelas Pago', 'Inventario', 'Checkout Pro', 'Analytics'],
+      title: t('serviciosPage.ecommerceTitle'),
+      subtitle: t('serviciosPage.ecommerceSubtitle'),
+      description: t('serviciosPage.ecommerceDesc'),
+      features: t('serviciosPage.ecommerceFeatures'),
       color: '#10b981',
       colorLight: 'rgba(16, 185, 129, 0.1)',
       gradient: 'linear-gradient(135deg, #10b981, #34d399)',
@@ -56,10 +57,10 @@ const ServiciosPage = () => {
     {
       id: 'landing',
       number: '04',
-      title: 'Landing Pages',
-      subtitle: 'Alta Conversión',
-      description: 'Páginas estratégicas que capturan leads y generan resultados medibles con copy persuasivo.',
-      features: ['Copywriting', 'A/B Testing', 'Forms Pro', 'Speed <2s', 'Tracking'],
+      title: t('serviciosPage.landingTitle'),
+      subtitle: t('serviciosPage.landingSubtitle'),
+      description: t('serviciosPage.landingDesc'),
+      features: t('serviciosPage.landingFeatures'),
       color: '#f59e0b',
       colorLight: 'rgba(245, 158, 11, 0.1)',
       gradient: 'linear-gradient(135deg, #f59e0b, #fbbf24)',
@@ -68,10 +69,10 @@ const ServiciosPage = () => {
     {
       id: 'branding',
       number: '05',
-      title: 'Branding',
-      subtitle: 'Identidad Única',
-      description: 'Construimos marcas memorables que conectan emocionalmente con tu audiencia.',
-      features: ['Logo Design', 'Brand Colors', 'Typography', 'Style Guide', 'Social Assets'],
+      title: t('serviciosPage.brandingTitle'),
+      subtitle: t('serviciosPage.brandingSubtitle'),
+      description: t('serviciosPage.brandingDesc'),
+      features: t('serviciosPage.brandingFeatures'),
       color: '#ec4899',
       colorLight: 'rgba(236, 72, 153, 0.1)',
       gradient: 'linear-gradient(135deg, #ec4899, #f472b6)',
@@ -80,16 +81,16 @@ const ServiciosPage = () => {
     {
       id: 'seo',
       number: '06',
-      title: 'SEO',
-      subtitle: 'Visibilidad Online',
-      description: 'Posiciona tu marca en los primeros resultados y atrae tráfico cualificado orgánicamente.',
-      features: ['Auditoría SEO', 'On-Page', 'Link Building', 'Core Vitals', 'Reportes'],
+      title: t('serviciosPage.seoTitle'),
+      subtitle: t('serviciosPage.seoSubtitle'),
+      description: t('serviciosPage.seoDesc'),
+      features: t('serviciosPage.seoFeatures'),
       color: '#7c3aed',
       colorLight: 'rgba(124, 58, 237, 0.1)',
       gradient: 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
       icon: 'search'
     }
-  ];
+  ], [t, language]);
 
   const icons = {
     design: (
@@ -185,29 +186,6 @@ const ServiciosPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animations - elegant entrance
-      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      heroTl.fromTo('.servicios-hero__label',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 }
-      )
-      .fromTo('.servicios-hero__title',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        '-=0.5'
-      )
-      .fromTo('.servicios-hero__subtitle',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.6'
-      )
-      .fromTo('.servicios-hero__cta',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.5'
-      );
-
       // Service cards - staggered reveal with scale
       gsap.fromTo('.servicios-card',
         {
@@ -286,65 +264,12 @@ const ServiciosPage = () => {
 
   return (
     <div ref={pageRef} className="servicios-page">
-      {/* ==================== HERO SECTION ==================== */}
-      <section ref={heroRef} className="servicios-hero">
-        {/* Subtle Background */}
-        <div className="servicios-hero__bg">
-          <div className="servicios-hero__gradient" />
-          <div className="servicios-hero__glow servicios-hero__glow--1" />
-          <div className="servicios-hero__glow servicios-hero__glow--2" />
-        </div>
-
-        <div className="servicios-hero__container">
-          <div className="servicios-hero__label">
-            <span>Nuestros Servicios</span>
-          </div>
-
-          <h1 className="servicios-hero__title">
-            Soluciones digitales que
-            <span className="servicios-hero__title--gradient"> impulsan resultados</span>
-          </h1>
-
-          <p className="servicios-hero__subtitle">
-            Diseñamos y desarrollamos experiencias web excepcionales que
-            transforman visitantes en clientes. Tecnología de vanguardia
-            con diseño que marca la diferencia.
-          </p>
-
-          <div className="servicios-hero__cta">
-            <button
-              className="servicios-hero__btn servicios-hero__btn--primary"
-              onClick={() => setIsContactModalOpen(true)}
-            >
-              <span>Iniciar Proyecto</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
-            <button
-              className="servicios-hero__btn servicios-hero__btn--secondary"
-              onClick={() => {
-                const showcase = document.getElementById('showcase');
-                if (showcase) {
-                  showcase.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              <span>Explorar servicios</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* ==================== SERVICES SHOWCASE ==================== */}
       <section id="showcase" className="servicios-showcase">
         <div className="servicios-showcase__header">
-          <span className="servicios-showcase__label">Nuestros servicios</span>
+          <span className="servicios-showcase__label">{t('serviciosPage.showcaseLabel')}</span>
           <h2 className="servicios-showcase__title">
-            Lo que hacemos <span>mejor</span>
+            {t('serviciosPage.showcaseTitle')} <span>{t('serviciosPage.showcaseTitleHighlight')}</span>
           </h2>
         </div>
 
@@ -396,7 +321,7 @@ const ServiciosPage = () => {
                   className="servicios-card__cta"
                   onClick={() => setIsContactModalOpen(true)}
                 >
-                  <span>Cotizar</span>
+                  <span>{t('serviciosPage.quote')}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
@@ -412,9 +337,9 @@ const ServiciosPage = () => {
       <section className="servicios-process">
         <div className="servicios-process__container">
           <div className="servicios-process__header">
-            <span className="servicios-process__label">Proceso</span>
+            <span className="servicios-process__label">{t('serviciosPage.processLabel')}</span>
             <h2 className="servicios-process__title">
-              Cómo <span>trabajamos</span>
+              {t('serviciosPage.processTitle')} <span>{t('serviciosPage.processTitleHighlight')}</span>
             </h2>
           </div>
 
@@ -424,11 +349,11 @@ const ServiciosPage = () => {
             </div>
 
             {[
-              { num: '01', title: 'Descubrimiento', desc: 'Entendemos tu negocio, objetivos y audiencia.' },
-              { num: '02', title: 'Estrategia', desc: 'Definimos arquitectura y roadmap del proyecto.' },
-              { num: '03', title: 'Diseño', desc: 'Creamos interfaces visuales excepcionales.' },
-              { num: '04', title: 'Desarrollo', desc: 'Construimos con código limpio y optimizado.' },
-              { num: '05', title: 'Lanzamiento', desc: 'Testing exhaustivo y despliegue exitoso.' }
+              { num: '01', title: t('serviciosPage.step1Title'), desc: t('serviciosPage.step1Desc') },
+              { num: '02', title: t('serviciosPage.step2Title'), desc: t('serviciosPage.step2Desc') },
+              { num: '03', title: t('serviciosPage.step3Title'), desc: t('serviciosPage.step3Desc') },
+              { num: '04', title: t('serviciosPage.step4Title'), desc: t('serviciosPage.step4Desc') },
+              { num: '05', title: t('serviciosPage.step5Title'), desc: t('serviciosPage.step5Desc') }
             ].map((step, i) => (
               <div key={i} className="servicios-process__step">
                 <div className="servicios-process__step-marker">
@@ -453,13 +378,13 @@ const ServiciosPage = () => {
 
         <div className="servicios-final__container">
           <div className="servicios-final__content">
-            <span className="servicios-final__badge">¿Listo para empezar?</span>
+            <span className="servicios-final__badge">{t('serviciosPage.finalBadge')}</span>
             <h2 className="servicios-final__title">
-              Transformemos tu
-              <span> visión en realidad</span>
+              {t('serviciosPage.finalTitle')}
+              <span> {t('serviciosPage.finalTitleHighlight')}</span>
             </h2>
             <p className="servicios-final__subtitle">
-              Agenda una llamada gratuita de 30 minutos y descubre cómo podemos ayudarte.
+              {t('serviciosPage.finalSubtitle')}
             </p>
 
             <div className="servicios-final__actions">
@@ -468,7 +393,7 @@ const ServiciosPage = () => {
                 onClick={() => setIsContactModalOpen(true)}
               >
                 <span className="servicios-final__btn-shine" />
-                <span>Agendar llamada</span>
+                <span>{t('serviciosPage.scheduleCall')}</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
                 </svg>

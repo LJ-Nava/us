@@ -1006,13 +1006,14 @@
   }
 
   &__extended-line {
-    stroke: rgba(251, 191, 36, 0.3);
+    stroke: var(--ai-primary, rgba(251, 191, 36, 0.3));
     stroke-width: 1.5;
     fill: none;
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200;
-    filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.4));
+    filter: drop-shadow(0 0 3px var(--ai-glow, rgba(251, 191, 36, 0.4)));
     animation: extendedLineFlow 12s linear infinite;
+    transition: stroke 0.5s ease-out, filter 0.5s ease-out;
 
     &--1 { animation-delay: 0s; }
     &--2 { animation-delay: 2s; }
@@ -1025,22 +1026,23 @@
   @keyframes extendedLineFlow {
     0% {
       stroke-dashoffset: 1200;
-      stroke: rgba(251, 191, 36, 0.2);
+      opacity: 0.3;
     }
     50% {
       stroke-dashoffset: 0;
-      stroke: rgba(254, 243, 199, 0.6);
+      opacity: 0.8;
     }
     100% {
       stroke-dashoffset: -1200;
-      stroke: rgba(251, 191, 36, 0.2);
+      opacity: 0.3;
     }
   }
 
   &__extended-node {
-    fill: rgba(251, 191, 36, 0.8);
-    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.7));
+    fill: var(--ai-primary, rgba(251, 191, 36, 0.8));
+    filter: drop-shadow(0 0 6px var(--ai-glow, rgba(251, 191, 36, 0.7)));
     animation: extendedNodePulse 3s ease-in-out infinite;
+    transition: fill 0.5s ease-out, filter 0.5s ease-out;
 
     &:nth-child(7) { animation-delay: 0s; }
     &:nth-child(8) { animation-delay: 0.3s; }
@@ -1180,32 +1182,32 @@
     &:hover {
       .logos-section__ai-iris {
         box-shadow:
-          0 0 60px rgba(254, 243, 199, 1),
-          0 0 100px rgba(251, 191, 36, 0.8),
-          0 0 150px rgba(217, 119, 6, 0.5),
+          0 0 60px var(--ai-secondary, rgba(254, 243, 199, 1)),
+          0 0 100px var(--ai-glow, rgba(251, 191, 36, 0.8)),
+          0 0 150px var(--ai-glow, rgba(217, 119, 6, 0.5)),
           inset 0 0 30px rgba(255, 255, 255, 0.5);
       }
 
       .logos-section__ai-pupil-core {
-        box-shadow: 0 0 25px #fff, 0 0 50px rgba(254, 243, 199, 1), 0 0 80px rgba(251, 191, 36, 1);
+        box-shadow: 0 0 25px #fff, 0 0 50px var(--ai-secondary, rgba(254, 243, 199, 1)), 0 0 80px var(--ai-primary, rgba(251, 191, 36, 1));
       }
 
       .logos-section__ai-ring {
-        border-color: rgba(254, 243, 199, 0.7);
+        border-color: var(--ai-secondary, rgba(254, 243, 199, 0.7));
       }
 
       .logos-section__ai-scanner {
         background: linear-gradient(90deg,
           transparent 0%,
-          rgba(254, 243, 199, 0.1) 15%,
-          rgba(254, 243, 199, 1) 50%,
-          rgba(254, 243, 199, 0.1) 85%,
+          color-mix(in srgb, var(--ai-secondary, rgba(254, 243, 199, 1)) 10%, transparent) 15%,
+          var(--ai-secondary, rgba(254, 243, 199, 1)) 50%,
+          color-mix(in srgb, var(--ai-secondary, rgba(254, 243, 199, 1)) 10%, transparent) 85%,
           transparent 100%
         );
       }
 
       .logos-section__ai-name {
-        text-shadow: 0 0 50px rgba(254, 243, 199, 1), 0 0 100px rgba(251, 191, 36, 0.8);
+        text-shadow: 0 0 50px var(--ai-secondary, rgba(254, 243, 199, 1)), 0 0 100px var(--ai-glow, rgba(251, 191, 36, 0.8));
       }
     }
   }
@@ -1214,10 +1216,11 @@
   &__ai-pulse {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(251, 191, 36, 0.3);
+    border: 1px solid var(--ai-primary, rgba(251, 191, 36, 0.3));
     top: 50%;
     left: 50%;
     pointer-events: none;
+    transition: border-color 0.5s ease-out;
 
     &--1 {
       width: 250px;
@@ -1245,12 +1248,10 @@
     0% {
       transform: translate(-50%, -50%) scale(0.8);
       opacity: 0.8;
-      border-color: rgba(251, 191, 36, 0.6);
     }
     100% {
       transform: translate(-50%, -50%) scale(2);
       opacity: 0;
-      border-color: rgba(251, 191, 36, 0);
     }
   }
 
@@ -1280,13 +1281,14 @@
   }
 
   &__ai-circuit {
-    stroke: rgba(251, 191, 36, 0.4);
+    stroke: var(--ai-primary, rgba(251, 191, 36, 0.4));
     stroke-width: 1.5;
     fill: none;
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
-    filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.5));
+    filter: drop-shadow(0 0 4px var(--ai-glow, rgba(251, 191, 36, 0.5)));
     animation: circuitFlow 8s linear infinite;
+    transition: stroke 0.5s ease-out, filter 0.5s ease-out;
 
     &:nth-child(1) { animation-delay: 0s; }
     &:nth-child(2) { animation-delay: 2s; }
@@ -1295,15 +1297,16 @@
   }
 
   @keyframes circuitFlow {
-    0% { stroke-dashoffset: 300; stroke: rgba(251, 191, 36, 0.3); }
-    50% { stroke-dashoffset: 0; stroke: rgba(254, 243, 199, 0.8); }
-    100% { stroke-dashoffset: -300; stroke: rgba(251, 191, 36, 0.3); }
+    0% { stroke-dashoffset: 300; opacity: 0.4; }
+    50% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: -300; opacity: 0.4; }
   }
 
   &__ai-node {
-    fill: rgba(251, 191, 36, 0.9);
-    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.8));
+    fill: var(--ai-primary, rgba(251, 191, 36, 0.9));
+    filter: drop-shadow(0 0 6px var(--ai-glow, rgba(251, 191, 36, 0.8)));
     animation: nodePulse 2s ease-in-out infinite;
+    transition: fill 0.5s ease-out, filter 0.5s ease-out;
 
     &:nth-child(5) { animation-delay: 0s; }
     &:nth-child(6) { animation-delay: 0.3s; }
@@ -1339,6 +1342,7 @@
     position: absolute;
     border-radius: 50%;
     border: 2px solid var(--ai-primary, rgba(251, 191, 36, 0.3));
+    box-shadow: 0 0 8px var(--ai-glow, rgba(251, 191, 36, 0.3));
     top: 50%;
     left: 50%;
     transition: border-color 0.5s ease-out, box-shadow 0.5s ease-out;
@@ -1461,9 +1465,10 @@
 
   &__ai-hex-shape {
     fill: none;
-    stroke: rgba(251, 191, 36, 0.3);
+    stroke: var(--ai-primary, rgba(251, 191, 36, 0.3));
     stroke-width: 1;
     animation: hexPulse 4s ease-in-out infinite;
+    transition: stroke 0.5s ease-out;
   }
 
   @keyframes hexRotate {
@@ -1472,8 +1477,8 @@
   }
 
   @keyframes hexPulse {
-    0%, 100% { stroke: rgba(251, 191, 36, 0.3); stroke-width: 1; }
-    50% { stroke: rgba(254, 243, 199, 0.6); stroke-width: 1.5; }
+    0%, 100% { stroke-width: 1; opacity: 0.5; }
+    50% { stroke-width: 1.5; opacity: 1; }
   }
 
   // Arcos decorativos
@@ -1491,11 +1496,12 @@
 
   &__ai-arc {
     fill: none;
-    stroke: rgba(251, 191, 36, 0.4);
+    stroke: var(--ai-primary, rgba(251, 191, 36, 0.4));
     stroke-width: 2;
     stroke-linecap: round;
     stroke-dasharray: 50 100;
     animation: arcRotate 8s linear infinite;
+    transition: stroke 0.5s ease-out;
 
     &--1 { animation-delay: 0s; }
     &--2 { animation-delay: 2s; }
@@ -1515,17 +1521,17 @@
     height: 55px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%,
-      rgba(254, 243, 199, 1) 0%,
-      rgba(251, 191, 36, 0.9) 35%,
-      rgba(217, 119, 6, 0.7) 100%
+      var(--ai-secondary, rgba(254, 243, 199, 1)) 0%,
+      var(--ai-primary, rgba(251, 191, 36, 0.9)) 35%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 70%, #000) 100%
     );
     box-shadow:
-      0 0 40px rgba(251, 191, 36, 0.9),
-      0 0 80px rgba(245, 158, 11, 0.6),
-      0 0 120px rgba(217, 119, 6, 0.4),
+      0 0 40px var(--ai-glow, rgba(251, 191, 36, 0.9)),
+      0 0 80px var(--ai-glow, rgba(245, 158, 11, 0.6)),
+      0 0 120px var(--ai-glow, rgba(217, 119, 6, 0.4)),
       inset 0 0 25px rgba(255, 255, 255, 0.4);
     z-index: 15;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.1s ease-out, background 0.5s ease-out, box-shadow 0.5s ease-out;
 
     @media (max-width: $breakpoint-lg) {
       width: 45px;
@@ -1539,9 +1545,10 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--ai-glow, rgba(251, 191, 36, 0.5)) 0%, transparent 70%);
     transform: scale(1.5);
     animation: irisGlowPulse 2s ease-in-out infinite;
+    transition: background 0.5s ease-out;
   }
 
   @keyframes irisGlowPulse {
@@ -1560,11 +1567,12 @@
     border-radius: 50%;
     background: radial-gradient(circle,
       rgba(255, 255, 255, 1) 0%,
-      rgba(254, 243, 199, 0.95) 40%,
-      rgba(251, 191, 36, 0.8) 100%
+      var(--ai-secondary, rgba(254, 243, 199, 0.95)) 40%,
+      var(--ai-primary, rgba(251, 191, 36, 0.8)) 100%
     );
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
     animation: pupilGlow 2s ease-in-out infinite;
+    transition: background 0.5s ease-out, box-shadow 0.5s ease-out;
 
     @media (max-width: $breakpoint-lg) {
       width: 20px;
@@ -1582,8 +1590,9 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 15px #fff, 0 0 30px rgba(251, 191, 36, 1);
+    box-shadow: 0 0 15px #fff, 0 0 30px var(--ai-primary, rgba(251, 191, 36, 1));
     animation: coreFlicker 0.5s ease-in-out infinite;
+    transition: box-shadow 0.5s ease-out;
 
     @media (max-width: $breakpoint-lg) {
       width: 8px;
@@ -1608,9 +1617,9 @@
     height: 2px;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(251, 191, 36, 0.05) 15%,
-      rgba(251, 191, 36, 0.8) 50%,
-      rgba(251, 191, 36, 0.05) 85%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 5%, transparent) 15%,
+      var(--ai-primary, rgba(251, 191, 36, 0.8)) 50%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 5%, transparent) 85%,
       transparent 100%
     );
     top: 50%;
@@ -1619,18 +1628,19 @@
     transform: translate(-50%, -50%);
     animation: scannerRotate 5s linear infinite, scannerGlitch 8s ease-in-out infinite;
     z-index: 12;
+    transition: background 0.5s ease-out;
 
     &::before {
       content: '';
       position: absolute;
       width: 8px;
       height: 8px;
-      background: rgba(254, 243, 199, 1);
+      background: var(--ai-secondary, rgba(254, 243, 199, 1));
       border-radius: 50%;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 15px rgba(251, 191, 36, 1), 0 0 30px rgba(251, 191, 36, 0.5);
+      box-shadow: 0 0 15px var(--ai-primary, rgba(251, 191, 36, 1)), 0 0 30px var(--ai-glow, rgba(251, 191, 36, 0.5));
       animation: scannerDot 2s ease-in-out infinite;
     }
 
@@ -1722,16 +1732,16 @@
     width: 3px;
     background: linear-gradient(180deg,
       rgba(255, 255, 255, 1) 0%,
-      rgba(254, 243, 199, 0.95) 20%,
-      rgba(251, 191, 36, 0.85) 60%,
-      rgba(217, 119, 6, 0.6) 100%
+      var(--ai-secondary, rgba(254, 243, 199, 0.95)) 20%,
+      var(--ai-primary, rgba(251, 191, 36, 0.85)) 60%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 60%, #000) 100%
     );
     border-radius: 3px;
     transform-origin: bottom;
     box-shadow:
-      0 0 10px rgba(251, 191, 36, 0.7),
-      0 0 20px rgba(251, 191, 36, 0.3);
-    transition: all 0.1s ease-out;
+      0 0 10px var(--ai-glow, rgba(251, 191, 36, 0.7)),
+      0 0 20px var(--ai-glow, rgba(251, 191, 36, 0.3));
+    transition: all 0.3s ease-out;
 
     @for $i from 1 through 17 {
       &:nth-child(#{$i}) {
@@ -1781,9 +1791,9 @@
   &__ai-particle {
     position: absolute;
     border-radius: 50%;
-    background: rgba(251, 191, 36, 1);
-    box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
-    transition: all 0.2s ease-out;
+    background: var(--ai-primary, rgba(251, 191, 36, 1));
+    box-shadow: 0 0 10px var(--ai-glow, rgba(251, 191, 36, 0.8));
+    transition: all 0.3s ease-out;
 
     &:nth-child(1) { width: 4px; height: 4px; top: 5%; left: 25%; animation: particleDrift1 8s ease-in-out infinite; }
     &:nth-child(2) { width: 3px; height: 3px; top: 10%; right: 20%; animation: particleDrift2 9s ease-in-out infinite 1s; }
@@ -1885,10 +1895,11 @@
     font-family: 'Inter', -apple-system, sans-serif;
     font-size: 20px;
     font-weight: 700;
-    color: rgba(251, 191, 36, 1);
+    color: var(--ai-primary, rgba(251, 191, 36, 1));
     letter-spacing: 8px;
     text-transform: uppercase;
-    text-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
+    text-shadow: 0 0 30px var(--ai-glow, rgba(251, 191, 36, 0.7));
+    transition: color 0.5s ease-out, text-shadow 0.5s ease-out;
 
     @media (max-width: $breakpoint-lg) {
       font-size: 16px;
@@ -1900,9 +1911,11 @@
     font-family: 'SF Mono', 'Fira Code', monospace;
     font-size: 10px;
     font-weight: 500;
-    color: rgba(245, 158, 11, 0.7);
+    color: var(--ai-primary, rgba(245, 158, 11, 0.7));
     letter-spacing: 3px;
     text-transform: uppercase;
+    opacity: 0.7;
+    transition: color 0.5s ease-out;
 
     @media (max-width: $breakpoint-lg) {
       font-size: 9px;
@@ -1962,18 +1975,19 @@
     font-family: 'Inter', -apple-system, sans-serif;
     font-size: 13px;
     font-weight: 500;
-    color: rgba(254, 243, 199, 0.95);
+    color: var(--ai-secondary, rgba(254, 243, 199, 0.95));
     background: linear-gradient(135deg,
-      rgba(251, 191, 36, 0.15) 0%,
-      rgba(217, 119, 6, 0.1) 100%
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 15%, transparent) 0%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 10%, transparent) 100%
     );
     padding: 12px 20px;
     border-radius: 25px;
-    border: 1px solid rgba(251, 191, 36, 0.25);
+    border: 1px solid color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 25%, transparent);
     white-space: nowrap;
     opacity: 0;
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: color 0.5s ease-out, background 0.5s ease-out, border-color 0.5s ease-out;
 
     &--1 {
       top: 5%;
@@ -2018,9 +2032,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: radial-gradient(ellipse at center,
-      rgba(251, 191, 36, 0.12) 0%,
-      rgba(245, 158, 11, 0.06) 30%,
-      rgba(217, 119, 6, 0.03) 50%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 12%, transparent) 0%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 6%, transparent) 30%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 3%, transparent) 50%,
       transparent 70%
     );
     border-radius: 50%;
@@ -2028,13 +2042,14 @@
     animation: auraBreathe 5s ease-in-out infinite;
     pointer-events: none;
     z-index: -1;
+    transition: background 0.5s ease-out;
 
     &--secondary {
       width: 700px;
       height: 700px;
       background: radial-gradient(ellipse at center,
-        rgba(254, 243, 199, 0.08) 0%,
-        rgba(251, 191, 36, 0.04) 40%,
+        color-mix(in srgb, var(--ai-secondary, rgba(254, 243, 199, 1)) 8%, transparent) 0%,
+        color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 1)) 4%, transparent) 40%,
         transparent 70%
       );
       filter: blur(80px);
@@ -2086,11 +2101,11 @@
   &__ai-data-item {
     font-family: 'SF Mono', 'Fira Code', monospace;
     font-size: 9px;
-    color: rgba(251, 191, 36, 0.5);
+    color: var(--ai-primary, rgba(251, 191, 36, 0.5));
     letter-spacing: 1px;
     opacity: 0;
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-    transition: all 0.3s ease-out;
+    text-shadow: 0 0 10px var(--ai-glow, rgba(251, 191, 36, 0.3));
+    transition: all 0.5s ease-out;
 
     &--1 { animation: dataFlicker 6s ease-in-out infinite; }
     &--2 { animation: dataFlicker 6s ease-in-out infinite 2s; }

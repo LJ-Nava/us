@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import ContactModal from './ContactModal';
+import { useI18n } from '../contexts/I18nContext';
 
 /**
  * Header - Premium Complete Menu
@@ -12,8 +13,15 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, language } = useI18n();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Navigate to a section on the home page
   const navigateToSection = (sectionId) => (e) => {
@@ -82,11 +90,11 @@ const Header = () => {
     );
   }, []);
 
-  // Services dropdown items
+  // Services dropdown items - translated
   const services = [
     {
-      title: 'Diseño Web',
-      desc: 'Interfaces UI/UX premium',
+      title: t('header.webDesign'),
+      desc: t('header.webDesignDesc'),
       serviceId: 'web-design',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -96,8 +104,8 @@ const Header = () => {
       )
     },
     {
-      title: 'Desarrollo Frontend',
-      desc: 'React, Next.js, Vue',
+      title: t('header.frontendDev'),
+      desc: t('header.frontendDevDesc'),
       serviceId: 'desarrollo',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -106,8 +114,8 @@ const Header = () => {
       )
     },
     {
-      title: 'E-Commerce',
-      desc: 'Tiendas online completas',
+      title: t('header.ecommerce'),
+      desc: t('header.ecommerceDesc'),
       serviceId: 'ecommerce',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -117,8 +125,8 @@ const Header = () => {
       )
     },
     {
-      title: 'Landing Pages',
-      desc: 'Alta conversión',
+      title: t('header.landingPages'),
+      desc: t('header.landingPagesDesc'),
       serviceId: 'landing',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -151,11 +159,11 @@ const Header = () => {
     }
   };
 
-  // Company dropdown items
+  // Company dropdown items - translated
   const company = [
     {
-      title: 'Sobre Nosotros',
-      desc: 'Conoce nuestro equipo',
+      title: t('header.aboutUs'),
+      desc: t('header.aboutUsDesc'),
       sectionId: 'nosotros',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -166,8 +174,8 @@ const Header = () => {
       )
     },
     {
-      title: 'Nuestro Proceso',
-      desc: 'Como trabajamos',
+      title: t('header.ourProcess'),
+      desc: t('header.ourProcessDesc'),
       sectionId: 'proceso',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -176,8 +184,8 @@ const Header = () => {
       )
     },
     {
-      title: 'Blog',
-      desc: 'Articulos y recursos',
+      title: t('header.blog'),
+      desc: t('header.blogDesc'),
       sectionId: 'blog',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -189,8 +197,8 @@ const Header = () => {
       )
     },
     {
-      title: 'Contacto',
-      desc: 'Hablemos de tu proyecto',
+      title: t('header.contact'),
+      desc: t('header.contactDesc'),
       sectionId: 'contacto',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -240,7 +248,7 @@ const Header = () => {
                   <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
                   <polyline points="9,22 9,12 15,12 15,22"/>
                 </svg>
-                <span>Inicio</span>
+                <span>{t('nav.inicio')}</span>
               </Link>
             </li>
 
@@ -265,7 +273,7 @@ const Header = () => {
                   <rect x="14" y="14" width="7" height="7"/>
                   <rect x="3" y="14" width="7" height="7"/>
                 </svg>
-                <span>Servicios</span>
+                <span>{t('nav.servicios')}</span>
                 <svg className="header__nav-arrow" viewBox="0 0 12 12" fill="none">
                   <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -274,8 +282,8 @@ const Header = () => {
               <div className={`header__dropdown ${activeDropdown === 'services' ? 'header__dropdown--active' : ''}`}>
                 <div className="header__dropdown-inner">
                   <div className="header__dropdown-header">
-                    <span className="header__dropdown-label">Servicios</span>
-                    <span className="header__dropdown-sublabel">Lo que hacemos</span>
+                    <span className="header__dropdown-label">{t('header.servicesLabel')}</span>
+                    <span className="header__dropdown-sublabel">{t('header.servicesSublabel')}</span>
                   </div>
                   <div className="header__dropdown-grid">
                     {services.map((item, i) => (
@@ -306,7 +314,7 @@ const Header = () => {
                   <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
                   <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
                 </svg>
-                <span>Portfolio</span>
+                <span>{t('nav.portfolio')}</span>
               </Link>
             </li>
 
@@ -318,7 +326,7 @@ const Header = () => {
                   <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
                   <line x1="12" y1="22.08" x2="12" y2="12"/>
                 </svg>
-                <span>Paquetes</span>
+                <span>{t('nav.paquetes')}</span>
               </a>
             </li>
 
@@ -333,7 +341,7 @@ const Header = () => {
                   <circle cx="12" cy="12" r="10"/>
                   <path d="M12 16v-4M12 8h.01"/>
                 </svg>
-                <span>Nosotros</span>
+                <span>{t('nav.nosotros')}</span>
                 <svg className="header__nav-arrow" viewBox="0 0 12 12" fill="none">
                   <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -342,8 +350,8 @@ const Header = () => {
               <div className={`header__dropdown ${activeDropdown === 'company' ? 'header__dropdown--active' : ''}`}>
                 <div className="header__dropdown-inner">
                   <div className="header__dropdown-header">
-                    <span className="header__dropdown-label">Nosotros</span>
-                    <span className="header__dropdown-sublabel">Conocenos mejor</span>
+                    <span className="header__dropdown-label">{t('header.companyLabel')}</span>
+                    <span className="header__dropdown-sublabel">{t('header.companySublabel')}</span>
                   </div>
                   <div className="header__dropdown-grid">
                     {company.map((item, i) => (
@@ -376,18 +384,109 @@ const Header = () => {
               <svg className="header__cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
               </svg>
-              <span className="header__cta-text">Contáctanos</span>
+              <span className="header__cta-text">{t('nav.contactanos')}</span>
               <svg className="header__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </span>
           </button>
 
-          {/* Mobile menu */}
-          <button className="header__menu" aria-label="Menú">
+          {/* Mobile menu toggle */}
+          <button
+            className={`header__menu ${isMobileMenuOpen ? 'header__menu--open' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menú"
+            aria-expanded={isMobileMenuOpen}
+          >
             <span className="header__menu-line" />
             <span className="header__menu-line" />
             <span className="header__menu-line" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Overlay */}
+      <div className={`header__mobile-nav ${isMobileMenuOpen ? 'header__mobile-nav--open' : ''}`}>
+        <div className="header__mobile-nav-inner">
+          <nav className="header__mobile-menu">
+            <Link
+              to="/"
+              className={`header__mobile-link ${location.pathname === '/' ? 'header__mobile-link--active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                <polyline points="9,22 9,12 15,12 15,22"/>
+              </svg>
+              <span>{t('nav.inicio')}</span>
+            </Link>
+
+            <Link
+              to="/servicios"
+              className={`header__mobile-link ${location.pathname === '/servicios' ? 'header__mobile-link--active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>{t('nav.servicios')}</span>
+            </Link>
+
+            <Link
+              to="/portfolio"
+              className={`header__mobile-link ${location.pathname === '/portfolio' ? 'header__mobile-link--active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+              </svg>
+              <span>{t('nav.portfolio')}</span>
+            </Link>
+
+            <a
+              href="#paquetes"
+              className="header__mobile-link"
+              onClick={(e) => {
+                setIsMobileMenuOpen(false);
+                navigateToSection('paquetes')(e);
+              }}
+            >
+              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+              <span>{t('nav.paquetes')}</span>
+            </a>
+
+            <Link
+              to="/nosotros"
+              className={`header__mobile-link ${location.pathname === '/nosotros' ? 'header__mobile-link--active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4M12 8h.01"/>
+              </svg>
+              <span>{t('nav.nosotros')}</span>
+            </Link>
+          </nav>
+
+          <button
+            className="header__mobile-cta"
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              setIsContactModalOpen(true);
+            }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>{t('nav.contactanos')}</span>
           </button>
         </div>
       </div>
