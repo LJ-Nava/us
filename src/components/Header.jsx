@@ -391,105 +391,83 @@ const Header = () => {
             </span>
           </button>
 
-          {/* Mobile menu toggle */}
+          {/* NEW Mobile Menu Toggle - Simple hamburger */}
           <button
-            className={`header__menu ${isMobileMenuOpen ? 'header__menu--open' : ''}`}
+            className="mob-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
             aria-label="Menú"
-            aria-expanded={isMobileMenuOpen}
+            type="button"
           >
-            <span className="header__menu-line" />
-            <span className="header__menu-line" />
-            <span className="header__menu-line" />
+            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
+            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
+            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Overlay */}
-      <div className={`header__mobile-nav ${isMobileMenuOpen ? 'header__mobile-nav--open' : ''}`}>
-        <div className="header__mobile-nav-inner">
-          <nav className="header__mobile-menu">
+      {/* NEW Mobile Menu - Full screen overlay */}
+      {isMobileMenuOpen && (
+        <div className="mob-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <nav className="mob-menu" onClick={(e) => e.stopPropagation()}>
             <Link
               to="/"
-              className={`header__mobile-link ${location.pathname === '/' ? 'header__mobile-link--active' : ''}`}
+              className={`mob-menu__item ${location.pathname === '/' ? 'mob-menu__item--active' : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                <polyline points="9,22 9,12 15,12 15,22"/>
-              </svg>
-              <span>{t('nav.inicio')}</span>
+              {t('nav.inicio')}
             </Link>
 
             <Link
               to="/servicios"
-              className={`header__mobile-link ${location.pathname === '/servicios' ? 'header__mobile-link--active' : ''}`}
+              className={`mob-menu__item ${location.pathname === '/servicios' ? 'mob-menu__item--active' : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="7" height="7"/>
-                <rect x="14" y="3" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/>
-              </svg>
-              <span>{t('nav.servicios')}</span>
+              {t('nav.servicios')}
             </Link>
 
             <Link
               to="/portfolio"
-              className={`header__mobile-link ${location.pathname === '/portfolio' ? 'header__mobile-link--active' : ''}`}
+              className={`mob-menu__item ${location.pathname === '/portfolio' ? 'mob-menu__item--active' : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
-              </svg>
-              <span>{t('nav.portfolio')}</span>
+              {t('nav.portfolio')}
             </Link>
 
             <a
               href="#paquetes"
-              className="header__mobile-link"
+              className="mob-menu__item"
               onClick={(e) => {
                 setIsMobileMenuOpen(false);
                 navigateToSection('paquetes')(e);
               }}
             >
-              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-                <line x1="12" y1="22.08" x2="12" y2="12"/>
-              </svg>
-              <span>{t('nav.paquetes')}</span>
+              {t('nav.paquetes')}
             </a>
 
             <Link
               to="/nosotros"
-              className={`header__mobile-link ${location.pathname === '/nosotros' ? 'header__mobile-link--active' : ''}`}
+              className={`mob-menu__item ${location.pathname === '/nosotros' ? 'mob-menu__item--active' : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <svg className="header__mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 16v-4M12 8h.01"/>
-              </svg>
-              <span>{t('nav.nosotros')}</span>
+              {t('nav.nosotros')}
             </Link>
-          </nav>
 
-          <button
-            className="header__mobile-cta"
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              setIsContactModalOpen(true);
-            }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-            <span>{t('nav.contactanos')}</span>
-          </button>
+            <button
+              className="mob-menu__cta"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsContactModalOpen(true);
+              }}
+            >
+              {t('nav.contactanos')}
+            </button>
+          </nav>
         </div>
-      </div>
+      )}
 
       {/* Contact Modal */}
       <ContactModal
