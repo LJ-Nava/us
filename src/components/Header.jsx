@@ -23,6 +23,12 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Helper: close menu and scroll to top
+  const handleNavClick = () => {
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
   // Navigate to a section on the home page
   const navigateToSection = (sectionId) => (e) => {
     e.preventDefault();
@@ -444,7 +450,7 @@ const Header = () => {
               <Link
                 to="/"
                 className={`mob-panel__link ${location.pathname === '/' ? 'mob-panel__link--active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 <span className="mob-panel__icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -463,7 +469,7 @@ const Header = () => {
               <Link
                 to="/servicios"
                 className={`mob-panel__link ${location.pathname === '/servicios' ? 'mob-panel__link--active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 <span className="mob-panel__icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -484,7 +490,7 @@ const Header = () => {
               <Link
                 to="/portfolio"
                 className={`mob-panel__link ${location.pathname === '/portfolio' ? 'mob-panel__link--active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 <span className="mob-panel__icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -526,7 +532,7 @@ const Header = () => {
               <Link
                 to="/nosotros"
                 className={`mob-panel__link ${location.pathname === '/nosotros' ? 'mob-panel__link--active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 <span className="mob-panel__icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

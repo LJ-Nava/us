@@ -25,8 +25,14 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
+    // Scroll instantáneo al top (sin animación)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    // También forzar con setTimeout por si acaso
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    }, 0);
   }, [pathname]);
 
   return null;
