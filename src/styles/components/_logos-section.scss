@@ -1334,22 +1334,20 @@
     }
   }
 
-  // Anillos concéntricos premium
+  // Anillos concéntricos premium - usando CSS variables para cambio de color dinámico
   &__ai-ring {
     position: absolute;
     border-radius: 50%;
-    border: 2px solid rgba(251, 191, 36, 0.3);
+    border: 2px solid var(--ai-primary, rgba(251, 191, 36, 0.3));
     top: 50%;
     left: 50%;
-    transition: all 0.3s ease-out;
+    transition: border-color 0.5s ease-out, box-shadow 0.5s ease-out;
 
     &--outer {
       width: 240px;
       height: 240px;
       transform: translate(-50%, -50%);
-      border: 3px solid rgba(251, 191, 36, 0.2);
-      border-top-color: rgba(251, 191, 36, 0.6);
-      border-right-color: rgba(251, 191, 36, 0.4);
+      border: 3px solid var(--ai-primary, rgba(251, 191, 36, 0.2));
       animation: ringRotateSlow 30s linear infinite;
 
       @media (max-width: $breakpoint-lg) {
@@ -1362,7 +1360,6 @@
       width: 200px;
       height: 200px;
       transform: translate(-50%, -50%);
-      border-color: rgba(251, 191, 36, 0.5);
       animation: ringPulse1 4s ease-in-out infinite;
 
       @media (max-width: $breakpoint-lg) {
@@ -1375,7 +1372,6 @@
       width: 160px;
       height: 160px;
       transform: translate(-50%, -50%);
-      border-color: rgba(245, 158, 11, 0.6);
       border-style: dashed;
       animation: ringRotate 20s linear infinite;
 
@@ -1389,7 +1385,6 @@
       width: 120px;
       height: 120px;
       transform: translate(-50%, -50%);
-      border-color: rgba(217, 119, 6, 0.7);
       animation: ringRotate 15s linear infinite reverse;
 
       @media (max-width: $breakpoint-lg) {
@@ -1402,7 +1397,6 @@
       width: 85px;
       height: 85px;
       transform: translate(-50%, -50%);
-      border-color: rgba(251, 191, 36, 0.8);
       border-width: 3px;
       animation: ringPulse2 3s ease-in-out infinite;
 
@@ -1416,7 +1410,7 @@
       width: 60px;
       height: 60px;
       transform: translate(-50%, -50%);
-      border: 2px solid rgba(254, 243, 199, 0.8);
+      border-width: 2px;
       animation: ringPulse3 2s ease-in-out infinite;
 
       @media (max-width: $breakpoint-lg) {
@@ -1437,8 +1431,8 @@
   }
 
   @keyframes ringPulse2 {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); border-color: rgba(251, 191, 36, 0.8); }
-    50% { transform: translate(-50%, -50%) scale(1.08); border-color: rgba(254, 243, 199, 1); }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.08); }
   }
 
   @keyframes ringPulse3 {
@@ -1687,12 +1681,13 @@
     width: 300px;
     height: 1px;
     background: linear-gradient(90deg,
-      rgba(251, 191, 36, 0.8) 0%,
-      rgba(251, 191, 36, 0.3) 30%,
+      var(--ai-primary, rgba(251, 191, 36, 0.8)) 0%,
+      color-mix(in srgb, var(--ai-primary, rgba(251, 191, 36, 0.3)) 30%, transparent) 30%,
       transparent 100%
     );
     transform-origin: left center;
     opacity: 0.3;
+    transition: background 0.5s ease-out;
 
     &--1 { transform: translateY(-50%) rotate(0deg); }
     &--2 { transform: translateY(-50%) rotate(90deg); }

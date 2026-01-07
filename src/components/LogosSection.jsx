@@ -125,6 +125,16 @@ const LogosSection = () => {
       ease: 'power2.out'
     }, 0.1);
 
+    // 1.5 Iris glow
+    const irisGlow = document.querySelector('.logos-section__ai-iris-glow');
+    if (irisGlow) {
+      tl.to(irisGlow, {
+        background: `radial-gradient(circle, ${newColor.glow} 0%, transparent 70%)`,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, 0.1);
+    }
+
     // 2. Inner rings spread outward (Venom spreading effect)
     const rings = document.querySelectorAll('.logos-section__ai-ring');
     rings.forEach((ring, i) => {
@@ -301,6 +311,26 @@ const LogosSection = () => {
         ease: 'power2.out'
       }, 1.15 + (i * 0.03));
     });
+
+    // 17. Energy lines (cross pattern)
+    const energyLines = document.querySelectorAll('.logos-section__ai-energy');
+    energyLines.forEach((line, i) => {
+      tl.to(line, {
+        background: `linear-gradient(90deg, ${newColor.primary} 0%, ${newColor.primary}4d 30%, transparent 100%)`,
+        duration: 0.4,
+        ease: 'power2.inOut'
+      }, 0.5 + (i * 0.05));
+    });
+
+    // 18. Scanner dot (::before pseudo element handled via CSS variable update)
+    // Update CSS variables on the container for any remaining elements
+    tl.to(container, {
+      '--ai-primary': newColor.primary,
+      '--ai-secondary': newColor.secondary,
+      '--ai-glow': newColor.glow,
+      duration: 0.5,
+      ease: 'power2.inOut'
+    }, 0.3);
 
     // Final flash effect on the container
     tl.to(container, {
