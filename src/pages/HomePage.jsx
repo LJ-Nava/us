@@ -3,7 +3,7 @@ import ServicesSection from '../components/ServicesSection';
 import LogosSection from '../components/LogosSection';
 import FeaturesSection from '../components/FeaturesSection';
 import PackagesSection from '../components/PackagesSection';
-import ContactSection from '../components/ContactSection';
+import CTASection from '../components/CTASection';
 
 const HomePage = () => {
   return (
@@ -11,20 +11,20 @@ const HomePage = () => {
       {/* Hero Section con 3D */}
       <HeroSection />
 
-      {/* Services Section - Nuestro Proceso */}
+      {/* Services Section - Nuestros Servicios */}
       <ServicesSection />
 
       {/* Logos Section - Social Proof */}
       <LogosSection />
 
-      {/* Features Section - Por qué elegirnos */}
+      {/* Features Section - Por que elegirnos */}
       <FeaturesSection />
 
       {/* Packages Section - Nuestros Paquetes */}
       <PackagesSection />
 
-      {/* Contact Section - Contacto */}
-      <ContactSection />
+      {/* CTA Section - Contacto */}
+      <CTASection />
     </>
   );
 };

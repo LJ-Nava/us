@@ -44,7 +44,13 @@
     padding: 140px $container-padding 100px;
     overflow: hidden;
     z-index: 1;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 60%, #e8edf5 100%);
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fafbfd 40%,
+      #f5f7fa 70%,
+      #eef1f6 100%
+    );
   }
 
   &__hero-bg {
@@ -52,15 +58,6 @@
     inset: 0;
     pointer-events: none;
     z-index: -1;
-  }
-
-  &__hero-gradient {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba($color-accent, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba($color-secondary, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 30% at 20% 60%, rgba($color-accent, 0.05) 0%, transparent 50%);
   }
 
   &__hero-grid {
@@ -84,39 +81,6 @@
     z-index: 2;
     text-align: center;
     max-width: 900px;
-  }
-
-  &__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: rgba($color-accent, 0.06);
-    border: 1px solid rgba($color-accent, 0.12);
-    border-radius: 50px;
-    color: $color-accent;
-    font-size: 0.875rem;
-    font-weight: $font-weight-medium;
-    text-decoration: none;
-    margin-bottom: $spacing-2xl;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-
-    &:hover {
-      background: rgba($color-accent, 0.12);
-      border-color: rgba($color-accent, 0.25);
-      color: darken($color-accent, 10%);
-      transform: translateX(-8px);
-      box-shadow: 0 0 30px rgba($color-accent, 0.15);
-    }
-
-    svg {
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    &:hover svg {
-      transform: translateX(-4px);
-    }
   }
 
   &__eyebrow {
@@ -271,41 +235,39 @@
   }
 
   // =============================================
-  // TRANSITION GRADIENT - Light to Dark
-  // =============================================
-  &__transition {
-    height: 200px;
-    background: linear-gradient(180deg, #e8edf5 0%, #1a1a2e 100%);
-    position: relative;
-    z-index: 1;
-  }
-
-  // =============================================
-  // PROJECTS SECTION - DARK THEME
+  // PROJECTS SECTION - Smooth Transition
   // =============================================
   &__projects {
     position: relative;
-    padding: $spacing-4xl 0 $spacing-5xl;
+    padding: 0 0 $spacing-5xl;
     z-index: 1;
-    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 30%, #0a0a12 100%);
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 200px;
-      background: linear-gradient(180deg, #e8edf5 0%, #1a1a2e 100%);
-      pointer-events: none;
-    }
+    background: linear-gradient(
+      180deg,
+      #eef1f6 0%,
+      #e4e8f0 5%,
+      #d5dce8 10%,
+      #c0c9da 15%,
+      #a8b4ca 20%,
+      #8e9cb8 25%,
+      #7485a5 30%,
+      #5a6d91 35%,
+      #45567d 40%,
+      #343f68 45%,
+      #272e54 50%,
+      #1e2344 55%,
+      #181c38 60%,
+      #14172e 70%,
+      #101325 80%,
+      #0c0f1e 90%,
+      #0a0c18 100%
+    );
   }
 
   &__container {
     @include container;
     max-width: 1400px;
     position: relative;
-    padding-top: 120px;
+    padding-top: $spacing-5xl;
   }
 
   &__grid {

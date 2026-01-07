@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import Hero3DScene from './Hero3DScene';
 import Typewriter from './Typewriter';
+import ContactModal from './ContactModal';
 
 /**
  * Hero Section Premium - Nivel Awwwards
@@ -13,6 +15,7 @@ const HeroSection = () => {
   const subtitleRef = useRef(null);
   const statsRef = useRef(null);
   const [counters, setCounters] = useState({ projects: 0, clients: 0, years: 0, team: 0 });
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const heroWords = [
     'cobra vida.',
@@ -111,7 +114,7 @@ const HeroSection = () => {
       animateCounter('projects', 300, 2000);
       animateCounter('clients', 30, 2000);
       animateCounter('years', 5, 1500);
-      animateCounter('team', 12, 1500);
+      animateCounter('team', 8, 1500);
     }, 1500);
 
     return () => clearTimeout(timeout);
@@ -173,13 +176,18 @@ const HeroSection = () => {
 
           {/* Subtítulo */}
           <p ref={subtitleRef} className="hero__subtitle">
-            Creamos experiencias digitales que transforman visitantes en clientes.
-            Diseño premium, desarrollo de vanguardia, resultados excepcionales.
+            Creamos experiencias digitales que conectan con tu audiencia<br />
+            y transforman visitantes en clientes.
           </p>
 
           {/* Botones */}
           <div className="hero__buttons">
-            <a href="#contacto" className="hero__cta" data-cursor data-cursor-text="Go">
+            <button
+              onClick={() => setIsContactModalOpen(true)}
+              className="hero__cta"
+              data-cursor
+              data-cursor-text="Go"
+            >
               <span className="hero__cta-text">Iniciar proyecto</span>
               <span className="hero__cta-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -187,13 +195,13 @@ const HeroSection = () => {
                 </svg>
               </span>
               <span className="hero__cta-glow" />
-            </a>
-            <a href="#proyectos" className="hero__cta-secondary" data-cursor>
+            </button>
+            <Link to="/portfolio" className="hero__cta-secondary" data-cursor>
               <span>Ver proyectos</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Stats */}
@@ -224,6 +232,12 @@ const HeroSection = () => {
 
       {/* Línea inferior decorativa */}
       <div className="hero__bottom-line" />
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </section>
   );
 };

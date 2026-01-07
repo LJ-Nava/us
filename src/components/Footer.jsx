@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -10,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
  */
 const Footer = () => {
   const footerRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const contactInfo = {
     email: 'DeveloperLuis17@gmail.com',
@@ -20,18 +23,38 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: 'Inicio', href: '#' },
-    { label: 'Servicios', href: '#servicios' },
-    { label: 'Paquetes', href: '#paquetes' },
-    { label: 'Contacto', href: '#contacto' },
+    { label: 'Inicio', href: '/', isRoute: true },
+    { label: 'Servicios', href: '/servicios', isRoute: true },
+    { label: 'Portfolio', href: '/portfolio', isRoute: true },
+    { label: 'Nosotros', href: '/nosotros', isRoute: true },
   ];
 
   const services = [
-    'Diseño Web',
-    'Desarrollo Frontend',
-    'E-commerce',
-    'Landing Pages',
+    { name: 'Diseño Web', serviceId: 'web-design' },
+    { name: 'Desarrollo Frontend', serviceId: 'desarrollo' },
+    { name: 'E-commerce', serviceId: 'ecommerce' },
+    { name: 'Landing Pages', serviceId: 'landing' },
   ];
+
+  // Navigate to a specific service on the services page
+  const navigateToService = (serviceId) => (e) => {
+    e.preventDefault();
+
+    if (location.pathname === '/servicios') {
+      const element = document.getElementById(serviceId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else {
+      navigate('/servicios');
+      setTimeout(() => {
+        const element = document.getElementById(serviceId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 150);
+    }
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -97,10 +120,10 @@ const Footer = () => {
           <div className="footer__grid">
             {/* Brand */}
             <div className="footer__brand">
-              <a href="#" className="footer__logo">
+              <Link to="/" className="footer__logo">
                 <span className="footer__logo-text">US</span>
                 <span className="footer__logo-dot" />
-              </a>
+              </Link>
               <p className="footer__tagline">
                 Creamos experiencias digitales que impulsan el crecimiento de tu negocio.
               </p>
@@ -134,10 +157,10 @@ const Footer = () => {
               <ul className="footer__list">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="footer__link">
+                    <Link to={link.href} className="footer__link">
                       <span className="footer__link-dot" />
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -149,9 +172,13 @@ const Footer = () => {
               <ul className="footer__list">
                 {services.map((service, index) => (
                   <li key={index}>
-                    <a href="#servicios" className="footer__link">
+                    <a
+                      href={`/servicios#${service.serviceId}`}
+                      onClick={navigateToService(service.serviceId)}
+                      className="footer__link"
+                    >
                       <span className="footer__link-dot" />
-                      {service}
+                      {service.name}
                     </a>
                   </li>
                 ))}

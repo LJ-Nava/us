@@ -1,0 +1,125 @@
+// ==============================================
+// GLOBE 3D - Interactive 3D Globe Component
+// ==============================================
+
+.globe-3d {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  @media (max-width: 1024px) {
+    height: 380px;
+  }
+
+  @media (max-width: 640px) {
+    height: 320px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  // Location labels overlay
+  &__labels {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5rem;
+    z-index: 10;
+
+    @media (max-width: 640px) {
+      gap: 1rem;
+      bottom: 1rem;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(15, 15, 25, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+
+    @media (max-width: 640px) {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.7rem;
+    }
+
+    &:hover {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: labelPulse 2s ease-in-out infinite;
+
+    @media (max-width: 640px) {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  &__label-text {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  @keyframes labelPulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 currentColor;
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 8px 2px currentColor;
+    }
+  }
+
+  // Glow effect behind globe
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.15) 0%,
+      rgba(6, 182, 212, 0.1) 30%,
+      transparent 60%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(40px);
+
+    @media (max-width: 1024px) {
+      width: 300px;
+      height: 300px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,6 +11,8 @@ import WhatsAppWidget from './components/WhatsAppWidget';
 // Pages
 import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
+import NosotrosPage from './pages/NosotrosPage';
+import ServiciosPage from './pages/ServiciosPage';
 
 // Registrar plugins de GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -27,10 +29,45 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Custom Cursor Component
+const CustomCursor = () => {
+  const cursorRef = useRef(null);
+  const cursorDotRef = useRef(null);
+
+  const handleMouseMove = useCallback((e) => {
+    if (cursorRef.current && cursorDotRef.current) {
+      gsap.to(cursorRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.5,
+        ease: 'power3.out'
+      });
+      gsap.to(cursorDotRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
+
+  return (
+    <>
+      <div ref={cursorRef} className="custom-cursor" />
+      <div ref={cursorDotRef} className="custom-cursor-dot" />
+    </>
+  );
+};
+
 // Layout principal
 const Layout = ({ children }) => {
   return (
     <div className="app">
+      <CustomCursor />
       <Header />
       <main className="main">
         {children}
@@ -75,6 +112,22 @@ function App() {
           element={
             <Layout>
               <PortfolioPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/nosotros"
+          element={
+            <Layout>
+              <NosotrosPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/servicios"
+          element={
+            <Layout>
+              <ServiciosPage />
             </Layout>
           }
         />

@@ -26,6 +26,15 @@
 @use 'components/contact-section';
 @use 'components/footer';
 @use 'components/whatsapp-widget';
+@use 'components/about-section';
+@use 'components/process-section';
+@use 'components/blog-section';
+@use 'components/cta-section';
+@use 'components/contact-modal';
+@use 'components/package-modal';
+@use 'components/globe-3d';
 
 // PAGES
 @use 'pages/portfolio-page';
+@use 'pages/nosotros-page';
+@use 'pages/servicios-page';

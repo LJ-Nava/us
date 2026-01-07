@@ -353,11 +353,13 @@
     padding: 12px 24px;
     font-size: 0.8rem;
     font-weight: $font-weight-semibold;
+    font-family: inherit;
     color: $color-white;
     background: $color-charcoal;
     border: none;
     border-radius: 8px;
     text-decoration: none;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: all 0.25s ease;

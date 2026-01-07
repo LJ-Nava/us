@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CTA3DBackground from './CTA3DBackground';
@@ -11,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 const CTASection = () => {
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
   const whatsappNumber = '573147083182';
 
   useEffect(() => {
@@ -58,8 +60,8 @@ const CTASection = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };
 
-  const handleEmail = () => {
-    window.location.href = 'mailto:hola@jvisual.co?subject=Consulta%20proyecto%20web';
+  const handlePortfolio = () => {
+    navigate('/portfolio');
   };
 
   return (
@@ -104,28 +106,28 @@ const CTASection = () => {
               </svg>
             </button>
 
-            <button className="cta-section__btn cta-section__btn--secondary" onClick={handleEmail}>
+            <button className="cta-section__btn cta-section__btn--secondary" onClick={handlePortfolio}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
               </svg>
-              Enviar email
+              Ver nuestros proyectos
             </button>
           </div>
 
           {/* Metrics */}
           <div className="cta-section__metrics">
             <div className="cta-section__metric">
-              <span className="cta-section__metric-value">300+</span>
+              <span className="cta-section__metric-value">50+</span>
               <span className="cta-section__metric-label">Proyectos entregados</span>
             </div>
             <div className="cta-section__metric-divider" />
             <div className="cta-section__metric">
-              <span className="cta-section__metric-value">98%</span>
+              <span className="cta-section__metric-value">100%</span>
               <span className="cta-section__metric-label">Clientes satisfechos</span>
             </div>
             <div className="cta-section__metric-divider" />
             <div className="cta-section__metric">
-              <span className="cta-section__metric-value">&lt;48h</span>
+              <span className="cta-section__metric-value">&lt;24h</span>
               <span className="cta-section__metric-label">Tiempo de respuesta</span>
             </div>
           </div>

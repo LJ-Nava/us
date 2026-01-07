@@ -18,7 +18,7 @@ const FeaturesSection = () => {
       id: 1,
       number: '01',
       title: 'Inteligencia Artificial',
-      description: 'Nuestro motor NEXUS optimiza cada línea de código, acelerando el desarrollo sin comprometer la calidad.',
+      description: 'Nuestro motor LUMEN optimiza cada línea de código, acelerando el desarrollo sin comprometer la calidad.',
       highlight: 'Desarrollo 3x más rápido',
       color: 'cyan',
       icon: (

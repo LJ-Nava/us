@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Portfolio3DBackground from '../components/Portfolio3DBackground';
+import PortfolioHeroBackground from '../components/PortfolioHeroBackground';
 
 // Importar imágenes de Romelima
 import romelima1 from '../assets/Romelima/1.png';
@@ -53,14 +54,6 @@ import physica2 from '../assets/Physuca/2.png';
 import physica3 from '../assets/Physuca/3.png';
 import physica4 from '../assets/Physuca/4.png';
 import physica5 from '../assets/Physuca/5.png';
-
-// Importar imágenes de Clinify Barber
-import clinify1 from '../assets/clinify/1.png';
-import clinify2 from '../assets/clinify/2.png';
-import clinify3 from '../assets/clinify/3.png';
-import clinify4 from '../assets/clinify/4.png';
-import clinify5 from '../assets/clinify/5.png';
-import clinify6 from '../assets/clinify/6.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,16 +117,6 @@ const projects = [
     images: [physica1, physica2, physica3, physica4, physica5],
     color: '#6b7b5c',
     tags: ['Citas Online', 'Servicios', 'Testimonios']
-  },
-  {
-    id: 7,
-    title: 'Clinify Barbershop',
-    category: 'Barbería Premium',
-    description: 'Barbería de lujo con sistema de reservas, galería de estilos y equipo de barberos profesionales.',
-    url: 'https://lj-nava.github.io/barber/',
-    images: [clinify1, clinify2, clinify3, clinify4, clinify5, clinify6],
-    color: '#ca9d3b',
-    tags: ['Reservas', 'Galería', 'Premium']
   }
 ];
 
@@ -445,44 +428,36 @@ const PortfolioPage = () => {
       <Portfolio3DBackground />
 
       <section className="portfolio-page__hero">
+        <PortfolioHeroBackground />
         <div className="portfolio-page__hero-bg">
-          <div className="portfolio-page__hero-gradient"></div>
           <div className="portfolio-page__hero-grid"></div>
         </div>
 
         <div className="portfolio-page__hero-content">
-          <Link to="/" className="portfolio-page__back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5"></path>
-              <path d="M12 19l-7-7 7-7"></path>
-            </svg>
-            <span>Volver al inicio</span>
-          </Link>
-
           <span className="portfolio-page__eyebrow">
             <span className="portfolio-page__eyebrow-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             </span>
-            Nuestro Portfolio
+            Trabajos Destacados
           </span>
 
           <h1 className="portfolio-page__title" ref={titleRef}>
-            Proyectos que{' '}
-            <span className="portfolio-page__title-highlight">transforman</span>{' '}
-            negocios
+            Lo que podemos{' '}
+            <span className="portfolio-page__title-highlight">crear</span>{' '}
+            para ti
           </h1>
 
           <p className="portfolio-page__subtitle">
-            Cada proyecto es una historia de éxito. Diseños premium, experiencias memorables y resultados medibles para nuestros clientes.
+            Una selección de nuestros proyectos más solicitados por nuestros clientes.
+            Cada uno representa nuestra capacidad de transformar ideas en experiencias digitales excepcionales.
           </p>
 
           <div className="portfolio-page__stats">
             <div className="portfolio-page__stat">
-              <AnimatedCounter target="7" suffix="+" duration={2} />
-              <span className="portfolio-page__stat-label">Proyectos</span>
+              <AnimatedCounter target="50" suffix="+" duration={2} />
+              <span className="portfolio-page__stat-label">Proyectos totales</span>
             </div>
             <div className="portfolio-page__stat-divider"></div>
             <div className="portfolio-page__stat">
@@ -492,7 +467,7 @@ const PortfolioPage = () => {
             <div className="portfolio-page__stat-divider"></div>
             <div className="portfolio-page__stat">
               <AnimatedCounter target="5" suffix="+" duration={1.8} />
-              <span className="portfolio-page__stat-label">Industrias</span>
+              <span className="portfolio-page__stat-label">Años creando</span>
             </div>
           </div>
         </div>

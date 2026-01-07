@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useCurrency from '../hooks/useCurrency';
+import PackageModal from './PackageModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,25 +16,28 @@ const PackagesSection = () => {
   const [hoveredPackage, setHoveredPackage] = useState(null);
   const { formatPrice, currencyName, loading } = useCurrency();
 
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const packages = [
     {
       id: 1,
-      name: 'Starter',
-      tagline: 'Ideal para comenzar',
-      description: 'Landing page profesional para emprendedores que buscan presencia digital.',
+      name: 'Básico',
+      tagline: 'Sitio simple',
+      description: 'Página web sencilla, ideal para mostrar tu negocio de forma profesional.',
       price: '250',
+      complexity: 'Baja complejidad',
       color: 'slate',
       popular: false,
       features: [
-        { text: 'Landing page (1 página)', included: true },
+        { text: '1-3 páginas', included: true },
         { text: 'Diseño responsive', included: true },
-        { text: 'Hasta 5 secciones', included: true },
         { text: 'Formulario de contacto', included: true },
         { text: 'Integración WhatsApp', included: true },
         { text: 'Entrega en 5-7 días', included: true },
         { text: '2 revisiones incluidas', included: true },
       ],
-      cta: 'Comenzar',
+      cta: 'Solicitar',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -46,20 +50,19 @@ const PackagesSection = () => {
       id: 2,
       name: 'Profesional',
       tagline: 'El más elegido',
-      description: 'Sitio web completo para negocios que quieren destacar y convertir.',
+      description: 'Sitio web completo con más funcionalidades para negocios en crecimiento.',
       price: '500',
+      complexity: 'Complejidad media',
       color: 'cyan',
       popular: true,
       features: [
-        { text: 'Sitio web hasta 5 páginas', included: true },
+        { text: '4-6 páginas', included: true },
         { text: 'Diseño UI/UX personalizado', included: true },
-        { text: 'Panel administrable (CMS)', included: true },
-        { text: 'Optimización SEO', included: true },
+        { text: 'Optimización SEO básico', included: true },
         { text: 'Google Analytics', included: true },
         { text: 'Redes sociales integradas', included: true },
         { text: 'Entrega en 10-14 días', included: true },
         { text: '3 revisiones incluidas', included: true },
-        { text: 'Soporte 1 mes', included: true },
       ],
       cta: 'Elegir plan',
       icon: (
@@ -70,22 +73,21 @@ const PackagesSection = () => {
     },
     {
       id: 3,
-      name: 'Business',
-      tagline: 'Con marketing incluido',
-      description: 'Web profesional + posicionamiento en Google para atraer más clientes.',
-      price: '750',
+      name: 'Avanzado',
+      tagline: 'Sitio complejo',
+      description: 'Web robusta con múltiples secciones, animaciones y funcionalidades avanzadas.',
+      price: '800',
+      complexity: 'Alta complejidad',
       color: 'violet',
       popular: false,
       features: [
-        { text: 'Todo del plan Profesional', included: true },
-        { text: 'Hasta 8 páginas', included: true },
+        { text: '7-10 páginas', included: true },
+        { text: 'Diseño premium personalizado', included: true },
+        { text: 'Animaciones avanzadas', included: true },
+        { text: 'SEO avanzado', included: true },
         { text: 'Blog integrado', included: true },
-        { text: 'SEO avanzado (posicionamiento)', included: true },
-        { text: 'Google My Business', included: true },
-        { text: 'Estrategia de palabras clave', included: true },
         { text: 'Entrega en 15-20 días', included: true },
         { text: 'Revisiones ilimitadas', included: true },
-        { text: 'Soporte 3 meses', included: true },
       ],
       cta: 'Solicitar',
       icon: (
@@ -98,20 +100,19 @@ const PackagesSection = () => {
       id: 4,
       name: 'E-commerce',
       tagline: 'Tu tienda online',
-      description: 'Tienda online lista para vender con carrito y pagos integrados.',
-      price: '950',
+      description: 'Tienda online lista para vender con carrito y pasarela de pagos.',
+      price: '1000',
+      complexity: 'Tienda completa',
       color: 'amber',
       popular: false,
       features: [
         { text: 'Tienda online completa', included: true },
-        { text: 'Hasta 50 productos', included: true },
+        { text: 'Hasta 50 productos iniciales', included: true },
         { text: 'Carrito de compras', included: true },
         { text: 'Pasarela de pagos', included: true },
-        { text: 'Panel de inventario', included: true },
         { text: 'WhatsApp Business', included: true },
         { text: 'Entrega en 20-25 días', included: true },
         { text: 'Capacitación incluida', included: true },
-        { text: 'Soporte 3 meses', included: true },
       ],
       cta: 'Cotizar',
       icon: (
@@ -121,6 +122,11 @@ const PackagesSection = () => {
       ),
     },
   ];
+
+  const handlePackageClick = (pkg) => {
+    setSelectedPackage(pkg);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -175,7 +181,7 @@ const PackagesSection = () => {
           </h2>
           <p className="packages-section__subtitle">
             Soluciones transparentes y sin sorpresas. Cada paquete incluye diseño, desarrollo
-            y optimización con nuestra tecnología NEXUS AI.
+            y optimización con nuestra tecnología LUMEN AI.
           </p>
         </div>
 
@@ -219,14 +225,18 @@ const PackagesSection = () => {
 
                 {/* Price */}
                 <div className="packages-section__card-price">
+                  <span className="packages-section__card-price-from">Desde</span>
                   <span className={`packages-section__card-price-value ${loading ? 'is-loading' : ''}`}>
                     {formatPrice(pkg.price)}
                   </span>
-                  <span className="packages-section__card-price-note">{currencyName}</span>
+                  <span className="packages-section__card-price-note">{pkg.complexity}</span>
                 </div>
 
                 {/* CTA Button */}
-                <button className="packages-section__card-cta">
+                <button
+                  className="packages-section__card-cta"
+                  onClick={() => handlePackageClick(pkg)}
+                >
                   <span>{pkg.cta}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -275,6 +285,14 @@ const PackagesSection = () => {
           </p>
         </div>
       </div>
+
+      {/* Package Modal */}
+      <PackageModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedPackage={selectedPackage}
+        formatPrice={formatPrice}
+      />
     </section>
   );
 };

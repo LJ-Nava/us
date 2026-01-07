@@ -1,8 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Colors for the wave effect
+const waveColors = [
+  { name: 'gold', primary: '#f59e0b', secondary: '#fbbf24', glow: 'rgba(245, 158, 11, 0.6)' },
+  { name: 'orange', primary: '#f97316', secondary: '#fb923c', glow: 'rgba(249, 115, 22, 0.6)' },
+  { name: 'red', primary: '#ef4444', secondary: '#f87171', glow: 'rgba(239, 68, 68, 0.6)' },
+  { name: 'pink', primary: '#ec4899', secondary: '#f472b6', glow: 'rgba(236, 72, 153, 0.6)' },
+  { name: 'violet', primary: '#8b5cf6', secondary: '#a78bfa', glow: 'rgba(139, 92, 246, 0.6)' },
+  { name: 'cyan', primary: '#06b6d4', secondary: '#22d3ee', glow: 'rgba(6, 182, 212, 0.6)' },
+  { name: 'emerald', primary: '#10b981', secondary: '#34d399', glow: 'rgba(16, 185, 129, 0.6)' },
+];
 
 // Iconos para el dashboard
 const icons = {
@@ -67,6 +78,245 @@ const LogosSection = () => {
   const sectionRef = useRef(null);
   const mockupRef = useRef(null);
   const aiFaceRef = useRef(null);
+  const [colorIndex, setColorIndex] = useState(0);
+  const [isWaving, setIsWaving] = useState(false);
+
+  // Handle click on AI core - trigger Venom-like color transformation
+  const handleAIClick = () => {
+    if (isWaving) return;
+
+    setIsWaving(true);
+    const nextIndex = (colorIndex + 1) % waveColors.length;
+    const newColor = waveColors[nextIndex];
+
+    // Create gradual "Venom taking over" color transformation
+    const container = document.querySelector('.logos-section__ai-container');
+    if (!container) return;
+
+    // Timeline for cascading color transformation
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setColorIndex(nextIndex);
+        setIsWaving(false);
+      }
+    });
+
+    // 1. Start with the iris/pupil (center) - immediate transformation
+    const iris = document.querySelector('.logos-section__ai-iris');
+    const pupil = document.querySelector('.logos-section__ai-pupil');
+    const pupilCore = document.querySelector('.logos-section__ai-pupil-core');
+
+    tl.to(iris, {
+      background: `radial-gradient(circle at 30% 30%, ${newColor.secondary} 0%, ${newColor.primary} 35%, ${newColor.primary}99 100%)`,
+      boxShadow: `0 0 40px ${newColor.glow}, 0 0 80px ${newColor.glow}`,
+      duration: 0.3,
+      ease: 'power2.out'
+    }, 0);
+
+    tl.to(pupil, {
+      background: `radial-gradient(circle, #fff 0%, ${newColor.secondary} 40%, ${newColor.primary} 100%)`,
+      duration: 0.25,
+      ease: 'power2.out'
+    }, 0.05);
+
+    tl.to(pupilCore, {
+      boxShadow: `0 0 15px #fff, 0 0 30px ${newColor.primary}`,
+      duration: 0.2,
+      ease: 'power2.out'
+    }, 0.1);
+
+    // 2. Inner rings spread outward (Venom spreading effect)
+    const rings = document.querySelectorAll('.logos-section__ai-ring');
+    rings.forEach((ring, i) => {
+      const delay = 0.15 + (i * 0.08); // Cascading delay
+      tl.to(ring, {
+        borderColor: `${newColor.primary}99`,
+        boxShadow: `0 0 ${8 + i * 3}px ${newColor.glow}`,
+        duration: 0.4,
+        ease: 'power2.inOut'
+      }, delay);
+    });
+
+    // 3. Hexagon shape
+    const hexShape = document.querySelector('.logos-section__ai-hex-shape');
+    if (hexShape) {
+      tl.to(hexShape, {
+        stroke: `${newColor.primary}66`,
+        duration: 0.5,
+        ease: 'power2.inOut'
+      }, 0.3);
+    }
+
+    // 4. Arcs
+    const arcs = document.querySelectorAll('.logos-section__ai-arc');
+    arcs.forEach((arc, i) => {
+      tl.to(arc, {
+        stroke: `${newColor.primary}99`,
+        duration: 0.4,
+        ease: 'power2.inOut'
+      }, 0.35 + (i * 0.05));
+    });
+
+    // 5. Scanner lines
+    const scanners = document.querySelectorAll('.logos-section__ai-scanner');
+    scanners.forEach((scanner, i) => {
+      tl.to(scanner, {
+        background: `linear-gradient(90deg, transparent 0%, ${newColor.primary}15 15%, ${newColor.primary} 50%, ${newColor.primary}15 85%, transparent 100%)`,
+        duration: 0.4,
+        ease: 'power2.inOut'
+      }, 0.4 + (i * 0.1));
+    });
+
+    // 6. Circuit lines - spreading from center outward
+    const circuits = document.querySelectorAll('.logos-section__ai-circuit');
+    circuits.forEach((circuit, i) => {
+      tl.to(circuit, {
+        stroke: `${newColor.primary}99`,
+        filter: `drop-shadow(0 0 4px ${newColor.glow})`,
+        duration: 0.5,
+        ease: 'power2.inOut'
+      }, 0.5 + (i * 0.04));
+    });
+
+    // 7. Nodes - cascading effect
+    const nodes = document.querySelectorAll('.logos-section__ai-node');
+    nodes.forEach((node, i) => {
+      tl.to(node, {
+        fill: newColor.primary,
+        filter: `drop-shadow(0 0 6px ${newColor.glow})`,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, 0.6 + (i * 0.03));
+    });
+
+    // 8. Pulses
+    const pulses = document.querySelectorAll('.logos-section__ai-pulse');
+    pulses.forEach((pulse, i) => {
+      tl.to(pulse, {
+        borderColor: `${newColor.primary}66`,
+        duration: 0.4,
+        ease: 'power2.inOut'
+      }, 0.55 + (i * 0.08));
+    });
+
+    // 9. Spectrum bars - spreading from center
+    const bars = document.querySelectorAll('.logos-section__ai-bar');
+    const centerIndex = Math.floor(bars.length / 2);
+    bars.forEach((bar, i) => {
+      const distanceFromCenter = Math.abs(i - centerIndex);
+      const delay = 0.65 + (distanceFromCenter * 0.03);
+      tl.to(bar, {
+        background: `linear-gradient(180deg, #fff 0%, ${newColor.secondary} 20%, ${newColor.primary} 60%, ${newColor.primary}99 100%)`,
+        boxShadow: `0 0 10px ${newColor.glow}, 0 0 20px ${newColor.glow}66`,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, delay);
+    });
+
+    // 10. Particles - random spreading
+    const particles = document.querySelectorAll('.logos-section__ai-particle');
+    particles.forEach((particle, i) => {
+      tl.to(particle, {
+        background: newColor.primary,
+        boxShadow: `0 0 10px ${newColor.glow}`,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 0.7 + (Math.random() * 0.3));
+    });
+
+    // 11. Extended lines and nodes (far reaching Venom tentacles)
+    const extendedLines = document.querySelectorAll('.logos-section__extended-line');
+    extendedLines.forEach((line, i) => {
+      tl.to(line, {
+        stroke: `${newColor.primary}66`,
+        filter: `drop-shadow(0 0 3px ${newColor.glow})`,
+        duration: 0.6,
+        ease: 'power2.inOut'
+      }, 0.8 + (i * 0.05));
+    });
+
+    const extendedNodes = document.querySelectorAll('.logos-section__extended-node');
+    extendedNodes.forEach((node, i) => {
+      tl.to(node, {
+        fill: `${newColor.primary}cc`,
+        filter: `drop-shadow(0 0 6px ${newColor.glow})`,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 0.9 + (i * 0.03));
+    });
+
+    // 12. Auras - final envelope
+    const auras = document.querySelectorAll('.logos-section__ai-aura');
+    auras.forEach((aura, i) => {
+      const newAuraGradient = i === 0
+        ? `radial-gradient(ellipse at center, ${newColor.primary}1f 0%, ${newColor.primary}0f 30%, ${newColor.primary}08 50%, transparent 70%)`
+        : `radial-gradient(ellipse at center, ${newColor.secondary}14 0%, ${newColor.primary}0a 40%, transparent 70%)`;
+      tl.to(aura, {
+        background: newAuraGradient,
+        duration: 0.8,
+        ease: 'power2.inOut'
+      }, 0.85 + (i * 0.1));
+    });
+
+    // 13. Brand name color
+    const brandName = document.querySelector('.logos-section__ai-name');
+    if (brandName) {
+      tl.to(brandName, {
+        color: newColor.primary,
+        textShadow: `0 0 30px ${newColor.glow}`,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 1);
+    }
+
+    // 14. Tagline
+    const tagline = document.querySelector('.logos-section__ai-tagline');
+    if (tagline) {
+      tl.to(tagline, {
+        color: `${newColor.primary}b3`,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 1.05);
+    }
+
+    // 15. Questions bubbles
+    const questions = document.querySelectorAll('.logos-section__ai-question');
+    questions.forEach((question, i) => {
+      tl.to(question, {
+        color: newColor.secondary,
+        background: `linear-gradient(135deg, ${newColor.primary}26 0%, ${newColor.primary}1a 100%)`,
+        borderColor: `${newColor.primary}40`,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 1.1 + (i * 0.05));
+    });
+
+    // 16. Data items
+    const dataItems = document.querySelectorAll('.logos-section__ai-data-item');
+    dataItems.forEach((item, i) => {
+      tl.to(item, {
+        color: `${newColor.primary}80`,
+        textShadow: `0 0 10px ${newColor.glow}4d`,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, 1.15 + (i * 0.03));
+    });
+
+    // Final flash effect on the container
+    tl.to(container, {
+      filter: 'brightness(1.15)',
+      duration: 0.15,
+      ease: 'power2.out'
+    }, 0.2);
+
+    tl.to(container, {
+      filter: 'brightness(1)',
+      duration: 0.3,
+      ease: 'power2.inOut'
+    }, 0.35);
+  };
+
+  const currentColor = waveColors[colorIndex];
 
   const technologies = [
     {
@@ -956,8 +1206,18 @@ const LogosSection = () => {
           <circle className="logos-section__extended-node" cx="650" cy="280" r="3" />
         </svg>
 
-        {/* Claude AI - Núcleo de Inteligencia Premium */}
-        <div className="logos-section__ai-container">
+        {/* LUMEN AI - Núcleo de Inteligencia Premium */}
+        <div
+          className={`logos-section__ai-container ${isWaving ? 'is-waving' : ''}`}
+          onClick={handleAIClick}
+          style={{
+            '--ai-primary': currentColor.primary,
+            '--ai-secondary': currentColor.secondary,
+            '--ai-glow': currentColor.glow,
+            cursor: 'pointer'
+          }}
+        >
+
           {/* Aura de fondo */}
           <div className="logos-section__ai-aura"></div>
           <div className="logos-section__ai-aura logos-section__ai-aura--secondary"></div>
@@ -1089,7 +1349,7 @@ const LogosSection = () => {
 
             {/* Nombre y branding */}
             <div className="logos-section__ai-brand">
-              <span className="logos-section__ai-name">NEXUS</span>
+              <span className="logos-section__ai-name">LUMEN</span>
               <span className="logos-section__ai-tagline">AI Core Engine</span>
             </div>
 
@@ -1115,7 +1375,7 @@ const LogosSection = () => {
               <span className="logos-section__ai-data-item">creativity: max</span>
             </div>
             <div className="logos-section__ai-data logos-section__ai-data--right">
-              <span className="logos-section__ai-data-item">model: nexus-v3</span>
+              <span className="logos-section__ai-data-item">model: lumen-v3</span>
               <span className="logos-section__ai-data-item">status: optimal</span>
               <span className="logos-section__ai-data-item">ready_to_create</span>
             </div>
