@@ -228,8 +228,7 @@ const Header = () => {
             <svg className="header__logo-svg" viewBox="0 0 40 40" fill="none">
               <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#logoGrad)" fillOpacity="0.1"/>
               <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#logoGrad)" strokeWidth="1.5"/>
-              <text x="8" y="28" className="header__logo-letter">U</text>
-              <text x="20" y="28" fill="url(#logoGrad)" className="header__logo-letter-accent">S</text>
+              <text x="11" y="27" fill="url(#logoGrad)" className="header__logo-letter-accent">J</text>
               <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
                   <stop offset="0%" stopColor="#8b5cf6"/>
@@ -239,7 +238,7 @@ const Header = () => {
             </svg>
           </div>
           <div className="header__logo-text">
-            <span className="header__logo-name">US Agency</span>
+            <span className="header__logo-name">Jowify</span>
             <span className="header__logo-tag">Digital Studio</span>
           </div>
         </Link>
@@ -426,8 +425,7 @@ const Header = () => {
                   <svg viewBox="0 0 40 40" fill="none">
                     <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#mobLogoGrad)" fillOpacity="0.15"/>
                     <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#mobLogoGrad)" strokeWidth="1.5"/>
-                    <text x="8" y="28" fill="#0f172a" fontSize="18" fontWeight="800" fontFamily="inherit">U</text>
-                    <text x="20" y="28" fill="url(#mobLogoGrad)" fontSize="18" fontWeight="800" fontFamily="inherit">S</text>
+                    <text x="11" y="27" fill="url(#mobLogoGrad)" fontSize="18" fontWeight="800" fontFamily="inherit">J</text>
                     <defs>
                       <linearGradient id="mobLogoGrad" x1="0" y1="0" x2="40" y2="40">
                         <stop offset="0%" stopColor="#8b5cf6"/>
@@ -436,7 +434,7 @@ const Header = () => {
                     </defs>
                   </svg>
                 </div>
-                <span className="mob-panel__title">Menu</span>
+                <span className="mob-panel__title">Jowify</span>
               </div>
               <button className="mob-panel__close" onClick={() => setIsMobileMenuOpen(false)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

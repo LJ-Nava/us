@@ -123,7 +123,7 @@ const Footer = () => {
             {/* Brand */}
             <div className="footer__brand">
               <Link to="/" className="footer__logo">
-                <span className="footer__logo-text">US</span>
+                <span className="footer__logo-text">Jowify</span>
                 <span className="footer__logo-dot" />
               </Link>
               <p className="footer__tagline">
@@ -221,7 +221,7 @@ const Footer = () => {
           <div className="footer__bottom">
             <div className="footer__bottom-left">
               <p className="footer__copyright">
-                © {currentYear} US Web Agency. {t('footer.rights')}
+                © {currentYear} Jowify. {t('footer.rights')}
               </p>
             </div>
             <div className="footer__bottom-right">

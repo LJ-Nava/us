@@ -44,7 +44,7 @@ export const translations = {
     // Hero
     hero: {
       badge: 'Agencia de Diseño Web Premium',
-      welcomeBadge: 'Bienvenido a J-Visual',
+      welcomeBadge: 'Bienvenido a Jowify',
       titleLine: 'Donde tu visión',
       heroWords: ['cobra vida.', 'se hace realidad.', 'toma forma.', 'empieza aquí.', 'evoluciona.'],
       title1: 'Creamos experiencias',
@@ -647,7 +647,7 @@ export const translations = {
     },
     hero: {
       badge: 'Premium Web Design Agency',
-      welcomeBadge: 'Welcome to J-Visual',
+      welcomeBadge: 'Welcome to Jowify',
       titleLine: 'Where your vision',
       heroWords: ['comes to life.', 'becomes reality.', 'takes shape.', 'starts here.', 'evolves.'],
       title1: 'We create digital',
@@ -1222,7 +1222,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agência de Web Design Premium',
-      welcomeBadge: 'Bem-vindo ao J-Visual',
+      welcomeBadge: 'Bem-vindo ao Jowify',
       titleLine: 'Onde sua visão',
       heroWords: ['ganha vida.', 'se torna realidade.', 'toma forma.', 'começa aqui.', 'evolui.'],
       title1: 'Criamos experiências',
@@ -1800,7 +1800,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agence Web Design Premium',
-      welcomeBadge: 'Bienvenue chez J-Visual',
+      welcomeBadge: 'Bienvenue chez Jowify',
       titleLine: 'Où votre vision',
       heroWords: ['prend vie.', 'devient réalité.', 'prend forme.', 'commence ici.', 'évolue.'],
       title1: 'Nous créons des expériences',
@@ -2382,7 +2382,7 @@ export const translations = {
     },
     hero: {
       badge: 'Premium Webdesign Agentur',
-      welcomeBadge: 'Willkommen bei J-Visual',
+      welcomeBadge: 'Willkommen bei Jowify',
       titleLine: 'Wo Ihre Vision',
       heroWords: ['lebendig wird.', 'Realität wird.', 'Form annimmt.', 'hier beginnt.', 'sich entwickelt.'],
       title1: 'Wir schaffen digitale',
@@ -2960,7 +2960,7 @@ export const translations = {
     },
     hero: {
       badge: '高端网页设计机构',
-      welcomeBadge: '欢迎来到 J-Visual',
+      welcomeBadge: '欢迎来到 Jowify',
       titleLine: '您的愿景在这里',
       heroWords: ['焕发生机。', '成为现实。', '成形。', '从这里开始。', '不断进化。'],
       title1: '我们创造',
@@ -3542,7 +3542,7 @@ export const translations = {
     },
     hero: {
       badge: 'プレミアムウェブデザインエージェンシー',
-      welcomeBadge: 'J-Visualへようこそ',
+      welcomeBadge: 'Jowifyへようこそ',
       titleLine: 'あなたのビジョンが',
       heroWords: ['息を吹き込む。', '現実になる。', '形になる。', 'ここから始まる。', '進化する。'],
       title1: '私たちは',
@@ -4103,7 +4103,7 @@ export const translations = {
     },
     hero: {
       badge: '프리미엄 웹 디자인 에이전시',
-      welcomeBadge: 'J-Visual에 오신 것을 환영합니다',
+      welcomeBadge: 'Jowify에 오신 것을 환영합니다',
       titleLine: '당신의 비전이',
       heroWords: ['생명을 얻습니다.', '현실이 됩니다.', '형태를 갖춥니다.', '여기서 시작됩니다.', '진화합니다.'],
       title1: '연결하는',
@@ -4600,7 +4600,7 @@ export const translations = {
     },
     hero: {
       badge: 'Công ty Thiết kế Web Cao cấp',
-      welcomeBadge: 'Chào mừng đến J-Visual',
+      welcomeBadge: 'Chào mừng đến Jowify',
       titleLine: 'Nơi tầm nhìn của bạn',
       heroWords: ['sống động.', 'thành hiện thực.', 'hình thành.', 'bắt đầu từ đây.', 'phát triển.'],
       title1: 'Chúng tôi tạo ra',
@@ -5092,7 +5092,7 @@ export const translations = {
     },
     hero: {
       badge: 'وكالة تصميم ويب متميزة',
-      welcomeBadge: 'مرحباً بك في J-Visual',
+      welcomeBadge: 'مرحباً بك في Jowify',
       titleLine: 'حيث رؤيتك',
       heroWords: ['تنبض بالحياة.', 'تصبح حقيقة.', 'تأخذ شكلها.', 'تبدأ هنا.', 'تتطور.'],
       title1: 'نخلق تجارب',
@@ -5584,7 +5584,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agenzia Web Design Premium',
-      welcomeBadge: 'Benvenuto in J-Visual',
+      welcomeBadge: 'Benvenuto in Jowify',
       titleLine: 'Dove la tua visione',
       heroWords: ['prende vita.', 'diventa realtà.', 'prende forma.', 'inizia qui.', 'si evolve.'],
       title1: 'Creiamo esperienze',
@@ -6076,7 +6076,7 @@ export const translations = {
     },
     hero: {
       badge: 'Премиум Веб-Дизайн Агентство',
-      welcomeBadge: 'Добро пожаловать в J-Visual',
+      welcomeBadge: 'Добро пожаловать в Jowify',
       titleLine: 'Где ваше видение',
       heroWords: ['оживает.', 'становится реальностью.', 'обретает форму.', 'начинается здесь.', 'развивается.'],
       title1: 'Мы создаём',
@@ -6568,7 +6568,7 @@ export const translations = {
     },
     hero: {
       badge: 'प्रीमियम वेब डिज़ाइन एजेंसी',
-      welcomeBadge: 'J-Visual में आपका स्वागत है',
+      welcomeBadge: 'Jowify में आपका स्वागत है',
       titleLine: 'जहां आपकी दृष्टि',
       heroWords: ['जीवंत होती है।', 'वास्तविकता बनती है।', 'आकार लेती है।', 'यहाँ से शुरू होती है।', 'विकसित होती है।'],
       title1: 'हम बनाते हैं',
