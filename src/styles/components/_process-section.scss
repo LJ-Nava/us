@@ -9,6 +9,7 @@
   position: relative;
   padding: 120px 2rem;
   overflow: hidden;
+  margin-top: -1px; // Eliminate gap line
 
   // Background
   &__bg {
@@ -20,7 +21,17 @@
   &__bg-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, #0a0f1c 0%, #0f172a 50%, #1e293b 100%);
+    background: linear-gradient(180deg,
+      #fafbfc 0%,
+      #fafbfc 5%,
+      #f0f2f5 10%,
+      #d5dbe5 20%,
+      #8090a8 35%,
+      #3a4a60 50%,
+      #1a2535 65%,
+      #0f172a 80%,
+      #1e293b 100%
+    );
   }
 
   &__bg-grid {

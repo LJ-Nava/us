@@ -9,8 +9,6 @@ import { useI18n } from '../contexts/I18nContext';
 const WhatsAppWidget = ({ phoneNumber = '1234567890' }) => {
   const { t } = useI18n();
   const [isVisible, setIsVisible] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Mostrar widget después de un delay
   useEffect(() => {
@@ -18,23 +16,12 @@ const WhatsAppWidget = ({ phoneNumber = '1234567890' }) => {
       setIsVisible(true);
     }, 2000);
 
-    // Mostrar tooltip después de más tiempo si no ha interactuado
-    const tooltipTimer = setTimeout(() => {
-      if (!hasInteracted) {
-        setShowTooltip(true);
-      }
-    }, 5000);
-
     return () => {
       clearTimeout(showTimer);
-      clearTimeout(tooltipTimer);
     };
-  }, [hasInteracted]);
+  }, []);
 
   const handleClick = () => {
-    setHasInteracted(true);
-    setShowTooltip(false);
-
     // Construir URL de WhatsApp con mensaje traducido
     const translatedMessage = t('whatsapp.defaultMessage');
     const encodedMessage = encodeURIComponent(translatedMessage);
@@ -43,39 +30,10 @@ const WhatsAppWidget = ({ phoneNumber = '1234567890' }) => {
     window.open(whatsappUrl, '_blank');
   };
 
-  const handleCloseTooltip = (e) => {
-    e.stopPropagation();
-    setShowTooltip(false);
-    setHasInteracted(true);
-  };
-
   if (!isVisible) return null;
 
   return (
     <div className={`whatsapp-widget ${isVisible ? 'whatsapp-widget--visible' : ''}`}>
-      {/* Tooltip/Mensaje */}
-      {showTooltip && (
-        <div className="whatsapp-widget__tooltip">
-          <button
-            className="whatsapp-widget__tooltip-close"
-            onClick={handleCloseTooltip}
-            aria-label={t('whatsapp.closeLabel')}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
-            </svg>
-          </button>
-          <div className="whatsapp-widget__tooltip-content">
-            <span className="whatsapp-widget__tooltip-emoji">👋</span>
-            <p className="whatsapp-widget__tooltip-text">
-              {t('whatsapp.tooltipQuestion')}<br/>
-              <strong>{t('whatsapp.tooltipCta')}</strong>
-            </p>
-          </div>
-          <div className="whatsapp-widget__tooltip-arrow" />
-        </div>
-      )}
-
       {/* Botón principal */}
       <button
         className="whatsapp-widget__button"

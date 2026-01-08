@@ -794,9 +794,9 @@
   --gold: #d4a853;
   --gold-light: #f0d890;
   --gold-dark: #a07d2e;
-  --card-width: 280px;
-  --card-height: 340px;
-  --radius: 420px;
+  --card-width: 300px;
+  --card-height: 360px;
+  --radius: 600px;
   --rotation-duration: 140s;
 
   position: relative;
@@ -810,32 +810,32 @@
   isolation: isolate;
 
   @media (max-width: 1400px) {
-    --radius: 380px;
+    --radius: 550px;
   }
 
   @media (max-width: 1200px) {
-    --radius: 340px;
+    --radius: 480px;
+    --card-width: 280px;
+    --card-height: 340px;
+  }
+
+  @media (max-width: 900px) {
+    --radius: 400px;
     --card-width: 260px;
     --card-height: 320px;
   }
 
-  @media (max-width: 900px) {
-    --radius: 300px;
+  @media (max-width: 768px) {
     --card-width: 240px;
     --card-height: 300px;
-  }
-
-  @media (max-width: 768px) {
-    --card-width: 220px;
-    --card-height: 280px;
-    --radius: 250px;
+    --radius: 320px;
     padding: 70px 0 90px;
   }
 
   @media (max-width: 480px) {
-    --radius: 200px;
-    --card-width: 200px;
-    --card-height: 260px;
+    --radius: 260px;
+    --card-width: 220px;
+    --card-height: 280px;
   }
 
   // ==================== BACKGROUND ====================

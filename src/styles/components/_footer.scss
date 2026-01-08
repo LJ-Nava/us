@@ -210,13 +210,12 @@
 
   &__logo-img {
     width: auto;
-    height: 48px;
+    height: 150px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
     transition: all 0.3s ease;
 
     &:hover {
-      filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+      filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5));
     }
   }
 
