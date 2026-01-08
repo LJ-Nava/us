@@ -82,6 +82,7 @@ const LogosSection = () => {
   // Random beautiful color on each page load
   const [colorIndex, setColorIndex] = useState(() => Math.floor(Math.random() * waveColors.length));
   const [isWaving, setIsWaving] = useState(false);
+  const [activeNav, setActiveNav] = useState('inbox');
   const colorIndexRef = useRef(colorIndex);
   const { t } = useI18n();
 
@@ -272,6 +273,118 @@ const LogosSection = () => {
       )
     },
   ];
+
+  // View content data for each navigation section
+  const viewContent = {
+    inbox: {
+      title: t('logos.inbox'),
+      count: '12',
+      countLabel: t('logos.tasks'),
+      tasks: [
+        { id: 'PRJ-142', title: t('logos.designLanding'), tag: t('logos.design'), tagType: 'design', date: t('logos.today'), priority: 'high', active: true },
+        { id: 'PRJ-141', title: t('logos.implementCheckout'), tag: t('logos.development'), tagType: 'dev', date: t('logos.tomorrow'), priority: 'medium' },
+        { id: 'PRJ-140', title: t('logos.optimizeImages'), tag: 'Ops', tagType: 'ops', date: t('logos.thisWeek'), priority: 'low' },
+        { id: 'PRJ-139', title: t('logos.createComponents'), tag: t('logos.design'), tagType: 'design', priority: 'medium' },
+        { id: 'PRJ-138', title: t('logos.integratePayments'), tag: t('logos.backend'), tagType: 'dev', date: t('logos.nextWeek'), priority: 'high' },
+      ],
+      detail: {
+        breadcrumb: t('logos.ecommerceApp'),
+        id: 'PRJ-142',
+        title: t('logos.designLanding'),
+        status: t('logos.inProgress'),
+        priority: t('logos.high'),
+        assignees: ['JC', 'MR'],
+        description: t('logos.taskDescription'),
+        files: [{ name: 'landing-v2.fig', type: 'figma' }, { name: 'brief.pdf', type: 'doc' }],
+        activity: [
+          { user: 'Juan', action: t('logos.updatedStatus'), value: t('logos.inProgress'), time: t('logos.ago2h') },
+          { user: 'Maria', action: t('logos.addedFile'), value: 'landing-v2.fig', time: t('logos.ago5h') },
+          { user: 'Juan', action: t('logos.createdTask'), time: t('logos.yesterday') },
+        ]
+      }
+    },
+    projects: {
+      title: t('logos.projects'),
+      count: '8',
+      countLabel: t('logos.active'),
+      tasks: [
+        { id: 'PRJ-001', title: t('logos.ecommerceApp'), tag: t('logos.development'), tagType: 'dev', date: '85%', priority: 'high', active: true },
+        { id: 'PRJ-002', title: t('logos.landingPage'), tag: t('logos.design'), tagType: 'design', date: '100%', priority: 'low' },
+        { id: 'PRJ-003', title: t('logos.dashboardUI'), tag: t('logos.design'), tagType: 'design', date: '60%', priority: 'medium' },
+        { id: 'PRJ-004', title: t('logos.mobileApp'), tag: t('logos.development'), tagType: 'dev', date: '40%', priority: 'high' },
+        { id: 'PRJ-005', title: t('logos.apiBackend'), tag: t('logos.backend'), tagType: 'dev', date: '90%', priority: 'medium' },
+      ],
+      detail: {
+        breadcrumb: t('logos.projects'),
+        id: 'PRJ-001',
+        title: t('logos.ecommerceApp'),
+        status: t('logos.inProgress'),
+        priority: t('logos.high'),
+        assignees: ['JC', 'MR', 'AL'],
+        description: t('logos.projectDescription'),
+        files: [{ name: 'requirements.pdf', type: 'doc' }, { name: 'wireframes.fig', type: 'figma' }],
+        activity: [
+          { user: 'Alex', action: t('logos.completedTask'), value: 'Auth Module', time: t('logos.ago2h') },
+          { user: 'Maria', action: t('logos.addedFile'), value: 'wireframes.fig', time: t('logos.ago5h') },
+          { user: 'Juan', action: t('logos.createdProject'), time: t('logos.lastWeek') },
+        ]
+      }
+    },
+    team: {
+      title: t('logos.team'),
+      count: '6',
+      countLabel: t('logos.members'),
+      tasks: [
+        { id: 'USR-001', title: 'Juan Carlos', tag: 'Lead Dev', tagType: 'dev', date: t('logos.online'), priority: 'high', active: true },
+        { id: 'USR-002', title: 'Maria Rodriguez', tag: t('logos.design'), tagType: 'design', date: t('logos.online'), priority: 'medium' },
+        { id: 'USR-003', title: 'Alex Martinez', tag: t('logos.backend'), tagType: 'dev', date: t('logos.away'), priority: 'low' },
+        { id: 'USR-004', title: 'Sofia Lopez', tag: 'QA', tagType: 'ops', date: t('logos.online'), priority: 'medium' },
+        { id: 'USR-005', title: 'Carlos Ruiz', tag: 'DevOps', tagType: 'ops', date: t('logos.offline'), priority: 'low' },
+      ],
+      detail: {
+        breadcrumb: t('logos.team'),
+        id: 'USR-001',
+        title: 'Juan Carlos',
+        status: t('logos.online'),
+        priority: 'Lead Developer',
+        assignees: ['JC'],
+        description: t('logos.teamDescription'),
+        files: [],
+        activity: [
+          { user: 'Juan', action: t('logos.completedTask'), value: 'PRJ-142', time: t('logos.ago2h') },
+          { user: 'Juan', action: t('logos.reviewedPR'), value: '#234', time: t('logos.ago5h') },
+          { user: 'Juan', action: t('logos.joined'), time: t('logos.lastMonth') },
+        ]
+      }
+    },
+    settings: {
+      title: t('logos.settings'),
+      count: '4',
+      countLabel: t('logos.sections'),
+      tasks: [
+        { id: 'SET-001', title: t('logos.generalSettings'), tag: t('logos.system'), tagType: 'ops', priority: 'medium', active: true },
+        { id: 'SET-002', title: t('logos.notifications'), tag: t('logos.preferences'), tagType: 'design', priority: 'low' },
+        { id: 'SET-003', title: t('logos.security'), tag: t('logos.account'), tagType: 'dev', priority: 'high' },
+        { id: 'SET-004', title: t('logos.integrations'), tag: 'API', tagType: 'dev', priority: 'medium' },
+      ],
+      detail: {
+        breadcrumb: t('logos.settings'),
+        id: 'SET-001',
+        title: t('logos.generalSettings'),
+        status: t('logos.configured'),
+        priority: t('logos.system'),
+        assignees: [],
+        description: t('logos.settingsDescription'),
+        files: [],
+        activity: [
+          { user: t('logos.system'), action: t('logos.backupCompleted'), time: t('logos.ago2h') },
+          { user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.yesterday') },
+        ]
+      }
+    }
+  };
+
+  const currentView = viewContent[activeNav];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -660,20 +773,32 @@ const LogosSection = () => {
             </div>
 
             <div className="logos-section__nav">
-              <div className="logos-section__nav-item logos-section__nav-item--active">
+              <div
+                className={`logos-section__nav-item ${activeNav === 'inbox' ? 'logos-section__nav-item--active' : ''}`}
+                onClick={() => setActiveNav('inbox')}
+              >
                 {icons.inbox}
                 <span>{t('logos.inbox')}</span>
                 <span className="logos-section__nav-badge">3</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div
+                className={`logos-section__nav-item ${activeNav === 'projects' ? 'logos-section__nav-item--active' : ''}`}
+                onClick={() => setActiveNav('projects')}
+              >
                 {icons.projects}
                 <span>{t('logos.projects')}</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div
+                className={`logos-section__nav-item ${activeNav === 'team' ? 'logos-section__nav-item--active' : ''}`}
+                onClick={() => setActiveNav('team')}
+              >
                 {icons.team}
                 <span>{t('logos.team')}</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div
+                className={`logos-section__nav-item ${activeNav === 'settings' ? 'logos-section__nav-item--active' : ''}`}
+                onClick={() => setActiveNav('settings')}
+              >
                 {icons.settings}
                 <span>{t('logos.settings')}</span>
               </div>
@@ -708,155 +833,97 @@ const LogosSection = () => {
             </div>
           </div>
 
-          {/* Panel 2: Lista de proyectos/inbox */}
+          {/* Panel 2: Lista dinámica basada en navegación activa */}
           <div className="logos-section__panel logos-section__panel--list">
             <div className="logos-section__list-header">
-              <span className="logos-section__list-title">{t('logos.inbox')}</span>
-              <span className="logos-section__list-count">12 {t('logos.tasks')}</span>
+              <span className="logos-section__list-title">{currentView.title}</span>
+              <span className="logos-section__list-count">{currentView.count} {currentView.countLabel}</span>
             </div>
 
-            <div className="logos-section__task logos-section__task--active">
-              <div className="logos-section__task-priority logos-section__task-priority--high"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-142</span>
-                <span className="logos-section__task-title">{t('logos.designLanding')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--design">{t('logos.design')}</span>
-                  <span className="logos-section__task-date">{icons.clock} {t('logos.today')}</span>
+            {currentView.tasks.map((task, index) => (
+              <div
+                key={task.id}
+                className={`logos-section__task ${task.active ? 'logos-section__task--active' : ''}`}
+              >
+                <div className={`logos-section__task-priority logos-section__task-priority--${task.priority}`}></div>
+                <div className="logos-section__task-content">
+                  <span className="logos-section__task-id">{task.id}</span>
+                  <span className="logos-section__task-title">{task.title}</span>
+                  <div className="logos-section__task-meta">
+                    <span className={`logos-section__task-tag logos-section__task-tag--${task.tagType}`}>{task.tag}</span>
+                    {task.date && <span className="logos-section__task-date">{icons.clock} {task.date}</span>}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="logos-section__task">
-              <div className="logos-section__task-priority logos-section__task-priority--medium"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-141</span>
-                <span className="logos-section__task-title">{t('logos.implementCheckout')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--dev">{t('logos.development')}</span>
-                  <span className="logos-section__task-date">{icons.clock} {t('logos.tomorrow')}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="logos-section__task">
-              <div className="logos-section__task-priority logos-section__task-priority--low"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-140</span>
-                <span className="logos-section__task-title">{t('logos.optimizeImages')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--ops">Ops</span>
-                  <span className="logos-section__task-date">{icons.clock} {t('logos.thisWeek')}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="logos-section__task">
-              <div className="logos-section__task-priority logos-section__task-priority--medium"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-139</span>
-                <span className="logos-section__task-title">{t('logos.createComponents')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--design">{t('logos.design')}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="logos-section__task">
-              <div className="logos-section__task-priority logos-section__task-priority--high"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-138</span>
-                <span className="logos-section__task-title">{t('logos.integratePayments')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--dev">{t('logos.backend')}</span>
-                  <span className="logos-section__task-date">{icons.clock} {t('logos.nextWeek')}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="logos-section__task">
-              <div className="logos-section__task-priority logos-section__task-priority--low"></div>
-              <div className="logos-section__task-content">
-                <span className="logos-section__task-id">PRJ-137</span>
-                <span className="logos-section__task-title">{t('logos.documentComponents')}</span>
-                <div className="logos-section__task-meta">
-                  <span className="logos-section__task-tag logos-section__task-tag--ops">{t('logos.docs')}</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Panel 3: Detalle del proyecto */}
+          {/* Panel 3: Detalle dinámico basado en navegación activa */}
           <div className="logos-section__panel logos-section__panel--detail">
             <div className="logos-section__detail-header">
               <div className="logos-section__detail-breadcrumb">
-                <span>{t('logos.ecommerceApp')}</span>
+                <span>{currentView.detail.breadcrumb}</span>
                 <span className="logos-section__detail-sep">›</span>
-                <span>PRJ-142</span>
+                <span>{currentView.detail.id}</span>
               </div>
             </div>
 
-            <h2 className="logos-section__detail-title">{t('logos.designLanding')}</h2>
+            <h2 className="logos-section__detail-title">{currentView.detail.title}</h2>
 
             <div className="logos-section__detail-props">
               <div className="logos-section__detail-prop">
                 <span className="logos-section__detail-label">{t('logos.status')}</span>
                 <span className="logos-section__detail-status">
                   <span className="logos-section__status-dot logos-section__status-dot--progress"></span>
-                  {t('logos.inProgress')}
+                  {currentView.detail.status}
                 </span>
               </div>
               <div className="logos-section__detail-prop">
                 <span className="logos-section__detail-label">{t('logos.priority')}</span>
                 <span className="logos-section__detail-priority">
                   {icons.star}
-                  {t('logos.high')}
+                  {currentView.detail.priority}
                 </span>
               </div>
-              <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">{t('logos.assigned')}</span>
-                <div className="logos-section__avatars">
-                  <div className="logos-section__avatar">JC</div>
-                  <div className="logos-section__avatar">MR</div>
+              {currentView.detail.assignees.length > 0 && (
+                <div className="logos-section__detail-prop">
+                  <span className="logos-section__detail-label">{t('logos.assigned')}</span>
+                  <div className="logos-section__avatars">
+                    {currentView.detail.assignees.map((assignee, index) => (
+                      <div key={index} className="logos-section__avatar">{assignee}</div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div className="logos-section__detail-desc">
-              <p>{t('logos.taskDescription')}</p>
+              <p>{currentView.detail.description}</p>
             </div>
 
-            <div className="logos-section__detail-attachments">
-              <span className="logos-section__detail-label">{t('logos.files')}</span>
-              <div className="logos-section__files">
-                <div className="logos-section__file">
-                  {icons.figma}
-                  <span>landing-v2.fig</span>
-                </div>
-                <div className="logos-section__file">
-                  {icons.doc}
-                  <span>brief.pdf</span>
+            {currentView.detail.files.length > 0 && (
+              <div className="logos-section__detail-attachments">
+                <span className="logos-section__detail-label">{t('logos.files')}</span>
+                <div className="logos-section__files">
+                  {currentView.detail.files.map((file, index) => (
+                    <div key={index} className="logos-section__file">
+                      {file.type === 'figma' ? icons.figma : icons.doc}
+                      <span>{file.name}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="logos-section__detail-activity">
               <span className="logos-section__detail-label">{t('logos.activity')}</span>
-              <div className="logos-section__activity-item">
-                <div className="logos-section__avatar logos-section__avatar--sm">JC</div>
-                <span>Juan {t('logos.updatedStatus')} <strong>{t('logos.inProgress')}</strong></span>
-                <span className="logos-section__activity-time">{t('logos.hoursAgo')} 2h</span>
-              </div>
-              <div className="logos-section__activity-item">
-                <div className="logos-section__avatar logos-section__avatar--sm">MR</div>
-                <span>María {t('logos.addedFile')} <strong>landing-v2.fig</strong></span>
-                <span className="logos-section__activity-time">{t('logos.hoursAgo')} 5h</span>
-              </div>
-              <div className="logos-section__activity-item">
-                <div className="logos-section__avatar logos-section__avatar--sm">JC</div>
-                <span>Juan {t('logos.createdTask')}</span>
-                <span className="logos-section__activity-time">{t('logos.yesterday')}</span>
-              </div>
+              {currentView.detail.activity.map((item, index) => (
+                <div key={index} className="logos-section__activity-item">
+                  <div className="logos-section__avatar logos-section__avatar--sm">{item.user.substring(0, 2).toUpperCase()}</div>
+                  <span>{item.user} {item.action} {item.value && <strong>{item.value}</strong>}</span>
+                  <span className="logos-section__activity-time">{item.time}</span>
+                </div>
+              ))}
             </div>
           </div>
 
