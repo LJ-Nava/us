@@ -208,6 +208,18 @@
     margin-bottom: $spacing-md;
   }
 
+  &__logo-img {
+    width: auto;
+    height: 48px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+    }
+  }
+
   &__logo-text {
     font-size: 2rem;
     font-weight: $font-weight-bold;

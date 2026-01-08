@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../contexts/I18nContext';
+import LogoImg from '../assets/Logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -123,8 +124,7 @@ const Footer = () => {
             {/* Brand */}
             <div className="footer__brand">
               <Link to="/" className="footer__logo">
-                <span className="footer__logo-text">Jowify</span>
-                <span className="footer__logo-dot" />
+                <img src={LogoImg} alt="Jowify" className="footer__logo-img" />
               </Link>
               <p className="footer__tagline">
                 {t('footer.tagline')}

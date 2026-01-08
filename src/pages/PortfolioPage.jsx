@@ -392,7 +392,7 @@ const Testimonials3DCarousel = ({ t }) => {
             <div
               key={index}
               className="testimonial-carousel__card"
-              style={{ '--index': index, '--total': totalSlides }}
+              style={{ '--angle': `${index * (360 / totalSlides)}deg`, '--index': index }}
             >
               <div className="testimonial-carousel__card-inner">
                 {/* Card shine effect */}

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import ContactModal from './ContactModal';
 import { useI18n } from '../contexts/I18nContext';
+import LogoImg from '../assets/Logo.png';
 
 /**
  * Header - Premium Complete Menu
@@ -224,23 +225,7 @@ const Header = () => {
       <div className="header__container">
         {/* Logo */}
         <Link to="/" className="header__logo">
-          <div className="header__logo-icon">
-            <svg className="header__logo-svg" viewBox="0 0 40 40" fill="none">
-              <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#logoGrad)" fillOpacity="0.1"/>
-              <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#logoGrad)" strokeWidth="1.5"/>
-              <text x="11" y="27" fill="url(#logoGrad)" className="header__logo-letter-accent">J</text>
-              <defs>
-                <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
-                  <stop offset="0%" stopColor="#8b5cf6"/>
-                  <stop offset="100%" stopColor="#06b6d4"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <div className="header__logo-text">
-            <span className="header__logo-name">Jowify</span>
-            <span className="header__logo-tag">Digital Studio</span>
-          </div>
+          <img src={LogoImg} alt="Jowify" className="header__logo-img" />
         </Link>
 
         {/* Navigation */}
@@ -421,20 +406,7 @@ const Header = () => {
             {/* Header */}
             <div className="mob-panel__header">
               <div className="mob-panel__brand">
-                <div className="mob-panel__logo">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#mobLogoGrad)" fillOpacity="0.15"/>
-                    <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#mobLogoGrad)" strokeWidth="1.5"/>
-                    <text x="11" y="27" fill="url(#mobLogoGrad)" fontSize="18" fontWeight="800" fontFamily="inherit">J</text>
-                    <defs>
-                      <linearGradient id="mobLogoGrad" x1="0" y1="0" x2="40" y2="40">
-                        <stop offset="0%" stopColor="#8b5cf6"/>
-                        <stop offset="100%" stopColor="#06b6d4"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <span className="mob-panel__title">Jowify</span>
+                <img src={LogoImg} alt="Jowify" className="mob-panel__logo-img" />
               </div>
               <button className="mob-panel__close" onClick={() => setIsMobileMenuOpen(false)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

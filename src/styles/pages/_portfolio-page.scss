@@ -1025,8 +1025,8 @@
     margin-left: calc(var(--card-width) / -2);
     margin-top: calc(var(--card-height) / -2);
     transform-style: preserve-3d;
-    // Calculate position in circle
-    transform: rotateY(calc(var(--index) * (360deg / var(--total)))) translateZ(var(--radius));
+    // Calculate position in circle - use pre-calculated angle
+    transform: rotateY(var(--angle)) translateZ(var(--radius));
     // GPU acceleration for smooth rendering
     will-change: transform;
     backface-visibility: hidden;
