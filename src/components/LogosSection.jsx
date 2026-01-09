@@ -596,10 +596,10 @@ const LogosSection = () => {
       countLabel: t('logos.members'),
       items: [
         {
-          id: 'USR-001', title: 'Luis Nava', tag: 'Founder & CTO', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          id: 'USR-001', title: 'Luis Nava', tag: 'Full Stack Dev', tagType: 'dev', date: t('logos.online'), priority: 'high',
           detail: {
             breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Tech Lead',
-            assignees: ['LN'], description: 'Full-stack architect with 8+ years building enterprise solutions. Expert in React, Node.js, AWS & AI integrations. Led 50+ successful projects for startups and Fortune 500 clients.',
+            assignees: ['LN'], description: 'Full-stack developer with 8+ years building enterprise solutions. Expert in React, Node.js, AWS & AI integrations. Led 50+ successful projects for startups and Fortune 500 clients.',
             files: [], activity: [
               { user: 'Luis', action: 'Shipped', value: 'NeuroFys AI Module', time: t('logos.ago2h') },
               { user: 'Luis', action: 'Merged', value: 'Feature Branch #142', time: t('logos.ago5h') },
@@ -607,10 +607,10 @@ const LogosSection = () => {
           }
         },
         {
-          id: 'USR-002', title: 'Javier Vargas', tag: 'Backend Lead', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          id: 'USR-002', title: 'Javier Vargas', tag: 'Full Stack Dev', tagType: 'dev', date: t('logos.online'), priority: 'high',
           detail: {
             breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Senior Engineer',
-            assignees: ['JV'], description: 'Backend specialist mastering Node.js, Python, PostgreSQL & Redis. Architect of scalable APIs serving 100K+ daily requests. HIPAA & security compliance expert.',
+            assignees: ['JV'], description: 'Full-stack developer mastering React, Node.js, Python, PostgreSQL & Redis. Architect of scalable APIs serving 100K+ daily requests. HIPAA & security compliance expert.',
             files: [], activity: [
               { user: 'Javier', action: 'Optimized', value: 'API Response 40%', time: t('logos.ago2h') },
               { user: 'Javier', action: 'Deployed', value: 'v2.4.0', time: t('logos.yesterday') },
