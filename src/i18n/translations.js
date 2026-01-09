@@ -2272,6 +2272,10 @@ export const translations = {
       ctaQuote: 'Devis',
       includes: 'Inclut:',
       footer: 'Tous les forfaits incluent garantie de satisfaction et code source complet',
+      // Discount countdown
+      limitedOffer: 'Offre à durée limitée',
+      dayLeft: 'jour restant',
+      daysLeft: 'jours restants',
       // Package complexity
       lowComplexity: 'Faible complexité',
       mediumComplexity: 'Complexité moyenne',
@@ -2891,6 +2895,10 @@ export const translations = {
       ctaQuote: 'Angebot',
       includes: 'Beinhaltet:',
       footer: 'Alle Pakete beinhalten Zufriedenheitsgarantie und vollständigen Quellcode',
+      // Discount countdown
+      limitedOffer: 'Zeitlich begrenztes Angebot',
+      dayLeft: 'Tag übrig',
+      daysLeft: 'Tage übrig',
       // Package complexity
       lowComplexity: 'Niedrige Komplexität',
       mediumComplexity: 'Mittlere Komplexität',
@@ -3509,6 +3517,10 @@ export const translations = {
       ctaQuote: '获取报价',
       includes: '包含：',
       footer: '所有套餐都包含满意保证和完整源代码',
+      // Discount countdown
+      limitedOffer: '限时优惠',
+      dayLeft: '天剩余',
+      daysLeft: '天剩余',
       // Package complexity
       lowComplexity: '低复杂度',
       mediumComplexity: '中等复杂度',
@@ -4128,6 +4140,10 @@ export const translations = {
       ctaQuote: '見積もり',
       includes: '含まれるもの：',
       footer: 'すべてのパッケージには満足保証と完全なソースコードが含まれています',
+      // Discount countdown
+      limitedOffer: '期間限定オファー',
+      dayLeft: '日残り',
+      daysLeft: '日残り',
       // Package complexity
       lowComplexity: '低複雑度',
       mediumComplexity: '中複雑度',
@@ -4729,6 +4745,10 @@ export const translations = {
       ctaQuote: '견적',
       includes: '포함 사항:',
       footer: '모든 패키지에는 만족 보장과 전체 소스 코드가 포함됩니다',
+      // Discount countdown
+      limitedOffer: '한정 기간 제안',
+      dayLeft: '일 남음',
+      daysLeft: '일 남음',
       // Package complexity
       lowComplexity: '낮은 복잡도',
       mediumComplexity: '중간 복잡도',
@@ -5266,6 +5286,10 @@ export const translations = {
       ctaQuote: 'Báo giá',
       includes: 'Bao gồm:',
       footer: 'Tất cả các gói đều bao gồm bảo đảm hài lòng và mã nguồn hoàn chỉnh',
+      // Discount countdown
+      limitedOffer: 'Ưu đãi có thời hạn',
+      dayLeft: 'ngày còn lại',
+      daysLeft: 'ngày còn lại',
       lowComplexity: 'Độ phức tạp thấp',
       mediumComplexity: 'Độ phức tạp trung bình',
       highComplexity: 'Độ phức tạp cao',
@@ -5798,6 +5822,10 @@ export const translations = {
       ctaQuote: 'عرض سعر',
       includes: 'يشمل:',
       footer: 'جميع الباقات تشمل ضمان الرضا والكود المصدري الكامل',
+      // Discount countdown
+      limitedOffer: 'عرض لفترة محدودة',
+      dayLeft: 'يوم متبقي',
+      daysLeft: 'أيام متبقية',
       lowComplexity: 'تعقيد منخفض',
       mediumComplexity: 'تعقيد متوسط',
       highComplexity: 'تعقيد عالي',
@@ -6330,6 +6358,10 @@ export const translations = {
       ctaQuote: 'Preventivo',
       includes: 'Include:',
       footer: 'Tutti i pacchetti includono garanzia di soddisfazione e codice sorgente completo',
+      // Discount countdown
+      limitedOffer: 'Offerta a tempo limitato',
+      dayLeft: 'giorno rimanente',
+      daysLeft: 'giorni rimanenti',
       lowComplexity: 'Bassa complessità',
       mediumComplexity: 'Media complessità',
       highComplexity: 'Alta complessità',
@@ -6862,6 +6894,10 @@ export const translations = {
       ctaQuote: 'Получить цену',
       includes: 'Включает:',
       footer: 'Все пакеты включают гарантию удовлетворения и полный исходный код',
+      // Discount countdown
+      limitedOffer: 'Ограниченное предложение',
+      dayLeft: 'день осталось',
+      daysLeft: 'дней осталось',
       lowComplexity: 'Низкая сложность',
       mediumComplexity: 'Средняя сложность',
       highComplexity: 'Высокая сложность',
@@ -7394,6 +7430,10 @@ export const translations = {
       ctaQuote: 'कोट पाएं',
       includes: 'शामिल है:',
       footer: 'सभी पैकेज में संतुष्टि गारंटी और पूर्ण सोर्स कोड शामिल है',
+      // Discount countdown
+      limitedOffer: 'सीमित समय का ऑफर',
+      dayLeft: 'दिन बाकी',
+      daysLeft: 'दिन बाकी',
       lowComplexity: 'कम जटिलता',
       mediumComplexity: 'मध्यम जटिलता',
       highComplexity: 'उच्च जटिलता',
