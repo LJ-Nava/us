@@ -131,9 +131,13 @@
 
   &__description {
     font-size: 0.95rem;
-    color: #64748b;
+    color: #475569;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+
+    @media (max-width: 1024px) {
+      color: #374151;
+    }
   }
 
   &__skills {
@@ -164,8 +168,12 @@
 
   &__subtitle {
     font-size: 1rem;
-    color: #64748b;
+    color: #374151;
     margin-top: 0.5rem;
+
+    @media (max-width: 1024px) {
+      color: #1f2937;
+    }
   }
 }
 
@@ -248,9 +256,13 @@
     z-index: 1;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #475569;
+    color: #374151;
     text-align: center;
     transition: color 0.3s ease;
+
+    @media (max-width: 1024px) {
+      color: #1f2937;
+    }
   }
 }
 
