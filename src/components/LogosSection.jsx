@@ -3,18 +3,167 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../contexts/I18nContext';
 
+// Project images imports
+import romelima1 from '../assets/Romelima/1.png';
+import romelima2 from '../assets/Romelima/2.png';
+import romelima3 from '../assets/Romelima/3.png';
+import romelima4 from '../assets/Romelima/4.png';
+import romelima5 from '../assets/Romelima/5.png';
+
+import cracker1 from '../assets/CrackenLavadero/1.png';
+import cracker2 from '../assets/CrackenLavadero/2.png';
+import cracker3 from '../assets/CrackenLavadero/3.png';
+import cracker4 from '../assets/CrackenLavadero/4.png';
+import cracker5 from '../assets/CrackenLavadero/5.png';
+
+import construcciones1 from '../assets/Consturcciones/1.png';
+import construcciones2 from '../assets/Consturcciones/2.png';
+import construcciones3 from '../assets/Consturcciones/3.png';
+import construcciones4 from '../assets/Consturcciones/4.png';
+import construcciones5 from '../assets/Consturcciones/5.png';
+
+import motive1 from '../assets/motive/1.png';
+import motive2 from '../assets/motive/2.png';
+import motive3 from '../assets/motive/3.png';
+import motive4 from '../assets/motive/4.png';
+import motive5 from '../assets/motive/5.png';
+
+import neuro1 from '../assets/neuro/1.png';
+import neuro2 from '../assets/neuro/2.png';
+import neuro3 from '../assets/neuro/3.png';
+import neuro4 from '../assets/neuro/4.png';
+import neuro5 from '../assets/neuro/5.png';
+
+import physica1 from '../assets/Physuca/1.png';
+import physica2 from '../assets/Physuca/2.png';
+import physica3 from '../assets/Physuca/3.png';
+import physica4 from '../assets/Physuca/4.png';
+import physica5 from '../assets/Physuca/5.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
-// Colors for the wave effect
-const waveColors = [
-  { name: 'gold', primary: '#f59e0b', secondary: '#fbbf24', glow: 'rgba(245, 158, 11, 0.6)' },
-  { name: 'orange', primary: '#f97316', secondary: '#fb923c', glow: 'rgba(249, 115, 22, 0.6)' },
-  { name: 'red', primary: '#ef4444', secondary: '#f87171', glow: 'rgba(239, 68, 68, 0.6)' },
-  { name: 'pink', primary: '#ec4899', secondary: '#f472b6', glow: 'rgba(236, 72, 153, 0.6)' },
-  { name: 'violet', primary: '#8b5cf6', secondary: '#a78bfa', glow: 'rgba(139, 92, 246, 0.6)' },
-  { name: 'cyan', primary: '#06b6d4', secondary: '#22d3ee', glow: 'rgba(6, 182, 212, 0.6)' },
-  { name: 'emerald', primary: '#10b981', secondary: '#34d399', glow: 'rgba(16, 185, 129, 0.6)' },
+// Project images arrays
+const projectImages = {
+  romelima: [romelima1, romelima2, romelima3, romelima4, romelima5],
+  cracker: [cracker1, cracker2, cracker3, cracker4, cracker5],
+  construcciones: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5],
+  motive: [motive1, motive2, motive3, motive4, motive5],
+  neuro: [neuro1, neuro2, neuro3, neuro4, neuro5],
+  physica: [physica1, physica2, physica3, physica4, physica5],
+};
+
+// Complete color palette with 8 primary colors and their tonalities
+const colorPalette = [
+  {
+    name: 'White',
+    emoji: '⚪',
+    tones: [
+      { name: 'Pure', hex: '#ffffff', glow: 'rgba(255, 255, 255, 0.6)' },
+      { name: 'Snow', hex: '#fafafa', glow: 'rgba(250, 250, 250, 0.6)' },
+      { name: 'Ghost', hex: '#f5f5f5', glow: 'rgba(245, 245, 245, 0.6)' },
+      { name: 'Smoke', hex: '#e5e5e5', glow: 'rgba(229, 229, 229, 0.6)' },
+      { name: 'Silver', hex: '#d4d4d4', glow: 'rgba(212, 212, 212, 0.6)' },
+      { name: 'Ash', hex: '#a3a3a3', glow: 'rgba(163, 163, 163, 0.6)' },
+    ]
+  },
+  {
+    name: 'Gold',
+    emoji: '🟡',
+    tones: [
+      { name: 'Cream', hex: '#fef3c7', glow: 'rgba(254, 243, 199, 0.6)' },
+      { name: 'Butter', hex: '#fde68a', glow: 'rgba(253, 230, 138, 0.6)' },
+      { name: 'Honey', hex: '#fbbf24', glow: 'rgba(251, 191, 36, 0.6)' },
+      { name: 'Gold', hex: '#f59e0b', glow: 'rgba(245, 158, 11, 0.6)' },
+      { name: 'Amber', hex: '#d97706', glow: 'rgba(217, 119, 6, 0.6)' },
+      { name: 'Bronze', hex: '#b45309', glow: 'rgba(180, 83, 9, 0.6)' },
+    ]
+  },
+  {
+    name: 'Red',
+    emoji: '🔴',
+    tones: [
+      { name: 'Blush', hex: '#fecaca', glow: 'rgba(254, 202, 202, 0.6)' },
+      { name: 'Coral', hex: '#f87171', glow: 'rgba(248, 113, 113, 0.6)' },
+      { name: 'Scarlet', hex: '#ef4444', glow: 'rgba(239, 68, 68, 0.6)' },
+      { name: 'Ruby', hex: '#dc2626', glow: 'rgba(220, 38, 38, 0.6)' },
+      { name: 'Crimson', hex: '#b91c1c', glow: 'rgba(185, 28, 28, 0.6)' },
+      { name: 'Wine', hex: '#7f1d1d', glow: 'rgba(127, 29, 29, 0.6)' },
+    ]
+  },
+  {
+    name: 'Fuchsia',
+    emoji: '🟣',
+    tones: [
+      { name: 'Lavender', hex: '#f5d0fe', glow: 'rgba(245, 208, 254, 0.6)' },
+      { name: 'Orchid', hex: '#f0abfc', glow: 'rgba(240, 171, 252, 0.6)' },
+      { name: 'Pink', hex: '#e879f9', glow: 'rgba(232, 121, 249, 0.6)' },
+      { name: 'Fuchsia', hex: '#d946ef', glow: 'rgba(217, 70, 239, 0.6)' },
+      { name: 'Magenta', hex: '#c026d3', glow: 'rgba(192, 38, 211, 0.6)' },
+      { name: 'Plum', hex: '#86198f', glow: 'rgba(134, 25, 143, 0.6)' },
+    ]
+  },
+  {
+    name: 'Violet',
+    emoji: '💜',
+    tones: [
+      { name: 'Lilac', hex: '#ddd6fe', glow: 'rgba(221, 214, 254, 0.6)' },
+      { name: 'Periwinkle', hex: '#c4b5fd', glow: 'rgba(196, 181, 253, 0.6)' },
+      { name: 'Amethyst', hex: '#a78bfa', glow: 'rgba(167, 139, 250, 0.6)' },
+      { name: 'Violet', hex: '#8b5cf6', glow: 'rgba(139, 92, 246, 0.6)' },
+      { name: 'Purple', hex: '#7c3aed', glow: 'rgba(124, 58, 237, 0.6)' },
+      { name: 'Indigo', hex: '#5b21b6', glow: 'rgba(91, 33, 182, 0.6)' },
+    ]
+  },
+  {
+    name: 'Cyan',
+    emoji: '🔵',
+    tones: [
+      { name: 'Ice', hex: '#cffafe', glow: 'rgba(207, 250, 254, 0.6)' },
+      { name: 'Sky', hex: '#67e8f9', glow: 'rgba(103, 232, 249, 0.6)' },
+      { name: 'Aqua', hex: '#22d3ee', glow: 'rgba(34, 211, 238, 0.6)' },
+      { name: 'Cyan', hex: '#06b6d4', glow: 'rgba(6, 182, 212, 0.6)' },
+      { name: 'Teal', hex: '#0891b2', glow: 'rgba(8, 145, 178, 0.6)' },
+      { name: 'Ocean', hex: '#0e7490', glow: 'rgba(14, 116, 144, 0.6)' },
+    ]
+  },
+  {
+    name: 'Emerald',
+    emoji: '🟢',
+    tones: [
+      { name: 'Mint', hex: '#d1fae5', glow: 'rgba(209, 250, 229, 0.6)' },
+      { name: 'Seafoam', hex: '#6ee7b7', glow: 'rgba(110, 231, 183, 0.6)' },
+      { name: 'Jade', hex: '#34d399', glow: 'rgba(52, 211, 153, 0.6)' },
+      { name: 'Emerald', hex: '#10b981', glow: 'rgba(16, 185, 129, 0.6)' },
+      { name: 'Forest', hex: '#059669', glow: 'rgba(5, 150, 105, 0.6)' },
+      { name: 'Pine', hex: '#047857', glow: 'rgba(4, 120, 87, 0.6)' },
+    ]
+  },
+  {
+    name: 'Rose',
+    emoji: '🌸',
+    tones: [
+      { name: 'Blush', hex: '#ffe4e6', glow: 'rgba(255, 228, 230, 0.6)' },
+      { name: 'Petal', hex: '#fecdd3', glow: 'rgba(254, 205, 211, 0.6)' },
+      { name: 'Coral', hex: '#fda4af', glow: 'rgba(253, 164, 175, 0.6)' },
+      { name: 'Rose', hex: '#fb7185', glow: 'rgba(251, 113, 133, 0.6)' },
+      { name: 'Cherry', hex: '#f43f5e', glow: 'rgba(244, 63, 94, 0.6)' },
+      { name: 'Ruby', hex: '#e11d48', glow: 'rgba(225, 29, 72, 0.6)' },
+    ]
+  },
 ];
+
+// Legacy format for LUMEN AI core (uses selected color)
+const getWaveColor = (familyIdx, toneIdx) => {
+  const family = colorPalette[familyIdx];
+  const tone = family.tones[toneIdx];
+  const lighterTone = family.tones[Math.max(0, toneIdx - 1)];
+  return {
+    name: `${family.name} ${tone.name}`,
+    primary: tone.hex,
+    secondary: lighterTone.hex,
+    glow: tone.glow
+  };
+};
 
 // Iconos para el dashboard
 const icons = {
@@ -73,46 +222,82 @@ const icons = {
       <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5zM12 2h3.5a3.5 3.5 0 1 1 0 7H12V2zm0 7h3.5a3.5 3.5 0 1 1 0 7H12v-7zm-7 7a3.5 3.5 0 0 1 3.5-3.5H12v3.5a3.5 3.5 0 1 1-7 0zm7-3.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
     </svg>
   ),
+  lumen: (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-5-9h10v2H7z"/>
+      <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.6"/>
+    </svg>
+  ),
+  palette: (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+      <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.2-.64-1.67-.08-.1-.13-.21-.13-.33 0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 8 17.5 8s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+    </svg>
+  ),
+  link: (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg>
+  ),
+  external: (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+      <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+    </svg>
+  ),
 };
 
 const LogosSection = () => {
   const sectionRef = useRef(null);
   const mockupRef = useRef(null);
   const aiFaceRef = useRef(null);
-  // Random beautiful color on each page load
-  const [colorIndex, setColorIndex] = useState(() => Math.floor(Math.random() * waveColors.length));
+  // Color selection: family (0-7) and tone (0-5)
+  const [colorFamily, setColorFamily] = useState(() => Math.floor(Math.random() * colorPalette.length));
+  const [colorTone, setColorTone] = useState(3); // Default to middle tone
   const [isWaving, setIsWaving] = useState(false);
-  const [activeNav, setActiveNav] = useState('inbox');
-  const colorIndexRef = useRef(colorIndex);
+  const [activeNav, setActiveNav] = useState('lumen');
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const colorFamilyRef = useRef(colorFamily);
   const { t } = useI18n();
+
+  // Get current color based on family and tone
+  const currentColor = getWaveColor(colorFamily, colorTone);
 
   // Keep ref in sync with state
   useEffect(() => {
-    colorIndexRef.current = colorIndex;
-  }, [colorIndex]);
+    colorFamilyRef.current = colorFamily;
+  }, [colorFamily]);
 
-  // Handle click on AI core - only change color state, no animations
+  // Handle click on AI core - cycle through colors
   const handleAIClick = (e) => {
     e.stopPropagation();
     if (isWaving) return;
 
     setIsWaving(true);
 
-    // Get random color different from current
-    let nextIndex;
+    // Get random color family different from current
+    let nextFamily;
     do {
-      nextIndex = Math.floor(Math.random() * waveColors.length);
-    } while (nextIndex === colorIndex && waveColors.length > 1);
+      nextFamily = Math.floor(Math.random() * colorPalette.length);
+    } while (nextFamily === colorFamily && colorPalette.length > 1);
 
-    // Just update the color state - React will re-render with new colors
-    // No GSAP animations that could break the visual structure
+    // Just update the color state
     setTimeout(() => {
-      setColorIndex(nextIndex);
+      setColorFamily(nextFamily);
+      setColorTone(3); // Reset to default tone
       setIsWaving(false);
     }, 100);
   };
 
-  const currentColor = waveColors[colorIndex];
+  // Handle selecting a color family from Panel 2
+  const handleFamilySelect = (familyIdx) => {
+    setColorFamily(familyIdx);
+    setSelectedItemId(`FAMILY-${familyIdx}`);
+  };
+
+  // Handle selecting a tone from Panel 3
+  const handleToneSelect = (toneIdx) => {
+    setColorTone(toneIdx);
+  };
 
   const technologies = [
     {
@@ -274,117 +459,350 @@ const LogosSection = () => {
     },
   ];
 
-  // View content data for each navigation section
+  // View content data for each navigation section - each item has its own detail
   const viewContent = {
     inbox: {
       title: t('logos.inbox'),
       count: '12',
       countLabel: t('logos.tasks'),
-      tasks: [
-        { id: 'PRJ-142', title: t('logos.designLanding'), tag: t('logos.design'), tagType: 'design', date: t('logos.today'), priority: 'high', active: true },
-        { id: 'PRJ-141', title: t('logos.implementCheckout'), tag: t('logos.development'), tagType: 'dev', date: t('logos.tomorrow'), priority: 'medium' },
-        { id: 'PRJ-140', title: t('logos.optimizeImages'), tag: 'Ops', tagType: 'ops', date: t('logos.thisWeek'), priority: 'low' },
-        { id: 'PRJ-139', title: t('logos.createComponents'), tag: t('logos.design'), tagType: 'design', priority: 'medium' },
-        { id: 'PRJ-138', title: t('logos.integratePayments'), tag: t('logos.backend'), tagType: 'dev', date: t('logos.nextWeek'), priority: 'high' },
-      ],
-      detail: {
-        breadcrumb: t('logos.ecommerceApp'),
-        id: 'PRJ-142',
-        title: t('logos.designLanding'),
-        status: t('logos.inProgress'),
-        priority: t('logos.high'),
-        assignees: ['JC', 'MR'],
-        description: t('logos.taskDescription'),
-        files: [{ name: 'landing-v2.fig', type: 'figma' }, { name: 'brief.pdf', type: 'doc' }],
-        activity: [
-          { user: 'Juan', action: t('logos.updatedStatus'), value: t('logos.inProgress'), time: t('logos.ago2h') },
-          { user: 'Maria', action: t('logos.addedFile'), value: 'landing-v2.fig', time: t('logos.ago5h') },
-          { user: 'Juan', action: t('logos.createdTask'), time: t('logos.yesterday') },
-        ]
-      }
+      items: [
+        {
+          id: 'PRJ-142', title: t('logos.designLanding'), tag: t('logos.design'), tagType: 'design', date: t('logos.today'), priority: 'high',
+          detail: {
+            breadcrumb: t('logos.ecommerceApp'), status: t('logos.inProgress'), priorityLabel: t('logos.high'),
+            assignees: ['LN', 'JV'], description: t('logos.taskDescription'),
+            files: [{ name: 'landing-v2.fig', type: 'figma' }, { name: 'brief.pdf', type: 'doc' }],
+            activity: [
+              { user: 'Luis', action: t('logos.updatedStatus'), value: t('logos.inProgress'), time: t('logos.ago2h') },
+              { user: 'Javier', action: t('logos.addedFile'), value: 'landing-v2.fig', time: t('logos.ago5h') },
+            ]
+          }
+        },
+        {
+          id: 'PRJ-141', title: t('logos.implementCheckout'), tag: t('logos.development'), tagType: 'dev', date: t('logos.tomorrow'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.ecommerceApp'), status: t('logos.inProgress'), priorityLabel: t('logos.medium'),
+            assignees: ['JV', 'LM'], description: 'Implementar flujo completo de checkout con validación de datos y procesamiento de pagos.',
+            files: [{ name: 'checkout-flow.fig', type: 'figma' }],
+            activity: [
+              { user: 'Javier', action: t('logos.createdTask'), time: t('logos.yesterday') },
+            ]
+          }
+        },
+        {
+          id: 'PRJ-140', title: t('logos.optimizeImages'), tag: 'Ops', tagType: 'ops', date: t('logos.thisWeek'), priority: 'low',
+          detail: {
+            breadcrumb: t('logos.ecommerceApp'), status: 'Pending', priorityLabel: 'Low',
+            assignees: ['LI'], description: 'Optimizar todas las imágenes del sitio para mejorar tiempos de carga.',
+            files: [], activity: [{ user: 'Lina', action: t('logos.createdTask'), time: t('logos.lastWeek') }]
+          }
+        },
+        {
+          id: 'PRJ-139', title: t('logos.createComponents'), tag: t('logos.design'), tagType: 'design', priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.dashboardUI'), status: t('logos.inProgress'), priorityLabel: t('logos.medium'),
+            assignees: ['LE', 'LI'], description: 'Crear biblioteca de componentes UI reutilizables para el dashboard.',
+            files: [{ name: 'components.fig', type: 'figma' }],
+            activity: [{ user: 'Lerys', action: t('logos.addedFile'), value: 'components.fig', time: t('logos.ago5h') }]
+          }
+        },
+        {
+          id: 'PRJ-138', title: t('logos.integratePayments'), tag: t('logos.backend'), tagType: 'dev', date: t('logos.nextWeek'), priority: 'high',
+          detail: {
+            breadcrumb: t('logos.ecommerceApp'), status: 'Planned', priorityLabel: t('logos.high'),
+            assignees: ['JV'], description: 'Integrar pasarela de pagos Stripe y PayPal para procesamiento seguro.',
+            files: [{ name: 'api-docs.pdf', type: 'doc' }],
+            activity: [{ user: 'Javier', action: t('logos.createdTask'), time: t('logos.lastWeek') }]
+          }
+        },
+      ]
     },
     projects: {
       title: t('logos.projects'),
-      count: '8',
-      countLabel: t('logos.active'),
-      tasks: [
-        { id: 'PRJ-001', title: t('logos.ecommerceApp'), tag: t('logos.development'), tagType: 'dev', date: '85%', priority: 'high', active: true },
-        { id: 'PRJ-002', title: t('logos.landingPage'), tag: t('logos.design'), tagType: 'design', date: '100%', priority: 'low' },
-        { id: 'PRJ-003', title: t('logos.dashboardUI'), tag: t('logos.design'), tagType: 'design', date: '60%', priority: 'medium' },
-        { id: 'PRJ-004', title: t('logos.mobileApp'), tag: t('logos.development'), tagType: 'dev', date: '40%', priority: 'high' },
-        { id: 'PRJ-005', title: t('logos.apiBackend'), tag: t('logos.backend'), tagType: 'dev', date: '90%', priority: 'medium' },
-      ],
-      detail: {
-        breadcrumb: t('logos.projects'),
-        id: 'PRJ-001',
-        title: t('logos.ecommerceApp'),
-        status: t('logos.inProgress'),
-        priority: t('logos.high'),
-        assignees: ['JC', 'MR', 'AL'],
-        description: t('logos.projectDescription'),
-        files: [{ name: 'requirements.pdf', type: 'doc' }, { name: 'wireframes.fig', type: 'figma' }],
-        activity: [
-          { user: 'Alex', action: t('logos.completedTask'), value: 'Auth Module', time: t('logos.ago2h') },
-          { user: 'Maria', action: t('logos.addedFile'), value: 'wireframes.fig', time: t('logos.ago5h') },
-          { user: 'Juan', action: t('logos.createdProject'), time: t('logos.lastWeek') },
-        ]
-      }
+      count: '6',
+      countLabel: t('logos.portfolio'),
+      items: [
+        {
+          id: 'PRJ-001', title: 'Romelima', tag: 'Restaurant', tagType: 'design', date: '100%', priority: 'high',
+          images: projectImages.romelima,
+          url: '#/portfolio#romelima',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Featured',
+            assignees: ['LN', 'JV'], description: 'Premium website for Peruvian restaurant with interactive digital menu and reservations.',
+            files: [{ name: 'React + GSAP', type: 'code' }, { name: 'Responsive', type: 'doc' }],
+            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+          }
+        },
+        {
+          id: 'PRJ-002', title: 'El Cracker', tag: 'Car Wash', tagType: 'dev', date: '100%', priority: 'high',
+          images: projectImages.cracker,
+          url: '#/portfolio#cracker',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Featured',
+            assignees: ['LN', 'LE'], description: 'Booking platform for car wash with dynamic pricing and appointment system.',
+            files: [{ name: 'React + Node', type: 'code' }, { name: 'API REST', type: 'doc' }],
+            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+          }
+        },
+        {
+          id: 'PRJ-003', title: 'Construcciones', tag: 'Construction', tagType: 'design', date: '100%', priority: 'medium',
+          images: projectImages.construcciones,
+          url: '#/portfolio#construcciones',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Business',
+            assignees: ['LN', 'LI'], description: 'Corporate website for construction company with project gallery.',
+            files: [{ name: 'React + SCSS', type: 'code' }, { name: 'Gallery', type: 'doc' }],
+            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+          }
+        },
+        {
+          id: 'PRJ-004', title: 'Motive HC', tag: 'Healthcare', tagType: 'dev', date: '100%', priority: 'high',
+          images: projectImages.motive,
+          url: '#/portfolio#motive',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Enterprise',
+            assignees: ['LN', 'JV'], description: 'B2B portal for healthcare staffing agency with nurse applications.',
+            files: [{ name: 'React + AWS', type: 'code' }, { name: 'HIPAA', type: 'doc' }],
+            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+          }
+        },
+        {
+          id: 'PRJ-005', title: 'NeuroFys', tag: 'SaaS/EMR', tagType: 'dev', date: '95%', priority: 'high',
+          images: projectImages.neuro,
+          url: '#/portfolio#neurofys',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: t('logos.inProgress'), priorityLabel: 'Enterprise',
+            assignees: ['LN', 'JV', 'LE'], description: 'Medical management system with AI. HIPAA compliant records.',
+            files: [{ name: 'React + AI', type: 'code' }, { name: 'EMR System', type: 'doc' }],
+            activity: [{ user: 'Luis', action: t('logos.updatedStatus'), value: 'AI Module', time: t('logos.ago2h') }]
+          }
+        },
+        {
+          id: 'PRJ-006', title: 'Physica', tag: 'Clinic', tagType: 'design', date: '100%', priority: 'medium',
+          images: projectImages.physica,
+          url: '#/portfolio#physica',
+          detail: {
+            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Business',
+            assignees: ['LN', 'LI'], description: 'Physical therapy clinic website with online appointment system.',
+            files: [{ name: 'React + Forms', type: 'code' }, { name: 'Booking', type: 'doc' }],
+            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+          }
+        },
+      ]
     },
     team: {
       title: t('logos.team'),
-      count: '6',
+      count: '8',
       countLabel: t('logos.members'),
-      tasks: [
-        { id: 'USR-001', title: 'Juan Carlos', tag: 'Lead Dev', tagType: 'dev', date: t('logos.online'), priority: 'high', active: true },
-        { id: 'USR-002', title: 'Maria Rodriguez', tag: t('logos.design'), tagType: 'design', date: t('logos.online'), priority: 'medium' },
-        { id: 'USR-003', title: 'Alex Martinez', tag: t('logos.backend'), tagType: 'dev', date: t('logos.away'), priority: 'low' },
-        { id: 'USR-004', title: 'Sofia Lopez', tag: 'QA', tagType: 'ops', date: t('logos.online'), priority: 'medium' },
-        { id: 'USR-005', title: 'Carlos Ruiz', tag: 'DevOps', tagType: 'ops', date: t('logos.offline'), priority: 'low' },
-      ],
-      detail: {
-        breadcrumb: t('logos.team'),
-        id: 'USR-001',
-        title: 'Juan Carlos',
-        status: t('logos.online'),
-        priority: 'Lead Developer',
-        assignees: ['JC'],
-        description: t('logos.teamDescription'),
-        files: [],
-        activity: [
-          { user: 'Juan', action: t('logos.completedTask'), value: 'PRJ-142', time: t('logos.ago2h') },
-          { user: 'Juan', action: t('logos.reviewedPR'), value: '#234', time: t('logos.ago5h') },
-          { user: 'Juan', action: t('logos.joined'), time: t('logos.lastMonth') },
-        ]
-      }
+      items: [
+        {
+          id: 'USR-001', title: 'Luis Nava', tag: 'Founder & CTO', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Tech Lead',
+            assignees: ['LN'], description: 'Full-stack architect with 8+ years building enterprise solutions. Expert in React, Node.js, AWS & AI integrations. Led 50+ successful projects for startups and Fortune 500 clients.',
+            files: [], activity: [
+              { user: 'Luis', action: 'Shipped', value: 'NeuroFys AI Module', time: t('logos.ago2h') },
+              { user: 'Luis', action: 'Merged', value: 'Feature Branch #142', time: t('logos.ago5h') },
+            ]
+          }
+        },
+        {
+          id: 'USR-002', title: 'Javier Vargas', tag: 'Backend Lead', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Senior Engineer',
+            assignees: ['JV'], description: 'Backend specialist mastering Node.js, Python, PostgreSQL & Redis. Architect of scalable APIs serving 100K+ daily requests. HIPAA & security compliance expert.',
+            files: [], activity: [
+              { user: 'Javier', action: 'Optimized', value: 'API Response 40%', time: t('logos.ago2h') },
+              { user: 'Javier', action: 'Deployed', value: 'v2.4.0', time: t('logos.yesterday') },
+            ]
+          }
+        },
+        {
+          id: 'USR-003', title: 'Lerys Maria', tag: 'UI/UX Lead', tagType: 'design', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Design Lead',
+            assignees: ['LE'], description: 'Creative director specializing in premium UI/UX design. Master of Figma, motion design & design systems. Creates interfaces that convert and delight users.',
+            files: [], activity: [
+              { user: 'Lerys', action: 'Created', value: 'Component Library v3', time: t('logos.ago5h') },
+              { user: 'Lerys', action: 'Designed', value: 'Dashboard Analytics', time: t('logos.yesterday') },
+            ]
+          }
+        },
+        {
+          id: 'USR-004', title: 'Lina Maria', tag: 'Frontend Dev', tagType: 'dev', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'React Expert',
+            assignees: ['LI'], description: 'Frontend engineer specializing in React, TypeScript & animations. Creates pixel-perfect implementations with GSAP & Framer Motion. Performance optimization advocate.',
+            files: [], activity: [
+              { user: 'Lina', action: 'Implemented', value: 'Smooth Animations', time: t('logos.ago2h') },
+              { user: 'Lina', action: 'Fixed', value: 'Mobile Responsiveness', time: t('logos.yesterday') },
+            ]
+          }
+        },
+        {
+          id: 'USR-005', title: 'Deivi Gutierrez', tag: 'DevOps', tagType: 'ops', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Cloud Architect',
+            assignees: ['DG'], description: 'Cloud infrastructure expert with AWS & GCP certifications. Masters Docker, Kubernetes & Terraform. Ensures 99.9% uptime with automated CI/CD pipelines.',
+            files: [], activity: [
+              { user: 'Deivi', action: 'Configured', value: 'Auto-scaling', time: t('logos.yesterday') },
+            ]
+          }
+        },
+        {
+          id: 'USR-006', title: 'Beyker Tovar', tag: 'QA Engineer', tagType: 'ops', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Quality Lead',
+            assignees: ['BT'], description: 'Quality assurance specialist ensuring flawless product delivery. Expert in automated testing, Cypress, Jest & performance testing. Zero-bug advocate.',
+            files: [], activity: [
+              { user: 'Beyker', action: 'Tested', value: 'Release v2.4', time: t('logos.ago2h') },
+            ]
+          }
+        },
+        {
+          id: 'USR-007', title: 'Daniela Nava', tag: 'Content Lead', tagType: 'design', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Creative Writer',
+            assignees: ['DN'], description: 'Content strategist and copywriter crafting compelling brand narratives. Expert in UX writing, blog content & social media storytelling.',
+            files: [], activity: [
+              { user: 'Daniela', action: 'Published', value: 'Brand Guidelines', time: t('logos.ago2h') },
+            ]
+          }
+        },
+        {
+          id: 'USR-008', title: 'Yorguin Vargas', tag: 'Marketing', tagType: 'design', date: t('logos.online'), priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Growth Lead',
+            assignees: ['YV'], description: 'Digital marketing strategist driving brand growth and client acquisition. Expert in SEO, social media, content strategy & conversion optimization.',
+            files: [], activity: [
+              { user: 'Yorguin', action: 'Launched', value: 'Q4 Campaign', time: t('logos.ago5h') },
+            ]
+          }
+        },
+      ]
     },
     settings: {
       title: t('logos.settings'),
       count: '4',
       countLabel: t('logos.sections'),
-      tasks: [
-        { id: 'SET-001', title: t('logos.generalSettings'), tag: t('logos.system'), tagType: 'ops', priority: 'medium', active: true },
-        { id: 'SET-002', title: t('logos.notifications'), tag: t('logos.preferences'), tagType: 'design', priority: 'low' },
-        { id: 'SET-003', title: t('logos.security'), tag: t('logos.account'), tagType: 'dev', priority: 'high' },
-        { id: 'SET-004', title: t('logos.integrations'), tag: 'API', tagType: 'dev', priority: 'medium' },
-      ],
-      detail: {
-        breadcrumb: t('logos.settings'),
-        id: 'SET-001',
-        title: t('logos.generalSettings'),
-        status: t('logos.configured'),
-        priority: t('logos.system'),
-        assignees: [],
-        description: t('logos.settingsDescription'),
-        files: [],
-        activity: [
-          { user: t('logos.system'), action: t('logos.backupCompleted'), time: t('logos.ago2h') },
-          { user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.yesterday') },
-        ]
-      }
+      items: [
+        {
+          id: 'SET-001', title: t('logos.generalSettings'), tag: t('logos.system'), tagType: 'ops', priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.settings'), status: t('logos.configured'), priorityLabel: t('logos.system'),
+            assignees: [], description: t('logos.settingsDescription'),
+            files: [], activity: [{ user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.yesterday') }]
+          }
+        },
+        {
+          id: 'SET-002', title: t('logos.notifications'), tag: t('logos.preferences'), tagType: 'design', priority: 'low',
+          detail: {
+            breadcrumb: t('logos.settings'), status: t('logos.configured'), priorityLabel: t('logos.preferences'),
+            assignees: [], description: 'Configurar notificaciones por email, push y en la aplicación.',
+            files: [], activity: [{ user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.lastWeek') }]
+          }
+        },
+        {
+          id: 'SET-003', title: t('logos.security'), tag: t('logos.account'), tagType: 'dev', priority: 'high',
+          detail: {
+            breadcrumb: t('logos.settings'), status: t('logos.configured'), priorityLabel: t('logos.account'),
+            assignees: [], description: 'Configuración de seguridad: 2FA, permisos y políticas de acceso.',
+            files: [], activity: [{ user: t('logos.system'), action: t('logos.backupCompleted'), time: t('logos.ago2h') }]
+          }
+        },
+        {
+          id: 'SET-004', title: t('logos.integrations'), tag: 'API', tagType: 'dev', priority: 'medium',
+          detail: {
+            breadcrumb: t('logos.settings'), status: 'Active', priorityLabel: 'API',
+            assignees: [], description: 'Gestionar integraciones con servicios externos: Slack, GitHub, Jira.',
+            files: [], activity: [{ user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.yesterday') }]
+          }
+        },
+      ]
+    },
+    lumen: {
+      title: 'LUMEN AI',
+      count: '8',
+      countLabel: t('logos.colors') || 'colors',
+      items: colorPalette.map((family, idx) => ({
+        id: `FAM-${idx + 1}`,
+        title: family.name,
+        tag: family.tones[3].hex,
+        tagType: 'color',
+        familyIdx: idx,
+        priority: colorFamily === idx ? 'high' : 'medium',
+        detail: {
+          breadcrumb: 'LUMEN Engine',
+          status: colorFamily === idx ? t('logos.active') || 'Active' : t('logos.available') || 'Available',
+          priorityLabel: t('logos.colorTheme') || 'Color Theme',
+          assignees: [],
+          description: `${t('logos.colorDesc') || 'Premium color family for LUMEN AI. Click to select this color family.'} 6 tonalities available.`,
+          hex: family.tones[3].hex,
+          files: [],
+          activity: [
+            { user: 'LUMEN', action: colorFamily === idx ? (t('logos.currentlyActive') || 'Currently active') : (t('logos.readyToApply') || 'Ready to apply'), time: '' }
+          ]
+        }
+      }))
     }
   };
 
   const currentView = viewContent[activeNav];
+
+  // Get selected item or first item as default
+  const getSelectedItem = () => {
+    if (!currentView?.items?.length) return null;
+    if (selectedItemId) {
+      const found = currentView.items.find(item => item.id === selectedItemId);
+      if (found) return found;
+    }
+    return currentView.items[0];
+  };
+
+  const selectedItem = getSelectedItem();
+
+  // Auto-carousel for project images
+  useEffect(() => {
+    if (activeNav !== 'projects' || !selectedItem?.images?.length) return;
+
+    const interval = setInterval(() => {
+      setCarouselIndex(prev => (prev + 1) % selectedItem.images.length);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [activeNav, selectedItem]);
+
+  // Reset carousel when selecting a different project
+  useEffect(() => {
+    setCarouselIndex(0);
+  }, [selectedItemId]);
+
+  // Handle navigation change - reset selected item
+  const handleNavChange = (nav) => {
+    setActiveNav(nav);
+    setSelectedItemId(null);
+    setCarouselIndex(0);
+  };
+
+  // Handle clicking on a project from favorites/recent
+  const handleProjectClick = (projectTitle) => {
+    setActiveNav('projects');
+    // Find the project by title
+    const project = viewContent.projects.items.find(item =>
+      item.title === projectTitle || item.title === t(`logos.${projectTitle.toLowerCase().replace(/\s+/g, '')}`)
+    );
+    if (project) {
+      setSelectedItemId(project.id);
+    } else {
+      setSelectedItemId(null);
+    }
+  };
+
+  // Handle color selection from LUMEN panel
+  const handleColorSelect = (colorIdx, itemId) => {
+    setColorIndex(colorIdx);
+    setSelectedItemId(itemId);
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -775,7 +1193,7 @@ const LogosSection = () => {
             <div className="logos-section__nav">
               <div
                 className={`logos-section__nav-item ${activeNav === 'inbox' ? 'logos-section__nav-item--active' : ''}`}
-                onClick={() => setActiveNav('inbox')}
+                onClick={() => handleNavChange('inbox')}
               >
                 {icons.inbox}
                 <span>{t('logos.inbox')}</span>
@@ -783,38 +1201,47 @@ const LogosSection = () => {
               </div>
               <div
                 className={`logos-section__nav-item ${activeNav === 'projects' ? 'logos-section__nav-item--active' : ''}`}
-                onClick={() => setActiveNav('projects')}
+                onClick={() => handleNavChange('projects')}
               >
                 {icons.projects}
                 <span>{t('logos.projects')}</span>
               </div>
               <div
                 className={`logos-section__nav-item ${activeNav === 'team' ? 'logos-section__nav-item--active' : ''}`}
-                onClick={() => setActiveNav('team')}
+                onClick={() => handleNavChange('team')}
               >
                 {icons.team}
                 <span>{t('logos.team')}</span>
               </div>
               <div
                 className={`logos-section__nav-item ${activeNav === 'settings' ? 'logos-section__nav-item--active' : ''}`}
-                onClick={() => setActiveNav('settings')}
+                onClick={() => handleNavChange('settings')}
               >
                 {icons.settings}
                 <span>{t('logos.settings')}</span>
+              </div>
+              <div
+                className={`logos-section__nav-item logos-section__nav-item--lumen ${activeNav === 'lumen' ? 'logos-section__nav-item--active' : ''}`}
+                onClick={() => handleNavChange('lumen')}
+                style={{ '--nav-accent': currentColor.primary }}
+              >
+                {icons.lumen}
+                <span>LUMEN</span>
+                <span className="logos-section__nav-color-dot" style={{ background: currentColor.primary }}></span>
               </div>
             </div>
 
             <div className="logos-section__nav-section">
               <span className="logos-section__nav-label">{t('logos.favorites')}</span>
-              <div className="logos-section__nav-item">
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.ecommerceApp'))}>
                 <span className="logos-section__dot logos-section__dot--purple"></span>
                 <span>{t('logos.ecommerceApp')}</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.landingPage'))}>
                 <span className="logos-section__dot logos-section__dot--blue"></span>
                 <span>{t('logos.landingPage')}</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.dashboardUI'))}>
                 <span className="logos-section__dot logos-section__dot--green"></span>
                 <span>{t('logos.dashboardUI')}</span>
               </div>
@@ -822,11 +1249,11 @@ const LogosSection = () => {
 
             <div className="logos-section__nav-section">
               <span className="logos-section__nav-label">{t('logos.recent')}</span>
-              <div className="logos-section__nav-item">
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.mobileApp'))}>
                 <span className="logos-section__dot logos-section__dot--blue"></span>
                 <span>{t('logos.mobileApp')}</span>
               </div>
-              <div className="logos-section__nav-item">
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.apiBackend'))}>
                 <span className="logos-section__dot logos-section__dot--purple"></span>
                 <span>{t('logos.apiBackend')}</span>
               </div>
@@ -840,91 +1267,217 @@ const LogosSection = () => {
               <span className="logos-section__list-count">{currentView.count} {currentView.countLabel}</span>
             </div>
 
-            {currentView.tasks.map((task, index) => (
-              <div
-                key={task.id}
-                className={`logos-section__task ${task.active ? 'logos-section__task--active' : ''}`}
-              >
-                <div className={`logos-section__task-priority logos-section__task-priority--${task.priority}`}></div>
-                <div className="logos-section__task-content">
-                  <span className="logos-section__task-id">{task.id}</span>
-                  <span className="logos-section__task-title">{task.title}</span>
-                  <div className="logos-section__task-meta">
-                    <span className={`logos-section__task-tag logos-section__task-tag--${task.tagType}`}>{task.tag}</span>
-                    {task.date && <span className="logos-section__task-date">{icons.clock} {task.date}</span>}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Panel 3: Detalle dinámico basado en navegación activa */}
-          <div className="logos-section__panel logos-section__panel--detail">
-            <div className="logos-section__detail-header">
-              <div className="logos-section__detail-breadcrumb">
-                <span>{currentView.detail.breadcrumb}</span>
-                <span className="logos-section__detail-sep">›</span>
-                <span>{currentView.detail.id}</span>
-              </div>
-            </div>
-
-            <h2 className="logos-section__detail-title">{currentView.detail.title}</h2>
-
-            <div className="logos-section__detail-props">
-              <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">{t('logos.status')}</span>
-                <span className="logos-section__detail-status">
-                  <span className="logos-section__status-dot logos-section__status-dot--progress"></span>
-                  {currentView.detail.status}
-                </span>
-              </div>
-              <div className="logos-section__detail-prop">
-                <span className="logos-section__detail-label">{t('logos.priority')}</span>
-                <span className="logos-section__detail-priority">
-                  {icons.star}
-                  {currentView.detail.priority}
-                </span>
-              </div>
-              {currentView.detail.assignees.length > 0 && (
-                <div className="logos-section__detail-prop">
-                  <span className="logos-section__detail-label">{t('logos.assigned')}</span>
-                  <div className="logos-section__avatars">
-                    {currentView.detail.assignees.map((assignee, index) => (
-                      <div key={index} className="logos-section__avatar">{assignee}</div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="logos-section__detail-desc">
-              <p>{currentView.detail.description}</p>
-            </div>
-
-            {currentView.detail.files.length > 0 && (
-              <div className="logos-section__detail-attachments">
-                <span className="logos-section__detail-label">{t('logos.files')}</span>
-                <div className="logos-section__files">
-                  {currentView.detail.files.map((file, index) => (
-                    <div key={index} className="logos-section__file">
-                      {file.type === 'figma' ? icons.figma : icons.doc}
-                      <span>{file.name}</span>
+            {activeNav === 'lumen' ? (
+              // Panel 2: 8 Primary Color Families
+              <div className="logos-section__palette">
+                <div className="logos-section__palette-scroll">
+                  {colorPalette.map((family, idx) => (
+                    <div
+                      key={`family-${idx}`}
+                      className={`logos-section__palette-family ${colorFamily === idx ? 'logos-section__palette-family--active' : ''}`}
+                      onClick={() => handleFamilySelect(idx)}
+                    >
+                      <div className="logos-section__palette-family-colors">
+                        {family.tones.map((tone, toneIdx) => (
+                          <div
+                            key={toneIdx}
+                            className="logos-section__palette-family-tone"
+                            style={{ background: tone.hex }}
+                          ></div>
+                        ))}
+                      </div>
+                      <div className="logos-section__palette-family-info">
+                        <span className="logos-section__palette-family-name">{family.name}</span>
+                        {colorFamily === idx && (
+                          <span className="logos-section__palette-family-check">{icons.check}</span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
+                <div className="logos-section__palette-footer">
+                  <div className="logos-section__palette-footer-orb" style={{
+                    background: `radial-gradient(circle at 30% 30%, ${currentColor.secondary}, ${currentColor.primary})`,
+                    boxShadow: `0 0 20px ${currentColor.glow}`
+                  }}></div>
+                  <div className="logos-section__palette-footer-info">
+                    <span className="logos-section__palette-footer-label">Active</span>
+                    <span className="logos-section__palette-footer-name" style={{ color: currentColor.primary }}>{currentColor.name}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // Regular task/item list with scroll
+              <div className="logos-section__list-scroll">
+                {currentView.items.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`logos-section__task ${selectedItem?.id === item.id ? 'logos-section__task--active' : ''}`}
+                    onClick={() => setSelectedItemId(item.id)}
+                  >
+                    <div className={`logos-section__task-priority logos-section__task-priority--${item.priority}`}></div>
+                    <div className="logos-section__task-content">
+                      <span className="logos-section__task-id">{item.id}</span>
+                      <span className="logos-section__task-title">{item.title}</span>
+                      <div className="logos-section__task-meta">
+                        <span className={`logos-section__task-tag logos-section__task-tag--${item.tagType}`}>{item.tag}</span>
+                        {item.date && <span className="logos-section__task-date">{icons.clock} {item.date}</span>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
+          </div>
 
-            <div className="logos-section__detail-activity">
-              <span className="logos-section__detail-label">{t('logos.activity')}</span>
-              {currentView.detail.activity.map((item, index) => (
-                <div key={index} className="logos-section__activity-item">
-                  <div className="logos-section__avatar logos-section__avatar--sm">{item.user.substring(0, 2).toUpperCase()}</div>
-                  <span>{item.user} {item.action} {item.value && <strong>{item.value}</strong>}</span>
-                  <span className="logos-section__activity-time">{item.time}</span>
+          {/* Panel 3: Detalle dinámico basado en item seleccionado */}
+          <div className="logos-section__panel logos-section__panel--detail">
+            {activeNav === 'lumen' ? (
+              // LUMEN: Always show tones panel
+              <div className="logos-section__tones-panel">
+                <div className="logos-section__tones-header">
+                  <h3 className="logos-section__tones-title">{colorPalette[colorFamily].name}</h3>
+                  <span className="logos-section__tones-subtitle">Select tonality</span>
                 </div>
-              ))}
-            </div>
+                <div className="logos-section__tones-grid">
+                  {colorPalette[colorFamily].tones.map((tone, idx) => (
+                    <div
+                      key={idx}
+                      className={`logos-section__tones-item ${colorTone === idx ? 'logos-section__tones-item--active' : ''}`}
+                      onClick={() => handleToneSelect(idx)}
+                      style={{ '--tone-color': tone.hex, '--tone-glow': tone.glow }}
+                    >
+                      <div className="logos-section__tones-item-swatch" style={{ background: tone.hex }}>
+                        {colorTone === idx && (
+                          <span className="logos-section__tones-item-check">{icons.check}</span>
+                        )}
+                      </div>
+                      <div className="logos-section__tones-item-info">
+                        <span className="logos-section__tones-item-name">{tone.name}</span>
+                        <span className="logos-section__tones-item-hex">{tone.hex}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="logos-section__tones-preview">
+                  <div className="logos-section__tones-preview-orb" style={{
+                    background: `radial-gradient(circle at 35% 35%, ${currentColor.secondary}, ${currentColor.primary})`,
+                    boxShadow: `0 0 40px ${currentColor.glow}, 0 0 80px ${currentColor.glow}`
+                  }}>
+                    <div className="logos-section__tones-preview-inner"></div>
+                  </div>
+                  <div className="logos-section__tones-preview-info">
+                    <span className="logos-section__tones-preview-label">LUMEN Theme</span>
+                    <span className="logos-section__tones-preview-name" style={{ color: currentColor.primary }}>
+                      {currentColor.name}
+                    </span>
+                    <span className="logos-section__tones-preview-hex">{currentColor.primary}</span>
+                  </div>
+                </div>
+              </div>
+            ) : selectedItem && (
+              <>
+                    <div className="logos-section__detail-header">
+                      <div className="logos-section__detail-breadcrumb">
+                        <span>{selectedItem.detail.breadcrumb}</span>
+                        <span className="logos-section__detail-sep">›</span>
+                        <span>{selectedItem.id}</span>
+                      </div>
+                    </div>
+
+                    <h2 className="logos-section__detail-title">{selectedItem.title}</h2>
+
+                    {/* Project Image Carousel */}
+                    {selectedItem.images && selectedItem.images.length > 0 && (
+                      <div className="logos-section__carousel">
+                        <div className="logos-section__carousel-container">
+                          {selectedItem.images.map((img, idx) => (
+                            <img
+                              key={idx}
+                              src={img}
+                              alt={`${selectedItem.title} ${idx + 1}`}
+                              className={`logos-section__carousel-img ${carouselIndex === idx ? 'logos-section__carousel-img--active' : ''}`}
+                            />
+                          ))}
+                        </div>
+                        <div className="logos-section__carousel-dots">
+                          {selectedItem.images.map((_, idx) => (
+                            <button
+                              key={idx}
+                              className={`logos-section__carousel-dot ${carouselIndex === idx ? 'logos-section__carousel-dot--active' : ''}`}
+                              onClick={() => setCarouselIndex(idx)}
+                            />
+                          ))}
+                        </div>
+                        {selectedItem.url && (
+                          <a
+                            href={selectedItem.url}
+                            className="logos-section__carousel-link"
+                          >
+                            {icons.external}
+                            <span>View in Portfolio</span>
+                          </a>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="logos-section__detail-props">
+                      <div className="logos-section__detail-prop">
+                        <span className="logos-section__detail-label">{t('logos.status')}</span>
+                        <span className="logos-section__detail-status">
+                          <span className="logos-section__status-dot logos-section__status-dot--progress"></span>
+                          {selectedItem.detail.status}
+                        </span>
+                      </div>
+                      <div className="logos-section__detail-prop">
+                        <span className="logos-section__detail-label">{activeNav === 'team' ? 'Role' : t('logos.priority')}</span>
+                        <span className="logos-section__detail-priority">
+                          {icons.star}
+                          {selectedItem.detail.priorityLabel}
+                        </span>
+                      </div>
+                      {selectedItem.detail.assignees.length > 0 && (
+                        <div className="logos-section__detail-prop">
+                          <span className="logos-section__detail-label">{t('logos.assigned')}</span>
+                          <div className="logos-section__avatars">
+                            {selectedItem.detail.assignees.map((assignee, index) => (
+                              <div key={index} className="logos-section__avatar">{assignee}</div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="logos-section__detail-desc">
+                      <p>{selectedItem.detail.description}</p>
+                    </div>
+
+                    {selectedItem.detail.files.length > 0 && (
+                      <div className="logos-section__detail-attachments">
+                        <span className="logos-section__detail-label">{t('logos.files')}</span>
+                        <div className="logos-section__files">
+                          {selectedItem.detail.files.map((file, index) => (
+                            <div key={index} className="logos-section__file">
+                              {file.type === 'figma' ? icons.figma : file.type === 'code' ? icons.code : icons.doc}
+                              <span>{file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="logos-section__detail-activity">
+                      <span className="logos-section__detail-label">{t('logos.activity')}</span>
+                      {selectedItem.detail.activity.map((actItem, index) => (
+                        <div key={index} className="logos-section__activity-item">
+                          <div className="logos-section__avatar logos-section__avatar--sm">{actItem.user.substring(0, 2).toUpperCase()}</div>
+                          <span>{actItem.user} {actItem.action} {actItem.value && <strong>{actItem.value}</strong>}</span>
+                          <span className="logos-section__activity-time">{actItem.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
           </div>
 
         </div>
