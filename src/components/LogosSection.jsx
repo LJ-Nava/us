@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../contexts/I18nContext';
@@ -53,7 +53,8 @@ const projectImages = {
 };
 
 // Complete color palette with 8 primary colors and their tonalities
-const colorPalette = [
+// Names are keys that will be translated using t()
+const colorPaletteData = [
   {
     name: 'White',
     emoji: '⚪',
@@ -152,8 +153,25 @@ const colorPalette = [
   },
 ];
 
+// Map English names to translation keys
+const colorNameKeys = {
+  White: 'colorWhite', Gold: 'colorGold', Red: 'colorRed', Fuchsia: 'colorFuchsia',
+  Violet: 'colorViolet', Cyan: 'colorCyan', Emerald: 'colorEmerald', Rose: 'colorRose',
+};
+
+const toneNameKeys = {
+  Pure: 'tonePure', Snow: 'toneSnow', Ghost: 'toneGhost', Smoke: 'toneSmoke', Silver: 'toneSilver', Ash: 'toneAsh',
+  Cream: 'toneCream', Butter: 'toneButter', Honey: 'toneHoney', Gold: 'toneGold', Amber: 'toneAmber', Bronze: 'toneBronze',
+  Blush: 'toneBlush', Coral: 'toneCoral', Scarlet: 'toneScarlet', Ruby: 'toneRuby', Crimson: 'toneCrimson', Wine: 'toneWine',
+  Lavender: 'toneLavender', Orchid: 'toneOrchid', Pink: 'tonePink', Fuchsia: 'toneFuchsia', Magenta: 'toneMagenta', Plum: 'tonePlum',
+  Lilac: 'toneLilac', Periwinkle: 'tonePeriwinkle', Amethyst: 'toneAmethyst', Violet: 'toneViolet', Purple: 'tonePurple', Indigo: 'toneIndigo',
+  Ice: 'toneIce', Sky: 'toneSky', Aqua: 'toneAqua', Cyan: 'toneCyan', Teal: 'toneTeal', Ocean: 'toneOcean',
+  Mint: 'toneMint', Seafoam: 'toneSeafoam', Jade: 'toneJade', Emerald: 'toneEmerald', Forest: 'toneForest', Pine: 'tonePine',
+  Petal: 'tonePetal', Rose: 'toneRose', Cherry: 'toneCherry',
+};
+
 // Legacy format for LUMEN AI core (uses selected color)
-const getWaveColor = (familyIdx, toneIdx) => {
+const getWaveColor = (familyIdx, toneIdx, colorPalette) => {
   const family = colorPalette[familyIdx];
   const tone = family.tones[toneIdx];
   const lighterTone = family.tones[Math.max(0, toneIdx - 1)];
@@ -249,18 +267,29 @@ const LogosSection = () => {
   const sectionRef = useRef(null);
   const mockupRef = useRef(null);
   const aiFaceRef = useRef(null);
+  const { t } = useI18n();
+
+  // Create translated color palette
+  const colorPalette = useMemo(() => colorPaletteData.map(family => ({
+    ...family,
+    name: t(`logos.${colorNameKeys[family.name]}`) || family.name,
+    tones: family.tones.map(tone => ({
+      ...tone,
+      name: t(`logos.${toneNameKeys[tone.name]}`) || tone.name,
+    })),
+  })), [t]);
+
   // Color selection: family (0-7) and tone (0-5)
-  const [colorFamily, setColorFamily] = useState(() => Math.floor(Math.random() * colorPalette.length));
+  const [colorFamily, setColorFamily] = useState(() => Math.floor(Math.random() * colorPaletteData.length));
   const [colorTone, setColorTone] = useState(3); // Default to middle tone
   const [isWaving, setIsWaving] = useState(false);
   const [activeNav, setActiveNav] = useState('lumen');
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const colorFamilyRef = useRef(colorFamily);
-  const { t } = useI18n();
 
   // Get current color based on family and tone
-  const currentColor = getWaveColor(colorFamily, colorTone);
+  const currentColor = getWaveColor(colorFamily, colorTone, colorPalette);
 
   // Keep ref in sync with state
   useEffect(() => {
@@ -277,8 +306,8 @@ const LogosSection = () => {
     // Get random color family different from current
     let nextFamily;
     do {
-      nextFamily = Math.floor(Math.random() * colorPalette.length);
-    } while (nextFamily === colorFamily && colorPalette.length > 1);
+      nextFamily = Math.floor(Math.random() * colorPaletteData.length);
+    } while (nextFamily === colorFamily && colorPaletteData.length > 1);
 
     // Just update the color state
     setTimeout(() => {
@@ -482,7 +511,7 @@ const LogosSection = () => {
           id: 'PRJ-141', title: t('logos.implementCheckout'), tag: t('logos.development'), tagType: 'dev', date: t('logos.tomorrow'), priority: 'medium',
           detail: {
             breadcrumb: t('logos.ecommerceApp'), status: t('logos.inProgress'), priorityLabel: t('logos.medium'),
-            assignees: ['JV', 'LM'], description: 'Implementar flujo completo de checkout con validación de datos y procesamiento de pagos.',
+            assignees: ['JV', 'LM'], description: t('logos.descCheckout'),
             files: [{ name: 'checkout-flow.fig', type: 'figma' }],
             activity: [
               { user: 'Javier', action: t('logos.createdTask'), time: t('logos.yesterday') },
@@ -490,10 +519,10 @@ const LogosSection = () => {
           }
         },
         {
-          id: 'PRJ-140', title: t('logos.optimizeImages'), tag: 'Ops', tagType: 'ops', date: t('logos.thisWeek'), priority: 'low',
+          id: 'PRJ-140', title: t('logos.optimizeImages'), tag: t('logos.tagOps'), tagType: 'ops', date: t('logos.thisWeek'), priority: 'low',
           detail: {
-            breadcrumb: t('logos.ecommerceApp'), status: 'Pending', priorityLabel: 'Low',
-            assignees: ['LI'], description: 'Optimizar todas las imágenes del sitio para mejorar tiempos de carga.',
+            breadcrumb: t('logos.ecommerceApp'), status: t('logos.pending'), priorityLabel: t('logos.low'),
+            assignees: ['LI'], description: t('logos.descOptimizeImages'),
             files: [], activity: [{ user: 'Lina', action: t('logos.createdTask'), time: t('logos.lastWeek') }]
           }
         },
@@ -501,7 +530,7 @@ const LogosSection = () => {
           id: 'PRJ-139', title: t('logos.createComponents'), tag: t('logos.design'), tagType: 'design', priority: 'medium',
           detail: {
             breadcrumb: t('logos.dashboardUI'), status: t('logos.inProgress'), priorityLabel: t('logos.medium'),
-            assignees: ['LE', 'LI'], description: 'Crear biblioteca de componentes UI reutilizables para el dashboard.',
+            assignees: ['LE', 'LI'], description: t('logos.descCreateComponents'),
             files: [{ name: 'components.fig', type: 'figma' }],
             activity: [{ user: 'Lerys', action: t('logos.addedFile'), value: 'components.fig', time: t('logos.ago5h') }]
           }
@@ -509,8 +538,8 @@ const LogosSection = () => {
         {
           id: 'PRJ-138', title: t('logos.integratePayments'), tag: t('logos.backend'), tagType: 'dev', date: t('logos.nextWeek'), priority: 'high',
           detail: {
-            breadcrumb: t('logos.ecommerceApp'), status: 'Planned', priorityLabel: t('logos.high'),
-            assignees: ['JV'], description: 'Integrar pasarela de pagos Stripe y PayPal para procesamiento seguro.',
+            breadcrumb: t('logos.ecommerceApp'), status: t('logos.planned'), priorityLabel: t('logos.high'),
+            assignees: ['JV'], description: t('logos.descIntegratePayments'),
             files: [{ name: 'api-docs.pdf', type: 'doc' }],
             activity: [{ user: 'Javier', action: t('logos.createdTask'), time: t('logos.lastWeek') }]
           }
@@ -530,7 +559,7 @@ const LogosSection = () => {
             breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.featured'),
             assignees: ['LN', 'JV'], description: t('logos.descRomelima'),
             files: [{ name: 'React + GSAP', type: 'code' }, { name: 'Responsive', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: t('logos.live') }]
           }
         },
         {
@@ -541,7 +570,7 @@ const LogosSection = () => {
             breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.featured'),
             assignees: ['LN', 'LE'], description: t('logos.descCracker'),
             files: [{ name: 'React + Node', type: 'code' }, { name: 'API REST', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: t('logos.live') }]
           }
         },
         {
@@ -552,7 +581,7 @@ const LogosSection = () => {
             breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.business'),
             assignees: ['LN', 'LI'], description: t('logos.descConstrucciones'),
             files: [{ name: 'React + SCSS', type: 'code' }, { name: 'Gallery', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: t('logos.live') }]
           }
         },
         {
@@ -563,11 +592,11 @@ const LogosSection = () => {
             breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.enterprise'),
             assignees: ['LN', 'JV'], description: t('logos.descMotive'),
             files: [{ name: 'React + AWS', type: 'code' }, { name: 'HIPAA', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: t('logos.live') }]
           }
         },
         {
-          id: 'PRJ-005', title: 'NeuroFys', tag: 'SaaS/EMR', tagType: 'dev', date: '95%', priority: 'high',
+          id: 'PRJ-005', title: 'NeuroFys', tag: t('logos.saas'), tagType: 'dev', date: '95%', priority: 'high',
           images: projectImages.neuro,
           url: '#/portfolio#neurofys',
           detail: {
@@ -585,7 +614,7 @@ const LogosSection = () => {
             breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.business'),
             assignees: ['LN', 'LI'], description: t('logos.descPhysica'),
             files: [{ name: 'React + Forms', type: 'code' }, { name: 'Booking', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: t('logos.live') }]
           }
         },
       ]
@@ -640,7 +669,7 @@ const LogosSection = () => {
           }
         },
         {
-          id: 'USR-005', title: 'Deivi Gutierrez', tag: 'DevOps', tagType: 'ops', date: t('logos.online'), priority: 'medium',
+          id: 'USR-005', title: 'Deivi Gutierrez', tag: t('logos.roleDevOps'), tagType: 'ops', date: t('logos.online'), priority: 'medium',
           detail: {
             breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleCloudArch'),
             assignees: ['DG'], description: t('logos.descDeivi'),
@@ -698,7 +727,7 @@ const LogosSection = () => {
           id: 'SET-002', title: t('logos.notifications'), tag: t('logos.preferences'), tagType: 'design', priority: 'low',
           detail: {
             breadcrumb: t('logos.settings'), status: t('logos.configured'), priorityLabel: t('logos.preferences'),
-            assignees: [], description: 'Configurar notificaciones por email, push y en la aplicación.',
+            assignees: [], description: t('logos.descNotifications'),
             files: [], activity: [{ user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.lastWeek') }]
           }
         },
@@ -706,15 +735,15 @@ const LogosSection = () => {
           id: 'SET-003', title: t('logos.security'), tag: t('logos.account'), tagType: 'dev', priority: 'high',
           detail: {
             breadcrumb: t('logos.settings'), status: t('logos.configured'), priorityLabel: t('logos.account'),
-            assignees: [], description: 'Configuración de seguridad: 2FA, permisos y políticas de acceso.',
+            assignees: [], description: t('logos.descSecurity'),
             files: [], activity: [{ user: t('logos.system'), action: t('logos.backupCompleted'), time: t('logos.ago2h') }]
           }
         },
         {
           id: 'SET-004', title: t('logos.integrations'), tag: 'API', tagType: 'dev', priority: 'medium',
           detail: {
-            breadcrumb: t('logos.settings'), status: 'Active', priorityLabel: 'API',
-            assignees: [], description: 'Gestionar integraciones con servicios externos: Slack, GitHub, Jira.',
+            breadcrumb: t('logos.settings'), status: t('logos.statusActive'), priorityLabel: 'API',
+            assignees: [], description: t('logos.descIntegrations'),
             files: [], activity: [{ user: 'Admin', action: t('logos.updatedSettings'), time: t('logos.yesterday') }]
           }
         },
@@ -749,17 +778,15 @@ const LogosSection = () => {
 
   const currentView = viewContent[activeNav];
 
-  // Get selected item or first item as default
-  const getSelectedItem = () => {
+  // Get selected item or first item as default - memoized to prevent infinite re-renders
+  const selectedItem = useMemo(() => {
     if (!currentView?.items?.length) return null;
     if (selectedItemId) {
       const found = currentView.items.find(item => item.id === selectedItemId);
       if (found) return found;
     }
     return currentView.items[0];
-  };
-
-  const selectedItem = getSelectedItem();
+  }, [currentView, selectedItemId]);
 
   // Auto-carousel for project images
   useEffect(() => {
@@ -770,7 +797,7 @@ const LogosSection = () => {
     }, 3000); // Change image every 3 seconds
 
     return () => clearInterval(interval);
-  }, [activeNav, selectedItem]);
+  }, [activeNav, selectedItemId, selectedItem?.images?.length]);
 
   // Reset carousel when selecting a different project
   useEffect(() => {
@@ -1135,11 +1162,18 @@ const LogosSection = () => {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    // Only add mouse tracking on non-touch devices to prevent mobile issues
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (!isTouchDevice) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
       ctx.revert();
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!isTouchDevice) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
     };
   }, []);
 
@@ -1301,7 +1335,7 @@ const LogosSection = () => {
                     boxShadow: `0 0 20px ${currentColor.glow}`
                   }}></div>
                   <div className="logos-section__palette-footer-info">
-                    <span className="logos-section__palette-footer-label">Active</span>
+                    <span className="logos-section__palette-footer-label">{t('logos.activeLabel')}</span>
                     <span className="logos-section__palette-footer-name" style={{ color: currentColor.primary }}>{currentColor.name}</span>
                   </div>
                 </div>
@@ -1337,7 +1371,7 @@ const LogosSection = () => {
               <div className="logos-section__tones-panel">
                 <div className="logos-section__tones-header">
                   <h3 className="logos-section__tones-title">{colorPalette[colorFamily].name}</h3>
-                  <span className="logos-section__tones-subtitle">Select tonality</span>
+                  <span className="logos-section__tones-subtitle">{t('logos.selectTonality')}</span>
                 </div>
                 <div className="logos-section__tones-grid">
                   {colorPalette[colorFamily].tones.map((tone, idx) => (
@@ -1367,7 +1401,7 @@ const LogosSection = () => {
                     <div className="logos-section__tones-preview-inner"></div>
                   </div>
                   <div className="logos-section__tones-preview-info">
-                    <span className="logos-section__tones-preview-label">LUMEN Theme</span>
+                    <span className="logos-section__tones-preview-label">{t('logos.lumenTheme')}</span>
                     <span className="logos-section__tones-preview-name" style={{ color: currentColor.primary }}>
                       {currentColor.name}
                     </span>
@@ -1415,7 +1449,7 @@ const LogosSection = () => {
                             className="logos-section__carousel-link"
                           >
                             {icons.external}
-                            <span>View in Portfolio</span>
+                            <span>{t('logos.viewInPortfolio')}</span>
                           </a>
                         )}
                       </div>
@@ -1430,7 +1464,7 @@ const LogosSection = () => {
                         </span>
                       </div>
                       <div className="logos-section__detail-prop">
-                        <span className="logos-section__detail-label">{activeNav === 'team' ? 'Role' : t('logos.priority')}</span>
+                        <span className="logos-section__detail-label">{activeNav === 'team' ? t('logos.roleLabel') : t('logos.priority')}</span>
                         <span className="logos-section__detail-priority">
                           {icons.star}
                           {selectedItem.detail.priorityLabel}
