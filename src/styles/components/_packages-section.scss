@@ -123,6 +123,67 @@ $package-colors: (
   }
 
   // =============================================
+  // DISCOUNT COUNTDOWN BANNER
+  // =============================================
+  &__discount-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: $spacing-xl;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.12) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 50px;
+    animation: pulse-banner 2s ease-in-out infinite;
+
+    @keyframes pulse-banner {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+    }
+  }
+
+  &__discount-banner-icon {
+    width: 24px;
+    height: 24px;
+    color: #ef4444;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__discount-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__discount-banner-label {
+    font-size: 0.7rem;
+    font-weight: $font-weight-medium;
+    color: rgba(15, 23, 42, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__discount-banner-days {
+    font-size: 0.95rem;
+    font-weight: $font-weight-bold;
+    color: #dc2626;
+  }
+
+  &__discount-banner-badge {
+    font-size: 0.85rem;
+    font-weight: $font-weight-bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-left: 4px;
+  }
+
+  // =============================================
   // PACKAGES GRID
   // =============================================
   &__grid {

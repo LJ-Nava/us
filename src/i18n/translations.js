@@ -286,6 +286,10 @@ export const translations = {
       ctaQuote: 'Cotizar',
       includes: 'Incluye:',
       footer: 'Todos los paquetes incluyen garantía de satisfacción y código fuente completo',
+      // Discount countdown
+      limitedOffer: 'Oferta por tiempo limitado',
+      dayLeft: 'día restante',
+      daysLeft: 'días restantes',
       // Package complexity
       lowComplexity: 'Baja complejidad',
       mediumComplexity: 'Complejidad media',
@@ -974,6 +978,10 @@ export const translations = {
       ctaQuote: 'Get quote',
       includes: 'Includes:',
       footer: 'All packages include satisfaction guarantee and complete source code',
+      // Discount countdown
+      limitedOffer: 'Limited time offer',
+      dayLeft: 'day left',
+      daysLeft: 'days left',
       // Package complexity
       lowComplexity: 'Low complexity',
       mediumComplexity: 'Medium complexity',
@@ -1639,6 +1647,10 @@ export const translations = {
       ctaQuote: 'Orçamento',
       includes: 'Inclui:',
       footer: 'Todos os pacotes incluem garantia de satisfação e código fonte completo',
+      // Discount countdown
+      limitedOffer: 'Oferta por tempo limitado',
+      dayLeft: 'dia restante',
+      daysLeft: 'dias restantes',
       // Package complexity
       lowComplexity: 'Baixa complexidade',
       mediumComplexity: 'Complexidade média',
