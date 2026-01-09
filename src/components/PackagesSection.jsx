@@ -30,7 +30,9 @@ const PackagesSection = () => {
       name: t('packages.basic'),
       tagline: t('packages.basicTagline'),
       description: t('packages.basicDesc'),
+      originalPrice: '310',
       price: '250',
+      discount: '20',
       complexity: t('packages.lowComplexity'),
       color: 'slate',
       popular: false,
@@ -56,7 +58,9 @@ const PackagesSection = () => {
       name: t('packages.professional'),
       tagline: t('packages.professionalTagline'),
       description: t('packages.professionalDesc'),
+      originalPrice: '625',
       price: '500',
+      discount: '20',
       complexity: t('packages.mediumComplexity'),
       color: 'cyan',
       popular: true,
@@ -81,7 +85,9 @@ const PackagesSection = () => {
       name: t('packages.advanced'),
       tagline: t('packages.advancedTagline'),
       description: t('packages.advancedDesc'),
+      originalPrice: '1000',
       price: '800',
+      discount: '20',
       complexity: t('packages.highComplexity'),
       color: 'violet',
       popular: false,
@@ -107,7 +113,9 @@ const PackagesSection = () => {
       name: t('packages.ecommerce'),
       tagline: t('packages.ecommerceTagline'),
       description: t('packages.ecommerceDesc'),
+      originalPrice: '1250',
       price: '1000',
+      discount: '20',
       complexity: t('packages.completeStore'),
       color: 'amber',
       popular: false,
@@ -230,7 +238,13 @@ const PackagesSection = () => {
 
                 {/* Price */}
                 <div className="packages-section__card-price">
-                  <span className="packages-section__card-price-from">{t('packages.from')}</span>
+                  <div className="packages-section__card-price-row">
+                    <span className="packages-section__card-price-from">{t('packages.from')}</span>
+                    <span className="packages-section__card-price-discount">-{pkg.discount}%</span>
+                  </div>
+                  <span className={`packages-section__card-price-original ${loading ? 'is-loading' : ''}`}>
+                    {formatPrice(pkg.originalPrice)}
+                  </span>
                   <span className={`packages-section__card-price-value ${loading ? 'is-loading' : ''}`}>
                     {formatPrice(pkg.price)}
                   </span>

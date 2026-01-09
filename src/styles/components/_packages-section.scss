@@ -290,12 +290,42 @@ $package-colors: (
     border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   }
 
+  &__card-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
   &__card-price-from {
     font-size: 0.7rem;
     color: rgba(15, 23, 42, 0.4);
     font-weight: $font-weight-medium;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  &__card-price-discount {
+    font-size: 0.65rem;
+    font-weight: $font-weight-bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  &__card-price-original {
+    font-size: 1rem;
+    font-weight: $font-weight-medium;
+    color: rgba(15, 23, 42, 0.35);
+    text-decoration: line-through;
+    line-height: 1;
+    margin-bottom: 2px;
+
+    &.is-loading {
+      opacity: 0.5;
+    }
   }
 
   &__card-price-value {
