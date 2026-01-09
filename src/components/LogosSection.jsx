@@ -523,47 +523,47 @@ const LogosSection = () => {
       countLabel: t('logos.portfolio'),
       items: [
         {
-          id: 'PRJ-001', title: 'Romelima', tag: 'Restaurant', tagType: 'design', date: '100%', priority: 'high',
+          id: 'PRJ-001', title: 'Romelima', tag: t('logos.tagRestaurant'), tagType: 'design', date: '100%', priority: 'high',
           images: projectImages.romelima,
           url: '#/portfolio#romelima',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Featured',
-            assignees: ['LN', 'JV'], description: 'Premium website for Peruvian restaurant with interactive digital menu and reservations.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.featured'),
+            assignees: ['LN', 'JV'], description: t('logos.descRomelima'),
             files: [{ name: 'React + GSAP', type: 'code' }, { name: 'Responsive', type: 'doc' }],
-            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
           }
         },
         {
-          id: 'PRJ-002', title: 'El Cracker', tag: 'Car Wash', tagType: 'dev', date: '100%', priority: 'high',
+          id: 'PRJ-002', title: 'El Cracker', tag: t('logos.tagCarWash'), tagType: 'dev', date: '100%', priority: 'high',
           images: projectImages.cracker,
           url: '#/portfolio#cracker',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Featured',
-            assignees: ['LN', 'LE'], description: 'Booking platform for car wash with dynamic pricing and appointment system.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.featured'),
+            assignees: ['LN', 'LE'], description: t('logos.descCracker'),
             files: [{ name: 'React + Node', type: 'code' }, { name: 'API REST', type: 'doc' }],
-            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
           }
         },
         {
-          id: 'PRJ-003', title: 'Construcciones', tag: 'Construction', tagType: 'design', date: '100%', priority: 'medium',
+          id: 'PRJ-003', title: 'Construcciones', tag: t('logos.tagConstruction'), tagType: 'design', date: '100%', priority: 'medium',
           images: projectImages.construcciones,
           url: '#/portfolio#construcciones',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Business',
-            assignees: ['LN', 'LI'], description: 'Corporate website for construction company with project gallery.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.business'),
+            assignees: ['LN', 'LI'], description: t('logos.descConstrucciones'),
             files: [{ name: 'React + SCSS', type: 'code' }, { name: 'Gallery', type: 'doc' }],
-            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
           }
         },
         {
-          id: 'PRJ-004', title: 'Motive HC', tag: 'Healthcare', tagType: 'dev', date: '100%', priority: 'high',
+          id: 'PRJ-004', title: 'Motive HC', tag: t('logos.tagHealthcare'), tagType: 'dev', date: '100%', priority: 'high',
           images: projectImages.motive,
           url: '#/portfolio#motive',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Enterprise',
-            assignees: ['LN', 'JV'], description: 'B2B portal for healthcare staffing agency with nurse applications.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.enterprise'),
+            assignees: ['LN', 'JV'], description: t('logos.descMotive'),
             files: [{ name: 'React + AWS', type: 'code' }, { name: 'HIPAA', type: 'doc' }],
-            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
           }
         },
         {
@@ -571,21 +571,21 @@ const LogosSection = () => {
           images: projectImages.neuro,
           url: '#/portfolio#neurofys',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: t('logos.inProgress'), priorityLabel: 'Enterprise',
-            assignees: ['LN', 'JV', 'LE'], description: 'Medical management system with AI. HIPAA compliant records.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.inProgress'), priorityLabel: t('logos.enterprise'),
+            assignees: ['LN', 'JV', 'LE'], description: t('logos.descNeuroFys'),
             files: [{ name: 'React + AI', type: 'code' }, { name: 'EMR System', type: 'doc' }],
             activity: [{ user: 'Luis', action: t('logos.updatedStatus'), value: 'AI Module', time: t('logos.ago2h') }]
           }
         },
         {
-          id: 'PRJ-006', title: 'Physica', tag: 'Clinic', tagType: 'design', date: '100%', priority: 'medium',
+          id: 'PRJ-006', title: 'Physica', tag: t('logos.tagClinic'), tagType: 'design', date: '100%', priority: 'medium',
           images: projectImages.physica,
           url: '#/portfolio#physica',
           detail: {
-            breadcrumb: t('logos.portfolio'), status: 'Completed', priorityLabel: 'Business',
-            assignees: ['LN', 'LI'], description: 'Physical therapy clinic website with online appointment system.',
+            breadcrumb: t('logos.portfolio'), status: t('logos.completed'), priorityLabel: t('logos.business'),
+            assignees: ['LN', 'LI'], description: t('logos.descPhysica'),
             files: [{ name: 'React + Forms', type: 'code' }, { name: 'Booking', type: 'doc' }],
-            activity: [{ user: 'Luis', action: 'Deployed', value: 'Production', time: 'Live' }]
+            activity: [{ user: 'Luis', action: t('logos.deployed'), value: t('logos.production'), time: 'Live' }]
           }
         },
       ]
@@ -596,86 +596,86 @@ const LogosSection = () => {
       countLabel: t('logos.members'),
       items: [
         {
-          id: 'USR-001', title: 'Luis Nava', tag: 'Full Stack Dev', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          id: 'USR-001', title: 'Luis Nava', tag: t('logos.roleFullStack'), tagType: 'dev', date: t('logos.online'), priority: 'high',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Tech Lead',
-            assignees: ['LN'], description: 'Full-stack developer with 8+ years building enterprise solutions. Expert in React, Node.js, AWS & AI integrations. Led 50+ successful projects for startups and Fortune 500 clients.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleTechLead'),
+            assignees: ['LN'], description: t('logos.descLuis'),
             files: [], activity: [
-              { user: 'Luis', action: 'Shipped', value: 'NeuroFys AI Module', time: t('logos.ago2h') },
-              { user: 'Luis', action: 'Merged', value: 'Feature Branch #142', time: t('logos.ago5h') },
+              { user: 'Luis', action: t('logos.actionShipped'), value: 'NeuroFys AI Module', time: t('logos.ago2h') },
+              { user: 'Luis', action: t('logos.actionMerged'), value: 'Feature Branch #142', time: t('logos.ago5h') },
             ]
           }
         },
         {
-          id: 'USR-002', title: 'Javier Vargas', tag: 'Full Stack Dev', tagType: 'dev', date: t('logos.online'), priority: 'high',
+          id: 'USR-002', title: 'Javier Vargas', tag: t('logos.roleFullStack'), tagType: 'dev', date: t('logos.online'), priority: 'high',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Senior Engineer',
-            assignees: ['JV'], description: 'Full-stack developer mastering React, Node.js, Python, PostgreSQL & Redis. Architect of scalable APIs serving 100K+ daily requests. HIPAA & security compliance expert.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleSeniorEng'),
+            assignees: ['JV'], description: t('logos.descJavier'),
             files: [], activity: [
-              { user: 'Javier', action: 'Optimized', value: 'API Response 40%', time: t('logos.ago2h') },
-              { user: 'Javier', action: 'Deployed', value: 'v2.4.0', time: t('logos.yesterday') },
+              { user: 'Javier', action: t('logos.actionOptimized'), value: 'API Response 40%', time: t('logos.ago2h') },
+              { user: 'Javier', action: t('logos.deployed'), value: 'v2.4.0', time: t('logos.yesterday') },
             ]
           }
         },
         {
-          id: 'USR-003', title: 'Lerys Maria', tag: 'UI/UX Lead', tagType: 'design', date: t('logos.online'), priority: 'medium',
+          id: 'USR-003', title: 'Lerys Maria', tag: t('logos.roleUIUX'), tagType: 'design', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Design Lead',
-            assignees: ['LE'], description: 'Creative director specializing in premium UI/UX design. Master of Figma, motion design & design systems. Creates interfaces that convert and delight users.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleDesignLead'),
+            assignees: ['LE'], description: t('logos.descLerys'),
             files: [], activity: [
-              { user: 'Lerys', action: 'Created', value: 'Component Library v3', time: t('logos.ago5h') },
-              { user: 'Lerys', action: 'Designed', value: 'Dashboard Analytics', time: t('logos.yesterday') },
+              { user: 'Lerys', action: t('logos.actionCreated'), value: 'Component Library v3', time: t('logos.ago5h') },
+              { user: 'Lerys', action: t('logos.actionDesigned'), value: 'Dashboard Analytics', time: t('logos.yesterday') },
             ]
           }
         },
         {
-          id: 'USR-004', title: 'Lina Maria', tag: 'Frontend Dev', tagType: 'dev', date: t('logos.online'), priority: 'medium',
+          id: 'USR-004', title: 'Lina Maria', tag: t('logos.roleFrontend'), tagType: 'dev', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'React Expert',
-            assignees: ['LI'], description: 'Frontend engineer specializing in React, TypeScript & animations. Creates pixel-perfect implementations with GSAP & Framer Motion. Performance optimization advocate.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleReactExpert'),
+            assignees: ['LI'], description: t('logos.descLina'),
             files: [], activity: [
-              { user: 'Lina', action: 'Implemented', value: 'Smooth Animations', time: t('logos.ago2h') },
-              { user: 'Lina', action: 'Fixed', value: 'Mobile Responsiveness', time: t('logos.yesterday') },
+              { user: 'Lina', action: t('logos.actionImplemented'), value: 'Smooth Animations', time: t('logos.ago2h') },
+              { user: 'Lina', action: t('logos.actionFixed'), value: 'Mobile Responsiveness', time: t('logos.yesterday') },
             ]
           }
         },
         {
           id: 'USR-005', title: 'Deivi Gutierrez', tag: 'DevOps', tagType: 'ops', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Cloud Architect',
-            assignees: ['DG'], description: 'Cloud infrastructure expert with AWS & GCP certifications. Masters Docker, Kubernetes & Terraform. Ensures 99.9% uptime with automated CI/CD pipelines.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleCloudArch'),
+            assignees: ['DG'], description: t('logos.descDeivi'),
             files: [], activity: [
-              { user: 'Deivi', action: 'Configured', value: 'Auto-scaling', time: t('logos.yesterday') },
+              { user: 'Deivi', action: t('logos.actionConfigured'), value: 'Auto-scaling', time: t('logos.yesterday') },
             ]
           }
         },
         {
-          id: 'USR-006', title: 'Beyker Tovar', tag: 'QA Engineer', tagType: 'ops', date: t('logos.online'), priority: 'medium',
+          id: 'USR-006', title: 'Beyker Tovar', tag: t('logos.roleQA'), tagType: 'ops', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Quality Lead',
-            assignees: ['BT'], description: 'Quality assurance specialist ensuring flawless product delivery. Expert in automated testing, Cypress, Jest & performance testing. Zero-bug advocate.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleQualityLead'),
+            assignees: ['BT'], description: t('logos.descBeyker'),
             files: [], activity: [
-              { user: 'Beyker', action: 'Tested', value: 'Release v2.4', time: t('logos.ago2h') },
+              { user: 'Beyker', action: t('logos.actionTested'), value: 'Release v2.4', time: t('logos.ago2h') },
             ]
           }
         },
         {
-          id: 'USR-007', title: 'Daniela Nava', tag: 'Content Lead', tagType: 'design', date: t('logos.online'), priority: 'medium',
+          id: 'USR-007', title: 'Daniela Nava', tag: t('logos.roleContent'), tagType: 'design', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Creative Writer',
-            assignees: ['DN'], description: 'Content strategist and copywriter crafting compelling brand narratives. Expert in UX writing, blog content & social media storytelling.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleWriter'),
+            assignees: ['DN'], description: t('logos.descDaniela'),
             files: [], activity: [
-              { user: 'Daniela', action: 'Published', value: 'Brand Guidelines', time: t('logos.ago2h') },
+              { user: 'Daniela', action: t('logos.actionPublished'), value: 'Brand Guidelines', time: t('logos.ago2h') },
             ]
           }
         },
         {
           id: 'USR-008', title: 'Yorguin Vargas', tag: 'Marketing', tagType: 'design', date: t('logos.online'), priority: 'medium',
           detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: 'Growth Lead',
-            assignees: ['YV'], description: 'Digital marketing strategist driving brand growth and client acquisition. Expert in SEO, social media, content strategy & conversion optimization.',
+            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleGrowthLead'),
+            assignees: ['YV'], description: t('logos.descYorguin'),
             files: [], activity: [
-              { user: 'Yorguin', action: 'Launched', value: 'Q4 Campaign', time: t('logos.ago5h') },
+              { user: 'Yorguin', action: t('logos.actionLaunched'), value: 'Q4 Campaign', time: t('logos.ago5h') },
             ]
           }
         },
