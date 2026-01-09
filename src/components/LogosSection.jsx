@@ -689,12 +689,12 @@ const LogosSection = () => {
           }
         },
         {
-          id: 'USR-007', title: 'Daniela Nava', tag: t('logos.roleContent'), tagType: 'design', date: t('logos.online'), priority: 'medium',
+          id: 'USR-007', title: 'Alanis Nava', tag: t('logos.roleContent'), tagType: 'design', date: t('logos.online'), priority: 'medium',
           detail: {
             breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleWriter'),
-            assignees: ['DN'], description: t('logos.descDaniela'),
+            assignees: ['AN'], description: t('logos.descDaniela'),
             files: [], activity: [
-              { user: 'Daniela', action: t('logos.actionPublished'), value: 'Brand Guidelines', time: t('logos.ago2h') },
+              { user: 'Alanis', action: t('logos.actionPublished'), value: 'Brand Guidelines', time: t('logos.ago2h') },
             ]
           }
         },
