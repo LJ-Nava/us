@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import CTA3DBackground from './CTA3DBackground';
 import { useI18n } from '../contexts/I18nContext';
+
+// Lazy load 3D background para mejor performance
+const CTA3DBackground = lazy(() => import('./CTA3DBackground'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,8 +71,10 @@ const CTASection = () => {
 
   return (
     <section ref={sectionRef} className="cta-section" id="contacto">
-      {/* 3D Background */}
-      <CTA3DBackground />
+      {/* 3D Background - Lazy loaded */}
+      <Suspense fallback={null}>
+        <CTA3DBackground />
+      </Suspense>
 
       {/* Gradient Overlay */}
       <div className="cta-section__overlay" />

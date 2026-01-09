@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Features3DBackground from './Features3DBackground';
 import { useI18n } from '../contexts/I18nContext';
+
+// Lazy load 3D background para mejor performance
+const Features3DBackground = lazy(() => import('./Features3DBackground'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,8 +105,10 @@ const FeaturesSection = () => {
 
   return (
     <section ref={sectionRef} className="features-section" id="why-us">
-      {/* 3D Geometric Background */}
-      <Features3DBackground />
+      {/* 3D Geometric Background - Lazy loaded */}
+      <Suspense fallback={null}>
+        <Features3DBackground />
+      </Suspense>
 
       {/* Ambient background elements */}
       <div className="features-section__ambient">

@@ -4,41 +4,41 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../contexts/I18nContext';
 
 // Project images imports
-import romelima1 from '../assets/Romelima/1.png';
-import romelima2 from '../assets/Romelima/2.png';
-import romelima3 from '../assets/Romelima/3.png';
-import romelima4 from '../assets/Romelima/4.png';
-import romelima5 from '../assets/Romelima/5.png';
+import romelima1 from '../assets/Romelima/1.webp';
+import romelima2 from '../assets/Romelima/2.webp';
+import romelima3 from '../assets/Romelima/3.webp';
+import romelima4 from '../assets/Romelima/4.webp';
+import romelima5 from '../assets/Romelima/5.webp';
 
-import cracker1 from '../assets/CrackenLavadero/1.png';
-import cracker2 from '../assets/CrackenLavadero/2.png';
-import cracker3 from '../assets/CrackenLavadero/3.png';
-import cracker4 from '../assets/CrackenLavadero/4.png';
-import cracker5 from '../assets/CrackenLavadero/5.png';
+import cracker1 from '../assets/CrackenLavadero/1.webp';
+import cracker2 from '../assets/CrackenLavadero/2.webp';
+import cracker3 from '../assets/CrackenLavadero/3.webp';
+import cracker4 from '../assets/CrackenLavadero/4.webp';
+import cracker5 from '../assets/CrackenLavadero/5.webp';
 
-import construcciones1 from '../assets/Consturcciones/1.png';
-import construcciones2 from '../assets/Consturcciones/2.png';
-import construcciones3 from '../assets/Consturcciones/3.png';
-import construcciones4 from '../assets/Consturcciones/4.png';
-import construcciones5 from '../assets/Consturcciones/5.png';
+import construcciones1 from '../assets/Consturcciones/1.webp';
+import construcciones2 from '../assets/Consturcciones/2.webp';
+import construcciones3 from '../assets/Consturcciones/3.webp';
+import construcciones4 from '../assets/Consturcciones/4.webp';
+import construcciones5 from '../assets/Consturcciones/5.webp';
 
-import motive1 from '../assets/motive/1.png';
-import motive2 from '../assets/motive/2.png';
-import motive3 from '../assets/motive/3.png';
-import motive4 from '../assets/motive/4.png';
-import motive5 from '../assets/motive/5.png';
+import motive1 from '../assets/motive/1.webp';
+import motive2 from '../assets/motive/2.webp';
+import motive3 from '../assets/motive/3.webp';
+import motive4 from '../assets/motive/4.webp';
+import motive5 from '../assets/motive/5.webp';
 
-import neuro1 from '../assets/neuro/1.png';
-import neuro2 from '../assets/neuro/2.png';
-import neuro3 from '../assets/neuro/3.png';
-import neuro4 from '../assets/neuro/4.png';
-import neuro5 from '../assets/neuro/5.png';
+import neuro1 from '../assets/neuro/1.webp';
+import neuro2 from '../assets/neuro/2.webp';
+import neuro3 from '../assets/neuro/3.webp';
+import neuro4 from '../assets/neuro/4.webp';
+import neuro5 from '../assets/neuro/5.webp';
 
-import physica1 from '../assets/Physuca/1.png';
-import physica2 from '../assets/Physuca/2.png';
-import physica3 from '../assets/Physuca/3.png';
-import physica4 from '../assets/Physuca/4.png';
-import physica5 from '../assets/Physuca/5.png';
+import physica1 from '../assets/Physuca/1.webp';
+import physica2 from '../assets/Physuca/2.webp';
+import physica3 from '../assets/Physuca/3.webp';
+import physica4 from '../assets/Physuca/4.webp';
+import physica5 from '../assets/Physuca/5.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

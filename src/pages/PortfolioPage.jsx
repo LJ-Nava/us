@@ -1,59 +1,61 @@
-import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Portfolio3DBackground from '../components/Portfolio3DBackground';
-import PortfolioHeroBackground from '../components/PortfolioHeroBackground';
 import { useI18n } from '../contexts/I18nContext';
 
+// Lazy load 3D backgrounds para mejor performance
+const Portfolio3DBackground = lazy(() => import('../components/Portfolio3DBackground'));
+const PortfolioHeroBackground = lazy(() => import('../components/PortfolioHeroBackground'));
+
 // Importar imágenes de Romelima
-import romelima1 from '../assets/Romelima/1.png';
-import romelima2 from '../assets/Romelima/2.png';
-import romelima3 from '../assets/Romelima/3.png';
-import romelima4 from '../assets/Romelima/4.png';
-import romelima5 from '../assets/Romelima/5.png';
+import romelima1 from '../assets/Romelima/1.webp';
+import romelima2 from '../assets/Romelima/2.webp';
+import romelima3 from '../assets/Romelima/3.webp';
+import romelima4 from '../assets/Romelima/4.webp';
+import romelima5 from '../assets/Romelima/5.webp';
 
 // Importar imágenes de Lavadero
-import lavadero1 from '../assets/CrackenLavadero/1.png';
-import lavadero2 from '../assets/CrackenLavadero/2.png';
-import lavadero3 from '../assets/CrackenLavadero/3.png';
-import lavadero4 from '../assets/CrackenLavadero/4.png';
-import lavadero5 from '../assets/CrackenLavadero/5.png';
-import lavadero6 from '../assets/CrackenLavadero/6.png';
+import lavadero1 from '../assets/CrackenLavadero/1.webp';
+import lavadero2 from '../assets/CrackenLavadero/2.webp';
+import lavadero3 from '../assets/CrackenLavadero/3.webp';
+import lavadero4 from '../assets/CrackenLavadero/4.webp';
+import lavadero5 from '../assets/CrackenLavadero/5.webp';
+import lavadero6 from '../assets/CrackenLavadero/6.webp';
 
 // Importar imágenes de Construcciones
-import construcciones1 from '../assets/Consturcciones/1.png';
-import construcciones2 from '../assets/Consturcciones/2.png';
-import construcciones3 from '../assets/Consturcciones/3.png';
-import construcciones4 from '../assets/Consturcciones/4.png';
-import construcciones5 from '../assets/Consturcciones/5.png';
-import construcciones6 from '../assets/Consturcciones/6.png';
-import construcciones7 from '../assets/Consturcciones/7.png';
-import construcciones8 from '../assets/Consturcciones/8.png';
+import construcciones1 from '../assets/Consturcciones/1.webp';
+import construcciones2 from '../assets/Consturcciones/2.webp';
+import construcciones3 from '../assets/Consturcciones/3.webp';
+import construcciones4 from '../assets/Consturcciones/4.webp';
+import construcciones5 from '../assets/Consturcciones/5.webp';
+import construcciones6 from '../assets/Consturcciones/6.webp';
+import construcciones7 from '../assets/Consturcciones/7.webp';
+import construcciones8 from '../assets/Consturcciones/8.webp';
 
 // Importar imágenes de Motive
-import motive1 from '../assets/motive/1.png';
-import motive2 from '../assets/motive/2.png';
-import motive3 from '../assets/motive/3.png';
-import motive4 from '../assets/motive/4.png';
-import motive5 from '../assets/motive/5.png';
-import motive6 from '../assets/motive/6.png';
-import motive7 from '../assets/motive/7.png';
+import motive1 from '../assets/motive/1.webp';
+import motive2 from '../assets/motive/2.webp';
+import motive3 from '../assets/motive/3.webp';
+import motive4 from '../assets/motive/4.webp';
+import motive5 from '../assets/motive/5.webp';
+import motive6 from '../assets/motive/6.webp';
+import motive7 from '../assets/motive/7.webp';
 
 // Importar imágenes de NeuroFys
-import neuro1 from '../assets/neuro/1.png';
-import neuro2 from '../assets/neuro/2.png';
-import neuro3 from '../assets/neuro/3.png';
-import neuro4 from '../assets/neuro/4.png';
-import neuro5 from '../assets/neuro/5.png';
-import neuro6 from '../assets/neuro/6.png';
-import neuro7 from '../assets/neuro/7.png';
+import neuro1 from '../assets/neuro/1.webp';
+import neuro2 from '../assets/neuro/2.webp';
+import neuro3 from '../assets/neuro/3.webp';
+import neuro4 from '../assets/neuro/4.webp';
+import neuro5 from '../assets/neuro/5.webp';
+import neuro6 from '../assets/neuro/6.webp';
+import neuro7 from '../assets/neuro/7.webp';
 
 // Importar imágenes de Physica
-import physica1 from '../assets/Physuca/1.png';
-import physica2 from '../assets/Physuca/2.png';
-import physica3 from '../assets/Physuca/3.png';
-import physica4 from '../assets/Physuca/4.png';
-import physica5 from '../assets/Physuca/5.png';
+import physica1 from '../assets/Physuca/1.webp';
+import physica2 from '../assets/Physuca/2.webp';
+import physica3 from '../assets/Physuca/3.webp';
+import physica4 from '../assets/Physuca/4.webp';
+import physica5 from '../assets/Physuca/5.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -561,11 +563,15 @@ const PortfolioPage = () => {
 
   return (
     <div className="portfolio-page" ref={heroRef}>
-      {/* 3D Background */}
-      <Portfolio3DBackground />
+      {/* 3D Background - Lazy loaded */}
+      <Suspense fallback={null}>
+        <Portfolio3DBackground />
+      </Suspense>
 
       <section className="portfolio-page__hero">
-        <PortfolioHeroBackground />
+        <Suspense fallback={null}>
+          <PortfolioHeroBackground />
+        </Suspense>
         <div className="portfolio-page__hero-bg">
           <div className="portfolio-page__hero-grid"></div>
         </div>

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../contexts/I18nContext';
-import LogoImg from '../assets/Logo.png';
+import LogoImg from '../assets/logo.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

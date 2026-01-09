@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
-import Hero3DScene from './Hero3DScene';
 import Typewriter from './Typewriter';
 import ContactModal from './ContactModal';
 import { useI18n } from '../contexts/I18nContext';
+
+// Lazy load 3D scene para mejor performance inicial
+const Hero3DScene = lazy(() => import('./Hero3DScene'));
 
 /**
  * Hero Section Premium - Nivel Awwwards
@@ -124,9 +126,11 @@ const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="hero" id="inicio">
-      {/* Escena 3D de fondo */}
+      {/* Escena 3D de fondo - Lazy loaded */}
       <div className="hero__3d-container">
-        <Hero3DScene />
+        <Suspense fallback={null}>
+          <Hero3DScene />
+        </Suspense>
       </div>
 
       {/* Gradientes decorativos */}

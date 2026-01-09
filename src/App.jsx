@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,11 +11,32 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 
-// Pages
-import HomePage from './pages/HomePage';
-import PortfolioPage from './pages/PortfolioPage';
-import NosotrosPage from './pages/NosotrosPage';
-import ServiciosPage from './pages/ServiciosPage';
+// Pages - Lazy loaded para mejor performance
+const HomePage = lazy(() => import('./pages/HomePage'));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const NosotrosPage = lazy(() => import('./pages/NosotrosPage'));
+const ServiciosPage = lazy(() => import('./pages/ServiciosPage'));
+
+// Loading fallback minimalista
+const PageLoader = () => (
+  <div style={{
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#0a0a0c'
+  }}>
+    <div style={{
+      width: '40px',
+      height: '40px',
+      border: '3px solid rgba(139, 92, 246, 0.2)',
+      borderTopColor: '#8b5cf6',
+      borderRadius: '50%',
+      animation: 'spin 1s linear infinite'
+    }} />
+    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+  </div>
+);
 
 // Registrar plugins de GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -108,40 +129,42 @@ function App() {
     <I18nProvider>
       <Router>
         <ScrollToTop />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <HomePage />
-              </Layout>
-            }
-          />
-          <Route
-            path="/portfolio"
-            element={
-              <Layout>
-                <PortfolioPage />
-              </Layout>
-            }
-          />
-          <Route
-            path="/nosotros"
-            element={
-              <Layout>
-                <NosotrosPage />
-              </Layout>
-            }
-          />
-          <Route
-            path="/servicios"
-            element={
-              <Layout>
-                <ServiciosPage />
-              </Layout>
-            }
-          />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <HomePage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/portfolio"
+              element={
+                <Layout>
+                  <PortfolioPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/nosotros"
+              element={
+                <Layout>
+                  <NosotrosPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/servicios"
+              element={
+                <Layout>
+                  <ServiciosPage />
+                </Layout>
+              }
+            />
+          </Routes>
+        </Suspense>
       </Router>
     </I18nProvider>
   );

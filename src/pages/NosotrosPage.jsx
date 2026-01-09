@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Globe3D from '../components/Globe3D';
-import AboutSection from '../components/AboutSection';
-import ProcessSection from '../components/ProcessSection';
-import ContactSection from '../components/ContactSection';
 import { useI18n } from '../contexts/I18nContext';
+
+// Lazy load componentes pesados para mejor performance
+const Globe3D = lazy(() => import('../components/Globe3D'));
+const AboutSection = lazy(() => import('../components/AboutSection'));
+const ProcessSection = lazy(() => import('../components/ProcessSection'));
+const ContactSection = lazy(() => import('../components/ContactSection'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +41,7 @@ const NosotrosPage = () => {
   const pageRef = useRef(null);
   const heroRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showGlobe, setShowGlobe] = useState(false);
   const { t, language } = useI18n();
 
   // Counters - load immediately
@@ -46,6 +49,12 @@ const NosotrosPage = () => {
   const [count2, ref2] = useCounter(300, 2);
   const [count3, ref3] = useCounter(98, 2.5);
   const [count4, ref4] = useCounter(5, 1.5);
+
+  // Delay Globe3D loading to prevent blocking initial render
+  useEffect(() => {
+    const timer = setTimeout(() => setShowGlobe(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -187,9 +196,13 @@ const NosotrosPage = () => {
             </div>
           </div>
 
-          {/* Right side - 3D Globe */}
+          {/* Right side - 3D Globe - Deferred loading */}
           <div className="nosotros-hero__globe-wrapper">
-            <Globe3D />
+            {showGlobe && (
+              <Suspense fallback={null}>
+                <Globe3D />
+              </Suspense>
+            )}
             <div className="nosotros-hero__globe-label">
               <span className="nosotros-hero__globe-label-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -211,9 +224,15 @@ const NosotrosPage = () => {
         </div>
       </section>
 
-      <AboutSection />
-      <ProcessSection />
-      <ContactSection />
+      <Suspense fallback={null}>
+        <AboutSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ProcessSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ContactSection />
+      </Suspense>
     </div>
   );
 };

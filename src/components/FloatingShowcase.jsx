@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 // Importar imágenes de proyectos
-import NeuroFysImg from '../assets/NeuroFys.png';
-import LavaderoImg from '../assets/Lavadero.png';
-import ConstruccionesImg from '../assets/Construcciones.png';
+import NeuroFysImg from '../assets/NeuroFys.webp';
+import LavaderoImg from '../assets/Lavadero.webp';
+import ConstruccionesImg from '../assets/Construcciones.webp';
 
 /**
  * Floating Showcase - Tarjetas flotantes premium con previews de trabajos
