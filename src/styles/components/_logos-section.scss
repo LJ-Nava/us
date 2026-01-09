@@ -1995,10 +1995,14 @@
     margin-bottom: $spacing-xl;
   }
 
-  // Carrusel infinito
+  // Carrusel infinito del tech stack
   &__carousel {
     width: 100%;
     overflow: hidden;
+    background: none !important;
+    border: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
     mask-image: linear-gradient(
       90deg,
       transparent 0%,
