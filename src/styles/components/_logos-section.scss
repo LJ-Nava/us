@@ -79,36 +79,8 @@
     padding-left: 0;
     overflow: visible;
 
-    @media (max-width: $breakpoint-lg) { min-height: 520px; padding-left: 0; }
-    @media (max-width: $breakpoint-md) {
-      min-height: 500px;
-      padding-left: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: $spacing-xl;
-      overflow: visible;
-      padding-top: $spacing-2xl;
-    }
-    @media (max-width: $breakpoint-sm) {
-      min-height: 480px;
-      padding: $spacing-xl 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: $spacing-lg;
-      overflow: visible;
-      padding-top: $spacing-xl;
-    }
-    @media (max-width: 480px) {
-      min-height: 450px;
-      padding: $spacing-lg 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: $spacing-md;
-      overflow: visible;
-      padding-top: $spacing-lg;
+    @media (max-width: $breakpoint-lg) {
+      display: none; // Ocultar en tablets y móviles - muy pesado para estos dispositivos
     }
   }
 
