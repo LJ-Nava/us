@@ -1233,29 +1233,29 @@ const LogosSection = () => {
 
             <div className="logos-section__nav-section">
               <span className="logos-section__nav-label">{t('logos.favorites')}</span>
-              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.ecommerceApp'))}>
-                <span className="logos-section__dot logos-section__dot--purple"></span>
-                <span>{t('logos.ecommerceApp')}</span>
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick('Romelima')}>
+                <span className="logos-section__dot" style={{ background: '#9b2335' }}></span>
+                <span>Romelima</span>
               </div>
-              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.landingPage'))}>
-                <span className="logos-section__dot logos-section__dot--blue"></span>
-                <span>{t('logos.landingPage')}</span>
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick('NeuroFys')}>
+                <span className="logos-section__dot" style={{ background: '#3b82f6' }}></span>
+                <span>NeuroFys</span>
               </div>
-              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.dashboardUI'))}>
-                <span className="logos-section__dot logos-section__dot--green"></span>
-                <span>{t('logos.dashboardUI')}</span>
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick('Motive HC')}>
+                <span className="logos-section__dot" style={{ background: '#f97316' }}></span>
+                <span>Motive HC</span>
               </div>
             </div>
 
             <div className="logos-section__nav-section">
               <span className="logos-section__nav-label">{t('logos.recent')}</span>
-              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.mobileApp'))}>
-                <span className="logos-section__dot logos-section__dot--blue"></span>
-                <span>{t('logos.mobileApp')}</span>
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick('El Cracker')}>
+                <span className="logos-section__dot" style={{ background: '#ef4444' }}></span>
+                <span>El Cracker</span>
               </div>
-              <div className="logos-section__nav-item" onClick={() => handleProjectClick(t('logos.apiBackend'))}>
-                <span className="logos-section__dot logos-section__dot--purple"></span>
-                <span>{t('logos.apiBackend')}</span>
+              <div className="logos-section__nav-item" onClick={() => handleProjectClick('Physica')}>
+                <span className="logos-section__dot" style={{ background: '#6b7b5c' }}></span>
+                <span>Physica</span>
               </div>
             </div>
           </div>
