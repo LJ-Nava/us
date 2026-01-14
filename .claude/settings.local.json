@@ -4,7 +4,9 @@
       "Bash(tree:*)",
       "Bash(wc:*)",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "WebSearch",
+      "Bash(git add:*)"
     ]
   }
 }

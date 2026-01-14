@@ -368,21 +368,19 @@ const Header = () => {
             </span>
           </button>
 
-          {/* NEW Mobile Menu Toggle - Simple hamburger */}
-          <button
-            className="mob-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              setIsMobileMenuOpen(!isMobileMenuOpen);
-            }}
-            aria-label="Menú"
-            type="button"
-          >
-            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
-            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
-            <span className={`mob-toggle__bar ${isMobileMenuOpen ? 'mob-toggle__bar--open' : ''}`} />
-          </button>
+          {/* Mobile Menu Toggle - Simple hamburger (hidden when menu is open) */}
+          {!isMobileMenuOpen && (
+            <button
+              className="mob-toggle"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Menú"
+              type="button"
+            >
+              <span className="mob-toggle__bar" />
+              <span className="mob-toggle__bar" />
+              <span className="mob-toggle__bar" />
+            </button>
+          )}
         </div>
       </div>
 

@@ -331,11 +331,8 @@ const AboutSection = () => {
         <div className="tech-section">
           <div className="tech-section__header">
             <span className="about-section__label">{t('about.techLabel')}</span>
-            <p className="tech-section__subtitle">
-              {t('about.techSubtitle')}
-            </p>
+            <p className="tech-section__subtitle">{t('about.techSubtitle')}</p>
           </div>
-
           <div className="tech-grid">
             {techStack.map((tech, i) => (
               <div
@@ -347,9 +344,7 @@ const AboutSection = () => {
                 onMouseLeave={() => handleMagneticLeave(techItemsRef.current[i])}
               >
                 <div className="tech-item__glow" />
-                <div className="tech-item__icon">
-                  {tech.icon}
-                </div>
+                <div className="tech-item__icon">{tech.icon}</div>
                 <span className="tech-item__name">{tech.name}</span>
               </div>
             ))}

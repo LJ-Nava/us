@@ -117,8 +117,8 @@ const HeroSection = () => {
     const timeout = setTimeout(() => {
       animateCounter('projects', 300, 2000);
       animateCounter('clients', 30, 2000);
-      animateCounter('years', 5, 1500);
-      animateCounter('team', 8, 1500);
+      animateCounter('years', 3, 1500);
+      animateCounter('team', 4, 1500);
     }, 1500);
 
     return () => clearTimeout(timeout);

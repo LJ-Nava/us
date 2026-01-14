@@ -170,7 +170,7 @@ const toneNameKeys = {
   Petal: 'tonePetal', Rose: 'toneRose', Cherry: 'toneCherry',
 };
 
-// Legacy format for LUMEN AI core (uses selected color)
+// Legacy format for color core (uses selected color)
 const getWaveColor = (familyIdx, toneIdx, colorPalette) => {
   const family = colorPalette[familyIdx];
   const tone = family.tones[toneIdx];
@@ -602,8 +602,8 @@ const LogosSection = () => {
           detail: {
             breadcrumb: t('logos.portfolio'), status: t('logos.inProgress'), priorityLabel: t('logos.enterprise'),
             assignees: ['LN', 'JV', 'LE'], description: t('logos.descNeuroFys'),
-            files: [{ name: 'React + AI', type: 'code' }, { name: 'EMR System', type: 'doc' }],
-            activity: [{ user: 'Luis', action: t('logos.updatedStatus'), value: 'AI Module', time: t('logos.ago2h') }]
+            files: [{ name: 'React + Tech', type: 'code' }, { name: 'EMR System', type: 'doc' }],
+            activity: [{ user: 'Luis', action: t('logos.updatedStatus'), value: 'Medical Module', time: t('logos.ago2h') }]
           }
         },
         {
@@ -621,7 +621,7 @@ const LogosSection = () => {
     },
     team: {
       title: t('logos.team'),
-      count: '8',
+      count: '4',
       countLabel: t('logos.members'),
       items: [
         {
@@ -630,7 +630,7 @@ const LogosSection = () => {
             breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleTechLead'),
             assignees: ['LN'], description: t('logos.descLuis'),
             files: [], activity: [
-              { user: 'Luis', action: t('logos.actionShipped'), value: 'NeuroFys AI Module', time: t('logos.ago2h') },
+              { user: 'Luis', action: t('logos.actionShipped'), value: 'NeuroFys Module', time: t('logos.ago2h') },
               { user: 'Luis', action: t('logos.actionMerged'), value: 'Feature Branch #142', time: t('logos.ago5h') },
             ]
           }
@@ -665,46 +665,6 @@ const LogosSection = () => {
             files: [], activity: [
               { user: 'Lina', action: t('logos.actionImplemented'), value: 'Smooth Animations', time: t('logos.ago2h') },
               { user: 'Lina', action: t('logos.actionFixed'), value: 'Mobile Responsiveness', time: t('logos.yesterday') },
-            ]
-          }
-        },
-        {
-          id: 'USR-005', title: 'Deivi Gutierrez', tag: t('logos.roleDevOps'), tagType: 'ops', date: t('logos.online'), priority: 'medium',
-          detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleCloudArch'),
-            assignees: ['DG'], description: t('logos.descDeivi'),
-            files: [], activity: [
-              { user: 'Deivi', action: t('logos.actionConfigured'), value: 'Auto-scaling', time: t('logos.yesterday') },
-            ]
-          }
-        },
-        {
-          id: 'USR-006', title: 'Beyker Tovar', tag: t('logos.roleQA'), tagType: 'ops', date: t('logos.online'), priority: 'medium',
-          detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleQualityLead'),
-            assignees: ['BT'], description: t('logos.descBeyker'),
-            files: [], activity: [
-              { user: 'Beyker', action: t('logos.actionTested'), value: 'Release v2.4', time: t('logos.ago2h') },
-            ]
-          }
-        },
-        {
-          id: 'USR-007', title: 'Alanis Nava', tag: t('logos.roleContent'), tagType: 'design', date: t('logos.online'), priority: 'medium',
-          detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleWriter'),
-            assignees: ['AN'], description: t('logos.descDaniela'),
-            files: [], activity: [
-              { user: 'Alanis', action: t('logos.actionPublished'), value: 'Brand Guidelines', time: t('logos.ago2h') },
-            ]
-          }
-        },
-        {
-          id: 'USR-008', title: 'Yorguin Vargas', tag: 'Marketing', tagType: 'design', date: t('logos.online'), priority: 'medium',
-          detail: {
-            breadcrumb: t('logos.team'), status: t('logos.online'), priorityLabel: t('logos.titleGrowthLead'),
-            assignees: ['YV'], description: t('logos.descYorguin'),
-            files: [], activity: [
-              { user: 'Yorguin', action: t('logos.actionLaunched'), value: 'Q4 Campaign', time: t('logos.ago5h') },
             ]
           }
         },
@@ -750,7 +710,7 @@ const LogosSection = () => {
       ]
     },
     lumen: {
-      title: 'LUMEN AI',
+      title: 'Theme',
       count: '8',
       countLabel: t('logos.colors') || 'colors',
       items: colorPalette.map((family, idx) => ({
@@ -761,15 +721,15 @@ const LogosSection = () => {
         familyIdx: idx,
         priority: colorFamily === idx ? 'high' : 'medium',
         detail: {
-          breadcrumb: 'LUMEN Engine',
+          breadcrumb: 'Color Engine',
           status: colorFamily === idx ? t('logos.active') || 'Active' : t('logos.available') || 'Available',
           priorityLabel: t('logos.colorTheme') || 'Color Theme',
           assignees: [],
-          description: `${t('logos.colorDesc') || 'Premium color family for LUMEN AI. Click to select this color family.'} 6 tonalities available.`,
+          description: `${t('logos.colorDesc') || 'Premium color family. Click to select this color family.'} 6 tonalities available.`,
           hex: family.tones[3].hex,
           files: [],
           activity: [
-            { user: 'LUMEN', action: colorFamily === idx ? (t('logos.currentlyActive') || 'Currently active') : (t('logos.readyToApply') || 'Ready to apply'), time: '' }
+            { user: 'System', action: colorFamily === idx ? (t('logos.currentlyActive') || 'Currently active') : (t('logos.readyToApply') || 'Ready to apply'), time: '' }
           ]
         }
       }))
@@ -1179,36 +1139,77 @@ const LogosSection = () => {
 
   return (
     <section ref={sectionRef} className="logos-section">
-      {/* Headline - Conectado con el concepto de IA */}
+      {/* Premium Headline - Hero Presentation */}
       <div className="logos-section__headline">
-        <span className="logos-section__headline-badge">
-          <span className="logos-section__headline-badge-dot"></span>
-          {t('logos.badge')}
-        </span>
-        <h2 className="logos-section__headline-title">
-          {t('logos.title1')}<br/>
-          <span className="logos-section__headline-accent">{t('logos.title2')}</span>
-        </h2>
-        <p className="logos-section__headline-subtitle">
-          {t('logos.subtitle')}
-        </p>
-      </div>
+        {/* Ambient lighting effects */}
+        <div className="logos-section__headline-ambient">
+          <div className="logos-section__headline-glow logos-section__headline-glow--primary"></div>
+          <div className="logos-section__headline-glow logos-section__headline-glow--secondary"></div>
+        </div>
 
-      {/* Tech grid - Stack tecnológico con carrusel infinito */}
-      <div className="logos-section__container">
-        <p className="logos-section__tech-label">{t('logos.techLabel')}</p>
-        <div className="logos-section__carousel">
-          <div className="logos-section__carousel-track">
-            {/* Duplicamos los items para crear el efecto infinito */}
-            {[...technologies, ...technologies].map((tech, i) => (
-              <div key={i} className="logos-section__item">
-                <div className="logos-section__icon">{tech.icon}</div>
-                <span className="logos-section__name">{tech.name}</span>
-              </div>
-            ))}
+        {/* Main content */}
+        <div className="logos-section__headline-content">
+          {/* Top decorative line */}
+          <div className="logos-section__headline-line logos-section__headline-line--top">
+            <span className="logos-section__headline-line-inner"></span>
+          </div>
+
+          {/* Badge */}
+          <div className="logos-section__headline-badge">
+            <span className="logos-section__headline-badge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+            </span>
+            {t('logos.badge') || 'Nuestro Trabajo'}
+          </div>
+
+          {/* Main title with dramatic typography */}
+          <h2 className="logos-section__headline-title">
+            <span className="logos-section__headline-title-line">
+              <span className="logos-section__headline-title-text">{t('logos.title1')}</span>
+            </span>
+            <span className="logos-section__headline-title-line">
+              <span className="logos-section__headline-title-text logos-section__headline-title-text--accent">{t('logos.title2')}</span>
+            </span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="logos-section__headline-subtitle">
+            {t('logos.subtitle')}
+          </p>
+
+          {/* Bottom decorative line */}
+          <div className="logos-section__headline-line logos-section__headline-line--bottom">
+            <span className="logos-section__headline-line-inner"></span>
+          </div>
+
+          {/* Scroll indicator that points to content below */}
+          <div className="logos-section__headline-scroll">
+            <span className="logos-section__headline-scroll-text">{t('logos.scrollText') || 'Explora nuestros proyectos'}</span>
+            <div className="logos-section__headline-scroll-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </div>
           </div>
         </div>
-        <p className="logos-section__tech-plus">{t('logos.aiIntegrated')}</p>
+
+        {/* Side decorative elements */}
+        <div className="logos-section__headline-sides">
+          <div className="logos-section__headline-side logos-section__headline-side--left">
+            <span></span><span></span><span></span>
+          </div>
+          <div className="logos-section__headline-side logos-section__headline-side--right">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        {/* Transition element to content below */}
+        <div className="logos-section__headline-transition">
+          <div className="logos-section__headline-transition-line"></div>
+          <div className="logos-section__headline-transition-glow"></div>
+        </div>
       </div>
 
       {/* Paneles flotantes 3D estilo Linear */}
@@ -1542,7 +1543,7 @@ const LogosSection = () => {
           <circle className="logos-section__extended-node" cx="650" cy="280" r="3" />
         </svg>
 
-        {/* LUMEN AI - Núcleo de Inteligencia Premium */}
+        {/* Visual Core - Premium Visual Element */}
         <div
           className={`logos-section__ai-container ${isWaving ? 'is-waving' : ''}`}
           onClick={handleAIClick}

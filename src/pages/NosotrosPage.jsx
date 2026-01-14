@@ -45,10 +45,10 @@ const NosotrosPage = () => {
   const { t, language } = useI18n();
 
   // Counters - load immediately
-  const [count1, ref1] = useCounter(8, 1.5);
+  const [count1, ref1] = useCounter(4, 1.5);
   const [count2, ref2] = useCounter(300, 2);
   const [count3, ref3] = useCounter(98, 2.5);
-  const [count4, ref4] = useCounter(5, 1.5);
+  const [count4, ref4] = useCounter(3, 1.5);
 
   // Delay Globe3D loading to prevent blocking initial render
   useEffect(() => {
