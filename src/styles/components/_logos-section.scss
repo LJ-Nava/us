@@ -79,8 +79,8 @@
     padding-left: 0;
     overflow: visible;
 
-    @media (max-width: $breakpoint-lg) {
-      display: none; // Ocultar en tablets y móviles - muy pesado para estos dispositivos
+    @media (max-width: 1400px) {
+      display: none; // Ocultar en tablets (incluyendo iPad Pro 12.9" landscape) y móviles - solo laptops/PCs
     }
   }
 

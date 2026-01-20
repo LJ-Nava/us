@@ -44,7 +44,7 @@ export const translations = {
     // Hero
     hero: {
       badge: 'Agencia de Diseño Web Premium',
-      welcomeBadge: 'Bienvenido a Jowify',
+      welcomeBadge: 'Bienvenido a Plexiva Studio',
       titleLine: 'Donde tu visión',
       heroWords: ['cobra vida.', 'se hace realidad.', 'toma forma.', 'empieza aquí.', 'evoluciona.'],
       title1: 'Creamos experiencias',
@@ -828,7 +828,7 @@ export const translations = {
     },
     hero: {
       badge: 'Premium Web Design Agency',
-      welcomeBadge: 'Welcome to Jowify',
+      welcomeBadge: 'Welcome to Plexiva Studio',
       titleLine: 'Where your vision',
       heroWords: ['comes to life.', 'becomes reality.', 'takes shape.', 'starts here.', 'evolves.'],
       title1: 'We create digital',
@@ -1584,7 +1584,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agência de Web Design Premium',
-      welcomeBadge: 'Bem-vindo ao Jowify',
+      welcomeBadge: 'Bem-vindo ao Plexiva Studio',
       titleLine: 'Onde sua visão',
       heroWords: ['ganha vida.', 'se torna realidade.', 'toma forma.', 'começa aqui.', 'evolui.'],
       title1: 'Criamos experiências',
@@ -2350,7 +2350,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agence Web Design Premium',
-      welcomeBadge: 'Bienvenue chez Jowify',
+      welcomeBadge: 'Bienvenue chez Plexiva Studio',
       titleLine: 'Où votre vision',
       heroWords: ['prend vie.', 'devient réalité.', 'prend forme.', 'commence ici.', 'évolue.'],
       title1: 'Nous créons des expériences',
@@ -3122,7 +3122,7 @@ export const translations = {
     },
     hero: {
       badge: 'Premium Webdesign Agentur',
-      welcomeBadge: 'Willkommen bei Jowify',
+      welcomeBadge: 'Willkommen bei Plexiva Studio',
       titleLine: 'Wo Ihre Vision',
       heroWords: ['lebendig wird.', 'Realität wird.', 'Form annimmt.', 'hier beginnt.', 'sich entwickelt.'],
       title1: 'Wir schaffen digitale',
@@ -3890,7 +3890,7 @@ export const translations = {
     },
     hero: {
       badge: '高端网页设计机构',
-      welcomeBadge: '欢迎来到 Jowify',
+      welcomeBadge: '欢迎来到 Plexiva Studio',
       titleLine: '您的愿景在这里',
       heroWords: ['焕发生机。', '成为现实。', '成形。', '从这里开始。', '不断进化。'],
       title1: '我们创造',
@@ -4659,7 +4659,7 @@ export const translations = {
     },
     hero: {
       badge: 'プレミアムウェブデザインエージェンシー',
-      welcomeBadge: 'Jowifyへようこそ',
+      welcomeBadge: 'Plexiva Studioへようこそ',
       titleLine: 'あなたのビジョンが',
       heroWords: ['息を吹き込む。', '現実になる。', '形になる。', 'ここから始まる。', '進化する。'],
       title1: '私たちは',
@@ -5411,7 +5411,7 @@ export const translations = {
     },
     hero: {
       badge: '프리미엄 웹 디자인 에이전시',
-      welcomeBadge: 'Jowify에 오신 것을 환영합니다',
+      welcomeBadge: 'Plexiva Studio에 오신 것을 환영합니다',
       titleLine: '당신의 비전이',
       heroWords: ['생명을 얻습니다.', '현실이 됩니다.', '형태를 갖춥니다.', '여기서 시작됩니다.', '진화합니다.'],
       title1: '연결하는',
@@ -6099,7 +6099,7 @@ export const translations = {
     },
     hero: {
       badge: 'Công ty Thiết kế Web Cao cấp',
-      welcomeBadge: 'Chào mừng đến Jowify',
+      welcomeBadge: 'Chào mừng đến Plexiva Studio',
       titleLine: 'Nơi tầm nhìn của bạn',
       heroWords: ['sống động.', 'thành hiện thực.', 'hình thành.', 'bắt đầu từ đây.', 'phát triển.'],
       title1: 'Chúng tôi tạo ra',
@@ -6781,7 +6781,7 @@ export const translations = {
     },
     hero: {
       badge: 'وكالة تصميم ويب متميزة',
-      welcomeBadge: 'مرحباً بك في Jowify',
+      welcomeBadge: 'مرحباً بك في Plexiva Studio',
       titleLine: 'حيث رؤيتك',
       heroWords: ['تنبض بالحياة.', 'تصبح حقيقة.', 'تأخذ شكلها.', 'تبدأ هنا.', 'تتطور.'],
       title1: 'نخلق تجارب',
@@ -7463,7 +7463,7 @@ export const translations = {
     },
     hero: {
       badge: 'Agenzia Web Design Premium',
-      welcomeBadge: 'Benvenuto in Jowify',
+      welcomeBadge: 'Benvenuto in Plexiva Studio',
       titleLine: 'Dove la tua visione',
       heroWords: ['prende vita.', 'diventa realtà.', 'prende forma.', 'inizia qui.', 'si evolve.'],
       title1: 'Creiamo esperienze',
@@ -8145,7 +8145,7 @@ export const translations = {
     },
     hero: {
       badge: 'Премиум Веб-Дизайн Агентство',
-      welcomeBadge: 'Добро пожаловать в Jowify',
+      welcomeBadge: 'Добро пожаловать в Plexiva Studio',
       titleLine: 'Где ваше видение',
       heroWords: ['оживает.', 'становится реальностью.', 'обретает форму.', 'начинается здесь.', 'развивается.'],
       title1: 'Мы создаём',
@@ -8827,7 +8827,7 @@ export const translations = {
     },
     hero: {
       badge: 'प्रीमियम वेब डिज़ाइन एजेंसी',
-      welcomeBadge: 'Jowify में आपका स्वागत है',
+      welcomeBadge: 'Plexiva Studio में आपका स्वागत है',
       titleLine: 'जहां आपकी दृष्टि',
       heroWords: ['जीवंत होती है।', 'वास्तविकता बनती है।', 'आकार लेती है।', 'यहाँ से शुरू होती है।', 'विकसित होती है।'],
       title1: 'हम बनाते हैं',
