@@ -124,7 +124,7 @@ const Footer = () => {
             {/* Brand */}
             <div className="footer__brand">
               <Link to="/" className="footer__logo">
-                <img src={LogoImg} alt="Plexiva Studio" className="footer__logo-img" />
+                <img src={LogoImg} alt="Plexify Studio" className="footer__logo-img" />
               </Link>
               <p className="footer__tagline">
                 {t('footer.tagline')}
@@ -221,7 +221,7 @@ const Footer = () => {
           <div className="footer__bottom">
             <div className="footer__bottom-left">
               <p className="footer__copyright">
-                © {currentYear} Plexiva Studio. {t('footer.rights')}
+                © {currentYear} Plexify Studio. {t('footer.rights')}
               </p>
             </div>
             <div className="footer__bottom-right">

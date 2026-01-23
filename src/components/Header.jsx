@@ -212,7 +212,7 @@ const Header = () => {
       <div className="header__container">
         {/* Logo */}
         <Link to="/" className="header__logo">
-          <img src={LogoImg} alt="Plexiva Studio" className="header__logo-img" />
+          <img src={LogoImg} alt="Plexify Studio" className="header__logo-img" />
         </Link>
 
         {/* Navigation */}
@@ -391,7 +391,7 @@ const Header = () => {
             {/* Header */}
             <div className="mob-panel__header">
               <div className="mob-panel__brand">
-                <img src={LogoImg} alt="Plexiva Studio" className="mob-panel__logo-img" />
+                <img src={LogoImg} alt="Plexify Studio" className="mob-panel__logo-img" />
               </div>
               <button className="mob-panel__close" onClick={() => setIsMobileMenuOpen(false)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
