@@ -1,0 +1,234 @@
+// ==============================================
+// HERO MOBILE BACKGROUND
+// Alternativa épica al 3D para dispositivos móviles
+// ==============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero-mobile {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+
+  // Gradient mesh background
+  &__gradient {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(
+      ellipse at 30% 20%,
+      rgba($color-primary, 0.15) 0%,
+      transparent 50%
+    );
+    animation: gradientMove 20s ease-in-out infinite;
+
+    &--2 {
+      background: radial-gradient(
+        ellipse at 70% 80%,
+        rgba($color-secondary, 0.12) 0%,
+        transparent 45%
+      );
+      animation: gradientMove2 25s ease-in-out infinite;
+    }
+  }
+
+  // Glowing orbs
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+
+    &--1 {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      right: -10%;
+      background: linear-gradient(135deg, $color-primary, $color-secondary);
+    }
+
+    &--2 {
+      width: 200px;
+      height: 200px;
+      bottom: 20%;
+      left: -5%;
+      background: linear-gradient(135deg, $color-secondary, #c084fc);
+    }
+
+    &--3 {
+      width: 150px;
+      height: 150px;
+      top: 50%;
+      left: 30%;
+      background: $color-primary;
+      opacity: 0.2;
+    }
+  }
+
+  // Geometric shapes container
+  &__shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  // Individual shapes
+  &__shape {
+    position: absolute;
+    opacity: 0.6;
+
+    &--1 {
+      width: 180px;
+      height: 180px;
+      top: 15%;
+      right: 5%;
+    }
+
+    &--2 {
+      width: 120px;
+      height: 120px;
+      top: 60%;
+      right: 15%;
+    }
+
+    &--3 {
+      width: 80px;
+      height: 80px;
+      bottom: 25%;
+      left: 10%;
+    }
+
+    &--4 {
+      width: 200px;
+      height: 200px;
+      top: 30%;
+      left: -5%;
+      opacity: 0.3;
+    }
+
+    &--5 {
+      width: 60px;
+      height: 60px;
+      top: 45%;
+      right: 25%;
+      opacity: 0.2;
+    }
+  }
+
+  // Connection lines
+  &__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__line {
+    stroke-linecap: round;
+  }
+
+  // Floating particles
+  &__particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  &__particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: particleFloat 4s ease-in-out infinite;
+  }
+
+  // Noise texture
+  &__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+}
+
+// Animations
+@keyframes gradientMove {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5%, 5%) rotate(5deg);
+  }
+  50% {
+    transform: translate(-5%, 10%) rotate(-5deg);
+  }
+  75% {
+    transform: translate(10%, -5%) rotate(3deg);
+  }
+}
+
+@keyframes gradientMove2 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(-10%, -5%) rotate(-5deg);
+  }
+  66% {
+    transform: translate(5%, -10%) rotate(5deg);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .hero-mobile {
+    &__orb {
+      &--1 {
+        width: 200px;
+        height: 200px;
+      }
+      &--2 {
+        width: 150px;
+        height: 150px;
+      }
+      &--3 {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    &__shape {
+      &--1 {
+        width: 140px;
+        height: 140px;
+      }
+      &--2 {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}

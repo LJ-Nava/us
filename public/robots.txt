@@ -1,0 +1,24 @@
+# Robots.txt para Plexify Studio
+# https://plexifystudio.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://plexifystudio.com/sitemap.xml
+
+# Bloquear archivos innecesarios
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /node_modules/
+
+# Permitir rastreadores de Google
+User-agent: Googlebot
+Allow: /
+
+# Permitir rastreadores de Bing
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay para ser amigable con el servidor
+Crawl-delay: 1

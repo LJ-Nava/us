@@ -94,13 +94,25 @@ const CustomCursor = () => {
   );
 };
 
+// Skip Link para accesibilidad (permite saltar al contenido principal)
+const SkipLink = () => (
+  <a
+    href="#main-content"
+    className="skip-link"
+    aria-label="Saltar al contenido principal"
+  >
+    Saltar al contenido principal
+  </a>
+);
+
 // Layout principal
 const Layout = ({ children }) => {
   return (
     <div className="app">
-      <CustomCursor />
+      <SkipLink />
+      <CustomCursor aria-hidden="true" />
       <Header />
-      <main className="main">
+      <main id="main-content" className="main" role="main" tabIndex="-1">
         {children}
       </main>
       <Footer />

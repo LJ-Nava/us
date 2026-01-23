@@ -1,6 +1,34 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect, lazy, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+
+// Lazy load del componente móvil para no cargarlo en desktop
+const HeroMobileBackground = lazy(() => import('./HeroMobileBackground'));
+
+/**
+ * Hook para detectar si es dispositivo móvil o tablet
+ */
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      // Detectar por ancho de pantalla Y capacidades del dispositivo
+      const isMobileWidth = window.innerWidth <= 1024;
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isLowPerformance = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+
+      // Es móvil si: pantalla pequeña O (es touch Y bajo rendimiento)
+      setIsMobile(isMobileWidth || (isTouchDevice && isLowPerformance));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
 
 /**
  * Geometría wireframe elegante que rota suavemente
@@ -244,9 +272,21 @@ const Scene = () => {
 };
 
 /**
- * Componente Canvas principal
+ * Componente Canvas principal - Adaptativo Desktop/Mobile
  */
 const Hero3DScene = () => {
+  const isMobile = useIsMobile();
+
+  // En móvil, mostrar la alternativa CSS
+  if (isMobile) {
+    return (
+      <Suspense fallback={<div className="hero-3d hero-3d--loading" />}>
+        <HeroMobileBackground />
+      </Suspense>
+    );
+  }
+
+  // En desktop, mostrar el 3D completo
   return (
     <div className="hero-3d">
       <Canvas

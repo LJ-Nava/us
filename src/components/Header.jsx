@@ -216,8 +216,8 @@ const Header = () => {
         </Link>
 
         {/* Navigation */}
-        <nav className="header__nav">
-          <ul className="header__nav-list">
+        <nav className="header__nav" aria-label="Navegación principal">
+          <ul className="header__nav-list" role="menubar">
             {/* Inicio */}
             <li className="header__nav-item">
               <Link to="/" className={`header__nav-link ${location.pathname === '/' ? 'header__nav-link--active' : ''}`}>
@@ -373,12 +373,14 @@ const Header = () => {
             <button
               className="mob-toggle"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Menú"
+              aria-label="Abrir menú de navegación"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
               type="button"
             >
-              <span className="mob-toggle__bar" />
-              <span className="mob-toggle__bar" />
-              <span className="mob-toggle__bar" />
+              <span className="mob-toggle__bar" aria-hidden="true" />
+              <span className="mob-toggle__bar" aria-hidden="true" />
+              <span className="mob-toggle__bar" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -386,15 +388,30 @@ const Header = () => {
 
       {/* Premium Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="mob-overlay" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="mob-panel" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="mob-overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
+        >
+          <nav
+            id="mobile-menu"
+            className="mob-panel"
+            onClick={(e) => e.stopPropagation()}
+            aria-label="Navegación principal móvil"
+          >
             {/* Header */}
             <div className="mob-panel__header">
               <div className="mob-panel__brand">
                 <img src={LogoImg} alt="Plexify Studio" className="mob-panel__logo-img" />
               </div>
-              <button className="mob-panel__close" onClick={() => setIsMobileMenuOpen(false)}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <button
+                className="mob-panel__close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Cerrar menú de navegación"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
               </button>
@@ -522,7 +539,7 @@ const Header = () => {
                 </svg>
               </button>
             </div>
-          </div>
+          </nav>
         </div>
       )}
 

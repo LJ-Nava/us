@@ -78,3 +78,62 @@ button {
   background: rgba($color-primary, 0.3);
   color: $color-white;
 }
+
+// ==============================================
+// ACCESIBILIDAD (A11Y)
+// ==============================================
+
+// Skip Link - Visible solo con focus (teclado)
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  padding: 1rem 2rem;
+  background: $color-primary;
+  color: $color-white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 20px rgba($color-primary, 0.4);
+  transition: top 0.3s ease;
+
+  &:focus {
+    top: 1rem;
+    outline: 3px solid $color-white;
+    outline-offset: 2px;
+  }
+}
+
+// Focus states mejorados para accesibilidad
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 3px;
+}
+
+// Ocultar elementos para lectores de pantalla (visually hidden)
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Reducir animaciones para usuarios que lo prefieren
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
