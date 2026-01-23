@@ -457,12 +457,20 @@
     border-radius: 32px;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
     @media (max-width: 1100px) {
       max-width: 100%;
       aspect-ratio: 16/9;
+    }
+
+    @media (max-width: 768px) {
+      aspect-ratio: auto;
+      padding: 40px 20px 24px;
+      min-height: 320px;
+      justify-content: space-between;
     }
   }
 
@@ -473,6 +481,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   &__visual-ring {
@@ -514,6 +526,11 @@
     gap: 12px;
     text-align: center;
     transition: all 0.4s ease;
+
+    @media (max-width: 768px) {
+      flex: 1;
+      justify-content: center;
+    }
   }
 
   &__visual-icon {
@@ -595,6 +612,10 @@
       left: 15%;
       animation: float 6s ease-in-out infinite 2s;
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   @keyframes float {
@@ -611,6 +632,17 @@
     display: flex;
     justify-content: space-between;
     gap: 16px;
+    z-index: 5;
+
+    @media (max-width: 768px) {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      width: 100%;
+      gap: 12px;
+      flex-shrink: 0;
+    }
   }
 
   &__visual-stat {
@@ -621,6 +653,10 @@
     border-radius: 16px;
     text-align: center;
     backdrop-filter: blur(10px);
+
+    @media (max-width: 768px) {
+      padding: 12px 8px;
+    }
   }
 
   &__visual-stat-value {
@@ -629,6 +665,10 @@
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 4px;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__visual-stat-label {
@@ -636,6 +676,10 @@
     color: #94a3b8;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+
+    @media (max-width: 768px) {
+      font-size: 0.65rem;
+    }
   }
 
   // Visual Glow
@@ -651,6 +695,10 @@
     filter: blur(60px);
     pointer-events: none;
     transition: all 0.4s ease;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   // Info Card
