@@ -450,6 +450,91 @@ export const translations = {
       privacy: 'Privacidad',
       terms: 'Términos',
     },
+    // Legal Page
+    legal: {
+      title: 'Términos y Privacidad',
+      subtitle: 'Información legal sobre nuestros servicios y el manejo de tus datos',
+      lastUpdated: 'Última actualización',
+      termsTitle: 'Términos de Servicio',
+      privacyTitle: 'Política de Privacidad',
+      terms: {
+        acceptance: {
+          title: '1. Aceptación de los Términos',
+          content: 'Al contratar los servicios de Plexify Studio, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con alguna parte de estos términos, le recomendamos no utilizar nuestros servicios.',
+        },
+        services: {
+          title: '2. Descripción de Servicios',
+          content: 'Plexify Studio ofrece servicios profesionales de diseño y desarrollo web, incluyendo pero no limitado a:',
+          item1: 'Diseño de sitios web personalizados y responsive',
+          item2: 'Desarrollo frontend con tecnologías modernas (React, Next.js, Vue)',
+          item3: 'Creación de tiendas en línea (E-commerce)',
+          item4: 'Diseño de landing pages de alta conversión',
+        },
+        payment: {
+          title: '3. Pagos y Facturación',
+          content: 'Los pagos se realizan según lo acordado en la propuesta comercial. Generalmente se requiere un anticipo del 50% para iniciar el proyecto y el 50% restante al momento de la entrega. Los precios no incluyen impuestos aplicables según la legislación local.',
+        },
+        intellectual: {
+          title: '4. Propiedad Intelectual',
+          content: 'Una vez completado el pago total, el cliente recibe los derechos de uso del producto final. Plexify Studio se reserva el derecho de mostrar el trabajo en su portafolio y materiales promocionales, a menos que se acuerde lo contrario por escrito.',
+        },
+        revisions: {
+          title: '5. Revisiones y Cambios',
+          content: 'Cada paquete incluye un número específico de revisiones detallado en la propuesta. Las revisiones adicionales o cambios fuera del alcance original pueden generar costos adicionales que serán comunicados previamente.',
+        },
+        termination: {
+          title: '6. Cancelación del Proyecto',
+          content: 'Si el cliente decide cancelar el proyecto antes de su finalización, el anticipo no será reembolsable. Los trabajos ya realizados hasta el momento de la cancelación serán facturados proporcionalmente.',
+        },
+        liability: {
+          title: '7. Limitación de Responsabilidad',
+          content: 'Plexify Studio no será responsable por daños indirectos, incidentales o consecuentes derivados del uso de nuestros servicios. Nuestra responsabilidad máxima se limita al monto total pagado por el cliente por el servicio específico.',
+        },
+      },
+      privacy: {
+        collection: {
+          title: '1. Información que Recopilamos',
+          content: 'Recopilamos información que nos proporciona directamente cuando utiliza nuestros servicios:',
+          item1: 'Información de contacto (nombre, correo electrónico, teléfono)',
+          item2: 'Información de la empresa o proyecto',
+          item3: 'Comunicaciones que mantiene con nosotros',
+        },
+        usage: {
+          title: '2. Uso de la Información',
+          content: 'Utilizamos la información recopilada para:',
+          item1: 'Proporcionar y mejorar nuestros servicios',
+          item2: 'Comunicarnos con usted sobre su proyecto',
+          item3: 'Enviar información relevante sobre nuestros servicios (con su consentimiento)',
+        },
+        protection: {
+          title: '3. Protección de Datos',
+          content: 'Implementamos medidas de seguridad técnicas y organizativas para proteger su información personal contra acceso no autorizado, pérdida o alteración. Sin embargo, ningún método de transmisión por Internet es 100% seguro.',
+        },
+        cookies: {
+          title: '4. Cookies y Tecnologías Similares',
+          content: 'Nuestro sitio web puede utilizar cookies para mejorar la experiencia del usuario y analizar el tráfico del sitio. Puede configurar su navegador para rechazar cookies, aunque esto puede afectar algunas funcionalidades.',
+        },
+        thirdParty: {
+          title: '5. Terceros',
+          content: 'No vendemos ni compartimos su información personal con terceros para fines de marketing. Podemos compartir información con proveedores de servicios que nos ayudan a operar nuestro negocio, siempre bajo acuerdos de confidencialidad.',
+        },
+        rights: {
+          title: '6. Sus Derechos',
+          content: 'Usted tiene derecho a:',
+          item1: 'Acceder a sus datos personales que tenemos almacenados',
+          item2: 'Solicitar la corrección de datos inexactos',
+          item3: 'Solicitar la eliminación de sus datos personales',
+        },
+        changes: {
+          title: '7. Cambios a esta Política',
+          content: 'Podemos actualizar esta política de privacidad ocasionalmente. Le notificaremos sobre cambios significativos publicando la nueva política en nuestro sitio web con la fecha de actualización.',
+        },
+      },
+      contact: {
+        title: '¿Tienes preguntas?',
+        content: 'Si tienes alguna pregunta sobre estos términos o nuestra política de privacidad, no dudes en contactarnos:',
+      },
+    },
     // WhatsApp Widget
     whatsapp: {
       tooltipQuestion: '¿Tienes alguna pregunta?',
@@ -1224,6 +1309,91 @@ export const translations = {
       landingPages: 'Landing Pages',
       privacy: 'Privacy',
       terms: 'Terms',
+    },
+    // Legal Page
+    legal: {
+      title: 'Terms & Privacy',
+      subtitle: 'Legal information about our services and how we handle your data',
+      lastUpdated: 'Last updated',
+      termsTitle: 'Terms of Service',
+      privacyTitle: 'Privacy Policy',
+      terms: {
+        acceptance: {
+          title: '1. Acceptance of Terms',
+          content: 'By hiring the services of Plexify Studio, you accept these terms and conditions in full. If you disagree with any part of these terms, we recommend not using our services.',
+        },
+        services: {
+          title: '2. Description of Services',
+          content: 'Plexify Studio offers professional web design and development services, including but not limited to:',
+          item1: 'Custom and responsive website design',
+          item2: 'Frontend development with modern technologies (React, Next.js, Vue)',
+          item3: 'E-commerce store creation',
+          item4: 'High-conversion landing page design',
+        },
+        payment: {
+          title: '3. Payments and Billing',
+          content: 'Payments are made as agreed in the commercial proposal. Generally, a 50% deposit is required to start the project and the remaining 50% upon delivery. Prices do not include applicable taxes according to local legislation.',
+        },
+        intellectual: {
+          title: '4. Intellectual Property',
+          content: 'Once full payment is completed, the client receives usage rights for the final product. Plexify Studio reserves the right to display the work in its portfolio and promotional materials, unless otherwise agreed in writing.',
+        },
+        revisions: {
+          title: '5. Revisions and Changes',
+          content: 'Each package includes a specific number of revisions detailed in the proposal. Additional revisions or changes outside the original scope may incur additional costs that will be communicated in advance.',
+        },
+        termination: {
+          title: '6. Project Cancellation',
+          content: 'If the client decides to cancel the project before completion, the deposit will not be refundable. Work completed up to the time of cancellation will be billed proportionally.',
+        },
+        liability: {
+          title: '7. Limitation of Liability',
+          content: 'Plexify Studio shall not be liable for indirect, incidental, or consequential damages arising from the use of our services. Our maximum liability is limited to the total amount paid by the client for the specific service.',
+        },
+      },
+      privacy: {
+        collection: {
+          title: '1. Information We Collect',
+          content: 'We collect information that you provide directly to us when using our services:',
+          item1: 'Contact information (name, email, phone)',
+          item2: 'Company or project information',
+          item3: 'Communications you have with us',
+        },
+        usage: {
+          title: '2. Use of Information',
+          content: 'We use the information collected to:',
+          item1: 'Provide and improve our services',
+          item2: 'Communicate with you about your project',
+          item3: 'Send relevant information about our services (with your consent)',
+        },
+        protection: {
+          title: '3. Data Protection',
+          content: 'We implement technical and organizational security measures to protect your personal information against unauthorized access, loss, or alteration. However, no method of transmission over the Internet is 100% secure.',
+        },
+        cookies: {
+          title: '4. Cookies and Similar Technologies',
+          content: 'Our website may use cookies to enhance user experience and analyze site traffic. You can configure your browser to reject cookies, although this may affect some functionality.',
+        },
+        thirdParty: {
+          title: '5. Third Parties',
+          content: 'We do not sell or share your personal information with third parties for marketing purposes. We may share information with service providers who help us operate our business, always under confidentiality agreements.',
+        },
+        rights: {
+          title: '6. Your Rights',
+          content: 'You have the right to:',
+          item1: 'Access your personal data that we have stored',
+          item2: 'Request correction of inaccurate data',
+          item3: 'Request deletion of your personal data',
+        },
+        changes: {
+          title: '7. Changes to this Policy',
+          content: 'We may update this privacy policy occasionally. We will notify you of significant changes by posting the new policy on our website with the update date.',
+        },
+      },
+      contact: {
+        title: 'Have questions?',
+        content: 'If you have any questions about these terms or our privacy policy, feel free to contact us:',
+      },
     },
     whatsapp: {
       tooltipQuestion: 'Have a question?',

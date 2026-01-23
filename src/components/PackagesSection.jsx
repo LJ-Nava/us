@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import useCurrency from '../hooks/useCurrency';
 import { useI18n } from '../contexts/I18nContext';
 import PackageModal from './PackageModal';
 
@@ -10,44 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * PackagesSection - Nuestros Paquetes
  * Diseño premium con 4 planes diferenciados
- * Precios en moneda local según ubicación
  * Traducido automáticamente según el país del usuario
  */
 const PackagesSection = () => {
   const sectionRef = useRef(null);
   const [hoveredPackage, setHoveredPackage] = useState(null);
-  const { t, language, country } = useI18n();
-  // Use the country detected by IP for currency, NOT the language-mapped country
-  const { formatPrice, currencyName, loading } = useCurrency(country);
+  const { t, language } = useI18n();
 
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Discount countdown - ends March 8, 2026 (2 months from now)
-  const DISCOUNT_END_DATE = new Date('2026-03-08T23:59:59');
-  const [daysRemaining, setDaysRemaining] = useState(0);
-  const [discountActive, setDiscountActive] = useState(true);
-
-  useEffect(() => {
-    const calculateDaysRemaining = () => {
-      const now = new Date();
-      const diff = DISCOUNT_END_DATE - now;
-      const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-      if (days <= 0) {
-        setDaysRemaining(0);
-        setDiscountActive(false);
-      } else {
-        setDaysRemaining(days);
-        setDiscountActive(true);
-      }
-    };
-
-    calculateDaysRemaining();
-    // Update every hour
-    const interval = setInterval(calculateDaysRemaining, 1000 * 60 * 60);
-    return () => clearInterval(interval);
-  }, []);
 
   // Packages with translated content
   const packages = useMemo(() => [
@@ -222,25 +192,6 @@ const PackagesSection = () => {
           <p className="packages-section__subtitle">
             {t('packages.subtitle')}
           </p>
-
-          {/* Discount Countdown Banner */}
-          {discountActive && (
-            <div className="packages-section__discount-banner">
-              <div className="packages-section__discount-banner-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </div>
-              <div className="packages-section__discount-banner-text">
-                <span className="packages-section__discount-banner-label">{t('packages.limitedOffer')}</span>
-                <span className="packages-section__discount-banner-days">
-                  {daysRemaining} {daysRemaining === 1 ? t('packages.dayLeft') : t('packages.daysLeft')}
-                </span>
-              </div>
-              <div className="packages-section__discount-banner-badge">-20%</div>
-            </div>
-          )}
         </div>
 
         {/* Packages Grid */}
@@ -281,23 +232,9 @@ const PackagesSection = () => {
                 {/* Description */}
                 <p className="packages-section__card-description">{pkg.description}</p>
 
-                {/* Price */}
-                <div className="packages-section__card-price">
-                  <div className="packages-section__card-price-row">
-                    <span className="packages-section__card-price-from">{t('packages.from')}</span>
-                    {discountActive && (
-                      <span className="packages-section__card-price-discount">-{pkg.discount}%</span>
-                    )}
-                  </div>
-                  {discountActive && (
-                    <span className={`packages-section__card-price-original ${loading ? 'is-loading' : ''}`}>
-                      {formatPrice(pkg.originalPrice)}
-                    </span>
-                  )}
-                  <span className={`packages-section__card-price-value ${loading ? 'is-loading' : ''}`}>
-                    {discountActive ? formatPrice(pkg.price) : formatPrice(pkg.originalPrice)}
-                  </span>
-                  <span className="packages-section__card-price-note">{pkg.complexity}</span>
+                {/* Complexity badge */}
+                <div className="packages-section__card-complexity">
+                  <span className="packages-section__card-complexity-badge">{pkg.complexity}</span>
                 </div>
 
                 {/* CTA Button */}
@@ -359,7 +296,6 @@ const PackagesSection = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         selectedPackage={selectedPackage}
-        formatPrice={formatPrice}
       />
     </section>
   );

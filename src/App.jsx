@@ -16,6 +16,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const NosotrosPage = lazy(() => import('./pages/NosotrosPage'));
 const ServiciosPage = lazy(() => import('./pages/ServiciosPage'));
+const LegalPage = lazy(() => import('./pages/LegalPage'));
 
 // Loading fallback minimalista
 const PageLoader = () => (
@@ -160,6 +161,14 @@ function App() {
               element={
                 <Layout>
                   <ServiciosPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/legal"
+              element={
+                <Layout>
+                  <LegalPage />
                 </Layout>
               }
             />

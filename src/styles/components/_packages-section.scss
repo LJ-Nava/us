@@ -341,71 +341,27 @@ $package-colors: (
     min-height: 40px;
   }
 
-  // Price
-  &__card-price {
+  // Complexity Badge (replaces price)
+  &__card-complexity {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    justify-content: center;
     margin-bottom: $spacing-lg;
     padding-bottom: $spacing-md;
     border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   }
 
-  &__card-price-row {
-    display: flex;
+  &__card-complexity-badge {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
-
-  &__card-price-from {
-    font-size: 0.7rem;
-    color: rgba(15, 23, 42, 0.4);
-    font-weight: $font-weight-medium;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  &__card-price-discount {
-    font-size: 0.65rem;
-    font-weight: $font-weight-bold;
-    color: #ffffff;
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    padding: 2px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.02em;
-  }
-
-  &__card-price-original {
-    font-size: 1rem;
-    font-weight: $font-weight-medium;
-    color: rgba(15, 23, 42, 0.35);
-    text-decoration: line-through;
-    line-height: 1;
-    margin-bottom: 2px;
-
-    &.is-loading {
-      opacity: 0.5;
-    }
-  }
-
-  &__card-price-value {
-    font-size: 1.75rem;
-    font-weight: $font-weight-bold;
-    color: #0f172a;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    transition: opacity 0.3s ease;
-
-    &.is-loading {
-      opacity: 0.5;
-    }
-  }
-
-  &__card-price-note {
-    font-size: 0.75rem;
-    color: rgba(15, 23, 42, 0.45);
-    font-weight: $font-weight-medium;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: $font-weight-semibold;
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.08);
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(99, 102, 241, 0.15);
   }
 
   // CTA Button

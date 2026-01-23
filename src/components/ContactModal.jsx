@@ -1,18 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
+import emailjs from '@emailjs/browser';
 import { useI18n } from '../contexts/I18nContext';
+
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_5bxpanf';
+const EMAILJS_TEMPLATE_ID = 'template_1j1kfng';
+const EMAILJS_PUBLIC_KEY = 'JM6HKpOFo3tLiClOw';
 
 /**
  * ContactModal - Premium Contact Form Modal
- * Sends form data via backend API with file attachments
+ * Sends form data via EmailJS
  * Uses Portal to render outside of parent stacking context
  */
 const ContactModal = ({ isOpen, onClose }) => {
   const { t } = useI18n();
   const modalRef = useRef(null);
   const contentRef = useRef(null);
-  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +27,6 @@ const ContactModal = ({ isOpen, onClose }) => {
     budget: '',
     message: ''
   });
-  const [files, setFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
@@ -62,62 +66,79 @@ const ContactModal = ({ isOpen, onClose }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
-    const newFiles = Array.from(e.target.files);
-    setFiles(prev => [...prev, ...newFiles].slice(0, 5));
-  };
-
-  const removeFile = (index) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
-  };
-
-  const formatFileSize = (bytes) => {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
+    // Map service values to readable names
+    const serviceLabels = {
+      corporate: 'Sitio Web Corporativo',
+      ecommerce: 'E-commerce / Tienda Online',
+      landing: 'Landing Page',
+      webapp: 'Aplicación Web',
+      redesign: 'Rediseño Web',
+      branding: 'Branding / Identidad',
+      seo: 'SEO / Posicionamiento',
+      other: 'Otro'
+    };
+
+    // Map budget values to readable ranges
+    const budgetLabels = {
+      range1: '$500 - $1,000 USD',
+      range2: '$1,000 - $3,000 USD',
+      range3: '$3,000 - $5,000 USD',
+      range4: '$5,000 - $10,000 USD',
+      range5: '$10,000+ USD',
+      tbd: 'Por definir'
+    };
+
+    const serviceName = serviceLabels[formData.service] || formData.service || 'No especificado';
+    const budgetName = budgetLabels[formData.budget] || formData.budget || 'No especificado';
+
+    // Build detailed message with all form data
+    const fullMessage = `
+${formData.message}
+
+--- INFORMACIÓN ADICIONAL ---
+Empresa: ${formData.company || 'No especificada'}
+Servicio: ${serviceName}
+Presupuesto: ${budgetName}
+    `.trim();
+
+    const templateParams = {
+      package_name: 'Consulta General',
+      complexity: serviceName,
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone || 'No proporcionado',
+      message: fullMessage,
+      extras: budgetName
+    };
+
     try {
-      const formDataToSend = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        budget: '',
+        message: ''
       });
-      files.forEach(file => {
-        formDataToSend.append('attachments', file);
-      });
 
-      const response = await fetch('http://localhost:3001/api/contact', {
-        method: 'POST',
-        body: formDataToSend
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          service: '',
-          budget: '',
-          message: ''
-        });
-        setFiles([]);
-
-        setTimeout(() => {
-          handleClose();
-          setTimeout(() => setSubmitStatus(null), 500);
-        }, 2500);
-      } else {
-        setSubmitStatus('error');
-      }
+      setTimeout(() => {
+        handleClose();
+        setTimeout(() => setSubmitStatus(null), 500);
+      }, 2500);
     } catch (error) {
       console.error('Error:', error);
       setSubmitStatus('error');
@@ -289,60 +310,6 @@ const ContactModal = ({ isOpen, onClose }) => {
               placeholder={t('contactModal.messagePlaceholder')}
             />
           </div>
-
-          {/* File Upload */}
-          <div className="contact-modal__upload">
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              onChange={handleFileChange}
-              accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.zip,.rar"
-              style={{ display: 'none' }}
-            />
-            <button
-              type="button"
-              className="contact-modal__upload-btn"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
-              </svg>
-              {t('contactModal.attachFiles')}
-            </button>
-            <span className="contact-modal__upload-hint">
-              {t('contactModal.attachHint')}
-            </span>
-          </div>
-
-          {/* File List */}
-          {files.length > 0 && (
-            <div className="contact-modal__files">
-              {files.map((file, index) => (
-                <div key={index} className="contact-modal__file">
-                  <div className="contact-modal__file-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                      <polyline points="14 2 14 8 20 8"/>
-                    </svg>
-                  </div>
-                  <div className="contact-modal__file-info">
-                    <span className="contact-modal__file-name">{file.name}</span>
-                    <span className="contact-modal__file-size">{formatFileSize(file.size)}</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="contact-modal__file-remove"
-                    onClick={() => removeFile(index)}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
 
           <button
             type="submit"

@@ -1,0 +1,319 @@
+// ==========================================================================
+// Legal Page Styles
+// Terms of Service & Privacy Policy - Light Theme
+// ==========================================================================
+
+.legal-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8f9fc 0%, #eef1f8 100%);
+}
+
+// ==========================================================================
+// Hero Section
+// ==========================================================================
+
+.legal-hero {
+  position: relative;
+  padding: 12rem 2rem 6rem;
+  text-align: center;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 10rem 1.5rem 4rem;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(139, 92, 246, 0.06) 0%,
+      transparent 60%
+    );
+  }
+
+  &__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+
+    &--1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(139, 92, 246, 0.15);
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &--2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(59, 130, 246, 0.1);
+      bottom: -100px;
+      right: 5%;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  &__date {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #8b5cf6;
+    padding: 0.5rem 1.25rem;
+    background: rgba(139, 92, 246, 0.08);
+    border-radius: 100px;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    font-weight: 500;
+  }
+}
+
+// ==========================================================================
+// Content Section
+// ==========================================================================
+
+.legal {
+  padding: 4rem 2rem 8rem;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 20px 40px -10px rgba(139, 92, 246, 0.08);
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+    }
+  }
+
+  &__block {
+    margin-bottom: 3rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__block-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(139, 92, 246, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 1.35rem;
+    }
+  }
+
+  &__block-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border-radius: 14px;
+    flex-shrink: 0;
+
+    svg {
+      width: 26px;
+      height: 26px;
+      color: #8b5cf6;
+    }
+  }
+
+  &__section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.5));
+    border-radius: 12px;
+    border-left: 3px solid rgba(139, 92, 246, 0.3);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 0.75rem;
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+      border-radius: 50%;
+    }
+  }
+
+  &__text {
+    font-size: 0.975rem;
+    line-height: 1.8;
+    color: #4b5563;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 0.5rem;
+
+    li {
+      position: relative;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4b5563;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__divider {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(139, 92, 246, 0.2),
+      rgba(59, 130, 246, 0.2),
+      transparent
+    );
+    margin: 3rem 0;
+    border-radius: 2px;
+  }
+
+  // Contact Section
+  &__contact {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(59, 130, 246, 0.06));
+    border-radius: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    text-align: center;
+  }
+
+  &__contact-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 0.75rem;
+  }
+
+  &__contact-text {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+
+  &__contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.875rem 1.75rem;
+    background: #fff;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 100px;
+    color: #1a1a2e;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.08);
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #8b5cf6;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border-color: transparent;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+
+      svg {
+        color: #fff;
+      }
+    }
+  }
+}

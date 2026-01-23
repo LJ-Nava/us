@@ -83,7 +83,7 @@ const projectsConfig = [
   },
   {
     id: 3,
-    title: 'Construcciones El Cracker',
+    title: 'Construcciones EC',
     categoryKey: 'construction',
     descKey: 'construccionesDesc',
     url: 'https://lj-nava.github.io/cracker-web/',
@@ -96,7 +96,7 @@ const projectsConfig = [
     title: 'Motive Homecare',
     categoryKey: 'healthcare',
     descKey: 'motiveDesc',
-    url: 'https://lj-nava.github.io/motive/',
+    url: 'https://motivehomecare.com',
     images: [motive1, motive2, motive3, motive4, motive5, motive6, motive7],
     color: '#f97316',
     tagKeys: ['tagStaffing', 'tagHealthcare', 'tagB2B']

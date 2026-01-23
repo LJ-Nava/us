@@ -1,13 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
+import emailjs from '@emailjs/browser';
 import { useI18n } from '../contexts/I18nContext';
+
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_5bxpanf';
+const EMAILJS_TEMPLATE_ID = 'template_1j1kfng';
+const EMAILJS_PUBLIC_KEY = 'JM6HKpOFo3tLiClOw';
 
 /**
  * PackageModal - Modal para solicitar un paquete
  * Muestra info del plan, formulario de contacto y extras
+ * Envía datos via EmailJS
  */
-const PackageModal = ({ isOpen, onClose, selectedPackage, formatPrice }) => {
+const PackageModal = ({ isOpen, onClose, selectedPackage }) => {
   const { t } = useI18n();
   const modalRef = useRef(null);
   const [formData, setFormData] = useState({
@@ -77,51 +84,36 @@ const PackageModal = ({ isOpen, onClose, selectedPackage, formatPrice }) => {
     if (formData.extras.googleMyBusiness) extrasList.push('Google My Business');
     if (formData.extras.maintenance) extrasList.push('Mantenimiento mensual');
 
-    const emailData = {
-      name: formData.name,
-      email: formData.email,
+    const templateParams = {
+      package_name: selectedPackage?.name || 'No especificado',
+      complexity: selectedPackage?.complexity || 'No especificado',
+      from_name: formData.name,
+      from_email: formData.email,
       phone: formData.phone,
-      message: `
-SOLICITUD DE PAQUETE: ${selectedPackage?.name}
-Precio base: ${formatPrice ? formatPrice(selectedPackage?.price) : selectedPackage?.price}
-Complejidad: ${selectedPackage?.complexity}
-
-DESCRIPCIÓN DEL PROYECTO:
-${formData.description}
-
-EXTRAS SELECCIONADOS:
-${extrasList.length > 0 ? extrasList.join(', ') : 'Ninguno'}
-
-CONTACTO:
-- Nombre: ${formData.name}
-- Email: ${formData.email}
-- Teléfono: ${formData.phone}
-      `.trim()
+      message: formData.description,
+      extras: extrasList.length > 0 ? extrasList.join(', ') : 'Ninguno'
     };
 
     try {
-      const response = await fetch('http://localhost:3001/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(emailData)
-      });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setTimeout(() => {
-          handleClose();
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            description: '',
-            extras: { googleMyBusiness: false, maintenance: false }
-          });
-          setSubmitStatus(null);
-        }, 2000);
-      } else {
-        setSubmitStatus('error');
-      }
+      setSubmitStatus('success');
+      setTimeout(() => {
+        handleClose();
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          description: '',
+          extras: { googleMyBusiness: false, maintenance: false }
+        });
+        setSubmitStatus(null);
+      }, 2000);
     } catch {
       setSubmitStatus('error');
     } finally {
@@ -148,9 +140,6 @@ CONTACTO:
           </div>
           <h2 className="package-modal__title">{t('packageModal.request')} {selectedPackage.name}</h2>
           <p className="package-modal__subtitle">
-            <span className="package-modal__price">
-              {t('packages.from')} {formatPrice ? formatPrice(selectedPackage.price) : `$${selectedPackage.price}`}
-            </span>
             <span className="package-modal__complexity">{selectedPackage.complexity}</span>
           </p>
         </div>
@@ -246,7 +235,6 @@ CONTACTO:
               <span className="package-modal__extra-content">
                 <span className="package-modal__extra-header">
                   <span className="package-modal__extra-name">{t('packageModal.gmbName')}</span>
-                  <span className="package-modal__extra-price">{formatPrice('50')}</span>
                 </span>
                 <span className="package-modal__extra-desc">
                   {t('packageModal.gmbDesc')}
@@ -290,7 +278,6 @@ CONTACTO:
               <span className="package-modal__extra-content">
                 <span className="package-modal__extra-header">
                   <span className="package-modal__extra-name">{t('packageModal.maintenanceName')}</span>
-                  <span className="package-modal__extra-price">{formatPrice('30')}<span className="package-modal__extra-period">/{t('packageModal.perMonth')}</span></span>
                 </span>
                 <span className="package-modal__extra-desc">
                   {t('packageModal.maintenanceDesc')}

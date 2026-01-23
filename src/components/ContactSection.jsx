@@ -14,7 +14,7 @@ const ContactSection = () => {
   const { t } = useI18n();
 
   const contactInfo = {
-    email: 'DeveloperLuis17@gmail.com',
+    email: 'contact@plexifystudio.com',
     whatsapp: '573147083182',
     whatsappDisplay: '+57 314 708 3182'
   };
