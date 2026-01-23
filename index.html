@@ -2,11 +2,168 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/us/assets/logo-CsvlLoo_.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plexify Studio</title>
-    <script type="module" crossorigin src="/us/assets/index-CsXVt5wT.js"></script>
-    <link rel="stylesheet" crossorigin href="/us/assets/index-CkWa069y.css">
+
+    <!-- SEO Básico -->
+    <title>Plexify Studio | Diseño Web Profesional en Colombia</title>
+    <meta name="description" content="Agencia de diseño web en Colombia. Creamos sitios web modernos, landing pages y tiendas online con tecnología de punta. Diseño premium a precios accesibles. +10 proyectos entregados." />
+    <meta name="keywords" content="diseño web colombia, agencia diseño web, desarrollo web, landing pages, tiendas online, ecommerce, diseño web profesional, páginas web" />
+    <meta name="author" content="Plexify Studio" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://plexifystudio.com/" />
+
+    <!-- Idioma y región -->
+    <meta name="language" content="Spanish" />
+    <meta name="geo.region" content="CO" />
+    <meta name="geo.country" content="Colombia" />
+
+    <!-- Favicon y iconos -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="theme-color" content="#8b5cf6" />
+    <meta name="msapplication-TileColor" content="#8b5cf6" />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://plexifystudio.com/" />
+    <meta property="og:title" content="Plexify Studio | Diseño Web Profesional en Colombia" />
+    <meta property="og:description" content="Creamos sitios web modernos y experiencias digitales únicas. Diseño premium a precios accesibles. Cotiza tu proyecto hoy." />
+    <meta property="og:image" content="https://plexifystudio.com/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Plexify Studio" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Plexify Studio | Diseño Web Profesional" />
+    <meta name="twitter:description" content="Agencia de diseño web en Colombia. Sitios modernos, landing pages y e-commerce. Diseño premium a precios accesibles." />
+    <meta name="twitter:image" content="https://plexifystudio.com/logo.png" />
+
+    <!-- Schema.org JSON-LD (Datos estructurados para Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Plexify Studio",
+      "description": "Agencia de diseño web profesional en Colombia. Especialistas en diseño moderno, desarrollo frontend con React, landing pages y tiendas online.",
+      "url": "https://plexifystudio.com",
+      "logo": "https://plexifystudio.com/logo.png",
+      "image": "https://plexifystudio.com/logo.png",
+      "telephone": "+57 314 708 3182",
+      "email": "contact@plexifystudio.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CO",
+        "addressRegion": "Colombia"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "addressCountry": "CO"
+      },
+      "priceRange": "$$",
+      "serviceType": ["Diseño Web", "Desarrollo Frontend", "Landing Pages", "E-commerce", "Tiendas Online"],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Colombia"
+      },
+      "sameAs": [],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "10"
+      }
+    }
+    </script>
+
+    <!-- Schema.org - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Plexify Studio",
+      "url": "https://plexifystudio.com",
+      "logo": "https://plexifystudio.com/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+57-314-708-3182",
+        "contactType": "sales",
+        "availableLanguage": ["Spanish", "English"]
+      }
+    }
+    </script>
+
+    <!-- Schema.org - WebSite (para búsqueda en sitio) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Plexify Studio",
+      "url": "https://plexifystudio.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plexifystudio.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Schema.org - SiteNavigationElement (Influencia Sitelinks de Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Servicios",
+          "description": "Diseño web, desarrollo frontend, landing pages y e-commerce",
+          "url": "https://plexifystudio.com/#/servicios"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "Nuestro Trabajo",
+          "description": "Portfolio de proyectos y casos de éxito",
+          "url": "https://plexifystudio.com/#/portfolio"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Paquetes",
+          "description": "Soluciones de diseño web para cada necesidad",
+          "url": "https://plexifystudio.com/#paquetes"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Nosotros",
+          "description": "Conoce al equipo de Plexify Studio",
+          "url": "https://plexifystudio.com/#/nosotros"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Contacto",
+          "description": "Cotiza tu proyecto de diseño web",
+          "url": "https://plexifystudio.com/#/nosotros#contacto"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <script type="module" crossorigin src="/assets/index-C1CewtEP.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CP8e9I8o.css">
   </head>
   <body>
     <div id="root"></div>
