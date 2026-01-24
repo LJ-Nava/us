@@ -53,7 +53,6 @@ const detectCountryByIP = async (forceRefresh = false) => {
     // Only cache in memory (session), not localStorage
     countryCache = countryCode;
 
-    console.log('Detected country:', countryCode);
     return countryCode;
   } catch (error) {
     console.warn('Primary IP API failed, trying backup...');
@@ -67,7 +66,6 @@ const detectCountryByIP = async (forceRefresh = false) => {
       const countryCode = backupData.countryCode || 'US';
 
       countryCache = countryCode;
-      console.log('Detected country (backup):', countryCode);
       return countryCode;
     } catch {
       try {
@@ -79,7 +77,6 @@ const detectCountryByIP = async (forceRefresh = false) => {
         const countryCode = thirdData.country || 'US';
 
         countryCache = countryCode;
-        console.log('Detected country (third):', countryCode);
         return countryCode;
       } catch {
         console.warn('All IP APIs failed, using browser language');
@@ -130,7 +127,6 @@ export const I18nProvider = ({ children }) => {
         setCountry(detectedCountry);
 
         const detectedLanguage = getLanguageFromCountry(detectedCountry);
-        console.log('Detected language:', detectedLanguage, 'from country:', detectedCountry);
 
         // Ensure the detected language is supported
         if (supportedLanguages.includes(detectedLanguage)) {

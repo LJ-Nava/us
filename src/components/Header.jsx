@@ -211,8 +211,15 @@ const Header = () => {
 
       <div className="header__container">
         {/* Logo */}
-        <Link to="/" className="header__logo">
-          <img src={LogoImg} alt="Plexify Studio" className="header__logo-img" />
+        <Link to="/" className="header__logo" aria-label="Plexify Studio - Ir al inicio">
+          <img
+            src={LogoImg}
+            alt="Plexify Studio - Agencia de Diseño Web en Colombia"
+            className="header__logo-img"
+            width="150"
+            height="40"
+            loading="eager"
+          />
         </Link>
 
         {/* Navigation */}
@@ -404,7 +411,13 @@ const Header = () => {
             {/* Header */}
             <div className="mob-panel__header">
               <div className="mob-panel__brand">
-                <img src={LogoImg} alt="Plexify Studio" className="mob-panel__logo-img" />
+                <img
+                  src={LogoImg}
+                  alt="Plexify Studio - Agencia de Diseño Web"
+                  className="mob-panel__logo-img"
+                  width="120"
+                  height="32"
+                />
               </div>
               <button
                 className="mob-panel__close"

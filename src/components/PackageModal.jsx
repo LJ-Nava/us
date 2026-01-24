@@ -127,8 +127,8 @@ const PackageModal = ({ isOpen, onClose, selectedPackage }) => {
     <div ref={modalRef} className="package-modal" onClick={handleClose}>
       <div className="package-modal__content" onClick={e => e.stopPropagation()}>
         {/* Close button */}
-        <button className="package-modal__close" onClick={handleClose}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <button className="package-modal__close" onClick={handleClose} aria-label="Cerrar modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
