@@ -138,14 +138,14 @@
           "position": 1,
           "name": "Servicios",
           "description": "Diseño web, desarrollo frontend, landing pages y e-commerce",
-          "url": "https://plexifystudio.com/#/servicios"
+          "url": "https://plexifystudio.com/servicios"
         },
         {
           "@type": "SiteNavigationElement",
           "position": 2,
           "name": "Nuestro Trabajo",
           "description": "Portfolio de proyectos y casos de éxito",
-          "url": "https://plexifystudio.com/#/portfolio"
+          "url": "https://plexifystudio.com/portfolio"
         },
         {
           "@type": "SiteNavigationElement",
@@ -159,14 +159,14 @@
           "position": 4,
           "name": "Nosotros",
           "description": "Conoce al equipo de Plexify Studio",
-          "url": "https://plexifystudio.com/#/nosotros"
+          "url": "https://plexifystudio.com/nosotros"
         },
         {
           "@type": "SiteNavigationElement",
           "position": 5,
           "name": "Contacto",
           "description": "Cotiza tu proyecto de diseño web",
-          "url": "https://plexifystudio.com/#/nosotros#contacto"
+          "url": "https://plexifystudio.com/nosotros#contacto"
         }
       ]
     }
@@ -179,10 +179,23 @@
 
     <!-- Accesibilidad: indicar cambios de idioma automáticos -->
     <meta name="format-detection" content="telephone=no" />
-    <script type="module" crossorigin src="/assets/index-BJsaJEqj.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Mfw0Vwo-.css">
+    <script type="module" crossorigin src="/assets/index-CfdZA3jV.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B0NB1vLe.css">
   </head>
   <body>
+    <!-- SPA redirect handler for GitHub Pages -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
     <div id="root"></div>
   </body>
 </html>
