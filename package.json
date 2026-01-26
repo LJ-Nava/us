@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://lj-nava.github.io/us",
+  "homepage": "https://plexifystudio.com",
   "scripts": {
     "dev": "vite",
     "start": "vite",

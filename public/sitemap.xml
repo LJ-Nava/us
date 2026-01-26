@@ -11,7 +11,7 @@
 
   <!-- Servicios (Prioridad Alta - Sitelink #1) -->
   <url>
-    <loc>https://plexifystudio.com/#/servicios</loc>
+    <loc>https://plexifystudio.com/servicios</loc>
     <lastmod>2025-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
@@ -19,13 +19,13 @@
 
   <!-- Portfolio / Nuestro Trabajo (Sitelink #2) -->
   <url>
-    <loc>https://plexifystudio.com/#/portfolio</loc>
+    <loc>https://plexifystudio.com/portfolio</loc>
     <lastmod>2025-01-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
-  <!-- Paquetes (Sitelink #3) -->
+  <!-- Paquetes (Sitelink #3 - sección del home) -->
   <url>
     <loc>https://plexifystudio.com/#paquetes</loc>
     <lastmod>2025-01-23</lastmod>
@@ -35,7 +35,7 @@
 
   <!-- Nosotros -->
   <url>
-    <loc>https://plexifystudio.com/#/nosotros</loc>
+    <loc>https://plexifystudio.com/nosotros</loc>
     <lastmod>2025-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -43,7 +43,7 @@
 
   <!-- Legal -->
   <url>
-    <loc>https://plexifystudio.com/#/legal</loc>
+    <loc>https://plexifystudio.com/legal</loc>
     <lastmod>2025-01-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.20</priority>
