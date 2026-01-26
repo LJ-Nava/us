@@ -1,4 +1,4 @@
-import{r as i,j as e}from"./index-CfdZA3jV.js";import{u as h,C as R,a as C}from"./react-three-fiber.esm-BOZH-X6c.js";import{R as z,C as y,A as w,V as E,S as F,a as P}from"./three.module-BOqUkN66.js";import{F as I}from"./Float-C7ESYJ8y.js";const _=()=>parseInt(z.replace(/\D+/g,"")),L=_();class T extends P{constructor(){super({uniforms:{time:{value:0},fade:{value:1}},vertexShader:`
+import{r as i,j as e}from"./index-BjqxLaFj.js";import{u as h,C as R,a as C}from"./react-three-fiber.esm-_mB-79hl.js";import{R as z,C as y,A as w,V as E,S as F,a as P}from"./three.module-BOqUkN66.js";import{F as I}from"./Float-CxeXDyC3.js";const _=()=>parseInt(z.replace(/\D+/g,"")),L=_();class T extends P{constructor(){super({uniforms:{time:{value:0},fade:{value:1}},vertexShader:`
       uniform float time;
       attribute float size;
       varying vec3 vColor;
