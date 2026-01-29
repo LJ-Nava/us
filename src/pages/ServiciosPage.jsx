@@ -399,7 +399,7 @@ const ServiciosPage = () => {
                 </svg>
               </button>
               <a
-                href="https://wa.me/573147083182"
+                href="https://wa.me/573151573329"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="servicios-final__btn servicios-final__btn--whatsapp"

@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CTASection = () => {
   const sectionRef = useRef(null);
   const navigate = useNavigate();
-  const whatsappNumber = '573147083182';
+  const whatsappNumber = '573151573329';
   const { t } = useI18n();
 
   useEffect(() => {

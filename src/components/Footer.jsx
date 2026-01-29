@@ -21,8 +21,8 @@ const Footer = () => {
 
   const contactInfo = {
     email: 'contact@plexifystudio.com',
-    whatsapp: '573147083182',
-    whatsappDisplay: '+57 314 708 3182'
+    whatsapp: '573151573329',
+    whatsappDisplay: '+57 315 157 3329'
   };
 
   const currentYear = new Date().getFullYear();
@@ -159,6 +159,17 @@ const Footer = () => {
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </button>
+                <a
+                  href="https://www.tiktok.com/@plexifystudio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer__social-link footer__social-link--tiktok"
+                  aria-label="TikTok"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+                  </svg>
+                </a>
               </div>
             </div>
 

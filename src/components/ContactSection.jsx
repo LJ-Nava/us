@@ -15,8 +15,8 @@ const ContactSection = () => {
 
   const contactInfo = {
     email: 'contact@plexifystudio.com',
-    whatsapp: '573147083182',
-    whatsappDisplay: '+57 314 708 3182'
+    whatsapp: '573151573329',
+    whatsappDisplay: '+57 315 157 3329'
   };
 
   useEffect(() => {

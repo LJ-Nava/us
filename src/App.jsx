@@ -117,7 +117,7 @@ const Layout = ({ children }) => {
       </main>
       <Footer />
       <WhatsAppWidget
-        phoneNumber="573147083182"
+        phoneNumber="573151573329"
         message="Hola! Me gustaría saber más sobre sus servicios de diseño web."
       />
     </div>

@@ -282,6 +282,13 @@
       color: #8b5cf6;
       transform: translateY(-3px);
     }
+
+    &--tiktok:hover {
+      background: rgba(255, 0, 80, 0.15);
+      border-color: rgba(255, 0, 80, 0.3);
+      color: #ff0050;
+      transform: translateY(-3px);
+    }
   }
 
   // Columns
