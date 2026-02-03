@@ -787,7 +787,7 @@ const LogosSection = () => {
 
   // Handle color selection from LUMEN panel
   const handleColorSelect = (colorIdx, itemId) => {
-    setColorIndex(colorIdx);
+    setColorFamily(colorIdx);
     setSelectedItemId(itemId);
   };
 
@@ -879,16 +879,16 @@ const LogosSection = () => {
       const irisY = Math.max(-maxIrisMove, Math.min(maxIrisMove, (deltaY / 250) * maxIrisMove));
 
       if (iris) {
-        gsap.to(iris, { x: irisX, y: irisY, scale: 1 + (proximity * 0.15), duration: 0.2, ease: 'power3.out', overwrite: true });
+        gsap.to(iris, { x: irisX, y: irisY, scale: 1 + (proximity * 0.15), duration: 0.2, ease: 'power3.out', overwrite: 'auto' });
       }
       if (pupil) {
-        gsap.to(pupil, { x: irisX * 0.4, y: irisY * 0.4, scale: 1 + (proximity * 0.3), duration: 0.15, ease: 'power2.out', overwrite: true });
+        gsap.to(pupil, { x: irisX * 0.4, y: irisY * 0.4, scale: 1 + (proximity * 0.3), duration: 0.15, ease: 'power2.out', overwrite: 'auto' });
       }
       if (pupilCore) {
-        gsap.to(pupilCore, { scale: 1 + (proximity * 0.5), opacity: 0.8 + (proximity * 0.2), duration: 0.15, overwrite: true });
+        gsap.to(pupilCore, { scale: 1 + (proximity * 0.5), opacity: 0.8 + (proximity * 0.2), duration: 0.15, overwrite: 'auto' });
       }
       if (irisGlow) {
-        gsap.to(irisGlow, { scale: 1 + (proximity * 0.4), opacity: 0.5 + (proximity * 0.5), duration: 0.25, overwrite: true });
+        gsap.to(irisGlow, { scale: 1 + (proximity * 0.4), opacity: 0.5 + (proximity * 0.5), duration: 0.25, overwrite: 'auto' });
       }
 
       // ========== RINGS ==========
@@ -901,14 +901,14 @@ const LogosSection = () => {
           scale: 1 + (proximity * 0.02 * (i + 1)),
           duration: 0.4,
           ease: 'power2.out',
-          overwrite: true
+          overwrite: 'auto'
         });
       });
 
       // ========== HEXAGON ==========
       const hexagon = document.querySelector('.logos-section__ai-hexagon');
       if (hexagon) {
-        gsap.to(hexagon, { rotation: angle * 0.1, scale: 1 + (proximity * 0.08), duration: 0.5, ease: 'power2.out', overwrite: true });
+        gsap.to(hexagon, { rotation: angle * 0.1, scale: 1 + (proximity * 0.08), duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
       }
 
       // ========== PARTICLES ==========
@@ -921,7 +921,7 @@ const LogosSection = () => {
           opacity: 0.4 + (proximity * 0.6),
           duration: 0.3,
           ease: 'power1.out',
-          overwrite: true
+          overwrite: 'auto'
         });
       });
 
@@ -935,7 +935,7 @@ const LogosSection = () => {
           opacity: 0.6 + (proximity * 0.4),
           duration: 0.1,
           ease: 'power1.out',
-          overwrite: true
+          overwrite: 'auto'
         });
       });
 
@@ -943,29 +943,29 @@ const LogosSection = () => {
       const circuits = document.querySelectorAll('.logos-section__ai-circuit');
       circuits.forEach((circuit) => {
         const intensity = 0.4 + (proximity * 0.6);
-        gsap.to(circuit, { stroke: `rgba(251, 191, 36, ${intensity})`, strokeWidth: 1.5 + (proximity * 1), duration: 0.3, overwrite: true });
+        gsap.to(circuit, { stroke: `rgba(251, 191, 36, ${intensity})`, strokeWidth: 1.5 + (proximity * 1), duration: 0.3, overwrite: 'auto' });
       });
 
       // ========== NODES ==========
       const nodes = document.querySelectorAll('.logos-section__ai-node');
       nodes.forEach((node) => {
-        gsap.to(node, { opacity: 0.5 + (proximity * 0.5), scale: 1 + (proximity * 0.4), duration: 0.2, overwrite: true });
+        gsap.to(node, { opacity: 0.5 + (proximity * 0.5), scale: 1 + (proximity * 0.4), duration: 0.2, overwrite: 'auto' });
       });
 
       // ========== SCANNERS ==========
       const scanners = document.querySelectorAll('.logos-section__ai-scanner');
       scanners.forEach((scanner, i) => {
-        gsap.to(scanner, { rotation: i === 0 ? angle : angle + 90, opacity: 0.5 + (proximity * 0.5), duration: 0.3, ease: 'power2.out', overwrite: true });
+        gsap.to(scanner, { rotation: i === 0 ? angle : angle + 90, opacity: 0.5 + (proximity * 0.5), duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
       });
 
       // ========== EXTENDED LINES & NODES ==========
       const extendedLines = document.querySelectorAll('.logos-section__extended-line');
       extendedLines.forEach((line) => {
-        gsap.to(line, { strokeOpacity: 0.3 + (proximity * 0.5), duration: 0.4, overwrite: true });
+        gsap.to(line, { strokeOpacity: 0.3 + (proximity * 0.5), duration: 0.4, overwrite: 'auto' });
       });
       const extendedNodes = document.querySelectorAll('.logos-section__extended-node');
       extendedNodes.forEach((node) => {
-        gsap.to(node, { opacity: 0.4 + (proximity * 0.6), scale: 1 + (proximity * 0.4), duration: 0.4, overwrite: true });
+        gsap.to(node, { opacity: 0.4 + (proximity * 0.6), scale: 1 + (proximity * 0.4), duration: 0.4, overwrite: 'auto' });
       });
 
       // ========== CORE 3D ==========
@@ -974,7 +974,7 @@ const LogosSection = () => {
         rotateY: (deltaX / window.innerWidth) * 5,
         duration: 0.5,
         ease: 'power2.out',
-        overwrite: true
+        overwrite: 'auto'
       });
     };
 
