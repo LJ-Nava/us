@@ -2173,17 +2173,26 @@
     gap: 12px;
     margin-top: $spacing-xl;
     animation: floatDown 3s ease-in-out infinite;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      .logos-section__headline-scroll-text {
+        color: #8b5cf6;
+      }
+    }
   }
 
   &__headline-scroll-text {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #6b7280;
-    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    transition: color 0.3s ease;
 
     @media (max-width: $breakpoint-sm) {
-      font-size: 0.68rem;
+      font-size: 0.75rem;
     }
   }
 

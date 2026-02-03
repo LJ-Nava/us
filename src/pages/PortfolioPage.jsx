@@ -57,40 +57,18 @@ import physica3 from '../assets/Physuca/3.webp';
 import physica4 from '../assets/Physuca/4.webp';
 import physica5 from '../assets/Physuca/5.webp';
 
+// Importar imágenes de E-commerce
+import ecommerce1 from '../assets/e-commerce/1.png';
+import ecommerce2 from '../assets/e-commerce/2.png';
+import ecommerce3 from '../assets/e-commerce/3.png';
+import ecommerce4 from '../assets/e-commerce/4.png';
+import ecommerce5 from '../assets/e-commerce/5.png';
+import ecommerce6 from '../assets/e-commerce/6.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Project images config (without translations)
 const projectsConfig = [
-  {
-    id: 1,
-    title: 'Romelima',
-    categoryKey: 'restaurant',
-    descKey: 'romelimaDesc',
-    url: 'https://lj-nava.github.io/Romelima/',
-    images: [romelima1, romelima2, romelima3, romelima4, romelima5],
-    color: '#9b2335',
-    tagKeys: ['tagUIUX', 'tagDigitalMenu', 'tagReservations']
-  },
-  {
-    id: 2,
-    title: 'El Cracker RYD',
-    categoryKey: 'carWash',
-    descKey: 'crackerDesc',
-    url: 'https://lj-nava.github.io/lavadero/',
-    images: [lavadero1, lavadero2, lavadero3, lavadero4, lavadero5, lavadero6],
-    color: '#ef4444',
-    tagKeys: ['tagPricingSystem', 'tagReservations', 'tagPromotions']
-  },
-  {
-    id: 3,
-    title: 'Construcciones EC',
-    categoryKey: 'construction',
-    descKey: 'construccionesDesc',
-    url: 'https://lj-nava.github.io/cracker-web/',
-    images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
-    color: '#d4a855',
-    tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
-  },
   {
     id: 4,
     title: 'Motive Homecare',
@@ -110,6 +88,46 @@ const projectsConfig = [
     images: [neuro1, neuro2, neuro3, neuro4, neuro5, neuro6, neuro7],
     color: '#3b82f6',
     tagKeys: ['tagAI', 'tagEMR', 'tagHIPAA']
+  },
+  {
+    id: 3,
+    title: 'Construcciones EC',
+    categoryKey: 'construction',
+    descKey: 'construccionesDesc',
+    url: 'https://lj-nava.github.io/cracker-web/',
+    images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
+    color: '#d4a855',
+    tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
+  },
+  {
+    id: 7,
+    title: 'RexTura',
+    categoryKey: 'ecommerce',
+    descKey: 'ecommerceDesc',
+    url: 'https://plexifystudio-projects.github.io/e-commerce/',
+    images: [ecommerce1, ecommerce2, ecommerce3, ecommerce4, ecommerce5, ecommerce6],
+    color: '#c8956c',
+    tagKeys: ['tagEcommerce', 'tagCatalog', 'tagCart']
+  },
+  {
+    id: 1,
+    title: 'Romelima',
+    categoryKey: 'restaurant',
+    descKey: 'romelimaDesc',
+    url: 'https://lj-nava.github.io/Romelima/',
+    images: [romelima1, romelima2, romelima3, romelima4, romelima5],
+    color: '#9b2335',
+    tagKeys: ['tagUIUX', 'tagDigitalMenu', 'tagReservations']
+  },
+  {
+    id: 2,
+    title: 'El Cracker RYD',
+    categoryKey: 'carWash',
+    descKey: 'crackerDesc',
+    url: 'https://lj-nava.github.io/lavadero/',
+    images: [lavadero1, lavadero2, lavadero3, lavadero4, lavadero5, lavadero6],
+    color: '#ef4444',
+    tagKeys: ['tagPricingSystem', 'tagReservations', 'tagPromotions']
   },
   {
     id: 6,
@@ -604,6 +622,27 @@ const PortfolioPage = () => {
             {projectsConfig.map((project) => (
               <ProjectCard key={project.id} project={project} t={t} />
             ))}
+
+            {/* CTA Card - fills remaining grid space */}
+            <a
+              href="https://wa.me/573151573329?text=Hola%20Plexify%2C%20me%20interesa%20un%20proyecto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="portfolio-page__cta-card"
+            >
+              <div className="portfolio-page__cta-glow" />
+              <div className="portfolio-page__cta-content">
+                <span className="portfolio-page__cta-eyebrow">{t('portfolioPage.ctaEyebrow')}</span>
+                <h3 className="portfolio-page__cta-title">{t('portfolioPage.ctaTitle')}</h3>
+                <p className="portfolio-page__cta-desc">{t('portfolioPage.ctaDesc')}</p>
+                <div className="portfolio-page__cta-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                  <span>{t('portfolioPage.ctaButton')}</span>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
 

@@ -844,8 +844,15 @@ const LogosSection = () => {
       });
     }, sectionRef);
 
-    // Mouse tracking - Interacciones premium ultra responsivas
+    // Mouse tracking - Throttled for performance
+    let lastMoveTime = 0;
+    const THROTTLE_MS = 40;
+
     const handleMouseMove = (e) => {
+      const now = performance.now();
+      if (now - lastMoveTime < THROTTLE_MS) return;
+      lastMoveTime = now;
+
       if (!aiFaceRef.current) return;
 
       const core = aiFaceRef.current;
@@ -858,11 +865,10 @@ const LogosSection = () => {
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-      // Calcular intensidad basada en proximidad (más cerca = más intenso)
       const proximity = Math.max(0, 1 - (distance / 600));
       const isClose = distance < 300;
 
-      // ========== IRIS - Efecto magnético premium ==========
+      // ========== IRIS ==========
       const iris = document.querySelector('.logos-section__ai-iris');
       const pupil = document.querySelector('.logos-section__ai-pupil');
       const pupilCore = document.querySelector('.logos-section__ai-pupil-core');
@@ -873,117 +879,53 @@ const LogosSection = () => {
       const irisY = Math.max(-maxIrisMove, Math.min(maxIrisMove, (deltaY / 250) * maxIrisMove));
 
       if (iris) {
-        gsap.to(iris, {
-          x: irisX,
-          y: irisY,
-          scale: 1 + (proximity * 0.15),
-          duration: 0.15,
-          ease: 'power3.out'
-        });
+        gsap.to(iris, { x: irisX, y: irisY, scale: 1 + (proximity * 0.15), duration: 0.2, ease: 'power3.out', overwrite: true });
       }
-
       if (pupil) {
-        gsap.to(pupil, {
-          x: irisX * 0.4,
-          y: irisY * 0.4,
-          scale: 1 + (proximity * 0.3),
-          duration: 0.1,
-          ease: 'power2.out'
-        });
+        gsap.to(pupil, { x: irisX * 0.4, y: irisY * 0.4, scale: 1 + (proximity * 0.3), duration: 0.15, ease: 'power2.out', overwrite: true });
       }
-
       if (pupilCore) {
-        gsap.to(pupilCore, {
-          scale: 1 + (proximity * 0.5),
-          opacity: 0.8 + (proximity * 0.2),
-          duration: 0.1
-        });
+        gsap.to(pupilCore, { scale: 1 + (proximity * 0.5), opacity: 0.8 + (proximity * 0.2), duration: 0.15, overwrite: true });
       }
-
       if (irisGlow) {
-        gsap.to(irisGlow, {
-          scale: 1 + (proximity * 0.4),
-          opacity: 0.5 + (proximity * 0.5),
-          duration: 0.2
-        });
+        gsap.to(irisGlow, { scale: 1 + (proximity * 0.4), opacity: 0.5 + (proximity * 0.5), duration: 0.25, overwrite: true });
       }
 
-      // ========== ANILLOS - Reacción paralax 3D ==========
+      // ========== RINGS ==========
       const rings = document.querySelectorAll('.logos-section__ai-ring');
       rings.forEach((ring, i) => {
         const speed = (i + 1) * 0.2;
-        const ringRotation = (deltaX / window.innerWidth) * 15 * (i % 2 === 0 ? 1 : -1);
         gsap.to(ring, {
           x: (deltaX / window.innerWidth) * 12 * speed,
           y: (deltaY / window.innerHeight) * 12 * speed,
-          rotation: `+=${ringRotation * 0.1}`,
           scale: 1 + (proximity * 0.02 * (i + 1)),
-          duration: 0.3 + (i * 0.05),
-          ease: 'power2.out'
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: true
         });
       });
 
-      // ========== HEXÁGONO - Rotación suave ==========
+      // ========== HEXAGON ==========
       const hexagon = document.querySelector('.logos-section__ai-hexagon');
       if (hexagon) {
-        gsap.to(hexagon, {
-          rotation: angle * 0.1,
-          scale: 1 + (proximity * 0.08),
-          duration: 0.4,
-          ease: 'power2.out'
-        });
+        gsap.to(hexagon, { rotation: angle * 0.1, scale: 1 + (proximity * 0.08), duration: 0.5, ease: 'power2.out', overwrite: true });
       }
 
-      // ========== ARCOS - Brillo dinámico ==========
-      const arcs = document.querySelectorAll('.logos-section__ai-arc');
-      arcs.forEach((arc, i) => {
-        gsap.to(arc, {
-          strokeOpacity: 0.3 + (proximity * 0.7),
-          strokeWidth: 2 + (proximity * 2),
-          duration: 0.2
-        });
-      });
-
-      // ========== CIRCUITOS - Flujo de energía ==========
-      const circuits = document.querySelectorAll('.logos-section__ai-circuit');
-      circuits.forEach((circuit, i) => {
-        const intensity = 0.4 + (proximity * 0.6);
-        gsap.to(circuit, {
-          stroke: `rgba(251, 191, 36, ${intensity})`,
-          strokeWidth: 1.5 + (proximity * 1),
-          duration: 0.2,
-          delay: i * 0.02
-        });
-      });
-
-      // ========== NODOS - Parpadeo reactivo ==========
-      const nodes = document.querySelectorAll('.logos-section__ai-node');
-      nodes.forEach((node, i) => {
-        const nodeIntensity = 0.5 + (proximity * 0.5) + (Math.random() * 0.3);
-        gsap.to(node, {
-          opacity: nodeIntensity,
-          scale: 1 + (proximity * 0.5) + (Math.random() * 0.3),
-          duration: 0.15,
-          ease: 'power1.out'
-        });
-      });
-
-      // ========== PARTÍCULAS - Parallax dramático ==========
+      // ========== PARTICLES ==========
       const particles = document.querySelectorAll('.logos-section__ai-particle');
       particles.forEach((particle, i) => {
         const speed = (i % 5 + 1) * 1.2;
-        const randomOffset = (Math.random() - 0.5) * 10;
         gsap.to(particle, {
-          x: (deltaX / window.innerWidth) * 60 * speed + randomOffset,
-          y: (deltaY / window.innerHeight) * 60 * speed + randomOffset,
-          scale: 1 + (proximity * 0.5),
+          x: (deltaX / window.innerWidth) * 40 * speed,
+          y: (deltaY / window.innerHeight) * 40 * speed,
           opacity: 0.4 + (proximity * 0.6),
-          duration: 0.2 + (i * 0.01),
-          ease: 'power1.out'
+          duration: 0.3,
+          ease: 'power1.out',
+          overwrite: true
         });
       });
 
-      // ========== ESPECTRO - Visualización dinámica ==========
+      // ========== BARS ==========
       const bars = document.querySelectorAll('.logos-section__ai-bar');
       bars.forEach((bar, i) => {
         const barHeight = (0.3 + (proximity * 0.7)) * (0.5 + Math.random() * 0.8);
@@ -991,142 +933,56 @@ const LogosSection = () => {
         gsap.to(bar, {
           scaleY: barHeight * (1.2 - distanceFromCenter * 0.5),
           opacity: 0.6 + (proximity * 0.4),
-          duration: 0.08,
-          ease: 'power1.out'
+          duration: 0.1,
+          ease: 'power1.out',
+          overwrite: true
         });
       });
 
-      // ========== SCANNER - Apunta al cursor ==========
+      // ========== CIRCUITS ==========
+      const circuits = document.querySelectorAll('.logos-section__ai-circuit');
+      circuits.forEach((circuit) => {
+        const intensity = 0.4 + (proximity * 0.6);
+        gsap.to(circuit, { stroke: `rgba(251, 191, 36, ${intensity})`, strokeWidth: 1.5 + (proximity * 1), duration: 0.3, overwrite: true });
+      });
+
+      // ========== NODES ==========
+      const nodes = document.querySelectorAll('.logos-section__ai-node');
+      nodes.forEach((node) => {
+        gsap.to(node, { opacity: 0.5 + (proximity * 0.5), scale: 1 + (proximity * 0.4), duration: 0.2, overwrite: true });
+      });
+
+      // ========== SCANNERS ==========
       const scanners = document.querySelectorAll('.logos-section__ai-scanner');
       scanners.forEach((scanner, i) => {
-        const scannerAngle = i === 0 ? angle : angle + 90;
-        gsap.to(scanner, {
-          rotation: scannerAngle,
-          opacity: 0.5 + (proximity * 0.5),
-          scaleX: 1 + (proximity * 0.3),
-          duration: 0.2,
-          ease: 'power2.out'
-        });
+        gsap.to(scanner, { rotation: i === 0 ? angle : angle + 90, opacity: 0.5 + (proximity * 0.5), duration: 0.3, ease: 'power2.out', overwrite: true });
       });
 
-      // ========== ONDAS DE PULSO - Intensidad ==========
-      const pulses = document.querySelectorAll('.logos-section__ai-pulse');
-      pulses.forEach((pulse, i) => {
-        gsap.to(pulse, {
-          scale: 1 + (proximity * 0.1),
-          opacity: 0.3 + (proximity * 0.3),
-          duration: 0.3
-        });
-      });
-
-      // ========== LÍNEAS DE ENERGÍA ==========
-      const energyLines = document.querySelectorAll('.logos-section__ai-energy');
-      energyLines.forEach((line, i) => {
-        const lineAngle = (i * 90) + (angle * 0.2);
-        gsap.to(line, {
-          rotation: lineAngle,
-          opacity: 0.3 + (proximity * 0.7),
-          scaleX: 1 + (proximity * 0.5),
-          duration: 0.3
-        });
-      });
-
-      // ========== AURAS - Efecto de respiración ==========
-      const auras = document.querySelectorAll('.logos-section__ai-aura');
-      auras.forEach((aura, i) => {
-        gsap.to(aura, {
-          opacity: 0.4 + (proximity * 0.6),
-          scale: 1 + (proximity * 0.2),
-          duration: 0.4
-        });
-      });
-
-      // ========== DATOS TÉCNICOS - Visibilidad ==========
-      const dataItems = document.querySelectorAll('.logos-section__ai-data-item');
-      dataItems.forEach((item, i) => {
-        gsap.to(item, {
-          opacity: 0.3 + (proximity * 0.7),
-          x: (deltaX / window.innerWidth) * 5,
-          duration: 0.3,
-          delay: i * 0.05
-        });
-      });
-
-      // ========== LÍNEAS EXTENDIDAS - Reactividad ==========
+      // ========== EXTENDED LINES & NODES ==========
       const extendedLines = document.querySelectorAll('.logos-section__extended-line');
+      extendedLines.forEach((line) => {
+        gsap.to(line, { strokeOpacity: 0.3 + (proximity * 0.5), duration: 0.4, overwrite: true });
+      });
       const extendedNodes = document.querySelectorAll('.logos-section__extended-node');
-
-      extendedLines.forEach((line, i) => {
-        gsap.to(line, {
-          strokeOpacity: 0.3 + (proximity * 0.5),
-          strokeWidth: 1.5 + (proximity * 1),
-          duration: 0.4,
-          delay: i * 0.05
-        });
+      extendedNodes.forEach((node) => {
+        gsap.to(node, { opacity: 0.4 + (proximity * 0.6), scale: 1 + (proximity * 0.4), duration: 0.4, overwrite: true });
       });
 
-      extendedNodes.forEach((node, i) => {
-        gsap.to(node, {
-          opacity: 0.4 + (proximity * 0.6),
-          scale: 1 + (proximity * 0.4),
-          duration: 0.3,
-          delay: i * 0.03
-        });
-      });
-
-      // ========== EL CORE ENTERO - Rotación 3D sutil ==========
+      // ========== CORE 3D ==========
       gsap.to(core, {
         rotateX: (deltaY / window.innerHeight) * -5,
         rotateY: (deltaX / window.innerWidth) * 5,
-        duration: 0.4,
-        ease: 'power2.out'
+        duration: 0.5,
+        ease: 'power2.out',
+        overwrite: true
       });
-
-      // ========== EFECTO GLITCH CUANDO ESTÁ MUY CERCA ==========
-      if (isClose && Math.random() > 0.95) {
-        // Glitch aleatorio en los circuitos
-        circuits.forEach((circuit, i) => {
-          if (Math.random() > 0.7) {
-            gsap.to(circuit, {
-              opacity: Math.random(),
-              strokeWidth: 1 + Math.random() * 3,
-              duration: 0.05,
-              onComplete: () => {
-                gsap.to(circuit, {
-                  opacity: 0.4 + (proximity * 0.6),
-                  strokeWidth: 1.5 + (proximity * 1),
-                  duration: 0.1
-                });
-              }
-            });
-          }
-        });
-
-        // Glitch en los anillos
-        rings.forEach((ring, i) => {
-          if (Math.random() > 0.8) {
-            gsap.to(ring, {
-              scale: 0.95 + Math.random() * 0.1,
-              opacity: 0.5 + Math.random() * 0.5,
-              duration: 0.03,
-              onComplete: () => {
-                gsap.to(ring, {
-                  scale: 1 + (proximity * 0.02 * (i + 1)),
-                  opacity: 1,
-                  duration: 0.1
-                });
-              }
-            });
-          }
-        });
-      }
     };
 
-    // Only add mouse tracking on non-touch devices to prevent mobile issues
+    // Only add mouse tracking on non-touch devices
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (!isTouchDevice) {
-      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
     }
 
     return () => {
@@ -1184,15 +1040,19 @@ const LogosSection = () => {
             <span className="logos-section__headline-line-inner"></span>
           </div>
 
-          {/* Scroll indicator that points to content below */}
-          <div className="logos-section__headline-scroll">
+          {/* Scroll indicator that links to projects section */}
+          <a
+            href="/portfolio"
+            className="logos-section__headline-scroll"
+            onClick={(e) => { e.preventDefault(); window.location.href = '/portfolio'; }}
+          >
             <span className="logos-section__headline-scroll-text">{t('logos.scrollText') || 'Explora nuestros proyectos'}</span>
             <div className="logos-section__headline-scroll-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 5v14M5 12l7 7 7-7" />
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </div>
-          </div>
+          </a>
         </div>
 
         {/* Side decorative elements */}
@@ -1261,7 +1121,7 @@ const LogosSection = () => {
                 style={{ '--nav-accent': currentColor.primary }}
               >
                 {icons.lumen}
-                <span>LUMEN</span>
+                <span>Plexify S-</span>
                 <span className="logos-section__nav-color-dot" style={{ background: currentColor.primary }}></span>
               </div>
             </div>
@@ -1686,7 +1546,7 @@ const LogosSection = () => {
 
             {/* Nombre y branding */}
             <div className="logos-section__ai-brand">
-              <span className="logos-section__ai-name">LUMEN</span>
+              <span className="logos-section__ai-name">Plexify S-</span>
               <span className="logos-section__ai-tagline">{t('logos.lumenTagline')}</span>
             </div>
 
