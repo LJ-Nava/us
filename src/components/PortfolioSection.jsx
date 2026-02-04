@@ -9,24 +9,24 @@ const projects = [
     id: 1,
     title: 'Rome Lima',
     category: 'Marca Personal',
-    url: 'https://lj-nava.github.io/Romelima/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/Romelima/',
+    url: 'https://plexifystudio-projects.github.io/Project-Restaurante/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Project-Restaurante/',
     color: '#6366f1'
   },
   {
     id: 2,
     title: 'Lavadero Premium',
     category: 'Negocio Local',
-    url: 'https://lj-nava.github.io/lavadero/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/lavadero/',
+    url: 'https://plexifystudio-projects.github.io/Projects-Lavadero/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Projects-Lavadero/',
     color: '#06b6d4'
   },
   {
     id: 3,
     title: 'Cracker Web',
     category: 'E-commerce',
-    url: 'https://lj-nava.github.io/cracker-web/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/cracker-web/',
+    url: 'https://plexifystudio-projects.github.io/Proyect-Construcciones/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Proyect-Construcciones/',
     color: '#f59e0b'
   },
   {
@@ -41,24 +41,24 @@ const projects = [
     id: 5,
     title: 'Health Care',
     category: 'Salud',
-    url: 'https://lj-nava.github.io/Health/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/Health/',
+    url: 'https://plexifystudio-projects.github.io/Projects-Clinify/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Projects-Clinify/',
     color: '#ec4899'
   },
   {
     id: 6,
     title: 'Physica Inc',
     category: 'Corporativo',
-    url: 'https://lj-nava.github.io/PhysicaInc/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/PhysicaInc/',
+    url: 'https://plexifystudio-projects.github.io/Project-Physica/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Project-Physica/',
     color: '#8b5cf6'
   },
   {
     id: 7,
     title: 'Barber Shop',
     category: 'Negocio Local',
-    url: 'https://lj-nava.github.io/barber/',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://lj-nava.github.io/barber/',
+    url: 'https://plexifystudio-projects.github.io/Project-Barber/',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/1800/https://plexifystudio-projects.github.io/Project-Barber/',
     color: '#f97316'
   }
 ];

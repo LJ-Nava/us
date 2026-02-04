@@ -84,7 +84,7 @@ const projectsConfig = [
     title: 'NeuroFys Y',
     categoryKey: 'saas',
     descKey: 'neuroDesc',
-    url: 'https://lj-nava.github.io/Health/',
+    url: 'https://plexifystudio-projects.github.io/Projects-Clinify/',
     images: [neuro1, neuro2, neuro3, neuro4, neuro5, neuro6, neuro7],
     color: '#3b82f6',
     tagKeys: ['tagAI', 'tagEMR', 'tagHIPAA']
@@ -94,7 +94,7 @@ const projectsConfig = [
     title: 'Construcciones EC',
     categoryKey: 'construction',
     descKey: 'construccionesDesc',
-    url: 'https://lj-nava.github.io/cracker-web/',
+    url: 'https://plexifystudio-projects.github.io/Proyect-Construcciones/',
     images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
     color: '#d4a855',
     tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
@@ -114,7 +114,7 @@ const projectsConfig = [
     title: 'Romelima',
     categoryKey: 'restaurant',
     descKey: 'romelimaDesc',
-    url: 'https://lj-nava.github.io/Romelima/',
+    url: 'https://plexifystudio-projects.github.io/Project-Restaurante/',
     images: [romelima1, romelima2, romelima3, romelima4, romelima5],
     color: '#9b2335',
     tagKeys: ['tagUIUX', 'tagDigitalMenu', 'tagReservations']
@@ -124,7 +124,7 @@ const projectsConfig = [
     title: 'El Cracker RYD',
     categoryKey: 'carWash',
     descKey: 'crackerDesc',
-    url: 'https://lj-nava.github.io/lavadero/',
+    url: 'https://plexifystudio-projects.github.io/Projects-Lavadero/',
     images: [lavadero1, lavadero2, lavadero3, lavadero4, lavadero5, lavadero6],
     color: '#ef4444',
     tagKeys: ['tagPricingSystem', 'tagReservations', 'tagPromotions']
@@ -134,7 +134,7 @@ const projectsConfig = [
     title: 'Physica Inc',
     categoryKey: 'clinic',
     descKey: 'physicaDesc',
-    url: 'https://lj-nava.github.io/PhysicaInc/',
+    url: 'https://plexifystudio-projects.github.io/Project-Physica/',
     images: [physica1, physica2, physica3, physica4, physica5],
     color: '#6b7b5c',
     tagKeys: ['tagOnlineAppointments', 'tagServices', 'tagTestimonials']
