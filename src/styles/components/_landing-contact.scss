@@ -1,0 +1,338 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================
+// CONTACT + WHATSAPP — .lc
+// Light premium, bold accents
+// ============================================
+
+.lc {
+  background: $color-white;
+  padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  position: relative;
+  overflow: hidden;
+
+  // Gradient accent line
+  &__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba($color-accent, 0.25), transparent);
+  }
+
+  // Decorative background orb
+  &__orb {
+    position: absolute;
+    width: clamp(250px, 35vw, 450px);
+    height: clamp(250px, 35vw, 450px);
+    top: 10%;
+    right: -8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($color-accent, 0.06) 0%, transparent 65%);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  &__inner {
+    @include container;
+    max-width: 1100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  // ——— 2-col layout ———
+  &__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+    align-items: start;
+
+    @include responsive(lg) {
+      grid-template-columns: 1.5fr 1fr;
+      gap: $spacing-4xl;
+    }
+  }
+
+  &__form-col {}
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: $color-accent;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-extrabold;
+    color: $color-charcoal;
+    letter-spacing: -0.02em;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__sub {
+    font-size: 0.95rem;
+    color: $color-gray-500;
+    line-height: 1.6;
+    margin-bottom: $spacing-xl;
+    max-width: 480px;
+  }
+
+  // Trust signals
+  &__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md $spacing-xl;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $color-gray-600;
+    font-size: 0.82rem;
+    font-weight: $font-weight-medium;
+
+    svg { flex-shrink: 0; stroke: $color-accent; }
+  }
+
+  // ——— Form ———
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+
+    @include responsive(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: 0.82rem;
+      font-weight: $font-weight-semibold;
+      color: $color-charcoal;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 0.8rem 1rem;
+      border: 1.5px solid $color-gray-200;
+      border-radius: $radius-lg;
+      font-family: $font-family-base;
+      font-size: 0.9rem;
+      color: $color-charcoal;
+      background: $color-white;
+      transition: border-color $transition-fast, box-shadow $transition-fast;
+
+      &::placeholder { color: $color-gray-400; }
+
+      &:focus {
+        outline: none;
+        border-color: $color-accent;
+        box-shadow: 0 0 0 4px rgba($color-accent, 0.06);
+      }
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+  }
+
+  // ——— Submit ———
+  &__submit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: 0.9rem $spacing-xl;
+    background: $gradient-accent;
+    color: $color-white;
+    font-size: 0.95rem;
+    font-weight: $font-weight-bold;
+    font-family: $font-family-base;
+    border: none;
+    border-radius: $radius-xl;
+    cursor: pointer;
+    transition: all $transition-base;
+    margin-top: $spacing-xs;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: $gradient-accent;
+      filter: blur(18px);
+      opacity: 0.25;
+      z-index: -1;
+      transition: opacity $transition-base;
+    }
+
+    svg { flex-shrink: 0; }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-3px);
+      &::before { opacity: 0.5; }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: $color-white;
+    border-radius: 50%;
+    animation: lc-spin 0.7s linear infinite;
+    margin-right: $spacing-sm;
+  }
+
+  // Success
+  &__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-3xl $spacing-2xl;
+    background: rgba(#10b981, 0.04);
+    border: 1.5px solid rgba(#10b981, 0.15);
+    border-radius: $radius-xl;
+    text-align: center;
+
+    svg { stroke: #10b981; }
+    h3 { font-size: $font-size-h3; font-weight: $font-weight-bold; color: $color-charcoal; margin: 0; }
+    p  { color: $color-gray-500; line-height: 1.6; max-width: 380px; margin: 0; }
+  }
+
+  // Error
+  &__error {
+    padding: $spacing-md $spacing-lg;
+    background: rgba(#ef4444, 0.04);
+    border: 1px solid rgba(#ef4444, 0.15);
+    border-radius: $radius-lg;
+    color: #dc2626;
+    font-size: 0.84rem;
+  }
+
+  // ——— WhatsApp column ———
+  &__wa-col {
+    @include responsive(lg) {
+      position: sticky;
+      top: 120px;
+    }
+  }
+
+  &__wa-card {
+    position: relative;
+    padding: $spacing-2xl;
+    background: $color-white;
+    border: 1.5px solid $color-gray-200;
+    border-radius: $radius-2xl;
+    box-shadow: $shadow-md;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  // Subtle green glow behind card
+  &__wa-glow {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(#25d366, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  &__wa-icon {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto $spacing-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    border-radius: $radius-xl;
+    color: $color-white;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.25);
+
+    svg { width: 36px; height: 36px; }
+  }
+
+  &__wa-label {
+    position: relative;
+    font-size: 0.95rem;
+    color: $color-gray-600;
+    line-height: 1.6;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__wa-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: 0.85rem $spacing-xl;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: $color-white;
+    font-size: 0.9rem;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    border: none;
+    border-radius: $radius-xl;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    svg { flex-shrink: 0; }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.3);
+    }
+  }
+}
+
+@keyframes lc-spin {
+  to { transform: rotate(360deg); }
+}

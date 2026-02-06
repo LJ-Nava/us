@@ -33,9 +33,12 @@
 @use 'components/package-modal';
 @use 'components/globe-3d';
 @use 'components/hero-mobile';
+@use 'components/landing-packages';
+@use 'components/landing-contact';
 
 // PAGES
 @use 'pages/portfolio-page';
 @use 'pages/nosotros-page';
 @use 'pages/servicios-page';
 @use 'pages/legal-page';
+@use 'pages/landing-page';

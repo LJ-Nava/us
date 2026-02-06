@@ -1,0 +1,726 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================
+// LANDING PAGE — Light premium wrapper + Hero
+// Split bento layout — Editorial modern
+// ============================================
+
+.landing-page {
+  position: relative;
+  background: $color-white;
+  overflow-x: hidden;
+}
+
+// ============================================
+// HERO — .lh — Asymmetric split + bento grid
+// ============================================
+
+.lh {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(7rem, 14vw, 11rem) 0 clamp(4rem, 8vw, 6rem);
+  background: $color-white;
+  overflow: hidden;
+
+  // ——— Background layer ———
+  &__bg {
+    @include absolute-fill;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    will-change: transform;
+
+    &--1 {
+      width: clamp(350px, 55vw, 700px);
+      height: clamp(350px, 55vw, 700px);
+      top: -22%;
+      right: -12%;
+      background: radial-gradient(circle, rgba($color-accent, 0.1) 0%, transparent 65%);
+    }
+
+    &--2 {
+      width: clamp(300px, 45vw, 550px);
+      height: clamp(300px, 45vw, 550px);
+      bottom: -15%;
+      left: -15%;
+      background: radial-gradient(circle, rgba($color-secondary, 0.08) 0%, transparent 65%);
+    }
+  }
+
+  &__grid {
+    @include absolute-fill;
+    background-image: radial-gradient(rgba($color-charcoal, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 40%, black 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 40%, black 10%, transparent 70%);
+  }
+
+  &__inner {
+    @include container;
+    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+  }
+
+  // ========================================
+  // SPLIT LAYOUT — left text / right bento
+  // ========================================
+  &__split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+    align-items: center;
+    margin-bottom: clamp(3.5rem, 7vw, 5rem);
+
+    @include responsive(lg) {
+      grid-template-columns: 1.15fr 1fr;
+      gap: clamp(3rem, 5vw, 5rem);
+    }
+  }
+
+  &__content {
+    @media (max-width: 1023px) {
+      text-align: center;
+    }
+  }
+
+  // ——— Tag badge ———
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.45rem 1.4rem;
+    background: rgba($color-accent, 0.06);
+    border: 1px solid rgba($color-accent, 0.12);
+    border-radius: $radius-full;
+    color: $color-accent;
+    font-size: 0.78rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.05em;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-accent;
+    box-shadow: 0 0 10px rgba($color-accent, 0.5);
+    animation: lh-pulse 2.5s ease-in-out infinite;
+  }
+
+  // ——— Title ———
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    font-weight: $font-weight-extrabold;
+    line-height: 1.06;
+    color: $color-charcoal;
+    margin-bottom: $spacing-lg;
+    letter-spacing: -0.03em;
+  }
+
+  &__accent {
+    background: linear-gradient(
+      135deg,
+      $color-accent 0%,
+      $color-secondary 40%,
+      $color-accent-light 70%,
+      $color-accent 100%
+    );
+    background-size: 250% 250%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: lh-gradient 6s ease infinite;
+  }
+
+  &__sub {
+    font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+    color: $color-gray-500;
+    max-width: 480px;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.7;
+
+    @media (max-width: 1023px) {
+      margin-inline: auto;
+    }
+  }
+
+  // ——— CTAs ———
+  &__cta-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    @media (max-width: 1023px) {
+      justify-content: center;
+    }
+  }
+
+  &__btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: 0.95rem 2.2rem;
+    background: $gradient-accent;
+    color: $color-white;
+    font-size: 0.94rem;
+    font-weight: $font-weight-bold;
+    font-family: $font-family-base;
+    border: none;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-base;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: $gradient-accent;
+      filter: blur(22px);
+      opacity: 0.35;
+      z-index: -1;
+      transition: opacity $transition-base;
+    }
+
+    svg { flex-shrink: 0; }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.02);
+      &::before { opacity: 0.6; }
+    }
+  }
+
+  &__btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.95rem 1.8rem;
+    background: $color-white;
+    border: 1.5px solid $color-gray-200;
+    border-radius: $radius-full;
+    color: $color-gray-600;
+    font-size: 0.94rem;
+    font-weight: $font-weight-semibold;
+    font-family: $font-family-base;
+    cursor: pointer;
+    transition: all $transition-base;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  // ========================================
+  // BENTO STATS GRID — right column
+  // ========================================
+  &__bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    @media (max-width: 1023px) {
+      max-width: 420px;
+      margin-inline: auto;
+    }
+  }
+
+  &__bento-card {
+    position: relative;
+    padding: $spacing-xl;
+    border-radius: $radius-xl;
+    border: 1.5px solid $color-gray-200;
+    background: $color-white;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Shine sweep
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    &:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: $shadow-lg;
+
+      &::after {
+        animation: lh-shine 0.8s ease-out forwards;
+      }
+    }
+
+    // ——— Big hero stat ———
+    &--hero {
+      grid-column: 1 / -1;
+      background: $gradient-accent;
+      border: none;
+      text-align: center;
+      padding: $spacing-2xl $spacing-xl;
+
+      .lh__bento-val {
+        font-size: clamp(2.8rem, 5vw, 3.8rem);
+        color: $color-white;
+        margin-bottom: 6px;
+      }
+
+      .lh__bento-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+      }
+
+      &:hover {
+        box-shadow: 0 20px 60px rgba($color-accent, 0.35);
+        transform: translateY(-6px) scale(1.02);
+      }
+    }
+
+    // ——— Small stat cards ———
+    &--sm {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: $spacing-lg $spacing-md;
+
+      svg {
+        stroke: $color-accent;
+        margin-bottom: 6px;
+        transition: transform 0.4s ease;
+      }
+
+      &:hover {
+        border-color: rgba($color-accent, 0.25);
+        box-shadow: 0 16px 40px rgba($color-accent, 0.1);
+
+        svg { transform: scale(1.2); }
+      }
+    }
+
+    // ——— Brand card ———
+    &--brand {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-lg $spacing-xl;
+      background: $color-snow;
+      border-color: $color-gray-100;
+
+      &:hover {
+        border-color: rgba($color-accent, 0.15);
+
+        .lh__bento-logo {
+          transform: scale(1.08);
+          box-shadow: 0 4px 20px rgba($color-accent, 0.15);
+        }
+      }
+    }
+  }
+
+  &__bento-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  &__bento-val {
+    display: block;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-weight: $font-weight-extrabold;
+    line-height: 1;
+    color: $color-charcoal;
+  }
+
+  &__bento-label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-400;
+  }
+
+  &__bento-logo {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba($color-accent, 0.1), rgba($color-secondary, 0.06));
+    border-radius: $radius-lg;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    svg { stroke: $color-accent; }
+  }
+
+  &__bento-brand {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: $font-weight-bold;
+    color: $color-charcoal;
+  }
+
+  &__bento-brandtag {
+    display: block;
+    font-size: 0.72rem;
+    color: $color-gray-400;
+    margin-top: 2px;
+  }
+
+  // ========================================
+  // TRUST MARQUEE
+  // ========================================
+  &__trust {
+    overflow: hidden;
+    padding: $spacing-lg 0;
+    border-top: 1px solid $color-gray-200;
+    border-bottom: 1px solid $color-gray-200;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  &__trust-track {
+    display: flex;
+    gap: $spacing-3xl;
+    animation: lh-marquee 25s linear infinite;
+    width: max-content;
+  }
+
+  &__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: $color-gray-600;
+    white-space: nowrap;
+    font-weight: $font-weight-medium;
+
+    svg { flex-shrink: 0; stroke: $color-accent; }
+  }
+
+  // ========================================
+  // PROBLEM VS SOLUTION
+  // ========================================
+  &__ps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    max-width: 920px;
+    margin-inline: auto;
+
+    @include responsive(md) {
+      grid-template-columns: 1fr auto 1fr;
+      gap: $spacing-xl;
+      align-items: center;
+    }
+  }
+
+  &__ps-vs {
+    display: none;
+
+    @include responsive(md) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: $color-snow;
+      border: 2px solid $color-gray-200;
+      font-size: 0.7rem;
+      font-weight: $font-weight-extrabold;
+      color: $color-gray-400;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+      box-shadow: $shadow-sm;
+
+      &:hover {
+        border-color: rgba($color-accent, 0.3);
+        color: $color-accent;
+        box-shadow: 0 4px 20px rgba($color-accent, 0.1);
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__ps-card {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-lg;
+    padding: $spacing-xl $spacing-2xl;
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-sm;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    // Shine sweep
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($color-accent, 0.06), transparent);
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    &--problem { border-left: 3px solid #ef4444; }
+    &--solution { border-left: 3px solid #10b981; }
+
+    &:hover {
+      transform: translateY(-8px);
+
+      &::after {
+        animation: lh-shine 0.8s ease-out forwards;
+      }
+
+      .lh__ps-icon {
+        transform: scale(1.12);
+      }
+    }
+
+    &--problem:hover {
+      border-color: rgba(#ef4444, 0.2);
+      border-left: 3px solid #ef4444;
+      box-shadow: 0 20px 50px rgba(#ef4444, 0.1), 0 4px 12px rgba(#ef4444, 0.06);
+    }
+
+    &--solution:hover {
+      border-color: rgba(#10b981, 0.2);
+      border-left: 3px solid #10b981;
+      box-shadow: 0 20px 50px rgba(#10b981, 0.1), 0 4px 12px rgba(#10b981, 0.06);
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: $color-gray-600;
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+
+  &__ps-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-lg;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &--red { background: rgba(#ef4444, 0.08); svg { stroke: #dc2626; } }
+    &--green { background: rgba(#10b981, 0.08); svg { stroke: #059669; } }
+  }
+
+  &__ps-tag {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: $spacing-sm;
+
+    &--red { color: #dc2626; }
+    &--green { color: #059669; }
+  }
+
+  // ========================================
+  // PILLARS — with step numbers
+  // ========================================
+  &__pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    max-width: 900px;
+    margin-inline: auto;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-xl;
+    }
+  }
+
+  &__pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-2xl $spacing-xl;
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-sm;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    // Gradient border on hover (animated)
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: linear-gradient(135deg, $color-accent, $color-secondary, $color-accent-light, $color-accent);
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    // Shine sweep
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($color-accent, 0.06), transparent);
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 0 20px 50px rgba($color-accent, 0.12), 0 4px 12px rgba($color-accent, 0.06);
+      transform: translateY(-10px);
+
+      &::before {
+        opacity: 1;
+        animation: lp-border 6s ease infinite;
+      }
+
+      &::after {
+        animation: lh-shine 0.8s ease-out forwards;
+      }
+
+      .lh__pillar-icon {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba($color-accent, 0.2);
+        background: linear-gradient(135deg, rgba($color-accent, 0.15), rgba($color-secondary, 0.1));
+      }
+
+      .lh__pillar-num {
+        color: $color-secondary;
+      }
+
+      .lh__pillar-label {
+        color: $color-accent-dark;
+      }
+    }
+  }
+
+  &__pillar-num {
+    font-size: 0.65rem;
+    font-weight: $font-weight-extrabold;
+    color: $color-accent;
+    letter-spacing: 0.12em;
+    margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+    transition: color 0.4s ease;
+  }
+
+  &__pillar-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba($color-accent, 0.1), rgba($color-secondary, 0.06));
+    border-radius: $radius-lg;
+    margin-bottom: $spacing-lg;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    svg { stroke: $color-accent; }
+  }
+
+  &__pillar-label {
+    font-size: 0.95rem;
+    font-weight: $font-weight-bold;
+    color: $color-charcoal;
+    margin-bottom: 6px;
+    transition: color 0.4s ease;
+  }
+
+  &__pillar-sub {
+    font-size: 0.82rem;
+    color: $color-gray-500;
+    line-height: 1.55;
+  }
+}
+
+// ========================================
+// KEYFRAMES
+// ========================================
+
+@keyframes lh-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba($color-accent, 0.5); }
+  50% { opacity: 0.4; box-shadow: 0 0 24px rgba($color-accent, 0.7); }
+}
+
+@keyframes lh-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes lh-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes lh-shine {
+  0% { left: -100%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@keyframes lp-border {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}

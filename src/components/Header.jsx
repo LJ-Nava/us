@@ -353,6 +353,16 @@ const Header = () => {
                 </div>
               </div>
             </li>
+
+            {/* Empezar - Landing Marketing */}
+            <li className="header__nav-item">
+              <Link to="/empezar" className={`header__nav-link header__nav-link--highlight ${location.pathname === '/empezar' ? 'header__nav-link--active' : ''}`}>
+                <svg className="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>{t('nav.empezar')}</span>
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -526,6 +536,24 @@ const Header = () => {
                   </svg>
                 </span>
                 <span className="mob-panel__text">{t('nav.nosotros')}</span>
+                <span className="mob-panel__arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
+
+              <Link
+                to="/empezar"
+                className={`mob-panel__link mob-panel__link--highlight ${location.pathname === '/empezar' ? 'mob-panel__link--active' : ''}`}
+                onClick={handleNavClick}
+              >
+                <span className="mob-panel__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                <span className="mob-panel__text">{t('nav.empezar')}</span>
                 <span className="mob-panel__arrow">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M9 18l6-6-6-6"/>
