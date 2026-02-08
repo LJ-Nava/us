@@ -70,46 +70,6 @@ gsap.registerPlugin(ScrollTrigger);
 // Project images config (without translations)
 const projectsConfig = [
   {
-    id: 4,
-    title: 'Motive Homecare',
-    categoryKey: 'healthcare',
-    descKey: 'motiveDesc',
-    url: 'https://motivehomecare.com',
-    images: [motive1, motive2, motive3, motive4, motive5, motive6, motive7],
-    color: '#f97316',
-    tagKeys: ['tagStaffing', 'tagHealthcare', 'tagB2B']
-  },
-  {
-    id: 5,
-    title: 'NeuroFys Y',
-    categoryKey: 'saas',
-    descKey: 'neuroDesc',
-    url: 'https://plexifystudio-projects.github.io/Projects-Clinify/',
-    images: [neuro1, neuro2, neuro3, neuro4, neuro5, neuro6, neuro7],
-    color: '#3b82f6',
-    tagKeys: ['tagAI', 'tagEMR', 'tagHIPAA']
-  },
-  {
-    id: 3,
-    title: 'Construcciones EC',
-    categoryKey: 'construction',
-    descKey: 'construccionesDesc',
-    url: 'https://plexifystudio-projects.github.io/Proyect-Construcciones/',
-    images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
-    color: '#d4a855',
-    tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
-  },
-  {
-    id: 7,
-    title: 'RexTura',
-    categoryKey: 'ecommerce',
-    descKey: 'ecommerceDesc',
-    url: 'https://plexifystudio-projects.github.io/e-commerce/',
-    images: [ecommerce1, ecommerce2, ecommerce3, ecommerce4, ecommerce5, ecommerce6],
-    color: '#c8956c',
-    tagKeys: ['tagEcommerce', 'tagCatalog', 'tagCart']
-  },
-  {
     id: 1,
     title: 'Romelima',
     categoryKey: 'restaurant',
@@ -128,6 +88,46 @@ const projectsConfig = [
     images: [lavadero1, lavadero2, lavadero3, lavadero4, lavadero5, lavadero6],
     color: '#ef4444',
     tagKeys: ['tagPricingSystem', 'tagReservations', 'tagPromotions']
+  },
+  {
+    id: 3,
+    title: 'Construcciones EC',
+    categoryKey: 'construction',
+    descKey: 'construccionesDesc',
+    url: 'https://plexifystudio-projects.github.io/Proyect-Construcciones/',
+    images: [construcciones1, construcciones2, construcciones3, construcciones4, construcciones5, construcciones6, construcciones7, construcciones8],
+    color: '#d4a855',
+    tagKeys: ['tagCorporate', 'tagGallery', 'tagQuoteSystem']
+  },
+  {
+    id: 7,
+    title: 'NexTura',
+    categoryKey: 'ecommerce',
+    descKey: 'ecommerceDesc',
+    url: 'https://plexifystudio-projects.github.io/e-commerce/',
+    images: [ecommerce1, ecommerce2, ecommerce3, ecommerce4, ecommerce5, ecommerce6],
+    color: '#c8956c',
+    tagKeys: ['tagEcommerce', 'tagCatalog', 'tagCart']
+  },
+  {
+    id: 4,
+    title: 'Motive Homecare',
+    categoryKey: 'healthcare',
+    descKey: 'motiveDesc',
+    url: 'https://motivehomecare.com',
+    images: [motive1, motive2, motive3, motive4, motive5, motive6, motive7],
+    color: '#f97316',
+    tagKeys: ['tagStaffing', 'tagHealthcare', 'tagB2B']
+  },
+  {
+    id: 5,
+    title: 'NeuroFys Y',
+    categoryKey: 'saas',
+    descKey: 'neuroDesc',
+    url: 'https://plexifystudio-projects.github.io/Projects-Clinify/',
+    images: [neuro1, neuro2, neuro3, neuro4, neuro5, neuro6, neuro7],
+    color: '#3b82f6',
+    tagKeys: ['tagAI', 'tagEMR', 'tagHIPAA']
   },
   {
     id: 6,
