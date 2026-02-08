@@ -41,6 +41,14 @@
     <priority>0.70</priority>
   </url>
 
+  <!-- Empezar — Landing de conversión -->
+  <url>
+    <loc>https://plexifystudio.com/empezar</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://plexifystudio.com/legal</loc>
